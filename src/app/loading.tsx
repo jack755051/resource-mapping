@@ -1,4 +1,5 @@
-export default function Home() {
+'use client';
+export default function Loading() {
   return (
     <div className="">
       <main className=""></main>
