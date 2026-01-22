@@ -1,8 +1,10 @@
-import Footer from '@/components/footer';
+import Footer from '@/components/layout/footer';
+import Header from '@/components/layout/header/header';
 
 export default function Home() {
   return (
     <div className="home__page__main__wrapper flex min-h-screen flex-col items-center justify-center">
+      <Header />
       {/* 主要的介面 */}
       <main className="home__page__main flex-1 flex flex-col items-center justify-center ">
         <h1 className="text-2xl font-bold">Resource Mapping Tool</h1>

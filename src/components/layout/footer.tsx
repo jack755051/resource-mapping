@@ -1,6 +1,6 @@
 'use client';
 
-import { FooterProps } from '../type';
+import { FooterProps } from '../../type';
 import { generateFooterText } from '@/utils/footer-helper';
 
 export default function Footer(props: FooterProps) {
