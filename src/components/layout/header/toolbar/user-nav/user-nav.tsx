@@ -7,7 +7,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuLabel,
-  DropdownMenuItem,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
@@ -19,11 +18,8 @@ import { HeaderUserNav } from '@/type';
 import { cn } from '@/lib/utils';
 
 // components
-import { UserNavTrigger } from './user-nav-trigger';
-import { UserNavMenuItem } from './user-nav-item';
-
-import { useIcon } from '@/hook/useIcon';
-
+import { Trigger } from './trigger';
+import { Item } from './item';
 
 export interface UserNavigationClasses {
   trigger?: string;      // 按鈕
@@ -54,7 +50,7 @@ export default function UserNavigation({
           variant="ghost"
           className={cn("relative h-8 w-8 rounded-full", classNames?.trigger, className)}
         >
-          <UserNavTrigger trigger={data.trigger} />
+          <Trigger trigger={data.trigger} />
         </Button>
       </DropdownMenuTrigger>
 
@@ -75,7 +71,7 @@ export default function UserNavigation({
 
               {/* 使用遞迴組件渲染 Item */}
               {group.menuItems.map((item, itemIndex) => (
-                <UserNavMenuItem
+                <Item
                   key={`${item.label}-${itemIndex}`}
                   item={item}
                   // 將樣式往下傳遞

@@ -4,15 +4,15 @@ import Link from 'next/link'; // 引入 Link
 import { type HeaderBrand as HeaderBrandType } from '@/type';
 import { cn } from '@/lib/utils';
 
-export interface HeaderBrandProps extends HeaderBrandType {
+export interface BrandProps extends HeaderBrandType {
     className?: string;
 }
 
-export default function HeaderBrand({
+export default function Brand({
     className,
     logo,
     title,
-}: HeaderBrandProps) {
+}: BrandProps) {
     return (
         <Link
             href="/"

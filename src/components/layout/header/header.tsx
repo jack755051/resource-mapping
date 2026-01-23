@@ -5,9 +5,9 @@ import { useNavigation } from '@/hook/useNavigation';
 import { useHeader } from '@/hook/useHeader';
 
 // components
-import HeaderNavigation from './headerNavigation';
-import HeaderBrand from './headerBrand';
-import HeaderToolbar from './headerToolbar';
+import Navigation from './navigation';
+import Brand from './brand';
+import Toolbar from './toolbar/toolbar';
 
 export default function Header() {
     const { items: navigationItems } = useNavigation();
@@ -15,8 +15,8 @@ export default function Header() {
 
     return (
         <header className="header__wrapper w-full items-center justify-between flex py-2">
-            <HeaderBrand className="header__content__brand " {...headerBrand} />
-            <HeaderNavigation
+            <Brand className="header__content__brand " {...headerBrand} />
+            <Navigation
                 className="header__content__navigation"
                 classNames={{
                     container: "hidden md:block", // 手機版隱藏，桌機版顯示
@@ -25,7 +25,7 @@ export default function Header() {
                 }}
                 items={navigationItems}
             />
-            <HeaderToolbar />
+            <Toolbar />
         </header>
     );
 }

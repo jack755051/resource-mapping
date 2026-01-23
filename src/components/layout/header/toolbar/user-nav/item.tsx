@@ -13,7 +13,7 @@ import { HeaderUserNavItem } from '@/type';
 import { cn } from '@/lib/utils';
 
 
-interface UserNavMenuItemProps {
+interface ItemProps {
     item: HeaderUserNavItem;
     classNames?: {
         item?: string;
@@ -22,7 +22,7 @@ interface UserNavMenuItemProps {
     };
 }
 
-export function UserNavMenuItem({ item, classNames }: UserNavMenuItemProps) {
+export function Item({ item, classNames }: ItemProps) {
     const { getIcon } = useIcon();
 
     // 1. 取得 Icon Component (注意：變數名稱要大寫開頭)
@@ -45,7 +45,7 @@ export function UserNavMenuItem({ item, classNames }: UserNavMenuItemProps) {
                 <DropdownMenuSubContent>
                     {item.children!.map((child, index) => (
                         // 自己呼叫自己
-                        <UserNavMenuItem
+                        <Item
                             key={`${child.label}-${index}`}
                             item={child}
                             classNames={classNames}

@@ -1,11 +1,11 @@
-import { UserNavTriggerAvatar, HeaderUserNavTrigger } from '@/type';
+import { HeaderUserNavTrigger } from '@/type';
 import { AvatarFallback, AvatarImage, Avatar } from '@/components/ui/avatar';
 
-interface UserNavTriggerProps {
+interface TriggerProps {
   trigger: HeaderUserNavTrigger;
 }
 
-export function UserNavTrigger({ trigger }: UserNavTriggerProps) {
+export function Trigger({ trigger }: TriggerProps) {
   // 簡單的判斷：如果是字串直接顯示
   if (typeof trigger === 'string') {
     return <span className="font-medium">{trigger}</span>;
