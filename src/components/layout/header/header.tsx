@@ -1,5 +1,8 @@
 'use client';
 
+//utils
+import { cn } from '@/lib/utils';
+
 // hooks
 import { useNavigation } from '@/hook/useNavigation';
 import { useHeader } from '@/hook/useHeader';
@@ -9,6 +12,7 @@ import Navigation from './navigation';
 import Brand from './brand';
 import Toolbar from './toolbar/toolbar';
 import { Search, UserNav } from './toolbar';
+
 
 export default function Header() {
     const { items: navigationItems } = useNavigation();
@@ -21,7 +25,12 @@ export default function Header() {
     };
 
     return (
-        <header className="header__wrapper w-full items-center justify-between flex py-2">
+        <header
+            className={cn(
+                'header__wrapper w-full items-center justify-between flex py-2 px-6',
+                'sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'
+            )}
+        >
             <Brand className="header__content__brand " {...headerBrand} />
             <Navigation
                 className="header__content__navigation"

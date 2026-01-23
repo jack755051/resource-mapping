@@ -1,4 +1,4 @@
-import { HeaderBrand, HeaderUserNav } from '@/type';
+import { HeaderBrand, HeaderSearch, HeaderUserNav } from '@/type';
 
 export function useHeader() {
   // 組件資料
@@ -34,8 +34,13 @@ export function useHeader() {
     ],
   };
 
+  const headerSearch: HeaderSearch = {
+    placeholder: 'Search...',
+  };
+
   return {
     headerBrand,
     headerUserNav,
+    headerSearch,
   };
 }
