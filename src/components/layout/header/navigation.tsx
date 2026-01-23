@@ -1,8 +1,12 @@
 'use client';
 
+// types
+import { HeaderNavigationItem } from '@/type';
+// components
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { HeaderNavigationItem } from '@/type';
+// hooks
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface NavigationClasses {
   container?: string; // 最外層 nav
@@ -22,6 +26,9 @@ export default function Navigation({
   classNames,
   items,
 }: NavigationProps) {
+  // 取得 t 函式
+  const { t } = useTranslation();
+
   return (
     <nav className={cn('header__navigation', classNames?.container, className)}>
       <ul
@@ -39,7 +46,7 @@ export default function Navigation({
                 classNames?.link
               )}
             >
-              {item.title}
+              {t(item.title)}
             </Link>
           </li>
         ))}
