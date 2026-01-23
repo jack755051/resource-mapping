@@ -20,7 +20,7 @@ export function useHeader() {
    */
   const headerUserNav: HeaderUserNav = {
     trigger: 'User',
-    group: [
+    groups: [
       {
         menuTitle: 'User',
         menuItems: [
