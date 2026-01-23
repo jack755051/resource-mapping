@@ -4,14 +4,14 @@
 import { cn } from '@/lib/utils';
 
 // hooks
-import { useNavigation } from '@/hook/useNavigation';
-import { useHeader } from '@/hook/useHeader';
+import { useNavigation } from '@/hooks/useNavigation';
+import { useHeader } from '@/hooks/useHeader';
 
 // components
 import Navigation from './navigation';
 import Brand from './brand';
 import Toolbar from './toolbar/toolbar';
-import { Search, UserNav } from './toolbar';
+import { LanguageSwitcher, Search, UserNav } from './toolbar';
 
 
 export default function Header() {
@@ -27,33 +27,44 @@ export default function Header() {
     return (
         <header
             className={cn(
-                'header__wrapper w-full items-center justify-between flex py-2 px-6',
+                // 1. 移除 justify-between
+                // 2. 加入 gap-6 (或 gap-8) 讓 Brand 跟 Navigation 之間有適當間距
+                'header__wrapper w-full flex items-center gap-6 py-2 px-6',
+
+                // 凍結樣式保持不變
                 'sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'
             )}
         >
-            <Brand className="header__content__brand " {...headerBrand} />
+            {/* 左側第一部分：Logo */}
+            {/* shrink-0 確保 Logo 不會被擠壓 */}
+            <Brand className="header__content__brand shrink-0" {...headerBrand} />
+
+            {/* 左側第二部分：導航 */}
+            {/* 因為外層有 flex + gap-6，所以它會自然緊跟在 Logo 右邊 */}
             <Navigation
                 className="header__content__navigation"
                 classNames={{
-                    container: 'hidden md:block', // 手機版隱藏，桌機版顯示
-                    list: 'gap-6 items-center', // 控制間距
-                    link: 'text-sm font-medium text-gray-600 hover:text-black', // 控制文字樣式
+                    container: 'hidden md:block',
+                    list: 'gap-6 items-center',
+                    link: 'text-sm font-medium text-muted-foreground hover:text-foreground transition-colors', // 稍微優化了文字顏色 class
                 }}
                 items={navigationItems}
             />
-            <Toolbar>
-                {/* 1. 放入搜尋組件 */}
+
+            {/* 右側部分：工具列 */}
+            {/* 關鍵：加上 ml-auto (margin-left: auto) */}
+            {/* 這會吃掉中間所有剩餘空間，把 Toolbar 推到最右邊 */}
+            <Toolbar className="ml-auto">
                 <Search
                     search={headerSearch}
                     onSearch={handleSearch}
-                    className="hidden md:flex" // 可以控制只有桌機顯示搜尋
+                    className="hidden md:flex"
                 />
 
-                {/* 2. 放入分隔線 (如果需要) */}
+                <LanguageSwitcher />
+
                 <div className="h-4 w-[1px] bg-border mx-2 hidden md:block" />
 
-                {/* 3. 放入使用者選單 */}
-                {/* 注意：這裡直接傳 props 給 UserNav，而不是傳給 Toolbar */}
                 <UserNav data={headerUserNav} />
             </Toolbar>
         </header>

@@ -5,6 +5,7 @@ import {
   SettingsIcon,
   UserIcon,
   SearchIcon,
+  LanguagesIcon,
 } from 'lucide-react';
 
 // 建議把 Map 移到外面，避免每次 render 都重建物件
@@ -14,6 +15,7 @@ const iconMap: Record<string, LucideIcon> = {
   user: UserIcon,
   logout: LogOutIcon,
   search: SearchIcon,
+  language: LanguagesIcon,
   // ... 其他 icon
 };
 
