@@ -6,16 +6,16 @@ import { HeaderNavigationItem } from '@/type';
 
 interface NavigationClasses {
   container?: string; // 最外層 nav
-  list?: string;      // ul
-  item?: string;      // li
-  link?: string;      // a (Link)
-};
+  list?: string; // ul
+  item?: string; // li
+  link?: string; // a (Link)
+}
 
 export interface NavigationProps {
   className?: string;
   classNames?: NavigationClasses;
   items: HeaderNavigationItem[];
-};
+}
 
 export default function Navigation({
   className,
@@ -24,7 +24,9 @@ export default function Navigation({
 }: NavigationProps) {
   return (
     <nav className={cn('header__navigation', classNames?.container, className)}>
-      <ul className={cn('header__navigation__list flex gap-4', classNames?.list)}>
+      <ul
+        className={cn('header__navigation__list flex gap-4', classNames?.list)}
+      >
         {items.map(item => (
           <li
             key={item.href}
