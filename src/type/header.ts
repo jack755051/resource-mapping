@@ -29,6 +29,7 @@ export interface HeaderBrandProps {
 }
 
 // ---------- Header__Navigation Start -----------
+
 export type HeaderNavigationItem = AppRoute;
 
 export interface HeaderNavigationClasses {
@@ -44,44 +45,79 @@ export interface HeaderNavigationProps {
   classNames?: HeaderNavigationClasses;
 }
 
-// ---------- Header__UserNav Start -----------
+// ---------- Header__Toolbar Start -----------
 
-// 1. 基礎的 Item 定義
-export interface HeaderUserNavItem {
-  label: string;
-  icon?: string; // icon 改為可選
-  shortcut?: string; // shortcut 改為可選
-  onClick?: () => void; // 預留點擊事件
-  children?: HeaderUserNavItem[]; // 關鍵：遞迴結構
+// ==== Header Search ====
+
+/**定義 Header Search 的核心資料 (純資料) */
+export interface HeaderSearchData {
+  placeholder?: string;
+  disabled?: boolean;
+  defaultValue?: string; // 可選：預設搜尋字串
 }
 
-// 2. Group 定義
+/**定義 Header Search 的 Slot 樣式 (純樣式) */
+export interface HeaderSearchClasses {
+  wrapper?: string; // 最外層 (對應 InputGroup)
+  input?: string; // 輸入框
+  addon?: string; // 搜尋按鈕圖示區
+}
+
+/**
+ * 定義 Component 接收的 Props
+ * 組件只需要關心樣式，因為資料是從 Hook 來的 (或者是選填的 override)
+ */
+export interface HeaderSearchProps {
+  data: HeaderSearchData; // <--- 統一命名為 data
+  onSearch?: (value: string) => void; // 這是行為 (Event)，通常獨立於 data 之外
+  className?: string;
+  classNames?: HeaderSearchClasses;
+}
+
+// ==== Header User Nav ====
+
+// === 1. 基礎單元 (Item & Trigger) ===
+
+export type HeaderUserNavTrigger =
+  | string
+  | { src: string; alt: string; label: string; };
+
+export interface HeaderUserNavItem {
+  label: string;
+  icon?: string;
+  shortcut?: string;
+  onClick?: () => void;
+  children?: HeaderUserNavItem[]; // 遞迴結構
+}
+
 export interface HeaderUserNavGroup {
-  menuTitle?: string; // Title 改為可選，有時候不需要標題
+  menuTitle?: string;
   menuItems: HeaderUserNavItem[];
 }
 
-// 3. Main Data 定義
-export interface HeaderUserNav {
+// === 2. Data (資料結構) ===
+export interface HeaderUserNavData { // 改名 Data
   trigger: HeaderUserNavTrigger;
-  groups: HeaderUserNavGroup[]; // 建議改名 groups 比較語意化
+  groups: HeaderUserNavGroup[];
 }
 
-// ... Trigger 相關定義保持不變
-export type HeaderUserNavTrigger = string | UserNavTriggerAvatar;
-export interface UserNavTriggerAvatar {
-  src: string;
-  alt: string;
-  label: string;
+// === 3. Classes (樣式插槽) ===
+export interface HeaderUserNavClasses {
+  trigger?: string;    // 按鈕本體
+  content?: string;    // 下拉選單容器
+  groupLabel?: string; // 群組標題
+  item?: string;       // 選項列 (li)
+  icon?: string;       // 圖示
+  shortcut?: string;   // 快捷鍵
 }
 
-// ---------- Header__UserNav Over -----------
-
-// ---------- Header__Search Start -----------
-export interface HeaderSearch {
-  placeholder?: string;
-  disabled?: boolean;
+// === 4. Props (組件介面) ===
+export interface HeaderUserNavProps {
+  data: HeaderUserNavData;
+  className?: string; // 最外層定位用
+  classNames?: HeaderUserNavClasses; // 內部微調用
 }
+
 
 // ---------- Header__Search Over -----------
 
@@ -89,5 +125,5 @@ export interface HeaderData {
   brand: HeaderBrandData;
   navigation: HeaderNavigationItem[];
   user: HeaderUserNav;
-  search: HeaderSearch;
+  search: HeaderSearchData;
 }

@@ -15,7 +15,8 @@ export default function Navigation({
   className,
   classNames,
   items,
-}: HeaderNavigationProps) { // 3. 使用統一的 Props 定義
+}: HeaderNavigationProps) {
+  // 3. 使用統一的 Props 定義
 
   const { t } = useTranslation();
 

@@ -1,5 +1,8 @@
 'use client';
 
+// type
+import { HeaderUserNavProps } from '@/type'; // 使用標準 Props
+
 // ui
 import {
   DropdownMenu,
@@ -11,9 +14,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 
-// type
-import { HeaderUserNav } from '@/type';
-
 // utils
 import { cn } from '@/lib/utils';
 
@@ -21,50 +21,35 @@ import { cn } from '@/lib/utils';
 import { Trigger } from './trigger';
 import { Item } from './item';
 
-export interface UserNavigationClasses {
-  trigger?: string; // 按鈕
-  content?: string; // 下拉選單容器
-  groupLabel?: string; // 群組標題
-  item?: string; // 選項 (會傳給子組件)
-  icon?: string; // icon (會傳給子組件)
-  shortcut?: string; // 快捷鍵文字 (會傳給子組件)
-}
+export default function UserNav({
+  data,       // 資料
+  className,  // 外層樣式 (定位)
+  classNames, // 內部樣式 (微調)
+}: HeaderUserNavProps) {
 
-interface UserNavigationProps {
-  data: HeaderUserNav; // 改名 data 比較清楚，不要叫 props
-  className?: string; // 留給最外層用
-  classNames?: UserNavigationClasses; // 細部控制
-}
-
-export default function UserNavigation({
-  data,
-  className,
-  classNames,
-}: UserNavigationProps) {
   return (
     <DropdownMenu>
-      {/* Trigger 區塊 */}
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           className={cn(
             'relative h-8 w-8 rounded-full',
-            classNames?.trigger,
+            classNames?.trigger, // 允許客製化按鈕樣式
             className
           )}
         >
-          <Trigger trigger={data.trigger} />
+          {/* 傳遞 className 給 Avatar 以確保大小一致 */}
+          <Trigger trigger={data.trigger} className="h-8 w-8" />
         </Button>
       </DropdownMenuTrigger>
 
-      {/* Content 區塊 */}
       <DropdownMenuContent
         className={cn('w-56', classNames?.content)}
         align="end"
+        forceMount
       >
         {data.groups.map((group, groupIndex) => (
           <div key={groupIndex}>
-            {/* 每個 Group 之間加分隔線 (除了第一個) */}
             {groupIndex > 0 && <DropdownMenuSeparator />}
 
             <DropdownMenuGroup>
@@ -74,12 +59,11 @@ export default function UserNavigation({
                 </DropdownMenuLabel>
               )}
 
-              {/* 使用遞迴組件渲染 Item */}
               {group.menuItems.map((item, itemIndex) => (
                 <Item
                   key={`${item.label}-${itemIndex}`}
                   item={item}
-                  // 將樣式往下傳遞
+                  // 只傳遞 Item 需要的樣式子集
                   classNames={{
                     item: classNames?.item,
                     icon: classNames?.icon,

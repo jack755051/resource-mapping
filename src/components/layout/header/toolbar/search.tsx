@@ -1,7 +1,10 @@
 'use client';
 
-// type
-import { HeaderSearch } from '@/type';
+import { useState } from 'react';
+import { LucideIcon } from 'lucide-react';
+
+// type (引入剛剛定義好的標準 Props)
+import { HeaderSearchProps } from '@/type';
 
 // components & packages
 import {
@@ -11,31 +14,19 @@ import {
 } from '@/components/ui/input-group';
 import { cn } from '@/lib/utils';
 import { useIcon } from '@/hooks/useIcon';
-import { LucideIcon } from 'lucide-react';
-import { useState } from 'react';
-
-interface SearchClasses {
-  inputGroup?: string;
-  input?: string;
-}
-
-interface SearchProps {
-  search: HeaderSearch;
-  className?: string;
-  classNames?: SearchClasses;
-  onSearch?: (value: string) => void;
-}
 
 export default function Search({
-  search,
+  data, // 1. 改名為 data
   className,
   classNames,
   onSearch,
-}: SearchProps) {
+}: HeaderSearchProps) {
+  const { placeholder, disabled, defaultValue } = data; // 2. 解構資料
+
   const { getIcon } = useIcon();
   const IconComponent = getIcon('search') as LucideIcon;
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(defaultValue || '');
 
   const handleTriggerSearch = () => {
     if (onSearch) {
@@ -43,7 +34,6 @@ export default function Search({
     }
   };
 
-  // 按下 Enter 觸發搜索
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleTriggerSearch();
@@ -51,17 +41,28 @@ export default function Search({
   };
 
   return (
-    <InputGroup className={cn('max-w-xs', classNames?.inputGroup)}>
+    <InputGroup
+      className={cn(
+        'max-w-xs',
+        classNames?.wrapper, // 3. 使用 wrapper 對應最外層
+        className
+      )}
+    >
       <InputGroupInput
         className={cn('max-w-xs', classNames?.input)}
-        placeholder={search.placeholder ?? 'Search...'}
+        placeholder={placeholder ?? 'Search...'}
         value={inputValue}
+        disabled={disabled} // 4. 綁定 disabled
         onChange={e => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
       />
+
       <InputGroupAddon
         onClick={handleTriggerSearch}
-        className="cursor-pointer hover:text-primary transition-colors"
+        className={cn(
+          'cursor-pointer hover:text-primary transition-colors',
+          classNames?.addon // 5. 加上 addon 的樣式控制能力
+        )}
       >
         {IconComponent && <IconComponent className="h-4 w-4" />}
       </InputGroupAddon>

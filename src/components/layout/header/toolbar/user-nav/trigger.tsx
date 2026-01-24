@@ -1,19 +1,21 @@
 import { HeaderUserNavTrigger } from '@/type';
-import { AvatarFallback, AvatarImage, Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { cn } from '@/lib/utils';
 
 interface TriggerProps {
   trigger: HeaderUserNavTrigger;
+  className?: string; // 補上 className 讓外層可以控制 Avatar 大小
 }
 
-export function Trigger({ trigger }: TriggerProps) {
-  // 簡單的判斷：如果是字串直接顯示
+export function Trigger({ trigger, className }: TriggerProps) {
+  // 1. 純文字模式
   if (typeof trigger === 'string') {
-    return <span className="font-medium">{trigger}</span>;
+    return <span className={cn("font-medium", className)}>{trigger}</span>;
   }
 
-  // 否則顯示 Avatar
+  // 2. Avatar 模式
   return (
-    <Avatar className="h-8 w-8">
+    <Avatar className={cn("h-8 w-8", className)}>
       <AvatarImage src={trigger.src} alt={trigger.alt} />
       <AvatarFallback>{trigger.label}</AvatarFallback>
     </Avatar>

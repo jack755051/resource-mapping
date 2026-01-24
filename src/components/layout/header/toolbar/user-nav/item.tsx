@@ -1,4 +1,7 @@
-// ui
+import { HeaderUserNavItem } from '@/type';
+import { useIcon } from '@/hooks/useIcon';
+import { cn } from '@/lib/utils';
+import { LucideIcon } from 'lucide-react';
 import {
   DropdownMenuItem,
   DropdownMenuSub,
@@ -6,14 +9,10 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuShortcut,
 } from '@/components/ui/dropdown-menu';
-import { useIcon } from '@/hooks/useIcon';
-// type
-import { HeaderUserNavItem } from '@/type';
-// utils
-import { cn } from '@/lib/utils';
 
 interface ItemProps {
   item: HeaderUserNavItem;
+  // 這裡我們只接收需要的樣式，避免傳入整個 HeaderUserNavClasses 太重
   classNames?: {
     item?: string;
     icon?: string;
@@ -23,31 +22,30 @@ interface ItemProps {
 
 export function Item({ item, classNames }: ItemProps) {
   const { getIcon } = useIcon();
-
-  // 1. 取得 Icon Component (注意：變數名稱要大寫開頭)
-  const IconComponent = item.icon ? getIcon(item.icon) : null;
-
-  // 2. 判斷是否有子選單 (巢狀邏輯)
+  const IconComponent = item.icon ? (getIcon(item.icon) as LucideIcon) : null;
   const hasChildren = item.children && item.children.length > 0;
 
+  // 共用的 Icon 渲染邏輯
+  const renderIcon = () =>
+    IconComponent && (
+      <IconComponent className={cn('mr-2 h-4 w-4', classNames?.icon)} />
+    );
+
+  // 1. 遞迴渲染 (有子選單)
   if (hasChildren) {
     return (
       <DropdownMenuSub>
         <DropdownMenuSubTrigger className={classNames?.item}>
-          {IconComponent && (
-            <IconComponent className={cn('mr-2 h-4 w-4', classNames?.icon)} />
-          )}
+          {renderIcon()}
           <span>{item.label}</span>
         </DropdownMenuSubTrigger>
 
-        {/* 遞迴渲染子層 */}
         <DropdownMenuSubContent>
           {item.children!.map((child, index) => (
-            // 自己呼叫自己
             <Item
               key={`${child.label}-${index}`}
               item={child}
-              classNames={classNames}
+              classNames={classNames} // 關鍵：繼續往下傳遞樣式
             />
           ))}
         </DropdownMenuSubContent>
@@ -55,12 +53,13 @@ export function Item({ item, classNames }: ItemProps) {
     );
   }
 
-  // 3. 沒有子選單，渲染一般 Item
+  // 2. 一般項目 (葉節點)
   return (
-    <DropdownMenuItem className={classNames?.item} onClick={item.onClick}>
-      {IconComponent && (
-        <IconComponent className={cn('mr-2 h-4 w-4', classNames?.icon)} />
-      )}
+    <DropdownMenuItem
+      className={classNames?.item}
+      onClick={item.onClick}
+    >
+      {renderIcon()}
       <span>{item.label}</span>
       {item.shortcut && (
         <DropdownMenuShortcut className={classNames?.shortcut}>

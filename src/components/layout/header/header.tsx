@@ -56,9 +56,10 @@ export default function Header() {
       {/* 這會吃掉中間所有剩餘空間，把 Toolbar 推到最右邊 */}
       <Toolbar className="ml-auto">
         <Search
-          search={headerSearch}
+          data={headerSearch}
           onSearch={handleSearch}
           className="hidden md:flex"
+          classNames={{}}
         />
 
         <LanguageSwitcher />
