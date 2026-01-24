@@ -1,37 +1,31 @@
 'use client';
 
-import { FooterProps as BaseFooterProps } from '../../type';
+// type
+import { FooterProps } from '@/type';
+
+// components
 import { generateFooterText } from '@/utils/footer-helper';
 import { cn } from '@/lib/utils'; // 記得引入 cn
 
-// 1. 定義 Slot ClassNames
-export interface FooterClasses {
-  wrapper?: string; // 最外層
-  text?: string;    // 文字內容
-}
+// hooks
+import { useFooter } from '@/hooks/useFooter';
 
-// 2. 擴充 Props
-// 假設 BaseFooterProps 只有 startYear 等資料欄位
-export interface FooterProps extends BaseFooterProps {
-  className?: string; // 為了方便，保留最外層的快速設定
-  classNames?: FooterClasses;
-}
 
 export default function Footer({
   className,
   classNames,
-  ...props // 其餘資料 props (startYear, etc.)
+  data: overrideData, // 接收外部可能傳入的資料覆蓋
 }: FooterProps) {
-
-  const footerText = generateFooterText(props);
+  const { footerText } = useFooter(overrideData);
 
   return (
     <footer
       className={cn(
-        // 預設樣式
+        // 1. 基礎樣式
         "footer__wrapper w-full flex items-center justify-center py-4 text-sm text-gray-600",
-        // 傳入的樣式
+        // 2. 外部傳入的 Slot 樣式
         classNames?.wrapper,
+        // 3. 最外層的樣式
         className
       )}
     >

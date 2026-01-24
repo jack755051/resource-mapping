@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* 關鍵：告訴 v4 去讀取舊版的設定檔 
   路徑是相對於 globals.css 的位置 (src/app/globals.css -> 往上兩層找到 config)

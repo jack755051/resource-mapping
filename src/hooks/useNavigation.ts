@@ -3,12 +3,11 @@ import { HeaderNavigationItem } from '@/type';
 import { appRoutes } from '@/config/routes';
 
 export function useNavigation() {
+  const pathname = usePathname();
 
-    const pathname = usePathname();
+  const navigationItems = appRoutes.filter(route => !route.hideInMenu);
 
-    const navigationItems = appRoutes.filter(route => !route.hideInMenu);
-
-    return {
-        items: navigationItems,
-    };
+  return {
+    items: navigationItems,
+  };
 }

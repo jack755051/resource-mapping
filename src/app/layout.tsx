@@ -37,25 +37,15 @@ export default function RootLayout({
         <LanguageProvider>
           {/* 2. 在這裡建立全域的 Sticky Footer 結構 */}
           <div className="relative flex min-h-screen flex-col bg-background">
-
             <Header />
 
             {/* 3. 主要內容區：這裡的 flex-1 會確保 Footer 被推到底部 */}
             {/* 你可以在這裡加 main，或者留給 page 自己加 */}
-            <main className="flex-1 flex flex-col">
-              {children}
-            </main>
+            <main className="flex-1 flex flex-col">{children}</main>
 
-            <Footer
-              startYear={2020}
-              companyName="San Ring Tech."
-              remark="All rights reserved."
-              className="border-t"
-            />
-
+            <Footer />
           </div>
         </LanguageProvider>
-
       </body>
     </html>
   );

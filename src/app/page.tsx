@@ -5,9 +5,7 @@ export default function Home() {
     <div className="home__page__content flex flex-col items-center justify-center p-6 h-full">
       <h1 className="text-2xl font-bold">Resource Mapping Tool</h1>
       {/* 你的其他主要內容放這裡 */}
-      <p className="mt-4 text-muted-foreground">
-        歡迎使用資源地圖系統...
-      </p>
+      <p className="mt-4 text-muted-foreground">歡迎使用資源地圖系統...</p>
     </div>
   );
 }
