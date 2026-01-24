@@ -39,7 +39,7 @@ export default function RootLayout({
           {/* 2. 在這裡建立全域的 Sticky Footer 結構 */}
           <div className="relative flex min-h-screen flex-col bg-background">
             <Header />
-            <SiteBreadcrumb />
+            {/* <SiteBreadcrumb /> */}
 
             {/* 3. 主要內容區：這裡的 flex-1 會確保 Footer 被推到底部 */}
             {/* 你可以在這裡加 main，或者留給 page 自己加 */}
