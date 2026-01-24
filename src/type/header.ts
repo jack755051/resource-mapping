@@ -37,6 +37,7 @@ export interface HeaderNavigationClasses {
   list?: string; // ul
   item?: string; // li
   link?: string; // a
+  active?: string;
 }
 
 export interface HeaderNavigationProps {
