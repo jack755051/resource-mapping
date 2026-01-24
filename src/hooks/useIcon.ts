@@ -6,6 +6,11 @@ import {
   UserIcon,
   SearchIcon,
   LanguagesIcon,
+  EyeIcon,
+  ArrowRightIcon,
+  ShieldCheckIcon,
+  ActivityIcon,
+  ServerIcon,
 } from 'lucide-react';
 
 // 建議把 Map 移到外面，避免每次 render 都重建物件
@@ -17,6 +22,13 @@ const iconMap: Record<string, LucideIcon> = {
   search: SearchIcon,
   language: LanguagesIcon,
   // ... 其他 icon
+
+  // homepage
+  arrowRight: ArrowRightIcon,
+  shieldCheck: ShieldCheckIcon,
+  activity: ActivityIcon,
+  eye: EyeIcon,
+  server: ServerIcon,
 };
 
 export function useIcon() {
