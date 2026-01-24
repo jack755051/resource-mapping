@@ -38,21 +38,29 @@ export default function Navigation({
               {/* 只有在 isActive 時才渲染這個 motion.span */}
               {isActive && (
                 <motion.span
-                  layoutId="navbar-active"
+                  // 🔴 關鍵修改 1：讓 layoutId 變為唯一值 (加上 item.href)
+                  // 這樣 Framer 就不會試圖從上一頁的位置「滑」過來，而是視為新元素
+                  layoutId={`navbar-active-${item.href}`}
+
+                  // 🟢 關鍵修改 2：加入進場動畫 (原地淡入 + 微放大)
+                  // 這樣即使沒有滑動，看起來也很有科技感，像是指示燈亮起
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  // 離場動畫 (選用)
+                  exit={{ opacity: 0, scale: 0.8 }}
+
                   className={cn(
-                    // 1. 不填滿，只留在底部 (bottom-0)
-                    "absolute bottom-0 left-0 right-0 -z-10",
-                    // 2. 高度設為 2px
-                    "h-[2px]",
-                    // 3. 實心顏色 + 光暈
-                    "bg-primary shadow-[0_0_8px_rgba(var(--primary),0.6)]",
+                    "absolute inset-0 -z-10 rounded-sm",
+                    "bg-primary/10 border border-primary/20",
+                    "shadow-[0_0_8px_rgba(59,130,246,0.15)]",
                     classNames?.active
                   )}
                   transition={{
                     type: "spring",
-                    stiffness: 400,
-                    damping: 35,
-                    bounce: 0
+                    stiffness: 350,
+                    damping: 30,
+                    bounce: 0,
+                    duration: 0.2 // 進場速度稍微快一點
                   }}
                 />
               )}
