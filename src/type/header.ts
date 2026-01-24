@@ -1,10 +1,9 @@
-export interface HeaderNavigationItem {
-  title: string;
-  href: string;
-  description?: string;
-}
+// ---------- Header__Brand Start -----------
 
-export interface HeaderBrand {
+import { AppRoute } from './route';
+
+/**定義 Header Brand 的核心資料 (純資料) */
+export interface HeaderBrandData {
   logo: {
     href: string;
     alt: string;
@@ -13,7 +12,40 @@ export interface HeaderBrand {
   title?: string;
 }
 
+/**定義 Header Brand 的 Slot 樣式 (純樣式) */
+export interface HeaderBrandClasses {
+  title?: string;
+  image?: string;
+}
+
+/**
+ * 定義 Component 接收的 Props
+ * 組件只需要關心樣式，因為資料是從 Hook 來的 (或者是選填的 override)
+ */
+export interface HeaderBrandProps {
+  data: HeaderBrandData;
+  className?: string;
+  classNames?: HeaderBrandClasses;
+}
+
+// ---------- Header__Navigation Start -----------
+export type HeaderNavigationItem = AppRoute;
+
+export interface HeaderNavigationClasses {
+  container?: string; // 最外層 nav
+  list?: string; // ul
+  item?: string; // li
+  link?: string; // a
+}
+
+export interface HeaderNavigationProps {
+  items: HeaderNavigationItem[]; // Navigation 比較特別，它是陣列
+  className?: string;
+  classNames?: HeaderNavigationClasses;
+}
+
 // ---------- Header__UserNav Start -----------
+
 // 1. 基礎的 Item 定義
 export interface HeaderUserNavItem {
   label: string;
@@ -52,3 +84,10 @@ export interface HeaderSearch {
 }
 
 // ---------- Header__Search Over -----------
+
+export interface HeaderData {
+  brand: HeaderBrandData;
+  navigation: HeaderNavigationItem[];
+  user: HeaderUserNav;
+  search: HeaderSearch;
+}

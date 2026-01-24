@@ -15,7 +15,8 @@ import { LanguageSwitcher, Search, UserNav } from './toolbar';
 
 export default function Header() {
   const { items: navigationItems } = useNavigation();
-  const { headerBrand, headerUserNav, headerSearch } = useHeader();
+  const { headerBrand, headerUserNav, headerSearch, headerNavigation } =
+    useHeader();
 
   // 定義搜尋邏輯 (Header 層級控制業務邏輯)
   const handleSearch = (value: string) => {
@@ -36,7 +37,7 @@ export default function Header() {
     >
       {/* 左側第一部分：Logo */}
       {/* shrink-0 確保 Logo 不會被擠壓 */}
-      <Brand className="header__content__brand shrink-0" {...headerBrand} />
+      <Brand className="header__content__brand shrink-0" data={headerBrand} />
 
       {/* 左側第二部分：導航 */}
       {/* 因為外層有 flex + gap-6，所以它會自然緊跟在 Logo 右邊 */}
@@ -45,9 +46,9 @@ export default function Header() {
         classNames={{
           container: 'hidden md:block',
           list: 'gap-6 items-center',
-          link: 'text-sm font-medium text-muted-foreground hover:text-foreground transition-colors', // 稍微優化了文字顏色 class
+          link: 'text-sm font-medium text-muted-foreground hover:text-foreground transition-colors',
         }}
-        items={navigationItems}
+        items={headerNavigation}
       />
 
       {/* 右側部分：工具列 */}

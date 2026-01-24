@@ -1,18 +1,18 @@
-import { HeaderBrand, HeaderSearch, HeaderUserNav } from '@/type';
+import { HeaderBrandData, HeaderSearch, HeaderUserNav } from '@/type';
+import { useNavigation } from '@/hooks/useNavigation';
 
 export function useHeader() {
-  // 組件資料
-
+  const { items: navigationItems } = useNavigation();
   /**
    * header brand
    */
-  const headerBrand: HeaderBrand = {
+  const headerBrand: HeaderBrandData = {
     logo: {
       href: '/',
-      alt: 'Logo',
-      src: '',
+      alt: 'San Ring Tech Logo',
+      src: '', // 記得放一張圖片到 public/images 或是暫時留空
     },
-    title: 'Title',
+    title: 'San Ring Tech.',
   };
 
   /**
@@ -22,7 +22,7 @@ export function useHeader() {
     trigger: 'User',
     groups: [
       {
-        menuTitle: 'User',
+        menuTitle: 'Account',
         menuItems: [
           {
             icon: 'user',
@@ -42,5 +42,6 @@ export function useHeader() {
     headerBrand,
     headerUserNav,
     headerSearch,
+    headerNavigation: navigationItems,
   };
 }

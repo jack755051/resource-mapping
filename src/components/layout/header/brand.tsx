@@ -1,37 +1,53 @@
 'use client';
 
-import Link from 'next/link'; // 引入 Link
-import { type HeaderBrand as HeaderBrandType } from '@/type';
+import Link from 'next/link';
+import { HeaderBrandProps } from '@/type'; // 直接引用定義好的 Props
 import { cn } from '@/lib/utils';
 
-export interface BrandProps extends HeaderBrandType {
-  className?: string;
-}
+export default function Brand({
+  data,
+  className,
+  classNames,
+}: HeaderBrandProps) {
+  // 解構資料，讓程式碼更乾淨
+  const { logo, title } = data;
 
-export default function Brand({ className, logo, title }: BrandProps) {
   return (
     <Link
-      href="/"
+      href={logo.href} // 修正：讀取資料中的路徑，而不是寫死 '/'
       className={cn(
         // 基礎佈局
         'header__brand flex items-center gap-2',
-        // 互動效果：防止文字選取、滑鼠游標變手指、滑過稍微變透明
+        // 互動效果
         'select-none cursor-pointer transition-opacity hover:opacity-80',
         className
       )}
     >
-      {/* 圖片：移除外層 div，直接控制 img */}
-      {logo.src && (
+      {/* 圖片區域 */}
+      {logo.src ? (
         <img
           src={logo.src}
           alt={logo.alt}
-          className="h-8 w-auto object-contain"
+          // h-8 w-auto 是控制 Logo 大小的關鍵，確保它不會變形
+          className={cn('h-8 w-auto object-contain', classNames?.image)}
         />
+      ) : (
+        // 如果沒有圖片，顯示一個佔位方塊 (開發階段好用)
+        <div className="h-8 w-8 bg-muted rounded-md flex items-center justify-center text-xs font-bold text-muted-foreground">
+          Logo
+        </div>
       )}
 
-      {/* 文字：保持原樣，但在手機版通常可以考慮 hidden md:block */}
+      {/* 文字區域 */}
       {title && (
-        <span className="header__brand__title font-bold text-lg whitespace-nowrap">
+        <span
+          className={cn(
+            'header__brand__title font-bold text-lg whitespace-nowrap',
+            // RWD: 手機版通常只顯示 Logo，隱藏文字以節省空間 (可選)
+            'hidden md:block',
+            classNames?.title
+          )}
+        >
           {title}
         </span>
       )}
