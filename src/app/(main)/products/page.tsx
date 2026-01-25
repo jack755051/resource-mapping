@@ -202,11 +202,10 @@ export default function ProductsPage() {
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
-                  title={product.title}
-                  category={product.category}
-                  image={product.image}
-                  specs={product.specs}
-                  tags={product.tags}
+                  data={{
+                    ...product,
+                    href: `/products/${product.id}`, // ⚠️ 注意：新的 interface 需要 href，如果 product 裡沒有，這裡要補上
+                  }}
                 />
               ))}
             </div>

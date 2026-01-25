@@ -6,6 +6,13 @@ import {
   UserIcon,
   SearchIcon,
   LanguagesIcon,
+
+  // page product
+  ArrowRight,
+  Aperture,
+  Maximize2,
+  Zap,
+  Layers,
 } from 'lucide-react';
 
 // 建議把 Map 移到外面，避免每次 render 都重建物件
@@ -16,6 +23,13 @@ const iconMap: Record<string, LucideIcon> = {
   logout: LogOutIcon,
   search: SearchIcon,
   language: LanguagesIcon,
+
+  // page product
+  arrowRight: ArrowRight,
+  aperture: Aperture,
+  maximize2: Maximize2,
+  zap: Zap,
+  layers: Layers,
   // ... 其他 icon
 };
 
