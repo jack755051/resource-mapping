@@ -18,8 +18,10 @@ export default function Navigation({
 
   return (
     <nav className={cn('header__navigation', classNames?.container, className)}>
-      <ul className={cn('header__navigation__list flex gap-4', classNames?.list)}>
-        {items.map((item) => {
+      <ul
+        className={cn('header__navigation__list flex gap-4', classNames?.list)}
+      >
+        {items.map(item => {
           // 判斷是否啟用
           const isActive =
             item.href === '/'
@@ -41,26 +43,24 @@ export default function Navigation({
                   // 🔴 關鍵修改 1：讓 layoutId 變為唯一值 (加上 item.href)
                   // 這樣 Framer 就不會試圖從上一頁的位置「滑」過來，而是視為新元素
                   layoutId={`navbar-active-${item.href}`}
-
                   // 🟢 關鍵修改 2：加入進場動畫 (原地淡入 + 微放大)
                   // 這樣即使沒有滑動，看起來也很有科技感，像是指示燈亮起
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   // 離場動畫 (選用)
                   exit={{ opacity: 0, scale: 0.8 }}
-
                   className={cn(
-                    "absolute inset-0 -z-10 rounded-sm",
-                    "bg-primary/10 border border-primary/20",
-                    "shadow-[0_0_8px_rgba(59,130,246,0.15)]",
+                    'absolute inset-0 -z-10 rounded-sm',
+                    'bg-primary/10 border border-primary/20',
+                    'shadow-[0_0_8px_rgba(59,130,246,0.15)]',
                     classNames?.active
                   )}
                   transition={{
-                    type: "spring",
+                    type: 'spring',
                     stiffness: 350,
                     damping: 30,
                     bounce: 0,
-                    duration: 0.2 // 進場速度稍微快一點
+                    duration: 0.2, // 進場速度稍微快一點
                   }}
                 />
               )}
@@ -72,7 +72,9 @@ export default function Navigation({
                   'hover:text-primary',
                   classNames?.link,
                   // 3. 文字顏色變化
-                  isActive ? 'text-primary font-medium' : 'text-muted-foreground'
+                  isActive
+                    ? 'text-primary font-medium'
+                    : 'text-muted-foreground'
                 )}
               >
                 {t(item.title)}

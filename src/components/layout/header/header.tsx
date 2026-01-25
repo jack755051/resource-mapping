@@ -47,7 +47,7 @@ export default function Header() {
           container: 'hidden md:block',
           list: 'gap-6 items-center',
           link: 'text-sm font-medium text-muted-foreground hover:text-foreground transition-colors',
-          active: 'text-foreground border-b-2 border-primary'
+          active: 'text-foreground border-b-2 border-primary',
         }}
         items={headerNavigation}
       />

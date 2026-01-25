@@ -11,27 +11,27 @@
  */
 
 export const routeMapping: Record<string, string> = {
-    // === 第一層頁面 (對應 routes.ts 的根目錄) ===
-    'about': 'nav.about',
-    'products': 'nav.products.title',
-    'solutions': 'nav.solutions.title',
-    'cases': 'nav.cases',
-    'contact': 'nav.contact',
-    'support': 'nav.support', // 雖然目前隱藏，但建議先寫好
+  // === 第一層頁面 (對應 routes.ts 的根目錄) ===
+  about: 'nav.about',
+  products: 'nav.products.title',
+  solutions: 'nav.solutions.title',
+  cases: 'nav.cases',
+  contact: 'nav.contact',
+  support: 'nav.support', // 雖然目前隱藏，但建議先寫好
 
-    // === 底部功能頁面 (對應 dictionaries.ts 但不在 Main Nav) ===
-    'privacy': 'nav.privacy',
-    'terms': 'nav.terms',
+  // === 底部功能頁面 (對應 dictionaries.ts 但不在 Main Nav) ===
+  privacy: 'nav.privacy',
+  terms: 'nav.terms',
 
-    // === 第二層：產品子頁面 (Products Children) ===
-    // 網址: /products/cameras -> slug: cameras
-    'cameras': 'nav.products.cameras',
-    'recorders': 'nav.products.recorders',
-    'accessories': 'nav.products.accessories',
+  // === 第二層：產品子頁面 (Products Children) ===
+  // 網址: /products/cameras -> slug: cameras
+  cameras: 'nav.products.cameras',
+  recorders: 'nav.products.recorders',
+  accessories: 'nav.products.accessories',
 
-    // === 第二層：解決方案子頁面 (Solutions Children) ===
-    // 網址: /solutions/residential -> slug: residential
-    'residential': 'nav.solutions.home',
-    'business': 'nav.solutions.business',
-    'construction': 'nav.solutions.construction',
+  // === 第二層：解決方案子頁面 (Solutions Children) ===
+  // 網址: /solutions/residential -> slug: residential
+  residential: 'nav.solutions.home',
+  business: 'nav.solutions.business',
+  construction: 'nav.solutions.construction',
 };

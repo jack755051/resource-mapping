@@ -55,10 +55,7 @@ export function Item({ item, classNames }: ItemProps) {
 
   // 2. 一般項目 (葉節點)
   return (
-    <DropdownMenuItem
-      className={classNames?.item}
-      onClick={item.onClick}
-    >
+    <DropdownMenuItem className={classNames?.item} onClick={item.onClick}>
       {renderIcon()}
       <span>{item.label}</span>
       {item.shortcut && (

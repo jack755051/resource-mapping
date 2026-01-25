@@ -27,7 +27,8 @@ export function useHeader() {
   /**
    * header user nav
    */
-  const headerUserNav: HeaderUserNavData = { // 使用新 Type
+  const headerUserNav: HeaderUserNavData = {
+    // 使用新 Type
     trigger: 'User', // 或是 { src: '...', ... }
     groups: [
       {
@@ -41,18 +42,23 @@ export function useHeader() {
           {
             icon: 'settings',
             label: 'Settings',
-            children: [ // 測試遞迴結構
+            children: [
+              // 測試遞迴結構
               { label: 'Display', icon: 'monitor' },
-              { label: 'Security', icon: 'lock' }
-            ]
+              { label: 'Security', icon: 'lock' },
+            ],
           },
         ],
       },
       {
         menuItems: [
-          { label: 'Logout', icon: 'log-out', onClick: () => console.log('logout') }
-        ]
-      }
+          {
+            label: 'Logout',
+            icon: 'log-out',
+            onClick: () => console.log('logout'),
+          },
+        ],
+      },
     ],
   };
 

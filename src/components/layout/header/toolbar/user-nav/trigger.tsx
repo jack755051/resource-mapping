@@ -10,12 +10,12 @@ interface TriggerProps {
 export function Trigger({ trigger, className }: TriggerProps) {
   // 1. 純文字模式
   if (typeof trigger === 'string') {
-    return <span className={cn("font-medium", className)}>{trigger}</span>;
+    return <span className={cn('font-medium', className)}>{trigger}</span>;
   }
 
   // 2. Avatar 模式
   return (
-    <Avatar className={cn("h-8 w-8", className)}>
+    <Avatar className={cn('h-8 w-8', className)}>
       <AvatarImage src={trigger.src} alt={trigger.alt} />
       <AvatarFallback>{trigger.label}</AvatarFallback>
     </Avatar>

@@ -22,11 +22,10 @@ import { Trigger } from './trigger';
 import { Item } from './item';
 
 export default function UserNav({
-  data,       // 資料
-  className,  // 外層樣式 (定位)
+  data, // 資料
+  className, // 外層樣式 (定位)
   classNames, // 內部樣式 (微調)
 }: HeaderUserNavProps) {
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

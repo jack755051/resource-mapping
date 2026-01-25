@@ -81,7 +81,7 @@ export interface HeaderSearchProps {
 
 export type HeaderUserNavTrigger =
   | string
-  | { src: string; alt: string; label: string; };
+  | { src: string; alt: string; label: string };
 
 export interface HeaderUserNavItem {
   label: string;
@@ -97,19 +97,20 @@ export interface HeaderUserNavGroup {
 }
 
 // === 2. Data (資料結構) ===
-export interface HeaderUserNavData { // 改名 Data
+export interface HeaderUserNavData {
+  // 改名 Data
   trigger: HeaderUserNavTrigger;
   groups: HeaderUserNavGroup[];
 }
 
 // === 3. Classes (樣式插槽) ===
 export interface HeaderUserNavClasses {
-  trigger?: string;    // 按鈕本體
-  content?: string;    // 下拉選單容器
+  trigger?: string; // 按鈕本體
+  content?: string; // 下拉選單容器
   groupLabel?: string; // 群組標題
-  item?: string;       // 選項列 (li)
-  icon?: string;       // 圖示
-  shortcut?: string;   // 快捷鍵
+  item?: string; // 選項列 (li)
+  icon?: string; // 圖示
+  shortcut?: string; // 快捷鍵
 }
 
 // === 4. Props (組件介面) ===
@@ -118,7 +119,6 @@ export interface HeaderUserNavProps {
   className?: string; // 最外層定位用
   classNames?: HeaderUserNavClasses; // 內部微調用
 }
-
 
 // ---------- Header__Search Over -----------
 
