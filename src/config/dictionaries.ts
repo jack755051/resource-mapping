@@ -13,7 +13,7 @@ export const dictionaries: Record<LanguageCode, Dictionary> = {
     'nav.contact': '聯絡我們',
     'nav.privacy': '隱私權政策',
     'nav.terms': '服務條款',
-    'nav.products.title': '監控產品',
+    'nav.products.title': '產品與服務',
     'nav.products.cameras': '監視攝影機',
     'nav.products.recorders': '錄影主機',
     'nav.products.accessories': '周邊配件',
