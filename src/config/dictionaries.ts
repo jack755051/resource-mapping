@@ -179,6 +179,50 @@ export const dictionaries: Record<LanguageCode, Dictionary> = {
     'products.hero.ai.tag': 'AI',
     'products.hero.ai.title': '智慧偵測',
     'products.hero.ai.accuracy': '99.9% 準確率',
+
+    // =================================================================
+    // Contact Page
+    // =================================================================
+    // Hero Section
+    'contact.hero.badge': 'Get in Touch',
+    'contact.hero.title': '準備好升級您的安全防護了嗎？',
+    'contact.hero.desc.line1': '無論是社區規劃、校園安防還是廠辦整合，',
+    'contact.hero.desc.line2': '光訊科技的專業團隊隨時準備為您提供諮詢。',
+
+    // Form Section (Left)
+    'contact.form.title': '專案諮詢',
+    'contact.form.desc': '請填寫以下資訊，我們將於 24 小時內由專人與您聯繫。',
+
+    'contact.form.label.name': '聯絡人姓名',
+    'contact.form.placeholder.name': '王小明',
+
+    'contact.form.label.phone': '聯絡電話',
+    'contact.form.placeholder.phone': '0912-345-678',
+
+    'contact.form.label.email': '電子信箱',
+    'contact.form.placeholder.email': 'example@company.com',
+
+    'contact.form.label.type': '諮詢項目 (可複選)',
+    'contact.form.tags.community': '社區安防',
+    'contact.form.tags.lpr': '車牌辨識',
+    'contact.form.tags.dvr': '監控主機',
+    'contact.form.tags.maintenance': '維修保養',
+    'contact.form.tags.other': '其他',
+
+    'contact.form.label.message': '需求描述',
+    'contact.form.placeholder.message': '請簡述您的場域狀況或需求...',
+
+    'contact.form.submit': '送出諮詢',
+
+    // Info Section (Right)
+    'contact.info.address.title': '公司地址',
+    'contact.info.address.content': '241 新北市新莊區福壽街 164 巷 17 號 1 樓',
+    'contact.info.address.map': '開啟 Google Maps',
+
+    'contact.info.phone.title': '聯絡電話',
+    'contact.info.fax.title': '傳真 Fax',
+
+    'contact.info.email.title': '電子信箱',
   },
 
   en: {
@@ -357,5 +401,49 @@ export const dictionaries: Record<LanguageCode, Dictionary> = {
     'products.hero.ai.tag': 'AI',
     'products.hero.ai.title': 'Smart Detection',
     'products.hero.ai.accuracy': '99.9% Accuracy',
+
+    // =================================================================
+    // Contact Page
+    // =================================================================
+    // Hero Section
+    'contact.hero.badge': 'Get in Touch',
+    'contact.hero.title': 'Ready to Upgrade Your Security?',
+    'contact.hero.desc.line1': 'Whether for community planning, campus security, or factory integration,',
+    'contact.hero.desc.line2': 'San Ring Tech\'s professional team is ready to assist you.',
+
+    // Form Section (Left)
+    'contact.form.title': 'Project Inquiry',
+    'contact.form.desc': 'Please fill out the form below, and we will contact you within 24 hours.',
+
+    'contact.form.label.name': 'Contact Name',
+    'contact.form.placeholder.name': 'Your Name',
+
+    'contact.form.label.phone': 'Phone Number',
+    'contact.form.placeholder.phone': '+886 912-345-678',
+
+    'contact.form.label.email': 'Email Address',
+    'contact.form.placeholder.email': 'example@company.com',
+
+    'contact.form.label.type': 'Inquiry Type',
+    'contact.form.tags.community': 'Community Security',
+    'contact.form.tags.lpr': 'LPR System',
+    'contact.form.tags.dvr': 'DVR/NVR',
+    'contact.form.tags.maintenance': 'Maintenance',
+    'contact.form.tags.other': 'Other',
+
+    'contact.form.label.message': 'Message',
+    'contact.form.placeholder.message': 'Please describe your site condition or requirements...',
+
+    'contact.form.submit': 'Send Inquiry',
+
+    // Info Section (Right)
+    'contact.info.address.title': 'Office Address',
+    'contact.info.address.content': '1F., No. 17, Ln. 164, Fushou St., Xinzhuang Dist., New Taipei City 242, Taiwan',
+    'contact.info.address.map': 'Open Google Maps',
+
+    'contact.info.phone.title': 'Phone',
+    'contact.info.fax.title': 'Fax',
+
+    'contact.info.email.title': 'Email',
   },
 };
