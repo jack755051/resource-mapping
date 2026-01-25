@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Aperture, HardDrive, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Aperture, Maximize2, Zap, Layers } from 'lucide-react'; // 引入更多圖示
+import { cn } from '@/lib/utils';
 
 interface ProductCardProps {
     title: string;
@@ -16,62 +17,85 @@ interface ProductCardProps {
 
 export function ProductCard({ title, category, image, specs, tags }: ProductCardProps) {
     return (
-        <Card className="group overflow-hidden rounded-[1.5rem] border-border/50 bg-card transition-all duration-300 hover:shadow-xl hover:border-primary/50 hover:-translate-y-1">
-            {/* 圖片區塊：帶有輕微的背景色，突顯產品本身 */}
-            <div className="relative aspect-[4/3] w-full bg-muted/30 overflow-hidden">
+        <Card className="group relative flex flex-col h-full overflow-hidden rounded-[1.5rem] border border-border/40 bg-card transition-all duration-500 hover:shadow-2xl hover:border-primary/50 hover:-translate-y-1">
+
+            {/* 1. 圖片區塊：更加通透 */}
+            {/* 使用 group-hover 讓圖片稍微放大 */}
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-b from-muted/20 to-muted/5 p-6">
                 <Image
                     src={image}
                     alt={title}
                     fill
-                    className="object-contain p-6 transition-transform duration-500 group-hover:scale-110"
+                    className="object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-sm group-hover:drop-shadow-xl"
                 />
 
-                {/* 左上角分類標籤 */}
-                <div className="absolute top-4 left-4">
-                    <Badge variant="secondary" className="bg-background/80 backdrop-blur text-xs font-mono tracking-wider">
+                {/* 左上角：分類標籤 (更簡約) */}
+                <div className="absolute top-4 left-4 z-10">
+                    <Badge variant="outline" className="bg-background/60 backdrop-blur border-border/50 text-xs font-medium tracking-wide text-muted-foreground">
                         {category}
                     </Badge>
                 </div>
 
-                {/* 右上角狀態/亮點 */}
+                {/* 右上角：AI 亮點 (保持醒目) */}
                 {tags.includes('AI') && (
-                    <div className="absolute top-4 right-4">
-                        <Badge className="bg-primary/90 hover:bg-primary text-primary-foreground gap-1">
-                            <Aperture className="w-3 h-3" /> AI INSIDE
+                    <div className="absolute top-4 right-4 z-10">
+                        <Badge className="bg-white/90 text-primary hover:bg-white shadow-sm gap-1.5 border border-primary/10">
+                            <Aperture className="w-3.5 h-3.5" />
+                            <span className="text-[10px] font-bold tracking-wider">AI CORE</span>
                         </Badge>
                     </div>
                 )}
             </div>
 
-            {/* 內容區塊 */}
-            <CardHeader className="p-5 pb-2">
-                <h3 className="text-lg font-bold leading-tight group-hover:text-primary transition-colors">
+            {/* 2. 標題區塊 */}
+            <div className="flex flex-col flex-1 p-6 pb-0">
+                <h3 className="text-lg font-bold leading-tight text-foreground group-hover:text-primary transition-colors duration-300">
                     {title}
                 </h3>
-                {/* 這裡可以放簡短描述，或省略 */}
-            </CardHeader>
+                {/* 裝飾線條，Hover 時變長或變色 */}
+                <div className="w-8 h-1 bg-border mt-3 mb-1 rounded-full group-hover:w-12 group-hover:bg-primary/50 transition-all duration-500" />
+            </div>
 
-            <CardContent className="p-5 pt-2 space-y-4">
-                {/* 規格圖示化：現代設計不喜歡純文字列表 */}
-                <div className="grid grid-cols-2 gap-2">
+            {/* 3. 規格區塊：去背化，改用 Icon 列表 */}
+            <CardContent className="p-6 py-4 flex-1">
+                <div className="grid grid-cols-2 gap-y-3 gap-x-4">
                     {specs.map((spec, index) => (
-                        <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/40 rounded-lg px-2 py-1.5">
-                            {/* 這裡可以根據 spec 類型動態換 icon，暫時用通用的 */}
-                            <div className="w-1 h-1 rounded-full bg-primary/50" />
-                            <span className="truncate">
-                                <span className="font-semibold text-foreground/80">{spec.value}</span> {spec.label}
-                            </span>
+                        <div key={index} className="flex items-center gap-2.5 text-sm group/spec">
+                            {/* 這裡可以做一個簡單的 Icon 映射，或者統一用一個通用的 tech icon */}
+                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-muted/50 flex items-center justify-center text-muted-foreground group-hover:bg-primary/5 group-hover:text-primary transition-colors">
+                                {/* 根據 label 決定 icon，或是隨機選一個，這裡示範簡單邏輯 */}
+                                {index === 0 ? <Maximize2 className="w-3 h-3" /> :
+                                    index === 1 ? <Zap className="w-3 h-3" /> :
+                                        <Layers className="w-3 h-3" />}
+                            </div>
+
+                            <div className="flex flex-col leading-none">
+                                <span className="font-bold text-foreground/90 text-[13px]">{spec.value}</span>
+                                <span className="text-[10px] text-muted-foreground uppercase tracking-wider mt-0.5">{spec.label}</span>
+                            </div>
                         </div>
                     ))}
                 </div>
             </CardContent>
 
-            <CardFooter className="p-5 pt-0">
-                <Button className="w-full rounded-xl gap-2 group-hover:bg-primary group-hover:text-primary-foreground" variant="outline">
-                    查看規格
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </Button>
+            {/* 4. 底部按鈕：改為更低調的連結樣式 */}
+            <CardFooter className="p-6 pt-2 border-t border-border/30 bg-muted/5 mt-auto">
+                <div className="w-full flex items-center justify-between group/btn cursor-pointer">
+                    <span className="text-sm font-medium text-muted-foreground group-hover/btn:text-foreground transition-colors">
+                        View Details
+                    </span>
+                    <Button
+                        size="icon"
+                        variant="ghost"
+                        className="rounded-full w-8 h-8 bg-transparent group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
+                    >
+                        <ArrowRight className="w-4 h-4" />
+                    </Button>
+                </div>
             </CardFooter>
+
+            {/* 全卡點擊的隱形連結 (UX 技巧) */}
+            <a href={`/products/${title}`} className="absolute inset-0 z-0" aria-label={`View ${title}`}></a>
         </Card>
     );
 }

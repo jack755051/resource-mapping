@@ -10,22 +10,33 @@
 */
 @layer base {
   :root {
-    --background: 210 40% 98%;
+    /* 修正 1: 背景改為純白 (0 0% 100%)，讓畫面更乾淨 */
+    --background: 0 0% 100%;
     --foreground: 222 47% 11%;
+
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
+
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
+
     --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
+
     --secondary: 199 89% 48%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
+
+    /* 修正 2: Muted 應該是淺灰色，而不是深藍色 */
+    /* 原本是 217 33% 17% (深色)，改成 210 40% 96.1% (淺灰) */
+    --muted: 210 40% 96.1%;
     --muted-foreground: 215 16% 47%;
+
     --accent: 210 40% 96.1%;
     --accent-foreground: 222 47% 11.2%;
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 221 83% 53%;
