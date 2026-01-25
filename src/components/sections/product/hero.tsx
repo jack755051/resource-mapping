@@ -1,7 +1,13 @@
 'use client';
+
 import { motion } from 'framer-motion';
+// 1. 引入翻譯 Hook
+import { useTranslation } from '@/hooks/useTranslation';
 
 export function ProductHeroSection() {
+    // 2. 取得 t 函式
+    const { t } = useTranslation();
+
     return (
         <div className="relative bg-muted/20 border-b border-border/40 overflow-hidden">
             {/* 背景裝飾 */}
@@ -19,19 +25,21 @@ export function ProductHeroSection() {
                         transition={{ duration: 0.6 }}
                     >
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold tracking-wider uppercase">
-                            San Ring Tech
+                            {t('products.hero.badge')}
                         </div>
 
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground">
-                            Vision <br />
+                            {t('products.hero.title.prefix')} <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
-                                Redefined.
+                                {t('products.hero.title.suffix')}
                             </span>
                         </h1>
 
                         <p className="text-muted-foreground text-lg md:text-xl max-w-xl leading-relaxed">
-                            從深海作業到智慧城市，我們提供全方位的視覺解決方案。
-                            <span className="text-foreground font-medium">嚴選硬體，在地化深度整合。</span>
+                            {t('products.hero.desc.main')}
+                            <span className="text-foreground font-medium">
+                                {t('products.hero.desc.highlight')}
+                            </span>
                         </p>
                     </motion.div>
 
@@ -43,7 +51,6 @@ export function ProductHeroSection() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
                         <div className="relative w-full h-full">
-                            {/* 記得確保圖片路徑正確，或使用 Image 組件 */}
                             <img
                                 src="/images/hero-camera.png"
                                 alt="Flagship Camera"
@@ -57,11 +64,15 @@ export function ProductHeroSection() {
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-                                        AI
+                                        {t('products.hero.ai.tag')}
                                     </div>
                                     <div>
-                                        <div className="text-sm font-bold">Smart Detection</div>
-                                        <div className="text-xs text-muted-foreground">99.9% Accuracy</div>
+                                        <div className="text-sm font-bold">
+                                            {t('products.hero.ai.title')}
+                                        </div>
+                                        <div className="text-xs text-muted-foreground">
+                                            {t('products.hero.ai.accuracy')}
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>

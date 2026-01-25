@@ -163,6 +163,22 @@ export const dictionaries: Record<LanguageCode, Dictionary> = {
     'about.timeline.future.label': 'Vision',
     'about.timeline.future.title': '視覺管理夥伴',
     'about.timeline.future.desc': '不僅是設備供應商，更是企業資產管理的策略夥伴。我們將持續探索 AIoT 與雲端管理的無限可能。',
+
+    // =================================================================
+    // Products Page: Hero Section (產品頁主視覺)
+    // =================================================================
+    'products.hero.badge': 'San Ring Tech', // 品牌名通常不翻，但保留彈性
+    'products.hero.title.prefix': '視野，',
+    'products.hero.title.suffix': '重新定義。',
+    // 如果您中文版想保留英文標題 "Vision Redefined."，請將上面兩行改成英文即可
+
+    'products.hero.desc.main': '從深海作業到智慧城市，我們提供全方位的視覺解決方案。',
+    'products.hero.desc.highlight': '嚴選硬體，在地化深度整合。',
+
+    // AI Floating Card
+    'products.hero.ai.tag': 'AI',
+    'products.hero.ai.title': '智慧偵測',
+    'products.hero.ai.accuracy': '99.9% 準確率',
   },
 
   en: {
@@ -326,5 +342,20 @@ export const dictionaries: Record<LanguageCode, Dictionary> = {
     'about.timeline.future.label': 'Vision',
     'about.timeline.future.title': 'Visual Partner',
     'about.timeline.future.desc': 'More than just a supplier, we are your strategic partner in asset management. We continue to explore the infinite possibilities of AIoT and cloud management.',
+
+    // =================================================================
+    // Products Page: Hero Section
+    // =================================================================
+    'products.hero.badge': 'San Ring Tech',
+    'products.hero.title.prefix': 'Vision',
+    'products.hero.title.suffix': 'Redefined.',
+
+    'products.hero.desc.main': 'From deep-sea operations to smart cities, we provide comprehensive visual solutions.',
+    'products.hero.desc.highlight': 'Premium hardware, deeply integrated locally.',
+
+    // AI Floating Card
+    'products.hero.ai.tag': 'AI',
+    'products.hero.ai.title': 'Smart Detection',
+    'products.hero.ai.accuracy': '99.9% Accuracy',
   },
 };
