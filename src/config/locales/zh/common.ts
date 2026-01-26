@@ -1,0 +1,22 @@
+export const zhCommon = {
+    // Global Navigation & Footer
+    'nav.home': '首頁',
+    'nav.about': '關於我們',
+    'nav.contact': '聯絡我們',
+    'nav.privacy': '隱私權政策',
+    'nav.terms': '服務條款',
+    'nav.products.title': '產品與服務',
+    'nav.products.cameras': '監視攝影機',
+    'nav.products.recorders': '錄影主機',
+    'nav.products.accessories': '周邊配件',
+    'nav.solutions.title': '專業服務',
+    'nav.solutions.home': '居家防護',
+    'nav.solutions.business': '商務監控',
+    'nav.solutions.construction': '弱電工程規劃',
+    'nav.cases': '安裝實績',
+    'nav.support': '技術支援',
+    'nav.search.placeholder': '請輸入關鍵字...',
+    'nav.search.button': '搜尋',
+    'footer.rights': '版權所有。',
+    'footer.company': 'San Ring Tech.',
+};
