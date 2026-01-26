@@ -1,8 +1,8 @@
 'use client';
 
-import { useContact } from '@/hooks/useContact';
 import { ContactForm } from './form';
 import { ContactInfo } from './info';
+import { useContact } from '@/hooks/useContact';
 
 export function ContactMainContent() {
     const { data } = useContact();

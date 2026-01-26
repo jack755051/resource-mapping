@@ -9,6 +9,7 @@ import SiteBreadcrumb from '@/components/layout/site-breadcrumb';
 
 // 2. 引入剛做好的 Provider
 import { LanguageProvider } from '@/provider/language-provider';
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -44,6 +45,7 @@ export default function RootLayout({
             {/* 3. 主要內容區：這裡的 flex-1 會確保 Footer 被推到底部 */}
             {/* 你可以在這裡加 main，或者留給 page 自己加 */}
             <main className="flex-1 flex flex-col">{children}</main>
+            <Toaster />
 
             <Footer />
           </div>

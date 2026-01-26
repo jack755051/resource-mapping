@@ -2,30 +2,29 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ContactFormData, contactFormSchema } from '@/schema/contact';
+import { toast } from 'sonner'; // 1. 引入 toast
 
-// 模擬 API Service
-const submitContactForm = async (data: ContactFormData) => {
-    return new Promise((resolve) => setTimeout(resolve, 1500));
-};
+import { ContactFormData, contactFormSchema } from '@/schema/contact';
+import { ContactService } from '@/api/services/contact.service'; // 2. 引入 Service
+import { ContactFormReqDto } from '@/api/request/contact.request'; // 引入 DTO
 
 export function useContactForm() {
     const [isSuccess, setIsSuccess] = useState(false);
 
-    // 1. 初始化表單
     const form = useForm<ContactFormData>({
         resolver: zodResolver(contactFormSchema),
         defaultValues: {
+            name: '',
+            phone: '',
+            email: '',
             type: [],
+            message: '',
         },
     });
 
     const { setValue, watch, reset } = form;
-
-    // 2. 監聽選中的 Tags
     const selectedTags = watch('type') || [];
 
-    // 3. Tag 切換邏輯
     const toggleTag = (tagKey: string) => {
         const current = selectedTags;
         if (current.includes(tagKey)) {
@@ -35,31 +34,55 @@ export function useContactForm() {
         }
     };
 
-    // 4. 送出邏輯
+    // 3. 修改送出邏輯：串接真實 API 與 Toast
     const onSubmit = async (data: ContactFormData) => {
         try {
-            console.log("正在送出資料:", data);
-            await submitContactForm(data);
+            // 轉換 Form Data 為 API Request DTO (如果欄位名稱完全一樣可省略轉換)
+            const payload: ContactFormReqDto = {
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+                type: data.type,
+                message: data.message
+            };
+
+            // 呼叫 Service
+            const response = await ContactService.handlePostContactForm(payload);
+
+            // 成功提示
+            toast.success(response.message || '諮詢已送出成功！'); // 假設後端回傳有 message
 
             setIsSuccess(true);
             reset();
 
             // 5秒後重置成功狀態
             setTimeout(() => setIsSuccess(false), 5000);
-        } catch (error) {
+
+        } catch (error: any) {
+            // 4. 錯誤處理 (解決 TS 報錯)
             console.error("送出失敗", error);
+
+            // 這裡使用 error?.message 或是 fallback 文字
+            // 如果 error 是 axios/fetch error，通常在 error.data 或 error.message 裡
+            const errorMsg = error?.data?.message || error?.message || '發送失敗，請稍後再試';
+            toast.error('發送失敗，請稍後再試');
         }
     };
 
-    // 5. 重置成功畫面 (給 "發送新諮詢" 按鈕用)
     const resetSuccess = () => setIsSuccess(false);
 
+    // 新增：清除表單邏輯
+    const handleClear = () => {
+        reset();
+    };
+
     return {
-        form,           // 把整個 form 物件回傳 (包含 register, formState 等)
-        selectedTags,   // UI 需要做高亮判斷
-        toggleTag,      // UI 需要綁定點擊事件
-        onSubmit,       // UI 綁定 form submit
-        isSuccess,      // UI 切換成功畫面
-        resetSuccess,   // UI 切換回表單
+        form,
+        selectedTags,
+        toggleTag,
+        onSubmit,
+        isSuccess,
+        resetSuccess,
+        handleClear,
     };
 }

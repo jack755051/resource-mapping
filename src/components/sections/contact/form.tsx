@@ -28,7 +28,8 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
         toggleTag,
         onSubmit,
         isSuccess,
-        resetSuccess
+        resetSuccess,
+        handleClear
     } = useContactForm();
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = form;
@@ -136,21 +137,43 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
                         {errors.message && <span className="text-xs text-red-500">{errors.message.message}</span>}
                     </div>
 
-                    <Button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full md:w-auto px-8 py-6 text-lg rounded-full gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all"
-                    >
-                        {isSubmitting ? (
-                            <>
-                                <Loader2 className="w-4 h-4 animate-spin" /> 送出中...
-                            </>
-                        ) : (
-                            <>
-                                {t('contact.form.submit')} <Send className="w-4 h-4" />
-                            </>
-                        )}
-                    </Button>
+                    {/* 按鈕行動列：調整為靠右對齊群組 */}
+                    <div className="flex flex-col-reverse md:flex-row md:justify-end md:items-center gap-4 pt-4">
+
+                        {/* 1. 清除按鈕：弱化為 Ghost 樣式 */}
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            onClick={handleClear}
+                            disabled={isSubmitting}
+                            className="text-muted-foreground hover:text-destructive transition-colors"
+                        >
+                            清除重填
+                        </Button>
+
+                        {/* 2. 送出按鈕：主要行動，移除 ml-auto */}
+                        <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className={cn(
+                                "h-12 px-8 rounded-full text-base font-medium transition-all shadow-lg",
+                                "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/25 hover:-translate-y-0.5",
+                                "w-full md:w-auto"
+                            )}
+                        >
+                            {isSubmitting ? (
+                                <>
+                                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                    處理中...
+                                </>
+                            ) : (
+                                <>
+                                    {t('contact.form.submit')}
+                                    <Send className="w-4 h-4 ml-2" />
+                                </>
+                            )}
+                        </Button>
+                    </div>
                 </form>
             )}
         </motion.div>

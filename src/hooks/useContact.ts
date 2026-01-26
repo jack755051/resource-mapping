@@ -1,9 +1,9 @@
+// src/hooks/useContact.ts
 import { useState, useEffect } from 'react';
 import { OfficeLocation } from '@/type/page/contact';
-import { ContactService } from '@/services/contact.service';
+import { ContactService } from '@/api/services/contact.service';
 
 export function useContact() {
-    // 因為變成模擬非同步，建議加上 loading 狀態
     const [locations, setLocations] = useState<OfficeLocation[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -24,7 +24,7 @@ export function useContact() {
 
     return {
         data: {
-            locations, // 這裡拿到的已經是經過 Mapper 轉換後的乾淨資料
+            locations,
             formConfig: {
                 inquiryTags: ['community', 'lpr', 'dvr', 'maintenance', 'other'],
             },

@@ -18,3 +18,8 @@ export interface OfficeLocationResDto {
         email: string;
     };
 }
+
+export interface ContactFormResDto {
+    success: boolean;
+    message: string;
+}
