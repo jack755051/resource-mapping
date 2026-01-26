@@ -1,12 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { Send, Loader2, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+
+// hooks
 import { useTranslation } from '@/hooks/useTranslation';
+
+import { cn } from '@/lib/utils';
+import { useContactForm } from '@/hooks/useContactForm';
+
 
 interface ContactFormProps {
     inquiryTags: string[];
@@ -14,6 +20,18 @@ interface ContactFormProps {
 
 export function ContactForm({ inquiryTags }: ContactFormProps) {
     const { t } = useTranslation();
+
+    // 🔥 使用 Custom Hook，一行搞定所有邏輯
+    const {
+        form,
+        selectedTags,
+        toggleTag,
+        onSubmit,
+        isSuccess,
+        resetSuccess
+    } = useContactForm();
+
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = form;
 
     return (
         <motion.div
@@ -28,43 +46,113 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
                 <p className="text-muted-foreground">{t('contact.form.desc')}</p>
             </div>
 
-            <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {isSuccess ? (
+                // 成功畫面
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="p-8 rounded-2xl bg-green-50/50 border border-green-200 text-center space-y-4"
+                >
+                    <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
+                        <CheckCircle2 className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-xl font-bold text-green-800">訊息已送出！</h3>
+                    <p className="text-green-700">感謝您的諮詢，我們的團隊將於 24 小時內與您聯繫。</p>
+                    <Button variant="outline" onClick={resetSuccess}>
+                        發送新的諮詢
+                    </Button>
+                </motion.div>
+            ) : (
+                // 表單畫面
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <Label htmlFor="name">{t('contact.form.label.name')}</Label>
+                            <Input
+                                id="name"
+                                {...register('name')}
+                                placeholder={t('contact.form.placeholder.name')}
+                                className={cn("bg-muted/20 border-border/50 h-12", errors.name && "border-red-500 focus-visible:ring-red-500")}
+                            />
+                            {errors.name && <span className="text-xs text-red-500">{errors.name.message}</span>}
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="phone">{t('contact.form.label.phone')}</Label>
+                            <Input
+                                id="phone"
+                                {...register('phone')}
+                                placeholder={t('contact.form.placeholder.phone')}
+                                className={cn("bg-muted/20 border-border/50 h-12", errors.phone && "border-red-500 focus-visible:ring-red-500")}
+                            />
+                            {errors.phone && <span className="text-xs text-red-500">{errors.phone.message}</span>}
+                        </div>
+                    </div>
+
                     <div className="space-y-2">
-                        <Label htmlFor="name">{t('contact.form.label.name')}</Label>
-                        <Input id="name" placeholder={t('contact.form.placeholder.name')} className="bg-muted/20 border-border/50 focus:bg-background h-12" />
+                        <Label htmlFor="email">{t('contact.form.label.email')}</Label>
+                        <Input
+                            id="email"
+                            type="email"
+                            {...register('email')}
+                            placeholder={t('contact.form.placeholder.email')}
+                            className={cn("bg-muted/20 border-border/50 h-12", errors.email && "border-red-500 focus-visible:ring-red-500")}
+                        />
+                        {errors.email && <span className="text-xs text-red-500">{errors.email.message}</span>}
                     </div>
+
                     <div className="space-y-2">
-                        <Label htmlFor="phone">{t('contact.form.label.phone')}</Label>
-                        <Input id="phone" placeholder={t('contact.form.placeholder.phone')} className="bg-muted/20 border-border/50 focus:bg-background h-12" />
+                        <Label>{t('contact.form.label.type')}</Label>
+                        <div className="flex flex-wrap gap-2">
+                            {inquiryTags.map((tagKey) => {
+                                const isSelected = selectedTags.includes(tagKey);
+                                return (
+                                    <button
+                                        type="button"
+                                        key={tagKey}
+                                        onClick={() => toggleTag(tagKey)}
+                                        className={cn(
+                                            "px-4 py-2 rounded-full border text-sm transition-all duration-200",
+                                            isSelected
+                                                ? "bg-primary text-primary-foreground border-primary shadow-md"
+                                                : "border-border/50 hover:border-primary hover:text-primary hover:bg-primary/5 bg-background"
+                                        )}
+                                    >
+                                        {t(`contact.form.tags.${tagKey}`)}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                        {errors.type && <span className="text-xs text-red-500">{errors.type.message}</span>}
                     </div>
-                </div>
 
-                <div className="space-y-2">
-                    <Label htmlFor="email">{t('contact.form.label.email')}</Label>
-                    <Input id="email" type="email" placeholder={t('contact.form.placeholder.email')} className="bg-muted/20 border-border/50 focus:bg-background h-12" />
-                </div>
-
-                <div className="space-y-2">
-                    <Label htmlFor="type">{t('contact.form.label.type')}</Label>
-                    <div className="flex flex-wrap gap-2">
-                        {inquiryTags.map((tagKey) => (
-                            <button type="button" key={tagKey} className="px-4 py-2 rounded-full border border-border/50 text-sm hover:border-primary hover:text-primary hover:bg-primary/5 transition-colors">
-                                {t(`contact.form.tags.${tagKey}`)}
-                            </button>
-                        ))}
+                    <div className="space-y-2">
+                        <Label htmlFor="message">{t('contact.form.label.message')}</Label>
+                        <Textarea
+                            id="message"
+                            {...register('message')}
+                            placeholder={t('contact.form.placeholder.message')}
+                            className={cn("min-h-[150px] bg-muted/20 border-border/50 resize-none", errors.message && "border-red-500 focus-visible:ring-red-500")}
+                        />
+                        {errors.message && <span className="text-xs text-red-500">{errors.message.message}</span>}
                     </div>
-                </div>
 
-                <div className="space-y-2">
-                    <Label htmlFor="message">{t('contact.form.label.message')}</Label>
-                    <Textarea id="message" placeholder={t('contact.form.placeholder.message')} className="min-h-[150px] bg-muted/20 border-border/50 focus:bg-background resize-none" />
-                </div>
-
-                <Button className="w-full md:w-auto px-8 py-6 text-lg rounded-full gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all">
-                    {t('contact.form.submit')} <Send className="w-4 h-4" />
-                </Button>
-            </form>
+                    <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full md:w-auto px-8 py-6 text-lg rounded-full gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all"
+                    >
+                        {isSubmitting ? (
+                            <>
+                                <Loader2 className="w-4 h-4 animate-spin" /> 送出中...
+                            </>
+                        ) : (
+                            <>
+                                {t('contact.form.submit')} <Send className="w-4 h-4" />
+                            </>
+                        )}
+                    </Button>
+                </form>
+            )}
         </motion.div>
     );
 }
