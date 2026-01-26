@@ -34,7 +34,10 @@ export function useContactForm() {
         }
     };
 
-    // 3. 修改送出邏輯：串接真實 API 與 Toast
+    /**
+     * 提交表單
+     * @param data 
+     */
     const onSubmit = async (data: ContactFormData) => {
         try {
             // 轉換 Form Data 為 API Request DTO (如果欄位名稱完全一樣可省略轉換)
@@ -71,7 +74,9 @@ export function useContactForm() {
 
     const resetSuccess = () => setIsSuccess(false);
 
-    // 新增：清除表單邏輯
+    /**
+     * 清除表單
+     */
     const handleClear = () => {
         reset();
     };

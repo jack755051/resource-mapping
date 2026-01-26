@@ -1,13 +1,13 @@
 import { ContactMapper } from "@/api/mapper/contact.mapper";
-import { MOCK_CONTACT_API_RESPONSE } from "@/mock/contact";
 import { OfficeLocation } from "@/type/page/contact";
 import { CommonUrl } from "../url";
 import { ofetch } from "ofetch";
 
 
 // tpyes
-import { ContactFormResDto } from "../response/contact.response";
+import { ContactFormResDto, OfficeLocationResDto } from "../response/contact.response";
 import { ContactFormReqDto } from "../request/contact.request";
+import { MOCK_CONTACT_API_RESPONSE } from "@/mock/contact";
 
 
 export const ContactService = {
@@ -15,18 +15,17 @@ export const ContactService = {
      * 取得據點列表
      * @returns Promise<OfficeLocation[]>
      */
-    getLocations: async (): Promise<OfficeLocation[]> => {
-        // 1. 模擬 API 請求 (未來這裡改成 axios.get)
-        // const { data } = await httpClient.get<OfficeLocationResDto[]>('/contact/locations');
-        const data = MOCK_CONTACT_API_RESPONSE;
+    handleGetLocations: async (): Promise<OfficeLocation[]> => {
+        // 直接請求，不包 try-catch
+        const data = await ofetch<OfficeLocationResDto[]>(CommonUrl.CONTACT_LOCATIONS, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-        // 模擬網路延遲 (可選)
-        await new Promise(resolve => setTimeout(resolve, 300));
-
-        // 2. 透過 Mapper 轉換資料
         return ContactMapper.toDomainList(data);
     },
-
 
     /**
      * 處理聯絡表單
