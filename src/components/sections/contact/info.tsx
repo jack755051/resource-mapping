@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState } from 'react'; // 1. 移除 useEffect
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, MapPin, Printer, ArrowRight, Building2 } from 'lucide-react';
 import {
@@ -10,6 +10,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { Label } from '@/components/ui/label';
 
 import { useTranslation } from '@/hooks/useTranslation';
 import { getLocalizedContent } from '@/type/i18n';
@@ -17,15 +18,43 @@ import type { OfficeLocation } from '@/type/page/contact';
 
 interface ContactInfoProps {
     locations: OfficeLocation[];
+    loading?: boolean;
 }
 
 export function ContactInfo({ locations }: ContactInfoProps) {
     const { t, language } = useTranslation();
 
-    // 狀態管理留在這裡，因為只有右側區塊需要知道目前選了哪個據點
-    const [selectedLocationId, setSelectedLocationId] = useState<string>(locations[0]?.id || '');
+    // 2. 安全保護
+    const hasData = locations && locations.length > 0;
 
-    const currentLocation = locations.find(loc => loc.id === selectedLocationId) || locations[0];
+    // 3. State 初始化為空字串 (這是對的)
+    const [selectedLocationId, setSelectedLocationId] = useState<string>('');
+
+    // =========================================================================
+    // 🔥 核心修正：移除 useEffect，使用「衍生狀態 (Derived State)」
+    // =========================================================================
+
+    // 邏輯：
+    // 1. 如果有選中的 ID (selectedLocationId)，就用選中的。
+    // 2. 如果沒選中 (空字串)，且有資料 (hasData)，就「自動視為」選中第一筆。
+    // 3. 這個 activeId 才是真正給 Select 和 find 用的 ID。
+    const activeId = selectedLocationId || (hasData ? locations[0].id : '');
+
+    // 根據計算出來的 activeId 找資料
+    const currentLocation = hasData
+        ? locations.find(loc => loc.id === activeId)
+        : null;
+
+    // 4. Loading 處理
+    if (!hasData || !currentLocation) {
+        return (
+            <div className="lg:col-span-5 space-y-8 animate-pulse">
+                <div className="h-12 bg-muted rounded-xl w-full" />
+                <div className="h-40 bg-muted rounded-[1.5rem] w-full" />
+                <div className="h-40 bg-muted rounded-[1.5rem] w-full" />
+            </div>
+        );
+    }
 
     return (
         <motion.div
@@ -42,7 +71,9 @@ export function ContactInfo({ locations }: ContactInfoProps) {
                 </div>
                 <div className="flex-1">
                     <Label className="text-xs text-muted-foreground mb-1 block">Select Location</Label>
-                    <Select value={selectedLocationId} onValueChange={setSelectedLocationId}>
+
+                    {/* 🔥 重點：這裡的 value 必須是有值的 activeId，不能是空字串 */}
+                    <Select value={activeId} onValueChange={setSelectedLocationId}>
                         <SelectTrigger className="w-full h-12 bg-card border-border/50 rounded-xl text-base font-medium">
                             <SelectValue placeholder="選擇據點" />
                         </SelectTrigger>
@@ -59,13 +90,15 @@ export function ContactInfo({ locations }: ContactInfoProps) {
 
             <AnimatePresence mode="wait">
                 <motion.div
-                    key={selectedLocationId}
+                    key={activeId} // 使用 activeId 做為 key
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
                     className="grid gap-4"
                 >
+                    {/* ... 下面的內容完全不用動，因為 currentLocation 已經正確了 ... */}
+
                     {/* Card: 地址 */}
                     <div className="p-6 rounded-[1.5rem] border border-border/50 bg-card hover:border-primary/30 transition-colors group">
                         <div className="flex items-start gap-4">
@@ -89,7 +122,7 @@ export function ContactInfo({ locations }: ContactInfoProps) {
                         </div>
                     </div>
 
-                    {/* Card: 電話與傳真 */}
+                    {/* Card: 電話 */}
                     <div className="p-6 rounded-[1.5rem] border border-border/50 bg-card hover:border-primary/30 transition-colors group">
                         <div className="flex items-start gap-4">
                             <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
@@ -106,7 +139,6 @@ export function ContactInfo({ locations }: ContactInfoProps) {
                                         ))}
                                     </div>
                                 </div>
-
                                 {currentLocation.contact.fax && (
                                     <>
                                         <div className="w-full h-px bg-border/50" />
@@ -158,6 +190,3 @@ export function ContactInfo({ locations }: ContactInfoProps) {
         </motion.div>
     );
 }
-
-// 補上 Label 需要的 import (從您的原本代碼複製過來即可)
-import { Label } from '@/components/ui/label';
