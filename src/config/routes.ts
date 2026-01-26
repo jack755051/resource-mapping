@@ -50,10 +50,15 @@ export const appRoutes: AppRoute[] = [
     ],
   },
   {
-    title: 'nav.cases', // 實績案例 (非常重要！客戶要看走線漂不漂亮)
-    href: '/cases',
-    icon: 'images',
+    title: 'nav.support', // 技術支援 (下載專區/常見問題) - 可選，看是否有資源維護
+    href: '/support',
+    icon: 'download',
   },
+  // {
+  //   title: 'nav.cases', // 實績案例 (非常重要！客戶要看走線漂不漂亮)
+  //   href: '/cases',
+  //   icon: 'images',
+  // },
   {
     title: 'nav.contact', // 聯絡我們 (免費估價)
     href: '/contact',
@@ -61,8 +66,9 @@ export const appRoutes: AppRoute[] = [
   },
   // 隱藏路由
   {
-    title: 'nav.support', // 技術支援 (下載專區/常見問題) - 可選，看是否有資源維護
-    href: '/support',
-    hideInMenu: true, // 可以放在 Footer 就好，不一定要在 Header
+    title: 'nav.fileDownload', // 下載專區
+    href: '/fileDownload',
+    icon: 'download',
+    hideInMenu: true,
   },
 ];

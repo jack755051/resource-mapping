@@ -13,7 +13,7 @@ export const dictionaries: Record<LanguageCode, Dictionary> = {
     'nav.contact': '聯絡我們',
     'nav.privacy': '隱私權政策',
     'nav.terms': '服務條款',
-    'nav.products.title': '產品與服務',
+    'nav.products.title': '產品',
     'nav.products.cameras': '監視攝影機',
     'nav.products.recorders': '錄影主機',
     'nav.products.accessories': '周邊配件',
@@ -223,6 +223,43 @@ export const dictionaries: Record<LanguageCode, Dictionary> = {
     'contact.info.fax.title': '傳真 Fax',
 
     'contact.info.email.title': '電子信箱',
+
+    // =================================================================
+    // Solutions Page (專業服務/解決方案)
+    // =================================================================
+    // Hero Section
+    'solutions.hero.title.prefix': '將您的安全需求，',
+    'solutions.hero.title.highlight': '轉化為堅不可摧的系統。',
+    'solutions.hero.desc': '我們不只是設備供應商，更是您的工程顧問。從現場評估到精密施工，San Ring Tech 提供符合工業標準的一站式整合服務。',
+
+    // Process Steps (Step 1-4)
+    'solutions.steps.1.title': '現場勘查評估',
+    'solutions.steps.1.desc': '親臨現場分析光線、死角與環境風險，量身定製防護策略。',
+
+    'solutions.steps.2.title': '系統架構設計',
+    'solutions.steps.2.desc': '規劃配置圖、選擇最適設備（如水下/廣角），並設計備援機制。',
+
+    'solutions.steps.3.title': '職人精密施工',
+    'solutions.steps.3.desc': '堅持工業級佈線標準。拒絕雜亂，確保線路美觀與訊號長期穩定。',
+
+    'solutions.steps.4.title': '整合與交付',
+    'solutions.steps.4.desc': '軟硬體調校、AI 參數設定，並提供完整的操作教育訓練。',
+
+    // Quality Section
+    'solutions.quality.badge': '施工品質', // 原文 CONSTRUCTION QUALITY
+    'solutions.quality.title': '施工的細節，決定了系統的壽命。',
+    'solutions.quality.desc': '許多監視系統的故障，源自於粗糙的施工與劣質的線材。San Ring Tech 視佈線為藝術。我們使用抗干擾線材、標準化標籤管理，讓您的機房不再是盤絲洞，而是井然有序的數據中心。',
+    'solutions.quality.image.caption': '標準化佈線工藝',
+
+    // Quality List Items
+    'solutions.quality.list.1': '使用工業級抗干擾純銅線材',
+    'solutions.quality.list.2': '全系統管路包覆，防蟲防咬',
+    'solutions.quality.list.3': '機櫃標準化標籤管理 (Cable Management)',
+    'solutions.quality.list.4': '完工後訊號衰減測試報告',
+
+    // CTA Section
+    'solutions.cta.title': '準備好規劃您的案場了嗎？',
+    'solutions.cta.button': '預約免費現場評估',
   },
 
   en: {
@@ -445,5 +482,42 @@ export const dictionaries: Record<LanguageCode, Dictionary> = {
     'contact.info.fax.title': 'Fax',
 
     'contact.info.email.title': 'Email',
+
+    // =================================================================
+    // Solutions Page
+    // =================================================================
+    // Hero Section
+    'solutions.hero.title.prefix': 'Turning your security needs',
+    'solutions.hero.title.highlight': 'into an impenetrable system.',
+    'solutions.hero.desc': 'We are not just equipment suppliers, but your engineering consultants. From site assessment to precision construction, San Ring Tech provides one-stop integration services meeting industrial standards.',
+
+    // Process Steps
+    'solutions.steps.1.title': 'Site Assessment',
+    'solutions.steps.1.desc': 'On-site analysis of lighting, blind spots, and environmental risks to tailor protection strategies.',
+
+    'solutions.steps.2.title': 'System Design',
+    'solutions.steps.2.desc': 'Layout planning, optimal equipment selection (e.g., underwater/wide-angle), and redundancy mechanism design.',
+
+    'solutions.steps.3.title': 'Precision Installation',
+    'solutions.steps.3.desc': 'Adhering to industrial cabling standards. We refuse messiness to ensure aesthetic routing and long-term signal stability.',
+
+    'solutions.steps.4.title': 'Integration & Delivery',
+    'solutions.steps.4.desc': 'Hardware/software tuning, AI parameter configuration, and comprehensive operation training.',
+
+    // Quality Section
+    'solutions.quality.badge': 'CONSTRUCTION QUALITY',
+    'solutions.quality.title': 'Details determine system lifespan.',
+    'solutions.quality.desc': 'Many surveillance system failures stem from rough construction and inferior cabling. San Ring Tech treats cabling as art. We use anti-interference cables and standardized labeling, turning your server room from a messy web into an orderly data center.',
+    'solutions.quality.image.caption': 'Standardized Cabling',
+
+    // Quality List Items
+    'solutions.quality.list.1': 'Industrial-grade anti-interference copper wiring',
+    'solutions.quality.list.2': 'Full conduit coverage (anti-pest/rodent)',
+    'solutions.quality.list.3': 'Standardized Cable Management & Labeling',
+    'solutions.quality.list.4': 'Post-installation signal attenuation report',
+
+    // CTA Section
+    'solutions.cta.title': 'Ready to plan your site?',
+    'solutions.cta.button': 'Book Free Site Assessment',
   },
 };
