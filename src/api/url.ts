@@ -19,4 +19,6 @@ export const replaceUrlParams = (url: string, params: Record<string, string | nu
 export enum CommonUrl {
     CONTACT_FORM = '/contact/form',
     CONTACT_LOCATIONS = '/contact/locations',
+    // 關於我
+    ABOUT_TIMELINE = '/about/timeline',
 }
