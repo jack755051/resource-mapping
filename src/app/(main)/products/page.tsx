@@ -6,34 +6,39 @@ import { ProductListSection } from '@/components/sections/product/product-list';
 import { useProduct } from '@/hooks/useProduct';
 
 export default function ProductsPage() {
-  // 1. 透過 Hook 取得所有資料與邏輯
   const {
     categories,
     products,
     activeCategory,
     setActiveCategory,
     totalCount,
-    currentCategoryName
+    currentCategoryName,
+    // 🔥 從 Hook 取出這兩個
+    pagination,
+    setPage,
+    loading
   } = useProduct();
 
   return (
     <div className="min-h-screen bg-background pb-20">
-      {/* 2. 英雄區塊 (純展示) */}
       <ProductHeroSection />
 
-      {/* 3. 過濾器 (傳入控制函式) */}
       <ProductFilterSection
         categories={categories}
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
       />
 
-      {/* 4. 產品列表 (傳入計算後的資料) */}
+      {/* 4. 產品列表 (傳入分頁 props) */}
       <ProductListSection
         products={products}
         categoryName={currentCategoryName}
         totalCount={totalCount}
         activeCategoryKey={activeCategory}
+        // 👇 傳入這些
+        pagination={pagination}
+        onPageChange={setPage}
+        loading={loading}
       />
     </div>
   );

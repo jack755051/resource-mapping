@@ -5,3 +5,7 @@ export interface ProductListReqDto {
     keyword?: string;
     sort?: string;
 }
+
+export interface ProductDetailReqDto {
+    slug: string;
+}
