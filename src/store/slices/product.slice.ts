@@ -3,16 +3,30 @@ import { Pagination } from "@/type/common";
 import { ProductListReqDto } from "@/api/request/product.request";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProductService } from "@/api/services/product.service";
+import { ConstantProductsCategoriesResDto } from "@/api/response/constant.response";
+import { ConstantsService } from "@/api/services/constants.service";
 
 // 1. 定義 State 結構
 interface ProductState {
     list: ProductCardData[];
+    categories: ConstantProductsCategoriesResDto[],
     pagination: Pagination | null;
     loading: boolean;
     error: string | null;
     // 儲存當前的查詢條件
     queryParams: ProductListReqDto;
 }
+
+export const fetchCategories = createAsyncThunk(
+    'product/fetchCategories',
+    async (lang: string, { rejectWithValue }) => {
+        try {
+            return await ConstantsService.handleGetProductsCategories(lang);
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
 
 // 2. 定義 Async Thunk (處理 API 請求)
 // 第一個泛型是回傳值，第二個是傳入參數(這裡我們傳入 lang)
@@ -43,6 +57,7 @@ const initialParams: ProductListReqDto = {
 
 const initialState: ProductState = {
     list: [],
+    categories: [],
     pagination: null,
     loading: false,
     error: null,

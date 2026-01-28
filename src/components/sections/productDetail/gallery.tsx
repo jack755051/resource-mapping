@@ -1,20 +1,23 @@
 'use client';
-import { useState } from 'react';
+
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { ProductGalleryProps } from '@/type/page/proudct-detail';
 
-interface ProductGalleryProps {
-    images: string[];
-}
 
-export function ProductGallery({ images }: ProductGalleryProps) {
-    const [activeIndex, setActiveIndex] = useState(0);
+export function ProductGallery({ props, className, classNames }: ProductGalleryProps) {
+    const { images, activeIndex, onIndexChange } = props;
 
     return (
-        <div className="space-y-4">
+        <div className={cn("space-y-4", className, classNames?.container)}>
             {/* 主圖顯示區 */}
-            <div className="relative aspect-[4/3] w-full bg-muted/10 rounded-[2rem] border border-border/50 overflow-hidden">
+            <div
+                className={cn(
+                    "relative aspect-[4/3] w-full bg-muted/10 rounded-[2rem] border border-border/50 overflow-hidden",
+                    classNames?.imageWrapper
+                )}
+            >
                 {/* 背景裝飾 */}
                 <div className="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-5" />
 
@@ -27,30 +30,41 @@ export function ProductGallery({ images }: ProductGalleryProps) {
                         transition={{ duration: 0.4 }}
                         className="relative w-full h-full"
                     >
-                        <Image
-                            src={images[activeIndex]}
-                            alt="Product Image"
-                            fill
-                            className="object-contain p-8 md:p-12 drop-shadow-2xl"
-                            priority
-                        />
+                        {images && images[activeIndex] && (
+                            <Image
+                                src={images[activeIndex]}
+                                alt="Product Image"
+                                fill
+                                // 這裡合併 classNames.image
+                                className={cn(
+                                    "object-contain p-8 md:p-12 drop-shadow-2xl",
+                                    classNames?.image
+                                )}
+                                priority
+                            />
+                        )}
                     </motion.div>
                 </AnimatePresence>
 
-                {/* 標籤 (可選) */}
-                <div className="absolute top-6 left-6">
+                {/* 標籤 */}
+                <div className={cn("absolute top-6 left-6", classNames?.badge)}>
                     <span className="bg-background/80 backdrop-blur border border-border/50 px-3 py-1 rounded-full text-xs font-mono font-medium">
                         VIEW 360°
                     </span>
                 </div>
             </div>
 
-            {/* 縮圖列表 */}
-            <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                {images.map((img, idx) => (
+            {/* 縮圖列表 (這裡對應到 classNames.footer) */}
+            <div
+                className={cn(
+                    "flex gap-4 overflow-x-auto pb-2 scrollbar-hide",
+                    classNames?.footer
+                )}
+            >
+                {images?.map((img, idx) => (
                     <button
                         key={idx}
-                        onClick={() => setActiveIndex(idx)}
+                        onClick={() => onIndexChange(idx)}
                         className={cn(
                             "relative w-20 h-20 rounded-xl border-2 overflow-hidden flex-shrink-0 transition-all bg-muted/10",
                             activeIndex === idx

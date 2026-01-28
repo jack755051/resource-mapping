@@ -9,3 +9,9 @@ export interface PaginatedList<T> {
     list: T[];
     pagination: Pagination;
 }
+
+export interface contentProps<T, S> {
+    props: T;
+    className?: string;
+    classNames?: S;
+}

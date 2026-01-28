@@ -9,7 +9,13 @@ import { ProductSpecs } from '@/components/sections/productDetail/specs';
 
 export default function ProductDetailPage({ params }: { params: { slug: string } }) {
     // 透過 slug 取得產品資料
-    const { product, relatedProducts, isLoading } = useProductDetail(params.slug);
+    const {
+        product,
+        isLoading,
+        relatedProducts,
+        galleryActiveIndex,
+        setGalleryActiveIndex
+    } = useProductDetail(params.slug);
 
     if (isLoading || !product) return <div>Loading...</div>;
 
@@ -24,7 +30,11 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                     {/* 左側：Sticky 圖片展示區 (佔 7 欄) */}
                     <div className="lg:col-span-7">
                         <div className="sticky top-24 space-y-8">
-                            <ProductGallery images={product.images} />
+                            <ProductGallery props={{
+                                images: product.images,
+                                activeIndex: galleryActiveIndex,
+                                onIndexChange: setGalleryActiveIndex
+                            }} />
                         </div>
                     </div>
 

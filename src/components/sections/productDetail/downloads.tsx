@@ -31,7 +31,7 @@ export function ProductDownloads({ downloads }: ProductDownloadsProps) {
                 {downloads.map((item, idx) => (
                     <div
                         key={idx}
-                        className="group flex items-center gap-4 p-4 rounded-xl border border-border/50 bg-card hover:border-primary/30 hover:shadow-md transition-all duration-300"
+                        className="group relative flex items-center gap-4 p-4 rounded-xl border border-border/50 bg-card hover:border-primary/30 hover:shadow-md transition-all duration-300"
                     >
                         {/* 檔案類型 Icon */}
                         <div className={cn(

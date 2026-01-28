@@ -96,9 +96,26 @@ export function useProductDetail(slug: string) {
     const [relatedProducts, setRelatedProducts] = useState<ProductCardData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // 新增：管理畫廊的狀態
+    const [galleryActiveIndex, setGalleryActiveIndex] = useState(0);
+
+    // ======= Methods Start =======
+
+    /**
+     * 處理畫廊切換
+     * @param index 索引
+     */
+    const handleGalleryChange = (index: number) => {
+        setGalleryActiveIndex(index);
+    };
+
+    // ======= Methods End =======
+
     useEffect(() => {
         // 模擬 API 請求
         setIsLoading(true);
+        // 每次切換產品時，重置畫廊索引
+        setGalleryActiveIndex(0);
 
         const timer = setTimeout(() => {
             // 1. 根據 slug 找產品 (這裡先做簡單的模擬，如果找不到就回傳預設的第一筆，方便測試)
@@ -120,6 +137,9 @@ export function useProductDetail(slug: string) {
     return {
         product,
         relatedProducts,
-        isLoading
+        isLoading,
+        // 匯出狀態與方法
+        galleryActiveIndex,
+        setGalleryActiveIndex: handleGalleryChange
     };
 }
