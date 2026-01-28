@@ -9,10 +9,10 @@ export interface OfficeLocationResDto {
     title: LocalizedString; // 支援多語系的物件
     address: {
         label: LocalizedString;
-        map_url: string;      // ⚠️ 注意：後端欄位名可能跟前端不一樣
-        embed_code: string;   // ⚠️ 注意：後端欄位名可能跟前端不一樣
+        map_url: string;
+        embed_code: string;
     };
-    contact_info: {           // ⚠️ 注意：後端可能包一層
+    contact_info: {
         phones: string[];
         fax?: string;
         email: string;

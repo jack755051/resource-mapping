@@ -21,4 +21,7 @@ export enum CommonUrl {
     CONTACT_LOCATIONS = '/contact/locations',
     // 關於我
     ABOUT_TIMELINE = '/about/timeline',
+    // 產品
+    PRODUCTS = '/products',
+    PRODUCT_DETAIL = '/products/:slug',
 }
