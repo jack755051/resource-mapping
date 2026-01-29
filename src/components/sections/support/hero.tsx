@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useTranslation } from '@/hooks/useTranslation'; // 1. 引入 Hook
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface SupportHeroProps {
     searchQuery: string;
@@ -13,7 +13,12 @@ interface SupportHeroProps {
 }
 
 export function SupportHero({ searchQuery, setSearchQuery, onSearch }: SupportHeroProps) {
-    const { t } = useTranslation(); // 2. 初始化
+    const { t } = useTranslation();
+
+    // 抽取出處理搜尋的函式，避免重複寫
+    const handleTriggerSearch = () => {
+        onSearch?.();
+    };
 
     return (
         <div className="relative bg-muted/20 border-b border-border/40 overflow-hidden">
@@ -48,16 +53,28 @@ export function SupportHero({ searchQuery, setSearchQuery, onSearch }: SupportHe
                                 <Search className="ml-4 w-5 h-5 text-muted-foreground" />
                                 <Input
                                     type="text"
-                                    // 3. 替換 Placeholder
                                     placeholder={t('support.hero.search.placeholder')}
                                     className="border-0 bg-transparent h-14 pl-3 pr-4 text-lg focus-visible:ring-0 focus-visible:ring-offset-0"
                                     value={searchQuery}
                                     onChange={(e) => {
                                         setSearchQuery(e.target.value);
+                                        // 這裡其實可以不用 onSearch?.()，因為 Hook 會監聽 searchQuery 變化自動搜尋
+                                        // 但如果你想保留即時重置分頁的功能，可以留著
                                         onSearch?.();
                                     }}
+                                    // 1. 新增：支援 Enter 鍵搜尋
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            handleTriggerSearch();
+                                        }
+                                    }}
                                 />
-                                <Button className="mr-1 rounded-full px-6" size="lg">
+                                <Button
+                                    className="mr-1 rounded-full px-6"
+                                    size="lg"
+                                    // 2. 新增：點擊按鈕觸發搜尋
+                                    onClick={handleTriggerSearch}
+                                >
                                     {t('support.hero.search.button')}
                                 </Button>
                             </div>
