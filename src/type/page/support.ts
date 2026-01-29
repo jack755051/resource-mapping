@@ -1,5 +1,3 @@
-// type/page/support.ts
-
 import { contentProps } from "../common";
 
 export type ResourceType = 'PDF' | 'ZIP' | 'Article' | 'EXE';
@@ -16,12 +14,12 @@ export interface SupportResource {
 }
 
 export interface SupportResourceClasses {
-    id: number;
-    title: string;
-    category: CategoryId;
-    date: string;
-    type: ResourceType;
-    size: number;
+    container?: string;
+    title?: string;
+    category?: string;
+    date?: string;
+    type?: string;
+    size?: string;
 }
 
 export interface SupportResourceProps extends contentProps<
@@ -30,15 +28,15 @@ export interface SupportResourceProps extends contentProps<
 > { }
 
 // ======== 支援分類 ========
-
 export interface SupportCategory {
     id: CategoryId;
     label: string;
 }
 
 export interface SupportCategoryClasses {
-    id: CategoryId;
-    label: string;
+    container?: string;
+    active?: string;
+    inactive?: string;
 }
 
 export interface SupportCategoryProps extends contentProps<

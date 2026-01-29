@@ -22,19 +22,10 @@ import {
 } from '@/components/ui/pagination';
 import { cn } from '@/lib/utils';
 import { useTranslation } from '@/hooks/useTranslation';
-
-// 定義資料介面
-export interface SupportItem {
-    id: number;
-    title: string;
-    category: string;
-    date: string;
-    type: string;
-    size: string;
-}
+import type { SupportResource } from '@/type/page/support';
 
 interface SupportListProps {
-    data: SupportItem[];
+    data: SupportResource[];
     currentPage: number;
     totalPages: number;
     setCurrentPage: (page: number | ((prev: number) => number)) => void;

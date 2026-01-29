@@ -2,11 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useTranslation } from '@/hooks/useTranslation'; // 引入 Hook
+import { useTranslation } from '@/hooks/useTranslation';
+import type { CategoryId } from '@/type/page/support';
 
 interface SupportFiltersProps {
-    activeCategory: string;
-    setActiveCategory: (id: string) => void;
+    activeCategory: CategoryId;
+    setActiveCategory: (id: CategoryId) => void;
     onCategoryChange?: () => void;
 }
 
@@ -14,7 +15,7 @@ export function SupportFilters({ activeCategory, setActiveCategory, onCategoryCh
     const { t } = useTranslation();
 
     // 定義分類 (移入組件內以支援多語系)
-    const categories = [
+    const categories: Array<{ id: CategoryId; label: string }> = [
         { id: 'all', label: t('support.category.all') },
         { id: 'manual', label: t('support.category.manual') },
         { id: 'firmware', label: t('support.category.firmware') },
