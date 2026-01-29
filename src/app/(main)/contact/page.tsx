@@ -1,7 +1,7 @@
 'use client';
 
-import { ContactHero } from "@/components/sections/contact/hero";
-import { ContactMainContent } from "@/components/sections/contact/main-content";
+import { ContactHero } from '@/components/sections/contact/hero';
+import { ContactMainContent } from '@/components/sections/contact/main-content';
 
 export default function ContactPage() {
   return (

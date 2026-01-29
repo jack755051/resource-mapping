@@ -9,75 +9,81 @@ import { ContactService } from '@/api/services/contact.service';
 import { ContactFormReqDto } from '@/api/request/contact.request';
 
 export function useContactForm() {
-    // 1. 取得當前語系
-    const { language } = useTranslation();
-    const [isSuccess, setIsSuccess] = useState(false);
+  // 1. 取得當前語系
+  const { language } = useTranslation();
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const form = useForm<ContactFormData>({
-        resolver: zodResolver(contactFormSchema),
-        defaultValues: {
-            name: '',
-            phone: '',
-            email: '',
-            type: [],
-            message: '',
-        },
-    });
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: '',
+      phone: '',
+      email: '',
+      type: [],
+      message: '',
+    },
+  });
 
-    const { setValue, watch, reset } = form;
-    const selectedTags = watch('type') || [];
+  const { setValue, watch, reset } = form;
+  const selectedTags = watch('type') || [];
 
-    const toggleTag = (tagKey: string) => {
-        const current = selectedTags;
-        if (current.includes(tagKey)) {
-            setValue('type', current.filter((t) => t !== tagKey));
-        } else {
-            setValue('type', [...current, tagKey]);
-        }
-    };
+  const toggleTag = (tagKey: string) => {
+    const current = selectedTags;
+    if (current.includes(tagKey)) {
+      setValue(
+        'type',
+        current.filter(t => t !== tagKey)
+      );
+    } else {
+      setValue('type', [...current, tagKey]);
+    }
+  };
 
-    /**
-     * 提交表單
-     */
-    const onSubmit = async (data: ContactFormData) => {
-        try {
-            const payload: ContactFormReqDto = {
-                name: data.name,
-                phone: data.phone,
-                email: data.email,
-                type: data.type,
-                message: data.message
-            };
+  /**
+   * 提交表單
+   */
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      const payload: ContactFormReqDto = {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        type: data.type,
+        message: data.message,
+      };
 
-            // 2. 傳遞 language 給 Service (讓後端知道要回傳中文還英文的訊息)
-            const response = await ContactService.handlePostContactForm(payload, language);
+      // 2. 傳遞 language 給 Service (讓後端知道要回傳中文還英文的訊息)
+      const response = await ContactService.handlePostContactForm(
+        payload,
+        language
+      );
 
-            toast.success(response.message || '諮詢已送出成功！');
+      toast.success(response.message || '諮詢已送出成功！');
 
-            setIsSuccess(true);
-            reset();
-            setTimeout(() => setIsSuccess(false), 5000);
+      setIsSuccess(true);
+      reset();
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (error: any) {
+      console.error('送出失敗', error);
+      const errorMsg =
+        error?.data?.message || error?.message || '發送失敗，請稍後再試';
+      toast.error(errorMsg);
+    }
+  };
 
-        } catch (error: any) {
-            console.error("送出失敗", error);
-            const errorMsg = error?.data?.message || error?.message || '發送失敗，請稍後再試';
-            toast.error(errorMsg);
-        }
-    };
+  const resetSuccess = () => setIsSuccess(false);
 
-    const resetSuccess = () => setIsSuccess(false);
+  const handleClear = () => {
+    reset();
+  };
 
-    const handleClear = () => {
-        reset();
-    };
-
-    return {
-        form,
-        selectedTags,
-        toggleTag,
-        onSubmit,
-        isSuccess,
-        resetSuccess,
-        handleClear,
-    };
+  return {
+    form,
+    selectedTags,
+    toggleTag,
+    onSubmit,
+    isSuccess,
+    resetSuccess,
+    handleClear,
+  };
 }

@@ -10,8 +10,11 @@ import { LoadingSpinner } from '@/components/layout/loading-spinner';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ProductInquiryCard } from '@/components/sections/productDetail/inquiry-card';
 
-
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
+export default function ProductDetailPage({
+    params,
+}: {
+    params: { slug: string };
+}) {
     const { t } = useTranslation();
 
     // 透過 slug 取得產品資料
@@ -19,9 +22,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         product,
         isLoading,
         relatedProducts,
+        handleInquiryCard,
         gallery,
         productInfo,
-        handleInquiryCard
+        productSpecs,
     } = useProductDetail(params.slug);
 
     if (isLoading || !productInfo || !gallery) {
@@ -37,12 +41,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
     return (
         <div className="min-h-screen bg-background pb-20">
-
             {/* 1. 麵包屑與簡單標題 (可選，視你的 SiteBreadcrumb 是否自動處理) */}
 
             <div className="container mx-auto px-6 py-12 md:py-20">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-
                     {/* 左側：Sticky 圖片展示區 (佔 7 欄) */}
                     <div className="lg:col-span-7">
                         <div className="sticky top-24 space-y-8">
@@ -52,14 +54,13 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
                     {/* 右側：滾動資訊區 (佔 5 欄) */}
                     <div className="lg:col-span-5 space-y-12">
-
                         {/* 核心資訊 (標題、描述、特色) */}
                         <ProductInfo props={productInfo} />
 
                         <div className="w-full h-px bg-border/50" />
 
                         {/* 技術規格 */}
-                        <ProductSpecs specs={product.specs} />
+                        <ProductSpecs props={productSpecs} />
 
                         <div className="w-full h-px bg-border/50" />
 
@@ -76,7 +77,6 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             <div className="border-t border-border/40 bg-muted/10 mt-20">
                 <RelatedProducts products={relatedProducts} />
             </div>
-
         </div>
     );
 }

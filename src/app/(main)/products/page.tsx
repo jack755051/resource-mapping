@@ -16,7 +16,7 @@ export default function ProductsPage() {
     // 🔥 從 Hook 取出這兩個
     pagination,
     setPage,
-    loading
+    loading,
   } = useProduct();
 
   return (

@@ -5,12 +5,11 @@ import { enProducts } from './products';
 import { enSolutions } from './solutions';
 import { enContact } from './contact';
 
-
 export const enDictionary = {
-    ...enCommon,
-    ...enHome,
-    ...enAbout,
-    ...enProducts,
-    ...enSolutions,
-    ...enContact,
+  ...enCommon,
+  ...enHome,
+  ...enAbout,
+  ...enProducts,
+  ...enSolutions,
+  ...enContact,
 };

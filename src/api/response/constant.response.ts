@@ -1,5 +1,5 @@
 export interface ConstantProductsCategoriesResDto {
-    id: string;
-    name: string;
-    counts?: number;
+  id: string;
+  name: string;
+  counts?: number;
 }
