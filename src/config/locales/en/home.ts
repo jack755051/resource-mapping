@@ -27,31 +27,29 @@ export const enHome = {
   // =================================================================
   // Home Page: Section C - Capabilities
   // =================================================================
-  'home.capabilities.title': 'Why Choose Us?',
-  'home.capabilities.subtitle':
-    "We don't just sell cameras. We provide a complete visual strategy.",
+  // Capabilities
+  'home.capabilities.title': 'More Than Hardware. A Strategy.',
+  'home.capabilities.subtitle': 'We redefine surveillance. Moving from passive recording to active business intelligence and risk mitigation.',
 
-  // Visual Management
-  'home.capabilities.visual.title': 'Visual Management System',
-  'home.capabilities.visual.desc':
-    'Turn "I don\'t know" into "Let\'s verify." Our system gives you the power to manage personnel efficiency and resolve disputes instantly. It\'s not just security; it\'s your operational leverage.',
+  // 1. Visual Management
+  'home.capabilities.visual.title': 'Evidence Over Arguments',
+  'home.capabilities.visual.desc': 'Eliminate internal friction. Our system provides indisputable, tamper-proof visual evidence, giving you absolute clarity for liability, labor disputes, and inventory audits.',
+  'home.capabilities.visual.tag': 'Operational Efficiency',
 
-  // Extreme Tech
-  'home.capabilities.extreme.title': 'Beyond Limits',
-  'home.capabilities.extreme.desc':
-    "Waterproof (IP68) & High-Speed Domes. We see what others can't.",
+  // 2. Extreme Tech
+  'home.capabilities.extreme.title': 'Conquering Hostile Environments',
+  'home.capabilities.extreme.desc': 'Where standard equipment fails, we thrive. Whether it is deep-water pressure, high-heat zones, or corrosive coastal air, we deploy military-grade solutions built to survive.',
+  'home.capabilities.extreme.tag': 'IP68 / Anti-Corrosion',
 
-  // Installation
-  'home.capabilities.install.title': 'Pro Installation',
-  'home.capabilities.install.desc':
-    'No messy wires. We pride ourselves on aesthetic, industrial-grade cabling.',
+  // 3. Installation
+  'home.capabilities.install.title': 'Cabling Defines Longevity',
+  'home.capabilities.install.desc': 'Hardware is replaceable; data is not. We reject messy cabling. Our structured, industrial-grade wiring ensures your system never fails due to a loose connection when you need it most.',
+  'home.capabilities.install.tag': 'Standardized Cabling',
 
-  // Home
+  // 4. Home
   'home.capabilities.home.tag': 'Residential',
-  'home.capabilities.home.title': 'Enterprise Grade for Home',
-  'home.capabilities.home.desc':
-    'Protect your family with the same technology used by factories. Stable, secure, and always connected to what matters most.',
-
+  'home.capabilities.home.title': 'Industrial Security at Home',
+  'home.capabilities.home.desc': 'Your family deserves better than a plastic toy camera. Bring bank-level security technology to your home. No privacy leaks, just 24/7 uncompromised stability.',
   // =================================================================
   // Home Page: Section D - CTA
   // =================================================================

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ProductSpecsProps } from '@/type/page/proudct-detail';
+import { cn } from '@/lib/utils';
 
 
 // 簡單的 Icon 映射
@@ -30,13 +31,13 @@ export function ProductSpecs({ props,
     const { specs } = props;
 
     return (
-        <div className="space-y-4">
-            <h3 className="text-lg font-bold flex items-center gap-2">
+        <div className={cn("space-y-4", className, classNames?.container)}>
+            <h3 className={cn("text-lg font-bold flex items-center gap-2", classNames?.title)}>
                 <Zap className="w-5 h-5 text-primary" />
                 {t('productDetail.specs.title')}
             </h3>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className={cn("grid grid-cols-2 gap-4", classNames?.specsGrid)}>
                 {specs.map((spec, idx) => {
                     const Icon = iconMap[spec.type || 'chip'] || Cpu;
 

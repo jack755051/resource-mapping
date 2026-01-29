@@ -14,7 +14,7 @@ export function ProductDownloads({ props, className, classNames }: ProductDownlo
   if (!downloads || downloads.length === 0) return null;
 
   return (
-    <div className={cn("space-y-6", container)}>
+    <div className={cn("space-y-6", className, container)}>
       <h3 className={cn("text-lg font-bold flex items-center gap-2", title)}>
         <Download className="w-5 h-5 text-primary" />
         {t('productDetail.downloads.title')}
