@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { ProductCardData } from '@/type/page/product';
+import { ProductGallery, ProductInfo, ProductInquiryCard } from '@/type/page/proudct-detail';
+import { useRouter } from 'next/navigation';
 
 // 定義詳細頁面專屬的資料型別 (繼承卡片資料，但多了詳細資訊)
 export interface ProductDetailData extends ProductCardData {
@@ -92,11 +94,12 @@ const MOCK_RELATED: ProductCardData[] = [
 ];
 
 export function useProductDetail(slug: string) {
+    // 引入 useRouter
+    const router = useRouter();
+
     const [product, setProduct] = useState<ProductDetailData | null>(null);
     const [relatedProducts, setRelatedProducts] = useState<ProductCardData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    // 新增：管理畫廊的狀態
     const [galleryActiveIndex, setGalleryActiveIndex] = useState(0);
 
     // ======= Methods Start =======
@@ -109,7 +112,41 @@ export function useProductDetail(slug: string) {
         setGalleryActiveIndex(index);
     };
 
-    // ======= Methods End =======
+    const handleInquiryCard = () => {
+        console.log('Contact clicked');
+        router.push('/contact');
+    }
+
+
+    // ======= Derived Data Start =======
+
+    const gallery: ProductGallery | null = useMemo(() => {
+        if (!product) return null;
+
+        return {
+            images: product.images,
+            activeIndex: galleryActiveIndex,
+            onIndexChange: setGalleryActiveIndex
+        };
+    }, [product, galleryActiveIndex]);
+
+
+    /**
+     * 處理產品資訊
+     * @returns ProductInfo
+     */
+    const productInfo: ProductInfo | null = useMemo(() => {
+        if (!product) return null;
+
+        return {
+            title: product.title,
+            model: product.model,
+            description: product.description,
+            features: product.features
+        };
+    }, [product]);
+
+    // ======= useEffect=======
 
     useEffect(() => {
         // 模擬 API 請求
@@ -140,6 +177,10 @@ export function useProductDetail(slug: string) {
         isLoading,
         // 匯出狀態與方法
         galleryActiveIndex,
-        setGalleryActiveIndex: handleGalleryChange
+        setGalleryActiveIndex: handleGalleryChange,
+        handleInquiryCard,
+        // 匯出 derived data
+        gallery,
+        productInfo,
     };
 }

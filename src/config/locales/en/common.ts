@@ -22,4 +22,8 @@ export const enCommon = {
     'footer.rights': 'All rights reserved.',
     'footer.company': 'San Ring Tech.',
 
+    // System Status
+    'system.initializing': 'System initializing...',
+    'system.loading': 'Loading...',
+    'system.error': 'Connection error, please try again later',
 }

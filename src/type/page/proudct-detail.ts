@@ -1,5 +1,7 @@
 import { contentProps } from "../common";
 
+// ======== 產品畫廊 ======== 
+
 export interface ProductGallery {
     images: string[];
     activeIndex: number;
@@ -18,4 +20,87 @@ export interface ProductGalleryClasses {
 }
 
 export interface ProductGalleryProps extends contentProps<ProductGallery, ProductGalleryClasses> {
+}
+
+// ======== 產品資訊 ======== 
+
+export interface ProductInfo {
+    title: string;
+    model: string;
+    description: string;
+    features: string[];
+}
+
+export interface ProductInfoClasses {
+    container?: string;     // 最外層容器
+    header?: string;        // 標題區塊的容器
+    badgeWrapper?: string;  // 包裹 Badge 和 Model 的那一列
+    badge?: string;         // "NEW ARRIVAL" 標籤
+    model?: string;         // Model 文字
+    title?: string;         // H1 標題
+    description?: string;   // 描述文字
+    featuresList?: string;  // 特色列表容器
+    featureItem?: string;   // 單個特色項目 (列)
+    featureIcon?: string;   // 打勾圖示的圓圈背景
+}
+
+export interface ProductInfoProps extends contentProps<ProductInfo, ProductInfoClasses> {
+}
+
+// ======== 產品詢問按鈕 ======== 
+
+export interface ProductInquiryCard {
+    onClickContact: () => void;
+}
+
+export interface ProductInquiryCardClasses {
+    container?: string;
+    title?: string;
+    description?: string;
+    button?: string;
+}
+
+export interface ProductInquiryCardProps extends contentProps<ProductInquiryCard, ProductInquiryCardClasses> {
+}
+
+// ======== 產品規格 ======== 
+
+export interface ProductSpecs {
+    specs: Record<string, string>;
+}
+
+export interface ProductSpecsClasses {
+    container?: string;
+    title?: string;
+    specsGrid?: string;
+}
+
+export interface ProductSpecsProps extends contentProps<ProductSpecs, ProductSpecsClasses> {
+}
+
+// ======== 產品下載 ======== 
+
+export interface DownloadItem {
+    title: string;
+    type: 'PDF' | 'Driver' | 'Firmware' | 'Software';
+    size: string;
+    date: string;
+    url: string;
+}
+
+export interface ProductDownloadsProps {
+    downloads: DownloadItem[];
+}
+
+// ======== 相關產品 ======== 
+
+export interface RelatedProduct {
+    id: string;
+    title: string;
+    image: string;
+    category: string;
+}
+
+export interface RelatedProductsProps {
+    products: RelatedProduct[];
 }

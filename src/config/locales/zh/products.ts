@@ -14,4 +14,9 @@ export const zhProducts = {
     'products.hero.ai.tag': 'AI',
     'products.hero.ai.title': '智慧偵測',
     'products.hero.ai.accuracy': '99.9% 準確率',
+
+    // 行動呼籲 (Call to Action)
+    'cta.interested.title': '對此產品感興趣？',
+    'cta.interested.desc': '我們的工程團隊可以為您提供詳細的技術諮詢。',
+    'cta.interested.button': '聯絡我們取得報價',
 }

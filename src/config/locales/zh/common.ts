@@ -19,4 +19,9 @@ export const zhCommon = {
     'nav.search.button': '搜尋',
     'footer.rights': '版權所有。',
     'footer.company': 'San Ring Tech.',
+
+    // 系統/狀態相關
+    'system.initializing': '系統初始化中...',
+    'system.loading': '資料載入中...',
+    'system.error': '連線錯誤，請稍後再試',
 };

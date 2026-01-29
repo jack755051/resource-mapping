@@ -13,4 +13,9 @@ export const enProducts = {
     'products.hero.ai.tag': 'AI',
     'products.hero.ai.title': 'Smart Detection',
     'products.hero.ai.accuracy': '99.9% Accuracy',
+
+    // Call to Action
+    'cta.interested.title': 'Interested in this product?',
+    'cta.interested.desc': 'Our engineering team is ready to provide detailed technical consultation.',
+    'cta.interested.button': 'Request a Quote',
 }

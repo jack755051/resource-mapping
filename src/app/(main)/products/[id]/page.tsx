@@ -6,18 +6,34 @@ import { useProductDetail } from '@/hooks/useProductDetail';
 import { ProductGallery } from '@/components/sections/productDetail/gallery';
 import { ProductInfo } from '@/components/sections/productDetail/info';
 import { ProductSpecs } from '@/components/sections/productDetail/specs';
+import { LoadingSpinner } from '@/components/layout/loading-spinner';
+import { useTranslation } from '@/hooks/useTranslation';
+import { ProductInquiryCard } from '@/components/sections/productDetail/inquiry-card';
+
 
 export default function ProductDetailPage({ params }: { params: { slug: string } }) {
+    const { t } = useTranslation();
+
     // 透過 slug 取得產品資料
     const {
         product,
         isLoading,
         relatedProducts,
-        galleryActiveIndex,
-        setGalleryActiveIndex
+        gallery,
+        productInfo,
+        handleInquiryCard
     } = useProductDetail(params.slug);
 
-    if (isLoading || !product) return <div>Loading...</div>;
+    if (isLoading || !productInfo || !gallery) {
+        return (
+            <div className="min-h-screen w-full flex flex-col items-center justify-center bg-background gap-4">
+                <LoadingSpinner size="lg" />
+                <p className="text-sm text-muted-foreground animate-pulse font-medium tracking-wide">
+                    {t('system.initializing')}
+                </p>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-background pb-20">
@@ -30,11 +46,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                     {/* 左側：Sticky 圖片展示區 (佔 7 欄) */}
                     <div className="lg:col-span-7">
                         <div className="sticky top-24 space-y-8">
-                            <ProductGallery props={{
-                                images: product.images,
-                                activeIndex: galleryActiveIndex,
-                                onIndexChange: setGalleryActiveIndex
-                            }} />
+                            <ProductGallery props={gallery} />
                         </div>
                     </div>
 
@@ -42,12 +54,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                     <div className="lg:col-span-5 space-y-12">
 
                         {/* 核心資訊 (標題、描述、特色) */}
-                        <ProductInfo
-                            title={product.title}
-                            model={product.model}
-                            description={product.description}
-                            features={product.features}
-                        />
+                        <ProductInfo props={productInfo} />
 
                         <div className="w-full h-px bg-border/50" />
 
@@ -60,14 +67,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                         <ProductDownloads downloads={product.downloads} />
 
                         {/* 詢問按鈕 */}
-                        <div className="p-6 bg-muted/30 rounded-2xl border border-primary/10">
-                            <h4 className="font-bold mb-2">對此產品感興趣？</h4>
-                            <p className="text-sm text-muted-foreground mb-4">我們的工程團隊可以為您提供詳細的技術諮詢。</p>
-                            <button className="w-full bg-primary text-primary-foreground h-12 rounded-full font-medium shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all">
-                                聯絡我們取得報價
-                            </button>
-                        </div>
-
+                        <ProductInquiryCard props={{ onClickContact: handleInquiryCard }} />
                     </div>
                 </div>
             </div>
