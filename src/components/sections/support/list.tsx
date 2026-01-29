@@ -20,16 +20,9 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from '@/components/ui/pagination';
-import { cn } from '@/lib/utils';
+import { cn, formatBytes } from '@/lib/utils';
 import { useTranslation } from '@/hooks/useTranslation';
-import type { SupportResource } from '@/type/page/support';
-
-interface SupportListProps {
-    data: SupportResource[];
-    currentPage: number;
-    totalPages: number;
-    setCurrentPage: (page: number | ((prev: number) => number)) => void;
-}
+import type { SupportListProps } from '@/type/page/support';
 
 // Helper 移至組件內部或保持在外皆可
 const getIcon = (type: string, category: string) => {
@@ -42,13 +35,14 @@ const getIcon = (type: string, category: string) => {
     return <Wrench className="w-5 h-5 text-muted-foreground" />;
 };
 
-export function SupportList({ data, currentPage, totalPages, setCurrentPage }: SupportListProps) {
+export function SupportList({ props, className, classNames, setCurrentPage }: SupportListProps) {
     const { t } = useTranslation();
+    const { data, currentPage, totalPages } = props;
 
     return (
-        <div className="container mx-auto px-6 py-12 max-w-4xl">
+        <div className={cn("container mx-auto px-6 py-12 max-w-4xl", className, classNames?.container)}>
             {/* 列表內容 */}
-            <div className="space-y-4 min-h-[400px]">
+            <div className={cn("space-y-4 min-h-[400px]", classNames?.listWrapper)}>
                 <AnimatePresence mode="popLayout">
                     {data.length > 0 ? (
                         data.map((item, index) => (
@@ -92,7 +86,7 @@ export function SupportList({ data, currentPage, totalPages, setCurrentPage }: S
                                 <div className="shrink-0 flex items-center gap-3">
                                     {item.size && (
                                         <span className="hidden md:block text-sm text-muted-foreground font-mono">
-                                            {item.size}
+                                            {formatBytes(item.size)}
                                         </span>
                                     )}
                                     <Button

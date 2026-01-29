@@ -9,7 +9,8 @@ import { resources } from '@/mock/support';
 import { useSupport } from '@/hooks/useSupport';
 
 export default function SupportPage() {
-  // 一行搞定所有邏輯
+  // 可以選擇使用靜態數據或 API 模式
+  // 靜態模式（現在的方式）：
   const {
     activeCategory,
     setActiveCategory,
@@ -18,8 +19,16 @@ export default function SupportPage() {
     currentPage,
     setCurrentPage,
     totalPages,
-    currentData
-  } = useSupport(resources);
+    currentData,
+    isLoading
+  } = useSupport({
+    mode: 'static', // 使用靜態數據
+    items: resources,
+    itemsPerPage: 5
+  });
+
+  // API 模式（當後端 API 準備好時）：
+  // const { ... } = useSupport({ mode: 'api', itemsPerPage: 5 });
 
   return (
     <div className="min-h-screen bg-background pb-20">
@@ -35,9 +44,11 @@ export default function SupportPage() {
       />
 
       <SupportList
-        data={currentData}
-        currentPage={currentPage}
-        totalPages={totalPages}
+        props={{
+          data: currentData,
+          currentPage,
+          totalPages
+        }}
         setCurrentPage={setCurrentPage}
       />
     </div>

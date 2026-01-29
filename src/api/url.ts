@@ -29,4 +29,7 @@ export enum CommonUrl {
   // 產品
   PRODUCTS = '/products',
   PRODUCT_DETAIL = '/products/:slug',
+  // 支援
+  SUPPORT_CATEGORIES = '/support/categories',
+  SUPPORT_RESOURCES = '/support/resources',
 }

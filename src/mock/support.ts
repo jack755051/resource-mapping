@@ -8,7 +8,7 @@ export const resources: SupportResource[] = [
         category: 'manual',
         date: '2025-10-15',
         type: 'PDF',
-        size: '2.5 MB',
+        size: 2621440, // 2.5 MB
     },
     {
         id: 2,
@@ -16,7 +16,7 @@ export const resources: SupportResource[] = [
         category: 'firmware',
         date: '2026-01-10',
         type: 'ZIP',
-        size: '45 MB',
+        size: 47185920, // 45 MB
     },
     {
         id: 3,
@@ -24,7 +24,7 @@ export const resources: SupportResource[] = [
         category: 'faq',
         date: '2025-12-05',
         type: 'Article',
-        size: '',
+        size: 0, // 文章沒有檔案大小
     },
     {
         id: 4,
@@ -32,7 +32,7 @@ export const resources: SupportResource[] = [
         category: 'software',
         date: '2025-11-20',
         type: 'EXE',
-        size: '120 MB',
+        size: 125829120, // 120 MB
     },
     {
         id: 5,
@@ -40,7 +40,7 @@ export const resources: SupportResource[] = [
         category: 'faq',
         date: '2025-09-01',
         type: 'Article',
-        size: '',
+        size: 0,
     },
     {
         id: 6,
@@ -48,7 +48,7 @@ export const resources: SupportResource[] = [
         category: 'manual',
         date: '2025-08-30',
         type: 'PDF',
-        size: '1.2 MB',
+        size: 1258291, // 1.2 MB
     },
     {
         id: 7,
@@ -56,7 +56,7 @@ export const resources: SupportResource[] = [
         category: 'faq',
         date: '2025-12-22',
         type: 'Article',
-        size: '',
+        size: 0,
     },
     {
         id: 8,
@@ -64,6 +64,6 @@ export const resources: SupportResource[] = [
         category: 'manual',
         date: '2025-07-11',
         type: 'PDF',
-        size: '0.8 MB',
+        size: 838861, // 0.8 MB
     },
 ];
