@@ -2,7 +2,7 @@ export const enProducts = {
   // =================================================================
   // Products Page: Hero Section
   // =================================================================
-  'products.hero.badge': 'San Ring Tech',
+  'products.hero.badge': 'Guangxun Tech',
   'products.hero.title.prefix': 'Vision',
   'products.hero.title.suffix': 'Redefined.',
 

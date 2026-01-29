@@ -7,15 +7,26 @@ export const zhHome = {
   'home.hero.cta.business': '企業諮詢',
   'home.hero.cta.special': '查看特殊方案',
 
-  // Clients
-  'home.clients.label': '備受行業與專家信賴',
-  'home.clients.factory.title': '工廠與製造業',
-  'home.clients.factory.desc': '監控生產流程...',
-  // ... 其他 clients 翻譯 ...
-  'home.clients.retail.title': '零售與商業空間',
-  'home.clients.retail.desc': '發生糾紛即時釐清...',
-  'home.clients.special.title': '特殊場域工程',
-  'home.clients.special.desc': '水下攝影...',
+  // =================================================================
+  // Home Page: Section B - Client Types
+  // =================================================================
+  // Label 改得更有份量，不是「被信賴」，而是「承載重任」
+  'home.clients.label': '承載關鍵場域的信任標準',
+
+  // 1. 工廠 (重點：優化製程、杜絕疏失)
+  'home.clients.factory.title': '智慧工廠與製造業',
+  'home.clients.factory.desc':
+    '不只是防盜，更是產線的「數位督導」。從原物料控管到工安預警，協助您優化製程良率，杜絕人為疏失造成的隱形成本。',
+
+  // 2. 零售 (重點：戰情室、止損)
+  'home.clients.retail.title': '連鎖零售與商業總部',
+  'home.clients.retail.desc':
+    '將客訴糾紛與庫存盤損歸零。為多店面品牌打造「集中化戰情室」，無論身在何處，各分店營運狀況與風險皆在掌控之中。',
+
+  // 3. 特殊 (重點：生存能力、唯一解)
+  'home.clients.special.title': '極限環境工程',
+  'home.clients.special.desc':
+    '挑戰物理極限的視野。針對強酸鹼、深水壓力與高溫場域，提供一般器材無法生存的工業級特種監控解決方案。',
 
   // Capabilities
   // Capabilities - 標題區

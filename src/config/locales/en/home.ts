@@ -13,16 +13,22 @@ export const enHome = {
   // =================================================================
   // Home Page: Section B - Client Types
   // =================================================================
-  'home.clients.label': 'Trusted by Industries & Professionals',
-  'home.clients.factory.title': 'Industrial & Factory',
+  'home.clients.label': 'TRUSTED BY INDUSTRY LEADERS & CRITICAL FACILITIES',
+
+  // 1. Factory
+  'home.clients.factory.title': 'Industrial & Manufacturing',
   'home.clients.factory.desc':
-    'Monitor production flow, prevent accidents, and secure inventory with 24/7 durability.',
-  'home.clients.retail.title': 'Retail & Commercial',
+    'From raw material security to production line analytics. We turn video data into manufacturing efficiency and zero-tolerance safety protocols.',
+
+  // 2. Retail
+  'home.clients.retail.title': 'Retail Chains & Commercial',
   'home.clients.retail.desc':
-    'Resolve disputes instantly and manage multiple store locations from a single device.',
-  'home.clients.special.title': 'Specialized Fields',
+    'Stop shrinkage at the source. Crystal-clear evidence for liability protection and centralized multi-branch management from a single dashboard.',
+
+  // 3. Special
+  'home.clients.special.title': 'Mission-Critical Environments',
   'home.clients.special.desc':
-    'Underwater cams, Speed Domes, and High-Speed capture for challenging environments.',
+    'Deployment in hostile zones. High-corrosion, deep-water, and extreme-temperature solutions where standard equipment fails.',
 
   // =================================================================
   // Home Page: Section C - Capabilities

@@ -18,10 +18,10 @@ export function useHeader() {
   const headerBrand: HeaderBrandData = {
     logo: {
       href: '/',
-      alt: 'San Ring Tech Logo',
+      alt: 'Guangxun Tech Logo',
       src: '', // 記得放一張圖片到 public/images 或是暫時留空
     },
-    title: 'San Ring Tech.',
+    title: 'Guangxun Tech.',
   };
 
   /**

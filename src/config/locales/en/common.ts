@@ -20,7 +20,7 @@ export const enCommon = {
   'nav.search.placeholder': 'Search...',
   'nav.search.button': 'Search',
   'footer.rights': 'All rights reserved.',
-  'footer.company': 'San Ring Tech.',
+  'footer.company': 'Guangxun Tech.',
 
   // System Status
   'system.initializing': 'System initializing...',

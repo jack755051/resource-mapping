@@ -7,7 +7,7 @@ export const enAbout = {
   'about.manifesto.title.middle': 'We build',
   'about.manifesto.title.highlight': 'Trust',
   'about.manifesto.desc.p1':
-    'San Ring Tech has over 20 years of experience in the surveillance industry. In this rapidly iterating tech world, 20 years signifies not obsolescence, but a paranoid persistence for quality.',
+    'Guangxun Tech has over 20 years of experience in the surveillance industry. In this rapidly iterating tech world, 20 years signifies not obsolescence, but a paranoid persistence for quality.',
   'about.manifesto.desc.p2':
     'From early CCTV production to today’s license plate recognition and deep-sea monitoring, we have always believed:',
   'about.manifesto.desc.highlight':

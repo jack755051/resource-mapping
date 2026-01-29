@@ -8,7 +8,7 @@ export const enContact = {
   'contact.hero.desc.line1':
     'Whether for community planning, campus security, or factory integration,',
   'contact.hero.desc.line2':
-    "San Ring Tech's professional team is ready to assist you.",
+    "Guangxun Tech's professional team is ready to assist you.",
 
   // Form Section (Left)
   'contact.form.title': 'Project Inquiry',

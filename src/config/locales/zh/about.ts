@@ -7,7 +7,7 @@ export const zhAbout = {
   'about.manifesto.title.middle': '我們是在製造',
   'about.manifesto.title.highlight': '信任',
   'about.manifesto.desc.p1':
-    '光訊科技（San Ring Tech）於監控領域已有 20 年經驗。在這個快速迭代的科技業，20 年代表的不是陳舊，而是對品質近乎偏執的堅持。',
+    '光訊科技（Guangxun Tech）於監控領域已有 20 年經驗。在這個快速迭代的科技業，20 年代表的不是陳舊，而是對品質近乎偏執的堅持。',
   'about.manifesto.desc.p2':
     '從早期的 CCTV 生產，到如今佈局車牌辨識與深海監控，我們始終相信：',
   'about.manifesto.desc.highlight':

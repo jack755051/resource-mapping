@@ -4,7 +4,7 @@ import { generateFooterText } from '@/utils/footer-helper';
 export function useFooter(overrideData?: Partial<FooterData>) {
   // 1. 預設資料 (或從 API/Context 來的資料)
   const defaultData: FooterData = {
-    companyName: 'San Ring Tech.',
+    companyName: 'Guangxun Tech.',
     startYear: 2020,
     remark: 'All rights reserved.',
   };

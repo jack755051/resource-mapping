@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Resource Mapping Tool',
-  description: 'San Ring Tech.',
+  description: 'Guangxun Tech.',
 };
 
 export default function RootLayout({

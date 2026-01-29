@@ -18,7 +18,7 @@ export const zhCommon = {
   'nav.search.placeholder': '請輸入關鍵字...',
   'nav.search.button': '搜尋',
   'footer.rights': '版權所有。',
-  'footer.company': 'San Ring Tech.',
+  'footer.company': 'Guangxun Tech.',
 
   // 系統/狀態相關
   'system.initializing': '系統初始化中...',
