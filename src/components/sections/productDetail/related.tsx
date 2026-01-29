@@ -1,31 +1,29 @@
 'use client';
 
 import { ProductCard } from '@/components/layout/site-product-card';
-import type { ProductCardData } from '@/type/page/product';
+import { useTranslation } from '@/hooks/useTranslation';
+import type { RelatedProductsProps } from '@/type/page/proudct-detail';
 
-interface RelatedProductsProps {
-  products: ProductCardData[];
-}
+export function RelatedProducts({ props, className, classNames }: RelatedProductsProps) {
 
-export function RelatedProducts({ products }: RelatedProductsProps) {
-  if (!products || products.length === 0) return null;
+  const { t } = useTranslation();
+  if (!props.products || props.products.length === 0) return null;
 
   return (
     <div className="container mx-auto px-6 py-16">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold tracking-tight">相關產品推薦</h2>
+        <h2 className="text-2xl font-bold tracking-tight">{t('productDetail.related.title')}</h2>
         <a
           href="/products"
           className="text-sm font-medium text-primary hover:underline"
         >
-          查看全系列
+          {t('productDetail.related.viewAll')}
         </a>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product, idx) => (
-          // 修正點：直接傳入 data 屬性，而不是將屬性展開
-          <ProductCard key={idx} data={product} />
+        {props.products.map((product, idx) => (
+          <ProductCard key={idx} props={product} />
         ))}
       </div>
     </div>

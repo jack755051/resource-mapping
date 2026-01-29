@@ -1,5 +1,6 @@
 // src/type/page/product.ts
 
+import { contentProps } from '../common';
 import { ProductSpecItem } from './proudct-detail';
 
 /** * 定義 Product Card 的核心資料
@@ -27,8 +28,7 @@ export interface ProductCardClasses {
   footer?: string;
 }
 
-export interface ProductCardProps {
-  data: ProductCardData;
-  className?: string;
-  classNames?: ProductCardClasses;
+export interface ProductCardProps extends contentProps<ProductCardData, ProductCardClasses> {
+
 }
+

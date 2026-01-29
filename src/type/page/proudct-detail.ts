@@ -1,4 +1,5 @@
 import { contentProps } from '../common';
+import { ProductCardData } from './product';
 
 // ======== 產品畫廊 ========
 
@@ -125,30 +126,19 @@ export interface ProductInquiryCardProps extends contentProps<
   ProductInquiryCard,
   ProductInquiryCardClasses
 > { }
-
-// ======== 產品下載 ========
-
-export interface DownloadItem {
-  title: string;
-  type: 'PDF' | 'Driver' | 'Firmware' | 'Software';
-  size: string;
-  date: string;
-  url: string;
-}
-
-export interface ProductDownloadsProps {
-  downloads: DownloadItem[];
-}
-
 // ======== 相關產品 ========
 
-export interface RelatedProduct {
-  id: string;
-  title: string;
-  image: string;
-  category: string;
+export interface RelatedProductsData {
+  products: ProductCardData[];
 }
 
-export interface RelatedProductsProps {
-  products: RelatedProduct[];
+export interface RelatedProductsClasses {
+  container?: string;
+  title?: string;
+  grid?: string;
 }
+
+export interface RelatedProductsProps extends contentProps<
+  RelatedProductsData,
+  RelatedProductsClasses
+> { }

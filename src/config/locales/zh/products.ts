@@ -51,4 +51,10 @@ export const zhProducts = {
   'cta.interested.title': '對此產品感興趣？',
   'cta.interested.desc': '我們的工程團隊可以為您提供詳細的技術諮詢。',
   'cta.interested.button': '聯絡我們取得報價',
+
+  // =================================================================
+  // Product Detail Page: Related Products (相關產品)
+  // =================================================================
+  'productDetail.related.title': '相關產品推薦',
+  'productDetail.related.viewAll': '查看全系列',
 };

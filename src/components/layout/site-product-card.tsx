@@ -17,8 +17,8 @@ import { cn } from '@/lib/utils';
 import { ProductCardProps } from '@/type/page/product';
 import { ProductImagePlaceholder } from './product-image-placeholder';
 
-export function ProductCard({ data, className, classNames }: ProductCardProps) {
-  const { title, category, image, specs, tags, href } = data;
+export function ProductCard({ props, className, classNames }: ProductCardProps) {
+  const { title, category, image, specs, tags, href } = props;
   const [imageError, setImageError] = useState(false);
 
   return (

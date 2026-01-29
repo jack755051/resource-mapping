@@ -29,7 +29,7 @@ export default function ProductDetailPage({
         productDownloads,
     } = useProductDetail(params.slug);
 
-    if (isLoading || !productInfo || !gallery) {
+    if (isLoading || !productInfo || !gallery || !productSpecs || !productDownloads) {
         return (
             <div className="min-h-screen w-full flex flex-col items-center justify-center bg-background gap-4">
                 <LoadingSpinner size="lg" />
@@ -76,7 +76,7 @@ export default function ProductDetailPage({
 
             {/* 底部：相關產品 */}
             <div className="border-t border-border/40 bg-muted/10 mt-20">
-                <RelatedProducts products={relatedProducts} />
+                <RelatedProducts props={{ products: relatedProducts }} />
             </div>
         </div>
     );

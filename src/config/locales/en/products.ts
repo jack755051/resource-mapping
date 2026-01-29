@@ -52,4 +52,10 @@ export const enProducts = {
   'cta.interested.desc':
     'Our engineering team is ready to provide detailed technical consultation.',
   'cta.interested.button': 'Request a Quote',
+
+  // =================================================================
+  // Product Detail Page: Related Products (相關產品)
+  // =================================================================
+  'productDetail.related.title': 'Related Products',
+  'productDetail.related.viewAll': 'View All Series',
 };
