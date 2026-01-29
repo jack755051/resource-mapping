@@ -24,7 +24,7 @@ import { cn, formatBytes } from '@/lib/utils';
 import { useTranslation } from '@/hooks/useTranslation';
 import type { SupportListProps } from '@/type/page/support';
 
-// Helper 移至組件內部或保持在外皆可
+// Icon Helper
 const getIcon = (type: string, category: string) => {
     if (category === 'firmware' || category === 'software')
         return <FileCode className="w-5 h-5 text-blue-600" />;
@@ -35,13 +35,18 @@ const getIcon = (type: string, category: string) => {
     return <Wrench className="w-5 h-5 text-muted-foreground" />;
 };
 
-export function SupportList({ props, className, classNames, setCurrentPage }: SupportListProps) {
+export function SupportList({
+    props,           // 對應 SupportListData (data, currentPage, totalPages)
+    className,       // 最外層 class
+    classNames,      // 細部 class (container, item, etc.)
+    setCurrentPage   // 函式
+}: SupportListProps) {
     const { t } = useTranslation();
     const { data, currentPage, totalPages } = props;
 
     return (
         <div className={cn("container mx-auto px-6 py-12 max-w-4xl", className, classNames?.container)}>
-            {/* 列表內容 */}
+            {/* 列表內容區塊 */}
             <div className={cn("space-y-4 min-h-[400px]", classNames?.listWrapper)}>
                 <AnimatePresence mode="popLayout">
                     {data.length > 0 ? (
@@ -52,13 +57,17 @@ export function SupportList({ props, className, classNames, setCurrentPage }: Su
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ delay: index * 0.05 }}
-                                className="group relative flex items-center gap-4 p-5 rounded-2xl border border-border/40 bg-card hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                                className={cn(
+                                    "group relative flex items-center gap-4 p-5 rounded-2xl border border-border/40 bg-card hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300",
+                                    classNames?.item // 應用 item 樣式
+                                )}
                             >
                                 {/* Icon Box */}
                                 <div
                                     className={cn(
                                         'w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors',
-                                        'bg-muted/50 group-hover:bg-primary/5'
+                                        'bg-muted/50 group-hover:bg-primary/5',
+                                        classNames?.itemIcon // 應用 itemIcon 樣式
                                     )}
                                 >
                                     {getIcon(item.type, item.category)}
@@ -73,19 +82,23 @@ export function SupportList({ props, className, classNames, setCurrentPage }: Su
                                         >
                                             {item.type}
                                         </Badge>
-                                        <span className="text-xs text-muted-foreground">
+                                        <span className={cn("text-xs text-muted-foreground", classNames?.itemMeta)}>
                                             {item.date}
                                         </span>
                                     </div>
-                                    <h3 className="text-base md:text-lg font-bold text-foreground truncate group-hover:text-primary transition-colors">
+                                    <h3 className={cn(
+                                        "text-base md:text-lg font-bold text-foreground truncate group-hover:text-primary transition-colors",
+                                        classNames?.itemTitle // 應用 itemTitle 樣式
+                                    )}>
                                         {item.title}
                                     </h3>
                                 </div>
 
                                 {/* Action */}
                                 <div className="shrink-0 flex items-center gap-3">
-                                    {item.size && (
-                                        <span className="hidden md:block text-sm text-muted-foreground font-mono">
+                                    {/* 修正 size 顯示邏輯：確保大於 0 才顯示 */}
+                                    {item.size > 0 && (
+                                        <span className={cn("hidden md:block text-sm text-muted-foreground font-mono", classNames?.itemMeta)}>
                                             {formatBytes(item.size)}
                                         </span>
                                     )}
@@ -106,12 +119,14 @@ export function SupportList({ props, className, classNames, setCurrentPage }: Su
                                 <a
                                     href="#"
                                     className="absolute inset-0"
-                                    aria-label="View Item"
+                                    aria-label={`View ${item.title}`}
+                                    onClick={(e) => e.preventDefault()}
                                 ></a>
                             </motion.div>
                         ))
                     ) : (
-                        <div className="flex flex-col items-center justify-center py-20 text-center">
+                        /* Empty State */
+                        <div className={cn("flex flex-col items-center justify-center py-20 text-center", classNames?.emptyState)}>
                             <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mb-4">
                                 <Search className="w-8 h-8 text-muted-foreground" />
                             </div>
@@ -126,9 +141,9 @@ export function SupportList({ props, className, classNames, setCurrentPage }: Su
                 </AnimatePresence>
             </div>
 
-            {/* 分頁器 (Shadcn Pagination) */}
+            {/* 分頁器 */}
             {totalPages > 1 && (
-                <div className="mt-12">
+                <div className={cn("mt-12", classNames?.pagination)}>
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
@@ -138,9 +153,10 @@ export function SupportList({ props, className, classNames, setCurrentPage }: Su
                                         e.preventDefault();
                                         if (currentPage > 1) setCurrentPage((prev) => prev - 1);
                                     }}
-                                    className={
-                                        currentPage === 1 ? 'pointer-events-none opacity-50' : ''
-                                    }
+                                    className={cn(
+                                        "cursor-pointer",
+                                        currentPage === 1 && "pointer-events-none opacity-50"
+                                    )}
                                 />
                             </PaginationItem>
 
@@ -167,11 +183,10 @@ export function SupportList({ props, className, classNames, setCurrentPage }: Su
                                         if (currentPage < totalPages)
                                             setCurrentPage((prev) => prev + 1);
                                     }}
-                                    className={
-                                        currentPage === totalPages
-                                            ? 'pointer-events-none opacity-50'
-                                            : ''
-                                    }
+                                    className={cn(
+                                        "cursor-pointer",
+                                        currentPage === totalPages && "pointer-events-none opacity-50"
+                                    )}
                                 />
                             </PaginationItem>
                         </PaginationContent>

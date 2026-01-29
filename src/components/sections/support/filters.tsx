@@ -2,32 +2,37 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useTranslation } from '@/hooks/useTranslation';
-import type { CategoryId } from '@/type/page/support';
+// 移除 useTranslation，因為 labels 已經在 Hook 翻譯好傳進來了
+// import { useTranslation } from '@/hooks/useTranslation'; 
+// 移除 CategoryId，改用 string 以支援動態分類
+// import type { CategoryId } from '@/type/page/support'; 
+
+// 定義單一分類的形狀
+export interface FilterCategory {
+    id: string;
+    label: string;
+}
 
 interface SupportFiltersProps {
-    activeCategory: CategoryId;
-    setActiveCategory: (id: CategoryId) => void;
+    categories: FilterCategory[]; // <--- 1. 新增這個 prop 接收資料
+    activeCategory: string;       // <--- 2. 放寬型別為 string
+    setActiveCategory: (id: string) => void; // <--- 3. 放寬型別為 string
     onCategoryChange?: () => void;
 }
 
-export function SupportFilters({ activeCategory, setActiveCategory, onCategoryChange }: SupportFiltersProps) {
-    const { t } = useTranslation();
-
-    // 定義分類 (移入組件內以支援多語系)
-    const categories: Array<{ id: CategoryId; label: string }> = [
-        { id: 'all', label: t('support.category.all') },
-        { id: 'manual', label: t('support.category.manual') },
-        { id: 'firmware', label: t('support.category.firmware') },
-        { id: 'software', label: t('support.category.software') },
-        { id: 'faq', label: t('support.category.faq') },
-    ];
+export function SupportFilters({
+    categories, // <--- 接收外部傳入的分類列表
+    activeCategory,
+    setActiveCategory,
+    onCategoryChange
+}: SupportFiltersProps) {
 
     return (
         <div className="sticky top-0 z-40 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
             <div className="container mx-auto px-6">
                 <div className="flex items-center h-16 overflow-x-auto scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
                     <div className="flex items-center gap-1">
+                        {/* 直接使用傳入的 categories 進行 map */}
                         {categories.map((cat) => {
                             const isActive = activeCategory === cat.id;
                             return (

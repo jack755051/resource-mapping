@@ -1,54 +1,65 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import type { SupportResource, CategoryId } from '@/type/page/support';
+import { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from '@/hooks/useTranslation';
+import type { SupportResource, SupportCategory } from '@/type/page/support';
 import { SupportService } from '@/api/services/support.service';
 
+// 只引入分類的 Mock (因為你只說列表不要假資料，分類若要拔掉也可以順便說)
+import { MOCK_SUPPORT_CATEGORIES } from '@/mock/support';
+import { SupportMapper } from '@/api/mapper/support.mapper';
+
+// 定義 FilterCategory (UI 顯示用)
+export interface FilterCategory {
+    id: string;
+    label: string;
+}
+
 interface UseSupportOptions {
-    mode?: 'static' | 'api'; // 靜態數據或 API 模式
-    items?: SupportResource[]; // 靜態模式使用
     itemsPerPage?: number;
 }
 
-export function useSupport(options: UseSupportOptions = {}) {
-    const {
-        mode = 'static',
-        items = [],
-        itemsPerPage = 5
-    } = options;
+export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
+    const { t, language } = useTranslation();
+    const currentLang = (language?.startsWith('zh') ? 'zh' : 'en') as 'zh' | 'en';
 
-    const [activeCategory, setActiveCategory] = useState<CategoryId>('all');
+    // 狀態
+    const [activeCategory, setActiveCategory] = useState<string>('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
 
-    // API 模式專用狀態
-    const [apiData, setApiData] = useState<SupportResource[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+    // 資料狀態
+    const [resources, setResources] = useState<SupportResource[]>([]);
+    const [rawCategories, setRawCategories] = useState<SupportCategory[]>([]);
+
+    // Loading 狀態
+    const [isLoadingList, setIsLoadingList] = useState(false);
+    const [isLoadingCats, setIsLoadingCats] = useState(false);
     const [totalItems, setTotalItems] = useState(0);
 
-    // 處理分類
-
-
-    // 處理重置分頁的 helper
-    const handleResetPagination = () => setCurrentPage(1);
-
-    const handleCategoryChange = (id: CategoryId) => {
-        setActiveCategory(id);
-        handleResetPagination();
-    };
-
-    const handleSearchChange = (query: string) => {
-        setSearchQuery(query);
-        handleResetPagination();
-    };
-
-    // API 模式：從後端獲取數據
+    // 1. 取得分類 (維持原案，若分類 API 掛掉還有選單可以用)
     useEffect(() => {
-        if (mode !== 'api') return;
-
-        const fetchData = async () => {
-            setIsLoading(true);
+        const fetchCategories = async () => {
+            setIsLoadingCats(true);
             try {
+                const data = await SupportService.handleGetSupportCategories();
+                setRawCategories(data);
+            } catch (error) {
+                console.warn('[Support] Category API Failed, using Mock Data.');
+                setRawCategories(SupportMapper.toDomainCategoryList(MOCK_SUPPORT_CATEGORIES));
+            } finally {
+                setIsLoadingCats(false);
+            }
+        };
+        fetchCategories();
+    }, []);
+
+    // 2. 取得列表 (修正：API 失敗就是沒有資料，不Fallback)
+    useEffect(() => {
+        const fetchList = async () => {
+            setIsLoadingList(true);
+            try {
+                // 呼叫 API
                 const result = await SupportService.handleGetSupportList({
                     category: activeCategory === 'all' ? undefined : activeCategory,
                     keyword: searchQuery || undefined,
@@ -56,73 +67,54 @@ export function useSupport(options: UseSupportOptions = {}) {
                     limit: itemsPerPage,
                 });
 
-                setApiData(result.data);
+                setResources(result.data);
                 setTotalItems(result.total);
             } catch (error) {
-                console.error('Failed to fetch support resources:', error);
-                setApiData([]);
+                // 錯誤處理：清空資料，顯示 "沒有資料"
+                console.error('[Support] List API Failed:', error);
+                setResources([]);
                 setTotalItems(0);
             } finally {
-                setIsLoading(false);
+                setIsLoadingList(false);
             }
         };
 
-        fetchData();
-    }, [mode, activeCategory, searchQuery, currentPage, itemsPerPage]);
+        const timer = setTimeout(fetchList, 300);
+        return () => clearTimeout(timer);
 
-    // 決定使用哪個數據源
-    const sourceData = mode === 'api' ? apiData : items;
+    }, [activeCategory, searchQuery, currentPage, itemsPerPage]);
 
-    // 靜態模式：客戶端過濾
-    const filteredData = useMemo(() => {
-        if (mode === 'api') {
-            // API 模式：後端已經過濾，直接返回
-            return sourceData;
-        }
+    // 3. UI 分類轉換
+    const uiCategories: FilterCategory[] = useMemo(() => {
+        const allOption: FilterCategory = { id: 'all', label: t('support.category.all') };
+        const apiOptions = rawCategories.map(cat => ({
+            id: cat.id,
+            label: cat.label[currentLang] || cat.label.en
+        }));
+        return [allOption, ...apiOptions];
+    }, [rawCategories, currentLang, t]);
 
-        // 靜態模式：客戶端過濾
-        return sourceData.filter((item) => {
-            const matchCategory = activeCategory === 'all' || item.category === activeCategory;
-            const matchSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
-            return matchCategory && matchSearch;
-        });
-    }, [mode, sourceData, activeCategory, searchQuery]);
+    const handleCategoryChange = (id: string) => {
+        setActiveCategory(id);
+        setCurrentPage(1);
+    };
 
-    // 計算總頁數
-    const totalPages = useMemo(() => {
-        if (mode === 'api') {
-            return Math.ceil(totalItems / itemsPerPage);
-        }
-        return Math.ceil(filteredData.length / itemsPerPage);
-    }, [mode, totalItems, filteredData.length, itemsPerPage]);
-
-    // 當前頁面數據
-    const currentData = useMemo(() => {
-        if (mode === 'api') {
-            // API 模式：後端已分頁
-            return filteredData;
-        }
-
-        // 靜態模式：客戶端分頁
-        return filteredData.slice(
-            (currentPage - 1) * itemsPerPage,
-            currentPage * itemsPerPage
-        );
-    }, [mode, filteredData, currentPage, itemsPerPage]);
+    const handleSearchChange = (query: string) => {
+        setSearchQuery(query);
+        setCurrentPage(1);
+    };
 
     return {
-        // 狀態
+        categories: uiCategories,
+        currentData: resources,
+        totalCount: totalItems,
+        totalPages: Math.ceil(totalItems / itemsPerPage),
         activeCategory,
         searchQuery,
         currentPage,
-        totalPages,
-        currentData, // 已經切分好的當前頁面資料
-        totalCount: mode === 'api' ? totalItems : filteredData.length,
-        isLoading, // API 模式的載入狀態
-
-        // 動作
-        setActiveCategory: handleCategoryChange, // 包裝過的 setter
-        setSearchQuery: handleSearchChange,      // 包裝過的 setter
+        isLoading: isLoadingList || isLoadingCats,
+        setActiveCategory: handleCategoryChange,
+        setSearchQuery: handleSearchChange,
         setCurrentPage,
     };
 }

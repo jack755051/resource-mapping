@@ -1,6 +1,8 @@
+import { LocalizedString } from "@/type/i18n";
+
 export interface SupportCategoryResDto {
     id: string;
-    label: string
+    name: LocalizedString;
 }
 
 export interface SupportListResDto {
