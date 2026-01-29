@@ -8,15 +8,16 @@ import { PaginatedSupportResource, SupportCategory } from "@/type/page/support";
 
 export const SupportService = {
     /** 取得支援分類 */
-    handleGetSupportCategories: async (): Promise<SupportCategory[]> => {
-        try {
-            const res = await ofetch<SupportCategoryResDto[]>(CommonUrl.SUPPORT_CATEGORIES);
-            return SupportMapper.toDomainCategoryList(res);
-        } catch (error) {
-            console.warn('[SupportService] Get Categories Failed:', error);
-            return []; // 失敗時回傳空陣列，避免卡死
-        }
+    handleGetSupportCategories: async (lang: string): Promise<SupportCategory[]> => {
+        const res = await ofetch<SupportCategoryResDto[]>(CommonUrl.SUPPORT_CATEGORIES, {
+            method: 'GET',
+            headers: {
+                'Accept-Language': lang
+            }
+        });
+        return SupportMapper.toDomainCategoryList(res);
     },
+
 
     /** 取得支援資源列表 (含防呆保護) */
     handleGetSupportList: async (payload: SupportReqDto): Promise<PaginatedSupportResource> => {
@@ -32,17 +33,18 @@ export const SupportService = {
                 page: pagination.current_page,
                 limit: pagination.items_per_page,
             };
-        } catch (error) {
-            // 重點：當 404 或 API 錯誤時，不拋出錯誤，而是回傳「空的分頁資料」
-            // 這樣前端就會自然呈現「查無資料」，而不會崩潰
-            console.warn('[SupportService] Get List Failed (404 or Error), returning empty list.', error);
-
-            return {
-                data: [],
-                total: 0,
-                page: payload.page,
-                limit: payload.limit,
-            };
+        } catch (error: any) {
+            // ★ 特規處理：如果後端回傳 404，視為「空資料」並回傳，不拋出錯誤
+            if (error?.response?.status === 404) {
+                return {
+                    data: [],
+                    total: 0,
+                    page: payload.page,
+                    limit: payload.limit,
+                };
+            }
+            // 其他錯誤 (500, 401...) 繼續往上拋，讓 Hook 處理
+            throw error;
         }
     }
 }

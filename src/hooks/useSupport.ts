@@ -42,7 +42,7 @@ export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
         const fetchCategories = async () => {
             setIsLoadingCats(true);
             try {
-                const data = await SupportService.handleGetSupportCategories();
+                const data = await SupportService.handleGetSupportCategories(language || 'zh');
                 setRawCategories(data);
             } catch (error) {
                 console.warn('[Support] Category API Failed, using Mock Data.');
