@@ -1,6 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import type { ProductCardData } from '@/type/page/product';
 import {
+    ProductDownload,
+    ProductDownloads,
     ProductGallery,
     ProductInfo,
     ProductInquiryCard,
@@ -15,13 +17,7 @@ export interface ProductDetailData extends ProductCardData {
     description: string;
     features: string[];
     images: string[]; // 畫廊圖片陣列
-    downloads: {
-        title: string;
-        type: 'PDF' | 'Driver' | 'Firmware' | 'Software';
-        size: string;
-        date: string;
-        url: string;
-    }[];
+    downloads: ProductDownload[];
 }
 
 // 模擬資料庫
@@ -60,23 +56,26 @@ const MOCK_DB: Record<string, ProductDetailData> = {
         ],
         downloads: [
             {
+                id: '1',
                 title: 'GC-IP50 系列規格書',
                 type: 'PDF',
-                size: '1.2 MB',
+                size: 1258291, // ✨ 約 1.2 MB
                 date: '2025-10-15',
                 url: '#',
             },
             {
+                id: '2',
                 title: '快速安裝指南',
                 type: 'PDF',
-                size: '0.8 MB',
+                size: 845000, // ✨ 約 0.8 MB (825 KB)
                 date: '2025-10-15',
                 url: '#',
             },
             {
+                id: '3',
                 title: 'IP Search Tool (Win)',
                 type: 'Software',
-                size: '45 MB',
+                size: 47185920, // ✨ 約 45 MB
                 date: '2025-12-01',
                 url: '#',
             },
@@ -192,6 +191,14 @@ export function useProductDetail(slug: string) {
         };
     }, [product]);
 
+    const productDownloads: ProductDownloads | null = useMemo(() => {
+        if (!product) return null;
+
+        return {
+            downloads: product.downloads,
+        };
+    }, [product]);
+
     // ======= useEffect=======
 
     useEffect(() => {
@@ -229,5 +236,6 @@ export function useProductDetail(slug: string) {
         gallery,
         productInfo,
         productSpecs,
+        productDownloads,
     };
 }

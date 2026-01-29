@@ -2,32 +2,25 @@
 
 import { FileText, Download, FileCode, FileArchive } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn, formatBytes } from '@/lib/utils';
+import { ProductDownloadsProps } from '@/type/page/proudct-detail';
+import { useTranslation } from '@/hooks/useTranslation';
 
-// 定義下載資源的資料結構
-interface DownloadItem {
-  title: string;
-  type: 'PDF' | 'Driver' | 'Firmware' | 'Software';
-  size: string;
-  date: string;
-  url: string;
-}
+export function ProductDownloads({ props, className, classNames }: ProductDownloadsProps) {
+  const { t } = useTranslation();
+  const { downloads } = props;
+  const { container, title, downloadsGrid } = classNames || {};
 
-interface ProductDownloadsProps {
-  downloads: DownloadItem[];
-}
-
-export function ProductDownloads({ downloads }: ProductDownloadsProps) {
   if (!downloads || downloads.length === 0) return null;
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-lg font-bold flex items-center gap-2">
+    <div className={cn("space-y-6", container)}>
+      <h3 className={cn("text-lg font-bold flex items-center gap-2", title)}>
         <Download className="w-5 h-5 text-primary" />
-        Technical Resources
+        {t('productDetail.downloads.title')}
       </h3>
 
-      <div className="grid gap-3">
+      <div className={cn("grid gap-3", downloadsGrid)}>
         {downloads.map((item, idx) => (
           <div
             key={idx}
@@ -62,7 +55,7 @@ export function ProductDownloads({ downloads }: ProductDownloadsProps) {
                 <span className="bg-muted px-1.5 py-0.5 rounded text-[10px] uppercase tracking-wider">
                   {item.type}
                 </span>
-                <span>{item.size}</span>
+                <span>{formatBytes(item.size)}</span>
                 <span className="hidden sm:inline-block">• {item.date}</span>
               </div>
             </div>

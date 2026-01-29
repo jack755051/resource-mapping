@@ -22,7 +22,7 @@ export interface ProductGalleryClasses {
 export interface ProductGalleryProps extends contentProps<
   ProductGallery,
   ProductGalleryClasses
-> {}
+> { }
 
 // ======== 產品資訊 ========
 
@@ -50,7 +50,7 @@ export interface ProductInfoClasses {
 export interface ProductInfoProps extends contentProps<
   ProductInfo,
   ProductInfoClasses
-> {}
+> { }
 
 // ======== 產品規格 ========
 
@@ -58,13 +58,13 @@ export interface ProductSpecItem {
   label: string;
   value: string;
   type:
-    | 'sensor'
-    | 'chip'
-    | 'lens'
-    | 'power'
-    | 'storage'
-    | 'protection'
-    | 'waterproof';
+  | 'sensor'
+  | 'chip'
+  | 'lens'
+  | 'power'
+  | 'storage'
+  | 'protection'
+  | 'waterproof';
 }
 
 export interface ProductSpecs {
@@ -80,7 +80,33 @@ export interface ProductSpecsClasses {
 export interface ProductSpecsProps extends contentProps<
   ProductSpecs,
   ProductSpecsClasses
-> {}
+> { }
+
+// ======== 產品下載 ========
+
+export interface ProductDownload {
+  id: string;
+  title: string;
+  type: 'PDF' | 'Word' | 'Driver' | 'Firmware' | 'Software';
+  size: number;
+  date: string;
+  url: string;
+}
+
+export interface ProductDownloads {
+  downloads: ProductDownload[];
+}
+
+export interface ProductDownloadsClasses {
+  container?: string;
+  title?: string;
+  downloadsGrid?: string;
+}
+
+export interface ProductDownloadsProps extends contentProps<
+  ProductDownloads,
+  ProductDownloadsClasses
+> { }
 
 // ======== 產品詢問按鈕 ========
 
@@ -98,7 +124,7 @@ export interface ProductInquiryCardClasses {
 export interface ProductInquiryCardProps extends contentProps<
   ProductInquiryCard,
   ProductInquiryCardClasses
-> {}
+> { }
 
 // ======== 產品下載 ========
 

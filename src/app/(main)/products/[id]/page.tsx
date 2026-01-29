@@ -26,6 +26,7 @@ export default function ProductDetailPage({
         gallery,
         productInfo,
         productSpecs,
+        productDownloads,
     } = useProductDetail(params.slug);
 
     if (isLoading || !productInfo || !gallery) {
@@ -65,7 +66,7 @@ export default function ProductDetailPage({
                         <div className="w-full h-px bg-border/50" />
 
                         {/* 下載資源 */}
-                        <ProductDownloads downloads={product.downloads} />
+                        <ProductDownloads props={productDownloads} />
 
                         {/* 詢問按鈕 */}
                         <ProductInquiryCard props={{ onClickContact: handleInquiryCard }} />

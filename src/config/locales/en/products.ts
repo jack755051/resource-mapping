@@ -16,6 +16,13 @@ export const enProducts = {
   'products.hero.ai.title': 'Smart Detection',
   'products.hero.ai.accuracy': '99.9% Accuracy',
 
+
+  // =================================================================
+  // Product Detail Page: Info (產品資訊)
+  // =================================================================
+  'productDetail.info.title': 'Product Information',
+  'productDetail.info.model': 'Model',
+
   // =================================================================
   // Product Detail Page: Technical Specs (產品規格)
   // =================================================================
@@ -28,6 +35,17 @@ export const enProducts = {
   'productDetail.specs.power': 'Power',
   'productDetail.specs.storage': 'Storage',
   'productDetail.specs.protection': 'Protection',
+
+  // =================================================================
+  // Product Detail Page: Downloads (產品下載)
+  // =================================================================
+  'productDetail.downloads.title': 'Downloads',
+
+  'productDetail.downloads.pdf': 'PDF',
+  'productDetail.downloads.word': 'Word',
+  'productDetail.downloads.driver': 'Driver',
+  'productDetail.downloads.firmware': 'Firmware',
+  'productDetail.downloads.software': 'Software',
 
   // Call to Action
   'cta.interested.title': 'Interested in this product?',

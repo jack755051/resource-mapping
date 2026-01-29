@@ -16,6 +16,13 @@ export const zhProducts = {
   'products.hero.ai.title': '智慧偵測',
   'products.hero.ai.accuracy': '99.9% 準確率',
 
+
+  // =================================================================
+  // Product Detail Page: Info (產品資訊)
+  // =================================================================
+  'productDetail.info.title': '產品資訊',
+  'productDetail.info.model': '型號',
+
   // =================================================================
   // Product Detail Page: Technical Specs (產品規格)
   // =================================================================
@@ -28,6 +35,17 @@ export const zhProducts = {
   'productDetail.specs.power': '功耗',
   'productDetail.specs.storage': '儲存',
   'productDetail.specs.protection': '防護等級',
+
+  // =================================================================
+  // Product Detail Page: Downloads (產品下載)
+  // =================================================================
+  'productDetail.downloads.title': '下載專區',
+
+  'productDetail.downloads.pdf': 'PDF',
+  'productDetail.downloads.word': 'Word',
+  'productDetail.downloads.driver': '驅動程式',
+  'productDetail.downloads.firmware': '韌體',
+  'productDetail.downloads.software': '軟體',
 
   // 行動呼籲 (Call to Action)
   'cta.interested.title': '對此產品感興趣？',

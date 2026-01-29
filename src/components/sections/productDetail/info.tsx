@@ -2,12 +2,14 @@ import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { ProductInfoProps } from '@/type/page/proudct-detail';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export function ProductInfo({
   props,
   className,
   classNames,
 }: ProductInfoProps) {
+  const { t } = useTranslation();
   const { tag, title, model, description, features } = props;
 
   return (
@@ -35,7 +37,7 @@ export function ProductInfo({
               classNames?.model
             )}
           >
-            MODEL: {model}
+            {t('productDetail.info.model')}: {model}
           </span>
         </div>
 
