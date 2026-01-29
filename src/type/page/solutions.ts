@@ -1,5 +1,5 @@
 export interface CarouselSlide {
-    src: string;
-    caption: string;
-    tag: string;
+  src: string;
+  caption: string;
+  tag: string;
 }

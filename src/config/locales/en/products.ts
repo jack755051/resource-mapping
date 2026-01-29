@@ -16,7 +16,6 @@ export const enProducts = {
   'products.hero.ai.title': 'Smart Detection',
   'products.hero.ai.accuracy': '99.9% Accuracy',
 
-
   // =================================================================
   // Product Detail Page: Info (產品資訊)
   // =================================================================

@@ -33,6 +33,13 @@ export const zhContact = {
 
   'contact.form.submit': '送出諮詢',
 
+  // Form Actions & Success
+  'contact.form.clear': '清除重填',
+  'contact.form.submitting': '處理中...',
+  'contact.success.title': '訊息已送出！',
+  'contact.success.desc': '感謝您的諮詢，我們的團隊將於 24 小時內與您聯繫。',
+  'contact.success.reset': '發送新的諮詢',
+
   // Info Section (Right)
   'contact.info.address.title': '公司地址',
   'contact.info.address.content': '241 新北市新莊區福壽街 164 巷 17 號 1 樓',

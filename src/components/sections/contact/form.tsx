@@ -12,6 +12,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 
 import { cn } from '@/lib/utils';
 import { useContactForm } from '@/hooks/useContactForm';
+import { SendSuccess } from './send-success';
 
 interface ContactFormProps {
   inquiryTags: string[];
@@ -54,22 +55,11 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
 
       {isSuccess ? (
         // 成功畫面
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="p-8 rounded-2xl bg-green-50/50 border border-green-200 text-center space-y-4"
-        >
-          <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
-            <CheckCircle2 className="w-8 h-8" />
-          </div>
-          <h3 className="text-xl font-bold text-green-800">訊息已送出！</h3>
-          <p className="text-green-700">
-            感謝您的諮詢，我們的團隊將於 24 小時內與您聯繫。
-          </p>
-          <Button variant="outline" onClick={resetSuccess}>
-            發送新的諮詢
-          </Button>
-        </motion.div>
+        <SendSuccess
+          props={{
+            onReset: resetSuccess,
+          }}
+        />
       ) : (
         // 表單畫面
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -186,7 +176,7 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
               disabled={isSubmitting}
               className="text-muted-foreground hover:text-destructive transition-colors"
             >
-              清除重填
+              {t('contact.form.clear')}
             </Button>
 
             {/* 2. 送出按鈕：主要行動，移除 ml-auto */}

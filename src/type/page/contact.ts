@@ -1,5 +1,6 @@
 // types/contact.ts
 
+import { contentProps } from '../common';
 import { LocalizedString } from '../i18n';
 
 /** 定義據點類型，方便前端做樣式區隔 (例如 HQ 顯示比較大，分公司顯示比較小) */
@@ -36,3 +37,27 @@ export interface ContactPageData {
   formConfig: ContactFormConfig;
   locations: OfficeLocation[]; // 修改這裡：變成陣列，支援多個據點
 }
+
+// ======== 成功畫面 ========
+
+export interface SendSuccessData {
+  // 這些文字設為可選，允許外部覆寫；如果不傳，組件內部會用預設翻譯
+  title?: string;
+  desc?: string;
+  resetText?: string;
+  onReset: () => void;
+}
+
+export interface SendSuccessClasses {
+  container?: string;
+  iconWrapper?: string; // 新增 Icon 的插槽
+  icon?: string;
+  title?: string;
+  description?: string;
+  button?: string;
+}
+
+export interface SendSuccessProps extends contentProps<
+  SendSuccessData,
+  SendSuccessClasses
+> {}

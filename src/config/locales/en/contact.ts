@@ -35,7 +35,15 @@ export const enContact = {
   'contact.form.placeholder.message':
     'Please describe your site condition or requirements...',
 
-  'contact.form.submit': 'Send Inquiry',
+  'contact.form.submit': 'Send',
+
+  // Form Actions & Success
+  'contact.form.clear': 'Clear Form',
+  'contact.form.submitting': 'Sending...',
+  'contact.success.title': 'Message Sent!',
+  'contact.success.desc':
+    'Thank you for your inquiry. Our team will contact you within 24 hours.',
+  'contact.success.reset': 'Send Another Inquiry',
 
   // Info Section (Right)
   'contact.info.address.title': 'Office Address',

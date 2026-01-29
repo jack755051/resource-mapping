@@ -16,7 +16,6 @@ export const zhProducts = {
   'products.hero.ai.title': '智慧偵測',
   'products.hero.ai.accuracy': '99.9% 準確率',
 
-
   // =================================================================
   // Product Detail Page: Info (產品資訊)
   // =================================================================

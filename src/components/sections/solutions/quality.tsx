@@ -11,7 +11,6 @@ export function SolutionsQuality() {
   return (
     <section className="py-24 container mx-auto px-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
         {/* 左側：文字描述 + 2x2 特點網格 (維持不變) */}
         <div className="space-y-10">
           <div className="space-y-4">
@@ -45,7 +44,6 @@ export function SolutionsQuality() {
 
         {/* 右側：垂直輪播展示區 */}
         <QualityCarousel />
-
       </div>
     </section>
   );

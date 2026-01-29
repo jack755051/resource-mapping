@@ -35,27 +35,32 @@ export const enHome = {
   // =================================================================
   // Capabilities
   'home.capabilities.title': 'More Than Hardware. A Strategy.',
-  'home.capabilities.subtitle': 'We redefine surveillance. Moving from passive recording to active business intelligence and risk mitigation.',
+  'home.capabilities.subtitle':
+    'We redefine surveillance. Moving from passive recording to active business intelligence and risk mitigation.',
 
   // 1. Visual Management
   'home.capabilities.visual.title': 'Evidence Over Arguments',
-  'home.capabilities.visual.desc': 'Eliminate internal friction. Our system provides indisputable, tamper-proof visual evidence, giving you absolute clarity for liability, labor disputes, and inventory audits.',
+  'home.capabilities.visual.desc':
+    'Eliminate internal friction. Our system provides indisputable, tamper-proof visual evidence, giving you absolute clarity for liability, labor disputes, and inventory audits.',
   'home.capabilities.visual.tag': 'Operational Efficiency',
 
   // 2. Extreme Tech
   'home.capabilities.extreme.title': 'Conquering Hostile Environments',
-  'home.capabilities.extreme.desc': 'Where standard equipment fails, we thrive. Whether it is deep-water pressure, high-heat zones, or corrosive coastal air, we deploy military-grade solutions built to survive.',
+  'home.capabilities.extreme.desc':
+    'Where standard equipment fails, we thrive. Whether it is deep-water pressure, high-heat zones, or corrosive coastal air, we deploy military-grade solutions built to survive.',
   'home.capabilities.extreme.tag': 'IP68 / Anti-Corrosion',
 
   // 3. Installation
   'home.capabilities.install.title': 'Cabling Defines Longevity',
-  'home.capabilities.install.desc': 'Hardware is replaceable; data is not. We reject messy cabling. Our structured, industrial-grade wiring ensures your system never fails due to a loose connection when you need it most.',
+  'home.capabilities.install.desc':
+    'Hardware is replaceable; data is not. We reject messy cabling. Our structured, industrial-grade wiring ensures your system never fails due to a loose connection when you need it most.',
   'home.capabilities.install.tag': 'Standardized Cabling',
 
   // 4. Home
   'home.capabilities.home.tag': 'Residential',
   'home.capabilities.home.title': 'Industrial Security at Home',
-  'home.capabilities.home.desc': 'Your family deserves better than a plastic toy camera. Bring bank-level security technology to your home. No privacy leaks, just 24/7 uncompromised stability.',
+  'home.capabilities.home.desc':
+    'Your family deserves better than a plastic toy camera. Bring bank-level security technology to your home. No privacy leaks, just 24/7 uncompromised stability.',
   // =================================================================
   // Home Page: Section D - CTA
   // =================================================================

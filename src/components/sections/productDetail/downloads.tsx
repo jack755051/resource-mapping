@@ -6,7 +6,11 @@ import { cn, formatBytes } from '@/lib/utils';
 import { ProductDownloadsProps } from '@/type/page/proudct-detail';
 import { useTranslation } from '@/hooks/useTranslation';
 
-export function ProductDownloads({ props, className, classNames }: ProductDownloadsProps) {
+export function ProductDownloads({
+  props,
+  className,
+  classNames,
+}: ProductDownloadsProps) {
   const { t } = useTranslation();
   const { downloads } = props;
   const { container, title, downloadsGrid } = classNames || {};
@@ -14,13 +18,13 @@ export function ProductDownloads({ props, className, classNames }: ProductDownlo
   if (!downloads || downloads.length === 0) return null;
 
   return (
-    <div className={cn("space-y-6", className, container)}>
-      <h3 className={cn("text-lg font-bold flex items-center gap-2", title)}>
+    <div className={cn('space-y-6', className, container)}>
+      <h3 className={cn('text-lg font-bold flex items-center gap-2', title)}>
         <Download className="w-5 h-5 text-primary" />
         {t('productDetail.downloads.title')}
       </h3>
 
-      <div className={cn("grid gap-3", downloadsGrid)}>
+      <div className={cn('grid gap-3', downloadsGrid)}>
         {downloads.map((item, idx) => (
           <div
             key={idx}

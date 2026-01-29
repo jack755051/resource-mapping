@@ -17,7 +17,6 @@ export function ClientSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
           {/* 1. Manufacturing */}
           <div className="group flex flex-col items-start gap-4 p-8 rounded-3xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
             <div className="flex justify-between w-full">
@@ -79,7 +78,6 @@ export function ClientSection() {
             </div>
             <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-cyan-500/5 rounded-full blur-3xl group-hover:bg-cyan-500/10 transition-colors" />
           </div>
-
         </div>
       </div>
     </section>

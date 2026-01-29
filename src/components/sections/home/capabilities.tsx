@@ -1,6 +1,13 @@
 'use client';
 
-import { Activity, Eye, Wrench, HomeIcon, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import {
+  Activity,
+  Eye,
+  Wrench,
+  HomeIcon,
+  ShieldCheck,
+  ArrowUpRight,
+} from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { cn } from '@/lib/utils';
 
@@ -8,7 +15,8 @@ export function CapabilitySection() {
   const { t } = useTranslation();
 
   // 定義統一的 Tag 基礎樣式 (減少重複代碼，確保統一)
-  const baseTagClass = "px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase w-fit";
+  const baseTagClass =
+    'px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase w-fit';
 
   return (
     <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto w-full">
@@ -22,7 +30,6 @@ export function CapabilitySection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[minmax(180px,auto)]">
-
         {/* 1. Visual Management (大格) - Primary 色系 */}
         <div className="md:col-span-2 md:row-span-2 rounded-[2rem] border border-border bg-card p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-primary/50 group">
           <div className="relative z-10 space-y-6">
@@ -31,7 +38,7 @@ export function CapabilitySection() {
                 <Activity className="w-7 h-7" />
               </div>
               {/* Tag 1: Primary */}
-              <span className={cn(baseTagClass, "bg-primary/10 text-primary")}>
+              <span className={cn(baseTagClass, 'bg-primary/10 text-primary')}>
                 {t('home.capabilities.visual.tag')}
               </span>
             </div>
@@ -56,7 +63,9 @@ export function CapabilitySection() {
           </div>
           <div className="flex flex-col">
             {/* Tag 2: Cyan (已修正：加上背景色與圓角) */}
-            <span className={cn(baseTagClass, "bg-cyan-500/10 text-cyan-600 mb-3")}>
+            <span
+              className={cn(baseTagClass, 'bg-cyan-500/10 text-cyan-600 mb-3')}
+            >
               {t('home.capabilities.extreme.tag')}
             </span>
             <h3 className="text-lg font-bold text-foreground">
@@ -76,7 +85,12 @@ export function CapabilitySection() {
           </div>
           <div className="flex flex-col">
             {/* Tag 3: Orange (已修正：加上背景色與圓角) */}
-            <span className={cn(baseTagClass, "bg-orange-500/10 text-orange-600 mb-3")}>
+            <span
+              className={cn(
+                baseTagClass,
+                'bg-orange-500/10 text-orange-600 mb-3'
+              )}
+            >
               {t('home.capabilities.install.tag')}
             </span>
             <h3 className="text-lg font-bold text-foreground">
@@ -94,7 +108,9 @@ export function CapabilitySection() {
             <div className="flex items-center gap-2 mb-2">
               <HomeIcon className="w-6 h-6 text-green-500" />
               {/* Tag 4: Green (已修正：樣式統一) */}
-              <span className={cn(baseTagClass, "bg-green-500/10 text-green-600")}>
+              <span
+                className={cn(baseTagClass, 'bg-green-500/10 text-green-600')}
+              >
                 {t('home.capabilities.home.tag')}
               </span>
             </div>

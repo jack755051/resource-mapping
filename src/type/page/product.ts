@@ -28,7 +28,7 @@ export interface ProductCardClasses {
   footer?: string;
 }
 
-export interface ProductCardProps extends contentProps<ProductCardData, ProductCardClasses> {
-
-}
-
+export interface ProductCardProps extends contentProps<
+  ProductCardData,
+  ProductCardClasses
+> {}
