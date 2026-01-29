@@ -4,6 +4,7 @@ import { enAbout } from './about';
 import { enProducts } from './products';
 import { enSolutions } from './solutions';
 import { enContact } from './contact';
+import { enSupport } from './support';
 
 export const enDictionary = {
   ...enCommon,
@@ -12,4 +13,5 @@ export const enDictionary = {
   ...enProducts,
   ...enSolutions,
   ...enContact,
+  ...enSupport,
 };

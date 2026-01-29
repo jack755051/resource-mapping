@@ -4,6 +4,7 @@ import { zhAbout } from './about';
 import { zhProducts } from './products';
 import { zhSolutions } from './solutions';
 import { zhContact } from './contact';
+import { zhSupport } from './support';
 
 export const zhDictionary = {
   ...zhCommon,
@@ -12,4 +13,5 @@ export const zhDictionary = {
   ...zhProducts,
   ...zhSolutions,
   ...zhContact,
+  ...zhSupport,
 };

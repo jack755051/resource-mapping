@@ -31,7 +31,7 @@ export const zhContact = {
   'contact.form.label.message': '需求描述',
   'contact.form.placeholder.message': '請簡述您的場域狀況或需求...',
 
-  'contact.form.submit': '送出諮詢',
+  'contact.form.submit': '送出',
 
   // Form Actions & Success
   'contact.form.clear': '清除重填',
