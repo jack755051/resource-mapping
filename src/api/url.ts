@@ -25,7 +25,7 @@ export enum CommonUrl {
   CONTACT_FORM = '/contact/form',
   CONTACT_LOCATIONS = '/contact/locations',
   // 關於我
-  ABOUT_TIMELINE = '/about/timeline',
+  ABOUT_HISTORY = '/about/history',
   // 產品
   PRODUCTS = '/products',
   PRODUCT_DETAIL = '/products/:slug',

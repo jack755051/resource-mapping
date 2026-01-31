@@ -3,13 +3,17 @@ import { ofetch } from 'ofetch';
 import { ITimelineSection } from '../response/about.response';
 
 export const AboutService = {
+
   /**
    * 取得關於我時間軸
    * @param lang - 當前語系代碼 (e.g., 'zh', 'en')
    */
   handleGetTimeline: async (lang: string): Promise<ITimelineSection> => {
-    return await ofetch<ITimelineSection>(CommonUrl.ABOUT_TIMELINE, {
+    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+    return await ofetch<ITimelineSection>(CommonUrl.ABOUT_HISTORY, {
       method: 'GET',
+      baseURL,
       headers: {
         'Content-Type': 'application/json',
         'Accept-Language': lang,

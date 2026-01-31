@@ -1,0 +1,14 @@
+services:
+  frontend:
+    # 這裡的 build . 代表使用當前目錄的 Dockerfile
+    build: .
+    container_name: resource-mapping-frontend
+    ports:
+      # 將本機的 3000 port 對應到容器的 80 port
+      # 啟動後你就可以用 http://localhost:3000 訪問
+      - "3000:80"
+    restart: always
+    # 如果你想讓它能連到 OrbStack 網域，通常預設網路即可
+    # 若連線有問題，可以嘗試加入這行 (僅限 Linux/OrbStack 環境)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
