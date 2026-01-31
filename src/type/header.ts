@@ -125,6 +125,6 @@ export interface HeaderUserNavProps {
 export interface HeaderData {
   brand: HeaderBrandData;
   navigation: HeaderNavigationItem[];
-  user: HeaderUserNav;
+  user: HeaderUserNavData;
   search: HeaderSearchData;
 }

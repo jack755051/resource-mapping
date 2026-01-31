@@ -3,6 +3,7 @@ import { PaginatedResDto, PaginationDto } from './common.response';
 export interface ProductSpecResDto {
   spec_key: string; // 對應前端的 label
   spec_value: string; // 對應前端的 value
+  spec_type?: 'sensor' | 'chip' | 'lens' | 'power' | 'storage' | 'protection' | 'waterproof'; // 可選：規格類型
 }
 
 export interface ProductResDto {

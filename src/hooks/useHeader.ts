@@ -1,8 +1,6 @@
 import {
   HeaderBrandData,
-  HeaderSearch,
   HeaderSearchData,
-  HeaderUserNav,
   HeaderUserNavData,
 } from '@/type';
 import { useNavigation } from '@/hooks/useNavigation';

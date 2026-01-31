@@ -38,7 +38,7 @@ export class SupportMapper {
      */
     static toDomainCategory(dto: SupportCategoryResDto): SupportCategory {
         return {
-            id: dto.id, // 後端回傳的 ID (例如 'manual', 'firmware' 或 UUID)
+            id: this.mapCategoryId(dto.id), // 使用 helper 確保 ID 符合 CategoryId 類型
             // 直接把後端的多語系物件 (zh, en) 傳給 Domain，讓 UI 決定顯示哪種語言
             label: dto.name
         };
@@ -57,7 +57,30 @@ export class SupportMapper {
     // ==========================================
 
     /**
+     * 處理分類選單的 ID 字串轉換 (用於 SupportCategory)
+     * 與 mapCategory 不同，這個方法支持 'all' 分類
+     */
+    private static mapCategoryId(id: string): CategoryId {
+        if (!id) return 'all'; // 防止 undefined/null
+
+        // 將後端可能的大寫轉小寫
+        const normalized = id.toLowerCase();
+
+        // 定義合法的 CategoryId 清單 (包含 'all')
+        const validCategories: CategoryId[] = ['all', 'manual', 'firmware', 'software', 'faq'];
+
+        if (validCategories.includes(normalized as CategoryId)) {
+            return normalized as CategoryId;
+        }
+
+        // Fallback: 如果後端傳來未知的分類，預設歸類為 all
+        console.warn(`Unknown category ID: ${id}, fallback to 'all'`);
+        return 'all';
+    }
+
+    /**
      * 處理 Category ID 字串轉換 (確保符合前端 Enum)
+     * 用於資源列表，不包含 'all'
      */
     private static mapCategory(cat: string): CategoryId {
         if (!cat) return 'manual'; // 防止 undefined/null

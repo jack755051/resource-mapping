@@ -1,6 +1,6 @@
-import { FooterProps } from '@/type';
+import { FooterData } from '@/type';
 
-export function generateFooterText(data: FooterProps): string {
+export function generateFooterText(data: FooterData): string {
   const currentYear = new Date().getFullYear();
   const year = Number(data.startYear);
 

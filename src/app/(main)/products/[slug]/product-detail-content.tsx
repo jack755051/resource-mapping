@@ -10,11 +10,7 @@ import { LoadingSpinner } from '@/components/layout/loading-spinner';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ProductInquiryCard } from '@/components/sections/productDetail/inquiry-card';
 
-export default function ProductDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export function ProductDetailContent({ slug }: { slug: string }) {
   const { t } = useTranslation();
 
   // 透過 slug 取得產品資料
@@ -27,7 +23,7 @@ export default function ProductDetailPage({
     productInfo,
     productSpecs,
     productDownloads,
-  } = useProductDetail(params.slug);
+  } = useProductDetail(slug);
 
   if (
     isLoading ||
