@@ -15,8 +15,10 @@ export const ProductService = {
     params: ProductListReqDto,
     lang: string
   ): Promise<PaginatedList<ProductCardData>> => {
+    const baseURL = '/api/v1';
     const data = await ofetch<ProductListResponse>(CommonUrl.PRODUCTS, {
       method: 'GET',
+      baseURL,
       query: {
         page: params.page,
         limit: params.limit,

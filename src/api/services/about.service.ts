@@ -9,7 +9,7 @@ export const AboutService = {
    * @param lang - 當前語系代碼 (e.g., 'zh', 'en')
    */
   handleGetTimeline: async (lang: string): Promise<ITimelineSection> => {
-    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const baseURL = '/api/v1';
 
     return await ofetch<ITimelineSection>(CommonUrl.ABOUT_HISTORY, {
       method: 'GET',

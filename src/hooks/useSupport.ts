@@ -65,7 +65,7 @@ export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
                     keyword: searchQuery || undefined,
                     page: currentPage,
                     limit: itemsPerPage,
-                });
+                }, language || 'zh');
 
                 setResources(result.data);
                 setTotalItems(result.total);

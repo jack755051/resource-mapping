@@ -9,9 +9,12 @@ import { PaginatedSupportResource, SupportCategory } from "@/type/page/support";
 export const SupportService = {
     /** 取得支援分類 */
     handleGetSupportCategories: async (lang: string): Promise<SupportCategory[]> => {
+        const baseURL = '/api/v1';
         const res = await ofetch<SupportCategoryResDto[]>(CommonUrl.SUPPORT_CATEGORIES, {
             method: 'GET',
+            baseURL,
             headers: {
+                'Content-Type': 'application/json',
                 'Accept-Language': lang
             }
         });
@@ -20,10 +23,16 @@ export const SupportService = {
 
 
     /** 取得支援資源列表 (含防呆保護) */
-    handleGetSupportList: async (payload: SupportReqDto): Promise<PaginatedSupportResource> => {
+    handleGetSupportList: async (payload: SupportReqDto, lang: string): Promise<PaginatedSupportResource> => {
+        const baseURL = '/api/v1';
         try {
             const res = await ofetch<PaginatedResDto<SupportListResDto>>(CommonUrl.SUPPORT_RESOURCES, {
-                params: payload
+                baseURL,
+                params: payload,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Language': lang ?? 'zh'
+                }
             });
             const { pagination } = res.meta;
 

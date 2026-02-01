@@ -6,10 +6,13 @@ export const ConstantsService = {
   handleGetProductsCategories: async (
     language?: string
   ): Promise<ConstantProductsCategoriesResDto[]> => {
+    const baseURL = '/api/v1';
+
     const data = await ofetch<ConstantProductsCategoriesResDto[]>(
       CommonUrl.CONSTANTS_PRODUCTS_CATEGORIES,
       {
         method: 'GET',
+        baseURL,
         headers: {
           'Content-Type': 'application/json',
           'Accept-Language': language ?? 'zh',
