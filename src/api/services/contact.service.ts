@@ -1,4 +1,4 @@
-import { ofetch } from 'ofetch';
+import { apiClient } from '../client';
 import { ContactMapper } from '@/api/mapper/contact.mapper';
 import { OfficeLocation } from '@/type/page/contact';
 import { CommonUrl } from '../url';
@@ -16,15 +16,11 @@ export const ContactService = {
    * @param lang 當前語系代碼 (e.g. 'zh', 'en')
    */
   handleGetLocations: async (lang: string): Promise<OfficeLocation[]> => {
-    const baseURL = '/api/v1';
-
-    const data = await ofetch<OfficeLocationResDto[]>(
+    const data = await apiClient<OfficeLocationResDto[]>(
       CommonUrl.CONTACT_LOCATIONS,
       {
         method: 'GET',
-        baseURL,
         headers: {
-          'Content-Type': 'application/json',
           // 🔥 關鍵：告訴後端我現在是哪個語言
           'Accept-Language': lang,
         },
@@ -43,14 +39,10 @@ export const ContactService = {
     payload: ContactFormReqDto,
     lang: string
   ): Promise<ContactFormResDto> => {
-    const baseURL = '/api/v1';
-
-    const data = await ofetch<ContactFormResDto>(CommonUrl.CONTACT_FORM, {
+    const data = await apiClient<ContactFormResDto>(CommonUrl.CONTACT_FORM, {
       method: 'POST',
-      baseURL,
       body: payload,
       headers: {
-        'Content-Type': 'application/json',
         // 🔥 關鍵：讓後端回傳的 error message (如 "驗證失敗") 是對應語言
         'Accept-Language': lang,
       },

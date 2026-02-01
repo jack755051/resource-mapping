@@ -1,4 +1,4 @@
-import { ofetch } from 'ofetch';
+import { apiClient } from '../client';
 import { CommonUrl } from '../url';
 import { ConstantProductsCategoriesResDto } from '../response/constant.response';
 
@@ -6,15 +6,11 @@ export const ConstantsService = {
   handleGetProductsCategories: async (
     language?: string
   ): Promise<ConstantProductsCategoriesResDto[]> => {
-    const baseURL = '/api/v1';
-
-    const data = await ofetch<ConstantProductsCategoriesResDto[]>(
+    const data = await apiClient<ConstantProductsCategoriesResDto[]>(
       CommonUrl.CONSTANTS_PRODUCTS_CATEGORIES,
       {
         method: 'GET',
-        baseURL,
         headers: {
-          'Content-Type': 'application/json',
           'Accept-Language': language ?? 'zh',
         },
       }

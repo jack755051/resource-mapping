@@ -1,6 +1,6 @@
+import { apiClient } from '../client';
 import { SupportReqDto } from "../request/support.request";
 import { CommonUrl } from '../url';
-import { ofetch } from "ofetch";
 import { SupportCategoryResDto, SupportListResDto } from '../response/support.response';
 import { PaginatedResDto } from '../response/common.response';
 import { SupportMapper } from "../mapper/support.mapper";
@@ -9,12 +9,9 @@ import { PaginatedSupportResource, SupportCategory } from "@/type/page/support";
 export const SupportService = {
     /** 取得支援分類 */
     handleGetSupportCategories: async (lang: string): Promise<SupportCategory[]> => {
-        const baseURL = '/api/v1';
-        const res = await ofetch<SupportCategoryResDto[]>(CommonUrl.SUPPORT_CATEGORIES, {
+        const res = await apiClient<SupportCategoryResDto[]>(CommonUrl.CONSTANTS_SUPPORT_CATEGORIES, {
             method: 'GET',
-            baseURL,
             headers: {
-                'Content-Type': 'application/json',
                 'Accept-Language': lang
             }
         });
@@ -24,13 +21,10 @@ export const SupportService = {
 
     /** 取得支援資源列表 (含防呆保護) */
     handleGetSupportList: async (payload: SupportReqDto, lang: string): Promise<PaginatedSupportResource> => {
-        const baseURL = '/api/v1';
         try {
-            const res = await ofetch<PaginatedResDto<SupportListResDto>>(CommonUrl.SUPPORT_RESOURCES, {
-                baseURL,
+            const res = await apiClient<PaginatedResDto<SupportListResDto>>(CommonUrl.SUPPORT_RESOURCES, {
                 params: payload,
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept-Language': lang ?? 'zh'
                 }
             });

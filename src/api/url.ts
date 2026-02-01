@@ -21,6 +21,8 @@ export const replaceUrlParams = (
 export enum CommonUrl {
   // 常數
   CONSTANTS_PRODUCTS_CATEGORIES = '/constants/products-categories',
+  CONSTANTS_SUPPORT_CATEGORIES = '/constants/support-categories',
+  CONSTANTS_OFFICE_CATEGORIES = '/constants/office-categories',
   // 聯絡方式
   CONTACT_FORM = '/contact/form',
   CONTACT_LOCATIONS = '/contact/locations',
@@ -30,6 +32,5 @@ export enum CommonUrl {
   PRODUCTS = '/products',
   PRODUCT_DETAIL = '/products/:slug',
   // 支援
-  SUPPORT_CATEGORIES = '/support/categories',
   SUPPORT_RESOURCES = '/support/resources',
 }

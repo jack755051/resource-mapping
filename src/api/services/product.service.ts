@@ -1,4 +1,4 @@
-import { ofetch } from 'ofetch';
+import { apiClient } from '../client';
 import { CommonUrl } from '../url';
 import { ProductListResponse } from '../response/product.response';
 import { ProductListReqDto } from '../request/product.request';
@@ -15,10 +15,8 @@ export const ProductService = {
     params: ProductListReqDto,
     lang: string
   ): Promise<PaginatedList<ProductCardData>> => {
-    const baseURL = '/api/v1';
-    const data = await ofetch<ProductListResponse>(CommonUrl.PRODUCTS, {
+    const data = await apiClient<ProductListResponse>(CommonUrl.PRODUCTS, {
       method: 'GET',
-      baseURL,
       query: {
         page: params.page,
         limit: params.limit,
@@ -27,7 +25,6 @@ export const ProductService = {
         sort: params.sort,
       },
       headers: {
-        'Content-Type': 'application/json',
         'Accept-Language': lang,
       },
     });
