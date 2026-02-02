@@ -1,39 +1,50 @@
 'use client';
 
-import { ProductCardData } from '@/type/page/product';
-import { Pagination } from '@/type/common';
 import { PaginationControl } from '@/components/sections/product/pagination-control';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ProductCard } from '@/components/layout/site-product-card';
 import { ProductSkeletonCard } from '@/components/layout/skeleton/product-skeleton-card';
-import { SlidersHorizontal } from 'lucide-react'; // 建議加個 icon 讓空狀態好看點
+import { SlidersHorizontal } from 'lucide-react';
+import { useProduct } from '@/hooks/useProduct';
+import { cn } from '@/lib/utils';
 
 interface ProductListSectionProps {
-  products: ProductCardData[];
-  categoryName?: string;
-  totalCount: number;
-  activeCategoryKey: string;
-  pagination: Pagination | null;
-  onPageChange: (page: number) => void;
-  loading?: boolean;
+  className?: string;
+  classNames?: {
+    container?: string;
+    header?: string;
+    grid?: string;
+    emptyState?: string;
+    pagination?: string;
+  };
 }
 
 export function ProductListSection({
-  products,
-  categoryName,
-  totalCount,
-  activeCategoryKey,
-  pagination,
-  onPageChange,
-  loading,
-}: ProductListSectionProps) {
+  className,
+  classNames
+}: ProductListSectionProps = {}) {
+  // =========================================================================
+  // 🔥 統一數據源：從 useProduct hook 獲取所有數據
+  // =========================================================================
+  const {
+    products,
+    currentCategoryName,
+    totalCount,
+    activeCategory,
+    pagination,
+    setPage,
+    loading
+  } = useProduct();
+
+  const categoryName = currentCategoryName;
+  const activeCategoryKey = activeCategory;
   // 1. 移除最上面的 if (loading) return...
   // 2. 移除最上面的 if (products.length === 0) return...
   // 我們要把它們整合到下面的 render 裡，這樣 AnimatePresence 才能運作
 
   return (
     // min-h-[80vh] 是防止抖動的關鍵
-    <section className="container mx-auto px-6 py-12 min-h-[80vh]">
+    <section className={cn("container mx-auto px-6 py-12 min-h-[80vh]", className, classNames?.container)}>
       <AnimatePresence mode="wait">
         {loading ? (
           // -------------------------------------------
@@ -66,7 +77,7 @@ export function ProductListSection({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="py-32 flex flex-col items-center justify-center text-center border-2 border-dashed border-border/50 rounded-3xl"
+            className={cn("py-32 flex flex-col items-center justify-center text-center border-2 border-dashed border-border/50 rounded-3xl", classNames?.emptyState)}
           >
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4 text-muted-foreground">
               <SlidersHorizontal className="w-8 h-8" />
@@ -89,7 +100,7 @@ export function ProductListSection({
             transition={{ duration: 0.3 }}
           >
             {/* 標題與計數 */}
-            <div className="mb-8 flex items-baseline gap-4">
+            <div className={cn("mb-8 flex items-baseline gap-4", classNames?.header)}>
               <h2 className="text-2xl font-bold">{categoryName}</h2>
               <span className="text-muted-foreground text-sm">
                 共 {totalCount} 項產品
@@ -97,17 +108,17 @@ export function ProductListSection({
             </div>
 
             {/* 產品網格 */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8", classNames?.grid)}>
               {products.map(product => (
                 <ProductCard key={product.id} props={product} />
               ))}
             </div>
 
             {/* 分頁控制器 */}
-            <div className="mt-12">
+            <div className={cn("mt-12", classNames?.pagination)}>
               <PaginationControl
                 pagination={pagination}
-                onPageChange={onPageChange}
+                onPageChange={setPage}
               />
             </div>
           </motion.div>

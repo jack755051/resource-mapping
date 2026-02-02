@@ -5,19 +5,15 @@ import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useSupport } from '@/hooks/useSupport';
 
-interface SupportHeroProps {
-    searchQuery: string;
-    setSearchQuery: (value: string) => void;
-    onSearch?: () => void;
-}
-
-export function SupportHero({ searchQuery, setSearchQuery, onSearch }: SupportHeroProps) {
+export function SupportHero() {
     const { t } = useTranslation();
+    const { searchQuery, setSearchQuery } = useSupport();
 
-    // 抽取出處理搜尋的函式，避免重複寫
+    // 搜尋會自動觸發（useSupport 內部監聽 searchQuery）
     const handleTriggerSearch = () => {
-        onSearch?.();
+        // 可以在這裡添加額外的搜尋邏輯（如 analytics）
     };
 
     return (
@@ -58,9 +54,7 @@ export function SupportHero({ searchQuery, setSearchQuery, onSearch }: SupportHe
                                     value={searchQuery}
                                     onChange={(e) => {
                                         setSearchQuery(e.target.value);
-                                        // 這裡其實可以不用 onSearch?.()，因為 Hook 會監聽 searchQuery 變化自動搜尋
-                                        // 但如果你想保留即時重置分頁的功能，可以留著
-                                        onSearch?.();
+                                        // Hook 會自動監聽 searchQuery 變化並重置分頁
                                     }}
                                     // 1. 新增：支援 Enter 鍵搜尋
                                     onKeyDown={(e) => {

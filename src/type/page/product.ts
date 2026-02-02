@@ -1,6 +1,7 @@
 // src/type/page/product.ts
 
-import { contentProps } from '../common';
+import { CommonFilter, contentProps } from '../common';
+import { LocalizedString } from '../i18n';
 import { ProductSpecItem } from './proudct-detail';
 
 /** * 定義 Product Card 的核心資料
@@ -31,4 +32,20 @@ export interface ProductCardClasses {
 export interface ProductCardProps extends contentProps<
   ProductCardData,
   ProductCardClasses
-> {}
+> { }
+
+// -------- 產品分類 -----------
+
+export interface ProductCategory extends CommonFilter { }
+
+export interface ProductCategoryClasses {
+  container?: string;
+  active?: string;
+  inactive?: string;
+}
+
+export interface ProductCategoryProps extends contentProps<
+  ProductCategory,
+  ProductCategoryClasses
+> { }
+

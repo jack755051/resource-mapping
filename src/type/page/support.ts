@@ -1,4 +1,4 @@
-import { contentProps } from "../common";
+import { CommonFilter, contentProps } from "../common";
 import { LocalizedString } from "../i18n";
 
 export type ResourceType = 'PDF' | 'ZIP' | 'Article' | 'EXE';
@@ -29,11 +29,7 @@ export interface SupportResourceProps extends contentProps<
 > { }
 
 // ======== 支援分類 (選單) ========
-export interface SupportCategory {
-    id: CategoryId;
-    label: LocalizedString
-    onClick?: () => void;
-}
+export interface SupportCategory extends CommonFilter { }
 
 export interface SupportCategoryClasses {
     container?: string;
@@ -42,7 +38,7 @@ export interface SupportCategoryClasses {
 }
 
 export interface SupportCategoryProps extends contentProps<
-    SupportCategory,
+    SupportCategory[],
     SupportCategoryClasses
 > { }
 

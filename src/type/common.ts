@@ -1,3 +1,7 @@
+import { LocalizedString } from "./i18n";
+import { ProductCategory } from "./page/product";
+import { SupportCategory } from "./page/support";
+
 export interface Pagination {
   current: number;
   pageSize: number;
@@ -15,3 +19,18 @@ export interface contentProps<T, S> {
   className?: string;
   classNames?: S;
 }
+
+// ====== 篩選的型別 =======
+export interface CommonFilter {
+  id: string;
+  label: LocalizedString;
+  active?: boolean;
+  slug?: string;
+  onFilterClick?: (id: string) => void; // 改为可选，因为组件可以直接使用 hook 的方法
+}
+
+// export interface SystemParams {
+//   supportCategories: SupportCategory[];
+//   productCategories: ProductCategory[];
+//   officeCategories: OfficeCategory[];
+// }

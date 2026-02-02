@@ -2,30 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-// 移除 useTranslation，因為 labels 已經在 Hook 翻譯好傳進來了
-// import { useTranslation } from '@/hooks/useTranslation'; 
-// 移除 CategoryId，改用 string 以支援動態分類
-// import type { CategoryId } from '@/type/page/support'; 
+import { useSupport } from '@/hooks/useSupport';
 
-// 定義單一分類的形狀
-export interface FilterCategory {
-    id: string;
-    label: string;
-}
 
-interface SupportFiltersProps {
-    categories: FilterCategory[]; // <--- 1. 新增這個 prop 接收資料
-    activeCategory: string;       // <--- 2. 放寬型別為 string
-    setActiveCategory: (id: string) => void; // <--- 3. 放寬型別為 string
-    onCategoryChange?: () => void;
-}
-
-export function SupportFilters({
-    categories, // <--- 接收外部傳入的分類列表
-    activeCategory,
-    setActiveCategory,
-    onCategoryChange
-}: SupportFiltersProps) {
+export function SupportFilters() {
+    const { categories, activeCategory, setActiveCategory } = useSupport();
 
     return (
         <div className="sticky top-0 z-40 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
@@ -34,13 +15,12 @@ export function SupportFilters({
                     <div className="flex items-center gap-1">
                         {/* 直接使用傳入的 categories 進行 map */}
                         {categories.map((cat) => {
-                            const isActive = activeCategory === cat.id;
+                            const isActive = cat.id === activeCategory;
                             return (
                                 <button
                                     key={cat.id}
                                     onClick={() => {
                                         setActiveCategory(cat.id);
-                                        onCategoryChange?.();
                                     }}
                                     className={cn(
                                         'relative whitespace-nowrap px-5 py-2 rounded-full text-sm font-medium transition-colors duration-300',

@@ -2,9 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { ProductCategory } from '@/type/page/product';
+import { useTranslation } from '@/hooks/useTranslation';
+import { getLocalizedContent } from '@/type/i18n';
 
 interface CategoryListProps {
-  categories: { id: string; name: string }[];
+  categories: ProductCategory[];
   activeCategory: string;
   onCategoryChange: (id: string) => void;
 }
@@ -14,11 +17,16 @@ export function CategoryList({
   activeCategory,
   onCategoryChange,
 }: CategoryListProps) {
+  const { language } = useTranslation();
+
   return (
     <div className="flex-1 overflow-x-auto scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
       <div className="flex items-center gap-1">
-        {categories.map(cat => {
+        {categories.map((cat) => {
           const isActive = activeCategory === cat.id;
+          // 解析多語系名稱
+          const localizedName = getLocalizedContent(cat.label, language);
+
           return (
             <button
               key={cat.id}
@@ -38,7 +46,8 @@ export function CategoryList({
                   style={{ borderRadius: 9999 }}
                 />
               )}
-              <span className="relative z-10">{cat.name}</span>
+              {/* 顯示解析後的名稱 */}
+              <span className="relative z-10">{localizedName}</span>
             </button>
           );
         })}

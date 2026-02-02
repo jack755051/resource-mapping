@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/pagination';
 import { cn, formatBytes } from '@/lib/utils';
 import { useTranslation } from '@/hooks/useTranslation';
-import type { SupportListProps } from '@/type/page/support';
+import { useSupport } from '@/hooks/useSupport';
 
 // Icon Helper
 const getIcon = (type: string, category: string) => {
@@ -35,14 +35,25 @@ const getIcon = (type: string, category: string) => {
     return <Wrench className="w-5 h-5 text-muted-foreground" />;
 };
 
-export function SupportList({
-    props,           // 對應 SupportListData (data, currentPage, totalPages)
-    className,       // 最外層 class
-    classNames,      // 細部 class (container, item, etc.)
-    setCurrentPage   // 函式
-}: SupportListProps) {
+interface SupportListProps {
+    className?: string;
+    classNames?: {
+        container?: string;
+        listWrapper?: string;
+        item?: string;
+        itemIcon?: string;
+        itemTitle?: string;
+        itemMeta?: string;
+        emptyState?: string;
+        pagination?: string;
+    };
+}
+
+export function SupportList({ className, classNames }: SupportListProps = {}) {
     const { t } = useTranslation();
-    const { data, currentPage, totalPages } = props;
+    const { currentData, currentPage, totalPages, setCurrentPage } = useSupport();
+
+    const data = currentData;
 
     return (
         <div className={cn("container mx-auto px-6 py-12 max-w-4xl", className, classNames?.container)}>

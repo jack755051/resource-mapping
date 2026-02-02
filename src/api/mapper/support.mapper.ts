@@ -1,6 +1,17 @@
 import { SupportCategoryResDto, SupportListResDto } from '../response/support.response';
 import { SupportResource, CategoryId, ResourceType, SupportCategory } from '@/type/page/support';
 
+/**
+ * Support Mapper
+ *
+ * 將後端 API 的 DTO (Data Transfer Object) 轉換為前端 Domain Model
+ *
+ * 後端改動說明：
+ * - ✅ 後端實體從 SupportType 改為 SupportCategory
+ * - ✅ 後端字段 name: { zh: string; en: string } 保持不變
+ * - ✅ Response DTO 正確使用 name: LocalizedString
+ * - ✅ Mapper 無需修改，已完全適配
+ */
 export class SupportMapper {
     // ==========================================
     // Public Methods: 列表資源轉換 (Resource List)
@@ -8,6 +19,9 @@ export class SupportMapper {
 
     /**
      * 單一轉換：將 API DTO 轉為 UI 用的 Domain Model (SupportResource)
+     *
+     * @param dto - 後端返回的支援資源 DTO
+     * @returns 前端 Domain Model
      */
     static toDomain(dto: SupportListResDto): SupportResource {
         return {
@@ -23,6 +37,9 @@ export class SupportMapper {
 
     /**
      * 批次轉換列表資源
+     *
+     * @param dtos - 後端返回的支援資源 DTO 數組
+     * @returns 前端 Domain Model 數組
      */
     static toDomainList(dtos: SupportListResDto[]): SupportResource[] {
         if (!Array.isArray(dtos)) return [];
@@ -35,17 +52,27 @@ export class SupportMapper {
 
     /**
      * 單一轉換：將 API 分類 DTO 轉為 UI 用的 Domain Model (SupportCategory)
+     *
+     * 後端字段映射：
+     * - dto.id (string) → id (CategoryId)
+     * - dto.name (LocalizedString) → label (LocalizedString)
+     *
+     * @param dto - 後端返回的支援分類 DTO
+     * @returns 前端 Domain Model
      */
     static toDomainCategory(dto: SupportCategoryResDto): SupportCategory {
         return {
             id: this.mapCategoryId(dto.id), // 使用 helper 確保 ID 符合 CategoryId 類型
-            // 直接把後端的多語系物件 (zh, en) 傳給 Domain，讓 UI 決定顯示哪種語言
+            // ✅ 直接把後端的多語系物件 (zh, en) 傳給 Domain，讓 UI 決定顯示哪種語言
             label: dto.name
         };
     }
 
     /**
      * 批次轉換分類
+     *
+     * @param dtos - 後端返回的支援分類 DTO 數組
+     * @returns 前端 Domain Model 數組
      */
     static toDomainCategoryList(dtos: SupportCategoryResDto[]): SupportCategory[] {
         if (!Array.isArray(dtos)) return [];
