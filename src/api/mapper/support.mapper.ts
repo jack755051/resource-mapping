@@ -55,7 +55,11 @@ export class SupportMapper {
      *
      * 後端字段映射：
      * - dto.id (string) → id (CategoryId)
-     * - dto.name (LocalizedString) → label (LocalizedString)
+     * - dto.name (string) → label (string)
+     *
+     * ⚠️ 重要：後端的 I18nInterceptor 已根據 accept-language header 自動翻譯
+     *    前端收到的 dto.name 已經是翻譯後的字符串（如 "常見問題" 或 "FAQ"）
+     *    不需要再做多語系處理，直接使用即可
      *
      * @param dto - 後端返回的支援分類 DTO
      * @returns 前端 Domain Model
@@ -63,8 +67,7 @@ export class SupportMapper {
     static toDomainCategory(dto: SupportCategoryResDto): SupportCategory {
         return {
             id: this.mapCategoryId(dto.id), // 使用 helper 確保 ID 符合 CategoryId 類型
-            // ✅ 直接把後端的多語系物件 (zh, en) 傳給 Domain，讓 UI 決定顯示哪種語言
-            label: dto.name
+            label: dto.name  // ✅ 後端已翻譯，直接使用
         };
     }
 

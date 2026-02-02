@@ -2,11 +2,12 @@ import { SupportCategoryResDto, SupportListResDto } from '@/api/response/support
 import { PaginatedResDto } from '@/api/response/common.response';
 
 // 1. 分類 API 的備用假資料
+// ⚠️ 注意：這裡模擬後端 I18nInterceptor 的行為，返回翻譯後的字符串（中文版本）
 export const MOCK_SUPPORT_CATEGORIES: SupportCategoryResDto[] = [
-    { id: 'manual', name: { zh: '使用手冊', en: 'Manual' } },
-    { id: 'firmware', name: { zh: '韌體更新', en: 'Firmware' } },
-    { id: 'software', name: { zh: '軟體下載', en: 'Software' } },
-    { id: 'faq', name: { zh: '常見問題', en: 'FAQ' } },
+    { id: 'manual', name: '使用手冊' },
+    { id: 'firmware', name: '韌體更新' },
+    { id: 'software', name: '軟體下載' },
+    { id: 'faq', name: '常見問題' },
 ];
 
 // 2. 列表 API 的備用假資料

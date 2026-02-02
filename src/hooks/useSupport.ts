@@ -2,12 +2,9 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
-import type { SupportResource, SupportCategory } from '@/type/page/support';
+import { useSystemParams } from '@/provider/system-params-provider';
+import type { SupportResource } from '@/type/page/support';
 import { SupportService } from '@/api/services/support.service';
-
-// 只引入分類的 Mock (因為你只說列表不要假資料，分類若要拔掉也可以順便說)
-import { MOCK_SUPPORT_CATEGORIES } from '@/mock/support';
-import { SupportMapper } from '@/api/mapper/support.mapper';
 
 // 定義 FilterCategory (UI 顯示用)
 export interface FilterCategory {
@@ -21,7 +18,10 @@ interface UseSupportOptions {
 
 export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
     const { t, language } = useTranslation();
-    const currentLang = (language?.startsWith('zh') ? 'zh' : 'en') as 'zh' | 'en';
+
+    // 🔥 從 SystemParamsProvider 獲取分類數據（系統級參數）
+    // ⚠️ SystemParamsProvider 會在語系切換時自動重新請求，後端返回翻譯後的字符串
+    const { supportCategories: rawCategories, isSupportCategoriesLoading: isLoadingCats } = useSystemParams();
 
     // 狀態
     const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -30,31 +30,12 @@ export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
 
     // 資料狀態
     const [resources, setResources] = useState<SupportResource[]>([]);
-    const [rawCategories, setRawCategories] = useState<SupportCategory[]>([]);
 
     // Loading 狀態
     const [isLoadingList, setIsLoadingList] = useState(false);
-    const [isLoadingCats, setIsLoadingCats] = useState(false);
     const [totalItems, setTotalItems] = useState(0);
 
-    // 1. 取得分類 (維持原案，若分類 API 掛掉還有選單可以用)
-    useEffect(() => {
-        const fetchCategories = async () => {
-            setIsLoadingCats(true);
-            try {
-                const data = await SupportService.handleGetSupportCategories(language || 'zh');
-                setRawCategories(data);
-            } catch (error) {
-                console.warn('[Support] Category API Failed, using Mock Data.');
-                setRawCategories(SupportMapper.toDomainCategoryList(MOCK_SUPPORT_CATEGORIES));
-            } finally {
-                setIsLoadingCats(false);
-            }
-        };
-        fetchCategories();
-    }, []);
-
-    // 2. 取得列表 (修正：API 失敗就是沒有資料，不Fallback)
+    // 🔥 取得列表（API 失敗顯示空資料）
     useEffect(() => {
         const fetchList = async () => {
             setIsLoadingList(true);
@@ -87,12 +68,13 @@ export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
     // 3. UI 分類轉換
     const uiCategories: FilterCategory[] = useMemo(() => {
         const allOption: FilterCategory = { id: 'all', label: t('support.category.all') };
-        const apiOptions = rawCategories.map(cat => ({
+        // ✅ 後端已根據語系返回翻譯後的 label，直接使用即可
+        const apiOptions: FilterCategory[] = rawCategories.map(cat => ({
             id: cat.id,
-            label: cat.label[currentLang] || cat.label.en
+            label: cat.label as string  // 後端 I18nInterceptor 已翻譯，保證是字符串
         }));
         return [allOption, ...apiOptions];
-    }, [rawCategories, currentLang, t]);
+    }, [rawCategories, t]);  // 🔥 不需要依賴 currentLang，因為後端已翻譯
 
     const handleCategoryChange = (id: string) => {
         setActiveCategory(id);

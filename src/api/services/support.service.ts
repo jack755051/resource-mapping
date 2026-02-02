@@ -9,13 +9,15 @@ import { PaginatedSupportResource, SupportCategory } from "@/type/page/support";
 export const SupportService = {
     /** 取得支援分類 */
     handleGetSupportCategories: async (lang: string): Promise<SupportCategory[]> => {
-        const res = await apiClient<SupportCategoryResDto[]>(CommonUrl.CONSTANTS_SUPPORT_CATEGORIES, {
+        const res = await apiClient<{ data: SupportCategoryResDto[] }>(CommonUrl.CONSTANTS_SUPPORT_CATEGORIES, {
             method: 'GET',
             headers: {
                 'Accept-Language': lang
             }
         });
-        return SupportMapper.toDomainCategoryList(res);
+        // 🔥 後端返回格式: { success, code, message, data: [...] }
+        // 需要訪問 res.data 才能拿到真正的數組
+        return SupportMapper.toDomainCategoryList(res.data);
     },
 
 

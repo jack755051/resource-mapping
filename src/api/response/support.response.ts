@@ -1,8 +1,6 @@
-import { LocalizedString } from "@/type/i18n";
-
 export interface SupportCategoryResDto {
     id: string;
-    name: LocalizedString;
+    name: string;  // 🔥 後端已根據 accept-language 返回翻譯後的字符串
 }
 
 export interface SupportListResDto {
