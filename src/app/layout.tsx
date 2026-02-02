@@ -9,7 +9,7 @@ import SiteBreadcrumb from '@/components/layout/site-breadcrumb';
 
 // 2. 引入剛做好的 Provider
 import { LanguageProvider } from '@/provider/language-provider';
-import { SystemParamsProvider } from '@/provider/system-params-provider';
+import { SystemProvider } from '@/provider/systemProvider';
 import { Toaster } from 'sonner';
 import { ReduxProvider } from '@/provider/ReduxProvider';
 
@@ -40,7 +40,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <LanguageProvider>
-            <SystemParamsProvider>
+            <SystemProvider>
               {/* 2. 在這裡建立全域的 Sticky Footer 結構 */}
               <div className="relative flex min-h-screen flex-col bg-background">
                 <Header />
@@ -53,7 +53,7 @@ export default function RootLayout({
 
                 <Footer />
               </div>
-            </SystemParamsProvider>
+            </SystemProvider>
           </LanguageProvider>
         </ReduxProvider>
       </body>

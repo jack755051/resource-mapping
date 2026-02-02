@@ -4,9 +4,29 @@ import { ProductListResponse } from '../response/product.response';
 import { ProductListReqDto } from '../request/product.request';
 import { ProductMapper } from '../mapper/product.mapper';
 import { PaginatedList } from '@/type/common';
-import { ProductCardData } from '@/type/page/product';
+import { ProductCardData, ProductCategory } from '@/type/page/product';
+import { ConstantProductsCategoriesResDto } from '../response/constant.response';
 
 export const ProductService = {
+  /**
+   * 取得產品分類列表
+   * @param lang 當前語系代碼 (e.g. 'zh', 'en')
+   */
+  handleGetProductCategories: async (lang: string): Promise<ProductCategory[]> => {
+    const res = await apiClient<{ data: ConstantProductsCategoriesResDto[] }>(
+      CommonUrl.CONSTANTS_PRODUCTS_CATEGORIES,
+      {
+        method: 'GET',
+        headers: {
+          'Accept-Language': lang,
+        },
+      }
+    );
+    // 🔥 後端返回 { success, code, message, data: [...] }
+    // 需要訪問 res.data 獲取實際陣列
+    return ProductMapper.toDomainCategoryList(res.data);
+  },
+
   /**
    * 取得產品列表
    * @param lang 當前語系代碼 (e.g. 'zh', 'en')

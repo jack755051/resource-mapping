@@ -1,7 +1,7 @@
 // src/hooks/useProduct.ts
 import { useMemo, useEffect } from 'react';
 import { useTranslation } from './useTranslation';
-import { useSystemParams } from '@/provider/system-params-provider';
+import { useSystem } from '@/provider/systemProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchProducts,
@@ -15,9 +15,10 @@ export function useProduct() {
   const dispatch = useDispatch<AppDispatch>();
   const { language } = useTranslation();
 
-  // 🔥 從 SystemParamsProvider 獲取分類數據（系統級參數）
-  // ⚠️ SystemParamsProvider 會在語系切換時自動重新請求，後端返回翻譯後的字符串
-  const { productCategories: rawCategories, isProductCategoriesLoading } = useSystemParams();
+  // 🔥 從 SystemProvider 獲取分類數據（系統級參數）
+  // ⚠️ SystemProvider 會在語系切換時自動重新請求，後端返回翻譯後的字符串
+  const { resources } = useSystem();
+  const rawCategories = resources.productCategories;
 
   // 1. 從 Redux 選取產品列表資料（分類改從 SystemParams 獲取）
   const { list, loading, pagination, queryParams } = useSelector(

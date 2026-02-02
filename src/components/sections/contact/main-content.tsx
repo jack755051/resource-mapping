@@ -3,10 +3,15 @@
 import { ContactForm } from './form';
 import { ContactInfo } from './info';
 import { useContact } from '@/hooks/useContact';
+import { useSystem } from '@/provider/systemProvider';
 
 export function ContactMainContent() {
   const { data } = useContact();
-  const { locations, formConfig } = data;
+  const { formConfig } = data;
+
+  // 🔥 從 SystemProvider 獲取 locations（系統參數）
+  const { resources } = useSystem();
+  const { locations } = resources;
 
   return (
     <div className="container mx-auto px-6 py-12 md:py-20">

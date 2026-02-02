@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
-import { useSystemParams } from '@/provider/system-params-provider';
+import { useSystem } from '@/provider/systemProvider';
 import type { SupportResource } from '@/type/page/support';
 import { SupportService } from '@/api/services/support.service';
 
@@ -20,9 +20,10 @@ interface UseSupportOptions {
 export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
     const { t, language } = useTranslation();
 
-    // 🔥 從 SystemParamsProvider 獲取分類數據（系統級參數）
-    // ⚠️ SystemParamsProvider 會在語系切換時自動重新請求，後端返回翻譯後的字符串
-    const { supportCategories: rawCategories, isSupportCategoriesLoading: isLoadingCats } = useSystemParams();
+    // 🔥 從 SystemProvider 獲取分類數據（系統級參數）
+    // ⚠️ SystemProvider 會在語系切換時自動重新請求，後端返回翻譯後的字符串
+    const { resources, isLoading: isSystemLoading } = useSystem();
+    const rawCategories = resources.supportCategories;
 
     // 狀態
     const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -30,7 +31,7 @@ export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
     const [currentPage, setCurrentPage] = useState(1);
 
     // 資料狀態
-    const [resources, setResources] = useState<SupportResource[]>([]);
+    const [supportList, setSupportList] = useState<SupportResource[]>([]);
 
     // Loading 狀態
     const [isLoadingList, setIsLoadingList] = useState(false);
@@ -49,12 +50,12 @@ export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
                     limit: itemsPerPage,
                 }, language || 'zh');
 
-                setResources(result.data);
+                setSupportList(result.data);
                 setTotalItems(result.total);
             } catch (error) {
                 // 錯誤處理：清空資料，顯示 "沒有資料"
                 console.error('[Support] List API Failed:', error);
-                setResources([]);
+                setSupportList([]);
                 setTotalItems(0);
             } finally {
                 setIsLoadingList(false);
@@ -91,13 +92,13 @@ export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
 
     return {
         categories: uiCategories,
-        currentData: resources,
+        currentData: supportList,
         totalCount: totalItems,
         totalPages: Math.ceil(totalItems / itemsPerPage),
         activeCategory,
         searchQuery,
         currentPage,
-        isLoading: isLoadingList || isLoadingCats,
+        isLoading: isLoadingList || isSystemLoading,
         setActiveCategory: handleCategoryChange,
         setSearchQuery: handleSearchChange,
         setCurrentPage,
