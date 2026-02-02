@@ -1,22 +1,20 @@
-import { LocalizedString } from '@/type/i18n';
-
-/** * 模擬後端 API 回傳的原始資料結構 (Data Transfer Object)
- * 通常後端習慣用 snake_case (底線命名)
+/**
+ * 後端實際返回的資料結構
+ * ⚠️ 後端 I18nInterceptor 已經翻譯了 name 和 address，返回的是字符串而非 LocalizedString
  */
 export interface OfficeLocationResDto {
   id: string;
-  type: string; // 後端可能是回傳字串 'hq', 'branch'
-  title: LocalizedString; // 支援多語系的物件
-  address: {
-    label: LocalizedString;
-    map_url: string;
-    embed_code: string;
+  name: string; // 🔥 已翻譯的據點名稱（如 "新北總公司"）
+  address: string; // 🔥 已翻譯的地址字符串
+  mapUrl: string; // Google Maps 連結
+  phones: string[];
+  fax?: string;
+  email: string;
+  officeType: {
+    id: string;
+    name: string; // 🔥 已翻譯的類型名稱（如 "區域總部"）
   };
-  contact_info: {
-    phones: string[];
-    fax?: string;
-    email: string;
-  };
+  sort: number;
 }
 
 export interface ContactFormResDto {

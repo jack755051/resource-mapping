@@ -7,7 +7,7 @@ import { LocalizedString } from '../i18n';
 export type OfficeType = 'hq' | 'branch' | 'warehouse';
 
 export interface OfficeAddress {
-  label: LocalizedString;
+  label: LocalizedString | string; // 🔥 支持已翻譯的字符串或 LocalizedString
   mapLink: string; // Google Maps 外部連結 (導航用)
   embedSrc: string; // Google Maps iframe src (嵌入地圖用)
 }
@@ -22,7 +22,7 @@ export interface OfficeContact {
 export interface OfficeLocation {
   id: string; // 唯一識別碼 (用於 React key)
   type: OfficeType; // 類型：總公司 vs 分公司
-  title: LocalizedString; // 據點名稱 (例如: "台北總公司", "台中辦事處") - i18n key
+  title: LocalizedString | string; // 🔥 據點名稱 - 支持已翻譯的字符串或 LocalizedString
   address: OfficeAddress;
   contact: OfficeContact;
 }
