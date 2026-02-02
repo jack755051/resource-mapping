@@ -11,9 +11,8 @@ export function SupportHero() {
     const { t } = useTranslation();
     const { searchQuery, setSearchQuery } = useSupport();
 
-    // 搜尋會自動觸發（useSupport 內部監聽 searchQuery）
     const handleTriggerSearch = () => {
-        // 可以在這裡添加額外的搜尋邏輯（如 analytics）
+        // 可以在這裡添加額外的搜尋邏輯
     };
 
     return (
@@ -35,42 +34,49 @@ export function SupportHero() {
                         </p>
                     </motion.div>
 
-                    {/* 搜尋框區塊 */}
+                    {/* 搜尋框區塊 - 優化版 */}
                     <motion.div
                         className="relative max-w-xl mx-auto"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
-                        <div className="relative group">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-blue-400/20 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                        <div className="relative group w-full">
+                            {/* 背景光暈效果 */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-blue-400/30 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
 
-                            <div className="relative flex items-center bg-background rounded-full border border-border/50 shadow-lg overflow-hidden">
-                                <Search className="ml-4 w-5 h-5 text-muted-foreground" />
+                            {/* 主要容器：增加 h-14 或 h-16 定高，並設定 flex 佈局 */}
+                            <div className="relative flex items-center w-full bg-background rounded-full border border-border/50 shadow-xl transition-all duration-300 focus-within:shadow-2xl focus-within:border-primary/50 focus-within:ring-4 focus-within:ring-primary/10">
+
+                                {/* 搜尋圖示 */}
+                                <div className="pl-5 text-muted-foreground shrink-0">
+                                    <Search className="w-5 h-5" />
+                                </div>
+
+                                {/* 輸入框：flex-1 佔滿空間，移除預設 focus ring 改由父層控制 */}
                                 <Input
                                     type="text"
                                     placeholder={t('support.hero.search.placeholder')}
-                                    className="border-0 bg-transparent h-14 pl-3 pr-4 text-lg focus-visible:ring-0 focus-visible:ring-offset-0"
+                                    className="flex-1 border-0 bg-transparent h-14 px-4 text-base md:text-lg placeholder:text-muted-foreground/50 focus-visible:ring-0 focus-visible:ring-offset-0"
                                     value={searchQuery}
-                                    onChange={(e) => {
-                                        setSearchQuery(e.target.value);
-                                        // Hook 會自動監聽 searchQuery 變化並重置分頁
-                                    }}
-                                    // 1. 新增：支援 Enter 鍵搜尋
+                                    onChange={(e) => setSearchQuery(e.target.value)}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
                                             handleTriggerSearch();
                                         }
                                     }}
                                 />
-                                <Button
-                                    className="mr-1 rounded-full px-6"
-                                    size="lg"
-                                    // 2. 新增：點擊按鈕觸發搜尋
-                                    onClick={handleTriggerSearch}
-                                >
-                                    {t('support.hero.search.button')}
-                                </Button>
+
+                                {/* 按鈕：增加外層 padding 讓它看起來懸浮在內 */}
+                                <div className="pr-1.5 py-1.5 shrink-0">
+                                    <Button
+                                        className="h-11 rounded-full px-6 text-base font-medium shadow-sm transition-transform active:scale-95"
+                                        size="lg"
+                                        onClick={handleTriggerSearch}
+                                    >
+                                        {t('support.hero.search.button')}
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </motion.div>

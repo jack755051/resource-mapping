@@ -3,8 +3,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useLanguage } from './language-provider';
 import { SupportService } from '@/api/services/support.service';
+import { ConstantsService } from '@/api/services/constants.service';
 import { SupportMapper } from '@/api/mapper/support.mapper';
+import { ProductMapper } from '@/api/mapper/product.mapper';
 import { SupportCategory } from '@/type/page/support';
+import { ProductCategory } from '@/type/page/product';
 import { MOCK_SUPPORT_CATEGORIES } from '@/mock/support';
 
 /**
@@ -19,13 +22,15 @@ interface SystemParamsContextType {
   // Support 相關
   supportCategories: SupportCategory[];
   isSupportCategoriesLoading: boolean;
+  refetchSupportCategories: () => Promise<void>;
+
+  // Product 相關
+  productCategories: ProductCategory[];
+  isProductCategoriesLoading: boolean;
+  refetchProductCategories: () => Promise<void>;
 
   // 未來可擴充：
-  // productCategories: ProductCategory[];
   // officeCategories: OfficeCategory[];
-
-  // 重新載入方法（如果需要手動觸發）
-  refetchSupportCategories: () => Promise<void>;
 }
 
 const SystemParamsContext = createContext<SystemParamsContextType | undefined>(
@@ -47,6 +52,10 @@ export function SystemParamsProvider({ children }: { children: React.ReactNode }
   // Support Categories 狀態
   const [supportCategories, setSupportCategories] = useState<SupportCategory[]>([]);
   const [isSupportCategoriesLoading, setIsSupportCategoriesLoading] = useState(true);
+
+  // Product Categories 狀態
+  const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
+  const [isProductCategoriesLoading, setIsProductCategoriesLoading] = useState(true);
 
   /**
    * 載入 Support Categories
@@ -70,19 +79,45 @@ export function SystemParamsProvider({ children }: { children: React.ReactNode }
     }
   };
 
+  /**
+   * 載入 Product Categories
+   * 會在以下情況觸發：
+   * 1. 系統初始化
+   * 2. 語系切換
+   */
+  const fetchProductCategories = async () => {
+    setIsProductCategoriesLoading(true);
+    try {
+      console.log('[SystemParams] Fetching ProductCategories, language:', language);
+      const data = await ConstantsService.handleGetProductsCategories(language);
+      const mappedData = ProductMapper.toDomainCategoryList(data);
+      setProductCategories(mappedData);
+      console.log('[SystemParams] ProductCategories loaded:', mappedData.length);
+    } catch (error) {
+      console.warn('[SystemParams] ProductCategories API Failed.', error);
+      // 錯誤時設置空數組
+      setProductCategories([]);
+    } finally {
+      setIsProductCategoriesLoading(false);
+    }
+  };
+
   // 🔥 核心：監聽語系變化，自動重新載入參數
   useEffect(() => {
-    fetchSupportCategories();
-
-    // 未來可以在這裡同時載入其他參數：
-    // fetchProductCategories();
-    // fetchOfficeCategories();
+    // 並行載入所有參數
+    Promise.all([
+      fetchSupportCategories(),
+      fetchProductCategories(),
+    ]);
   }, [language]); // 依賴 language，語系切換時自動重新執行
 
   const value: SystemParamsContextType = {
     supportCategories,
     isSupportCategoriesLoading,
     refetchSupportCategories: fetchSupportCategories,
+    productCategories,
+    isProductCategoriesLoading,
+    refetchProductCategories: fetchProductCategories,
   };
 
   return (

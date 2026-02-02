@@ -1,10 +1,48 @@
-import { ProductCardData } from '@/type/page/product';
+import { ProductCardData, ProductCategory } from '@/type/page/product';
 import { ProductResDto } from '../response/product.response';
 import { PaginatedList } from '@/type/common';
 import { PaginatedResDto } from '../response/common.response';
 import { ProductSpecItem } from '@/type/page/proudct-detail';
+import { ConstantProductsCategoriesResDto } from '../response/constant.response';
 
 export class ProductMapper {
+  // ==========================================
+  // Product Categories 轉換
+  // ==========================================
+
+  /**
+   * 單一轉換：將 API 分類 DTO 轉為 UI 用的 Domain Model (ProductCategory)
+   *
+   * 後端字段映射：
+   * - dto.value (string) → id - 使用 value 作為 id（如 "all", "iot-devices"）
+   * - dto.name (string) → label - 已翻譯的分類名稱
+   * - dto.sort (number) → sort - 排序順序
+   *
+   * ⚠️ 重要：
+   * 1. 使用 value 而非 id（UUID），因為需要用 "all", "iot-devices" 等值來匹配
+   * 2. 後端的 I18nInterceptor 已根據 accept-language header 自動翻譯 name
+   * 3. 保留 sort 字段用於前端排序
+   */
+  static toDomainCategory(dto: ConstantProductsCategoriesResDto): ProductCategory {
+    return {
+      id: dto.value,      // ✅ 使用 value 作為 id
+      label: dto.name,    // ✅ 後端已翻譯，直接使用
+      sort: dto.sort,     // ✅ 保留排序順序
+      slug: dto.value     // ✅ slug 同 value
+    };
+  }
+
+  /**
+   * 批次轉換分類
+   */
+  static toDomainCategoryList(dtos: ConstantProductsCategoriesResDto[]): ProductCategory[] {
+    if (!Array.isArray(dtos)) return [];
+    return dtos.map(dto => this.toDomainCategory(dto));
+  }
+
+  // ==========================================
+  // Product List 轉換
+  // ==========================================
   /**
    * 根據規格 key 推斷規格類型
    */

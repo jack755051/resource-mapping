@@ -6,7 +6,7 @@ export const ConstantsService = {
   handleGetProductsCategories: async (
     language?: string
   ): Promise<ConstantProductsCategoriesResDto[]> => {
-    const data = await apiClient<ConstantProductsCategoriesResDto[]>(
+    const res = await apiClient<{ data: ConstantProductsCategoriesResDto[] }>(
       CommonUrl.CONSTANTS_PRODUCTS_CATEGORIES,
       {
         method: 'GET',
@@ -16,6 +16,8 @@ export const ConstantsService = {
       }
     );
 
-    return data;
+    // 🔥 後端返回格式: { success, code, message, data: [...] }
+    // 需要訪問 res.data 才能拿到真正的數組
+    return res.data;
   },
 };
