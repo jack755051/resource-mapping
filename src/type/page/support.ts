@@ -2,7 +2,7 @@ import { CommonFilter, contentProps } from "../common";
 import { LocalizedString } from "../i18n";
 
 export type ResourceType = 'PDF' | 'ZIP' | 'Article' | 'EXE';
-export type CategoryId = 'all' | 'manual' | 'firmware' | 'software' | 'faq';
+export type CategoryId = 'all' | 'manual' | 'manuals' | 'firmware' | 'software' | 'faq';  // 🔥 支持複數形式
 
 // ======== 支援資源 (單項) ========
 export interface SupportResource {

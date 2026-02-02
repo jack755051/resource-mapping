@@ -26,6 +26,7 @@ export interface CommonFilter {
   label: string | LocalizedString;  // 🔥 支持两种格式：翻译后的字符串 或 多语系对象
   active?: boolean;
   slug?: string;
+  sort?: number;  // 排序順序
   onFilterClick?: (id: string) => void; // 改为可选，因为组件可以直接使用 hook 的方法
 }
 

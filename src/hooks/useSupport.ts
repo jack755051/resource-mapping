@@ -10,6 +10,7 @@ import { SupportService } from '@/api/services/support.service';
 export interface FilterCategory {
     id: string;
     label: string;
+    sort?: number;  // 用於排序
 }
 
 interface UseSupportOptions {
@@ -67,14 +68,16 @@ export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
 
     // 3. UI 分類轉換
     const uiCategories: FilterCategory[] = useMemo(() => {
-        const allOption: FilterCategory = { id: 'all', label: t('support.category.all') };
-        // ✅ 後端已根據語系返回翻譯後的 label，直接使用即可
-        const apiOptions: FilterCategory[] = rawCategories.map(cat => ({
-            id: cat.id,
-            label: cat.label as string  // 後端 I18nInterceptor 已翻譯，保證是字符串
-        }));
-        return [allOption, ...apiOptions];
-    }, [rawCategories, t]);  // 🔥 不需要依賴 currentLang，因為後端已翻譯
+        // 🔥 後端已經返回了 "all" 選項（value: "all", sort: 0），不需要前端再添加
+        // ✅ 直接使用後端返回的數據，並按 sort 排序（升序）
+        return rawCategories
+            .map(cat => ({
+                id: cat.id,
+                label: cat.label as string,  // 後端 I18nInterceptor 已翻譯，保證是字符串
+                sort: cat.sort
+            }))
+            .sort((a, b) => (a.sort ?? 999) - (b.sort ?? 999));  // 按 sort 升序排序
+    }, [rawCategories]);  // 🔥 不需要依賴 t 或 currentLang，因為後端已翻譯
 
     const handleCategoryChange = (id: string) => {
         setActiveCategory(id);

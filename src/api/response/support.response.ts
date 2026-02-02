@@ -1,6 +1,9 @@
 export interface SupportCategoryResDto {
     id: string;
     name: string;  // 🔥 後端已根據 accept-language 返回翻譯後的字符串
+    value: string; // 分類的值（如 "all", "manual", "faq"）
+    sort: number;  // 排序順序
+    icon: string | null;
 }
 
 export interface SupportListResDto {

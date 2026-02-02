@@ -4,10 +4,11 @@ import { PaginatedResDto } from '@/api/response/common.response';
 // 1. 分類 API 的備用假資料
 // ⚠️ 注意：這裡模擬後端 I18nInterceptor 的行為，返回翻譯後的字符串（中文版本）
 export const MOCK_SUPPORT_CATEGORIES: SupportCategoryResDto[] = [
-    { id: 'manual', name: '使用手冊' },
-    { id: 'firmware', name: '韌體更新' },
-    { id: 'software', name: '軟體下載' },
-    { id: 'faq', name: '常見問題' },
+    // { id: 'uuid-all', name: '所有資源', value: 'all', sort: 0, icon: null },
+    // { id: 'uuid-manual', name: '使用手冊', value: 'manual', sort: 1, icon: null },
+    // { id: 'uuid-firmware', name: '韌體更新', value: 'firmware', sort: 2, icon: null },
+    // { id: 'uuid-software', name: '軟體下載', value: 'software', sort: 3, icon: null },
+    // { id: 'uuid-faq', name: '常見問題', value: 'faq', sort: 4, icon: null },
 ];
 
 // 2. 列表 API 的備用假資料
