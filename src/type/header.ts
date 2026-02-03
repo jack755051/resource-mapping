@@ -26,6 +26,7 @@ export interface HeaderBrandProps {
   data: HeaderBrandData;
   className?: string;
   classNames?: HeaderBrandClasses;
+  isShowCompanyName?: boolean;
 }
 
 // ---------- Header__Navigation Start -----------

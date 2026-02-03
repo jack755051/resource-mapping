@@ -17,7 +17,7 @@ export function useHeader() {
     logo: {
       href: '/',
       alt: 'Guangxun Tech Logo',
-      src: '', // 記得放一張圖片到 public/images 或是暫時留空
+      src: '/images/logo.jpg',
     },
     title: 'Guangxun Tech.',
   };
@@ -69,7 +69,16 @@ export function useHeader() {
     // defaultValue: '預設值' // 如果需要
   };
 
+  // 是否顯示登入按鈕
+  const isShowLoginButton = false;
+  // 是否顯示公司名稱文字
+  const isShowCompanyName = false;
+
+
   return {
+    // 處理顯示
+    isShowLoginButton,
+    isShowCompanyName,
     headerBrand,
     headerUserNav,
     headerSearch,

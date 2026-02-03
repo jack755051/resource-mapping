@@ -8,6 +8,7 @@ export default function Brand({
   data,
   className,
   classNames,
+  isShowCompanyName,
 }: HeaderBrandProps) {
   // 解構資料，讓程式碼更乾淨
   const { logo, title } = data;
@@ -39,7 +40,7 @@ export default function Brand({
       )}
 
       {/* 文字區域 */}
-      {title && (
+      {title && isShowCompanyName && (
         <span
           className={cn(
             'header__brand__title font-bold text-lg whitespace-nowrap',
