@@ -114,13 +114,15 @@ export function ProductListSection({
               ))}
             </div>
 
-            {/* 分頁控制器 */}
-            <div className={cn("mt-12", classNames?.pagination)}>
-              <PaginationControl
-                pagination={pagination}
-                onPageChange={setPage}
-              />
-            </div>
+            {/* 分頁控制器 - 添加分隔線和更好的間距 */}
+            {pagination && pagination.totalPages > 1 && (
+              <div className={cn("mt-16 pt-8 border-t border-border/50", classNames?.pagination)}>
+                <PaginationControl
+                  pagination={pagination}
+                  onPageChange={setPage}
+                />
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

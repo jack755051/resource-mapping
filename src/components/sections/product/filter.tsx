@@ -14,12 +14,6 @@ export function ProductFilterSection() {
 
   const hasData = categories && categories.length > 0;
 
-  // 邏輯：
-  // 1. 如果外部傳入 activeCategory，優先使用。
-  // 2. 如果外部傳入空字串，且有分類資料，預設選中第一個 (通常是 "All")。
-  // 3. 確保子組件永遠拿到一個有效的 ID (除非完全沒資料)。
-  const currentActiveId = activeCategory || (hasData ? categories[0].id : '');
-
   // 安全保護：如果完全沒資料，可以選擇不渲染或渲染 Skeleton
   if (!hasData) return null;
 
@@ -31,8 +25,7 @@ export function ProductFilterSection() {
           {/* 左側：分類列表 */}
           <CategoryList
             categories={categories}
-            // 使用計算後的有效 ID
-            activeCategory={currentActiveId}
+            activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}
           />
 

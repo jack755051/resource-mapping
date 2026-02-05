@@ -45,8 +45,17 @@ export function useProduct() {
   }, [rawCategories]);
 
   // 4. 計算當前分類名稱
-  // ✅ queryParams.categoryId 現在存的是 UUID（category.id）
-  const activeCategory = queryParams.categoryId || 'all';
+  // ✅ 當 categoryId 為 undefined 時，自動選擇「全系列」分類（通常是 sort: 0 或 slug: 'all'）
+  const activeCategory = useMemo(() => {
+    if (queryParams.categoryId) {
+      return queryParams.categoryId;
+    }
+    // 找到「全系列」分類：優先使用 slug === 'all'，其次使用 sort === 0 的第一個
+    const allCategory = uiCategories.find(c => c.slug === 'all')
+                      || uiCategories.find(c => c.sort === 0)
+                      || uiCategories[0];  // 兜底：使用第一個分類
+    return allCategory?.id || 'all';
+  }, [queryParams.categoryId, uiCategories]);
 
   const currentCategoryName = useMemo(() => {
     const current = uiCategories.find(c => c.id === activeCategory);
