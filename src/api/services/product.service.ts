@@ -13,6 +13,7 @@ export const ProductService = {
    * @param lang 當前語系代碼 (e.g. 'zh', 'en')
    */
   handleGetProductCategories: async (lang: string): Promise<ProductCategory[]> => {
+    console.log('取得產品分類列表');
     const res = await apiClient<{ data: ConstantProductsCategoriesResDto[] }>(
       CommonUrl.CONSTANTS_PRODUCTS_CATEGORIES,
       {
@@ -35,6 +36,7 @@ export const ProductService = {
     params: ProductListReqDto,
     lang: string
   ): Promise<PaginatedList<ProductCardData>> => {
+    console.log('取得產品列表');
     const data = await apiClient<ProductListResponse>(CommonUrl.PRODUCTS, {
       method: 'GET',
       query: {
@@ -48,6 +50,8 @@ export const ProductService = {
         'Accept-Language': lang,
       },
     });
+
+    console.log('取得產品列表', data);
 
     return ProductMapper.toPaginatedList(data);
   },

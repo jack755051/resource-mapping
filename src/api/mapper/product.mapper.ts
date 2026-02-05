@@ -85,17 +85,26 @@ export class ProductMapper {
   static toPaginatedList(
     dto: PaginatedResDto<ProductResDto>
   ): PaginatedList<ProductCardData> {
+    console.log('轉換後的列表', dto.data?.map(item => this.toProductCardData(item)));
+
+    const list = dto.data?.map(item => this.toProductCardData(item)) ?? [];
+
+    const pagination = {
+      current: dto.meta.pagination.current_page,
+      pageSize: dto.meta.pagination.items_per_page,
+      total: dto.meta.pagination.total_items,
+      totalPages: dto.meta.pagination.total_pages,
+    };
+
+    console.log('轉換後的列表', list);
+    console.log('轉換後的列表', pagination);
+
     return {
       // 1. 轉換列表資料
-      list: dto.data?.map(item => this.toProductCardData(item)) ?? [],
-
+      list: list,
       // 2. 轉換分頁資訊 (Snake -> Camel)
-      pagination: {
-        current: dto.meta.pagination.current_page,
-        pageSize: dto.meta.pagination.items_per_page,
-        total: dto.meta.pagination.total_items,
-        totalPages: dto.meta.pagination.total_pages,
-      },
+      pagination: pagination,
+
     };
   }
 }
