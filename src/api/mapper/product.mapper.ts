@@ -14,21 +14,22 @@ export class ProductMapper {
    * 單一轉換：將 API 分類 DTO 轉為 UI 用的 Domain Model (ProductCategory)
    *
    * 後端字段映射：
-   * - dto.value (string) → id - 使用 value 作為 id（如 "all", "iot-devices"）
+   * - dto.id (UUID) → id - 用於 API 請求的分類 UUID
+   * - dto.value (string) → slug - URL 友好的分類識別碼（如 "underwater", "5mp"）
    * - dto.name (string) → label - 已翻譯的分類名稱
    * - dto.sort (number) → sort - 排序順序
    *
    * ⚠️ 重要：
-   * 1. 使用 value 而非 id（UUID），因為需要用 "all", "iot-devices" 等值來匹配
-   * 2. 後端的 I18nInterceptor 已根據 accept-language header 自動翻譯 name
-   * 3. 保留 sort 字段用於前端排序
+   * 1. ✅ id 使用 UUID（dto.id），用於 API 過濾請求
+   * 2. ✅ slug 使用 value（dto.value），用於 URL 和顯示
+   * 3. 後端的 I18nInterceptor 已根據 accept-language header 自動翻譯 name
    */
   static toDomainCategory(dto: ConstantProductsCategoriesResDto): ProductCategory {
     return {
-      id: dto.value,      // ✅ 使用 value 作為 id
+      id: dto.id,         // ✅ 使用真實的 UUID
       label: dto.name,    // ✅ 後端已翻譯，直接使用
       sort: dto.sort,     // ✅ 保留排序順序
-      slug: dto.value     // ✅ slug 同 value
+      slug: dto.value     // ✅ URL 友好的識別碼
     };
   }
 

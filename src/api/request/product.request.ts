@@ -1,7 +1,7 @@
 export interface ProductListReqDto {
   page: number;
   limit: number;
-  category?: string;
+  categoryId?: string;  // ✅ 改為 categoryId 以匹配後端 DTO
   keyword?: string;
   sort?: string;
 }

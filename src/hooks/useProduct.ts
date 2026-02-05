@@ -25,9 +25,10 @@ export function useProduct() {
   );
 
   // 2. 初始化產品列表
+  // ✅ 使用具體的查詢參數作為依賴，而非整個對象
   useEffect(() => {
     dispatch(fetchProducts(language));
-  }, [dispatch, queryParams, language]);
+  }, [dispatch, queryParams.categoryId, queryParams.page, queryParams.limit, queryParams.sort, language]);
 
   // 3. UI 分類轉換
   const uiCategories: ProductCategory[] = useMemo(() => {
@@ -44,7 +45,8 @@ export function useProduct() {
   }, [rawCategories]);
 
   // 4. 計算當前分類名稱
-  const activeCategory = queryParams.category || 'all';
+  // ✅ queryParams.categoryId 現在存的是 UUID（category.id）
+  const activeCategory = queryParams.categoryId || 'all';
 
   const currentCategoryName = useMemo(() => {
     const current = uiCategories.find(c => c.id === activeCategory);
@@ -54,8 +56,10 @@ export function useProduct() {
 
   // Action 封裝
   const handleSetCategory = (categoryId: string) => {
+    console.log(`🔄 切換分類: categoryId=${categoryId}`);
+
     // 切換分類時，通常也會重置到第一頁
-    dispatch(setCategory(categoryId));
+    dispatch(setCategory(categoryId));  // ✅ 傳遞 category 的 UUID
     dispatch(setPage(1));
   };
 

@@ -50,7 +50,7 @@ export const ProductService = {
       query: {
         page: params.page,
         limit: params.limit,
-        category: params.category, // 如果是 undefined，ofetch 會自動過濾掉不傳
+        categoryId: params.categoryId, // ✅ 改為 categoryId，如果是 undefined，ofetch 會自動過濾掉不傳
         keyword: params.keyword,
         sort: params.sort,
       },

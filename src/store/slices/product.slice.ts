@@ -51,7 +51,7 @@ export const fetchProducts = createAsyncThunk(
 const initialParams: ProductListReqDto = {
   page: 1,
   limit: 12,
-  category: undefined, // undefined 代表 'all'
+  categoryId: undefined, // ✅ undefined 代表 'all'
   sort: 'asc',
 };
 
@@ -70,8 +70,9 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     // 設定分類 (這會觸發重新抓取，但在 Hook 裡做)
+    // ✅ action.payload 現在是 category 的 UUID
     setCategory(state, action: PayloadAction<string>) {
-      state.queryParams.category =
+      state.queryParams.categoryId =
         action.payload === 'all' ? undefined : action.payload;
       state.queryParams.page = 1; // 切換分類時重置回第一頁
     },
