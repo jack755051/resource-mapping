@@ -12,8 +12,9 @@ export const MOCK_SUPPORT_CATEGORIES: SupportCategoryResDto[] = [
 ];
 
 // 2. 列表 API 的備用假資料
+// ✅ 匹配後端實際返回的分頁結構
 export const MOCK_SUPPORT_LIST_RESPONSE: PaginatedResDto<SupportListResDto> = {
-    data: [
+    items: [  // ✅ 使用 items 而非 data
         {
             id: 1,
             title: '[Mock] GC-IP50 使用手冊',
@@ -32,12 +33,10 @@ export const MOCK_SUPPORT_LIST_RESPONSE: PaginatedResDto<SupportListResDto> = {
         },
         // ... 你可以多塞幾筆
     ],
-    meta: {
-        pagination: {
-            current_page: 1,
-            total_pages: 1,
-            total_items: 2,
-            items_per_page: 10
-        }
+    meta: {  // ✅ 直接在 meta 中，沒有 pagination 包裝
+        page: 1,        // ✅ 使用 page
+        lastPage: 1,    // ✅ 使用 lastPage
+        total: 2,       // ✅ 使用 total
+        limit: 10       // ✅ 使用 limit
     }
 };

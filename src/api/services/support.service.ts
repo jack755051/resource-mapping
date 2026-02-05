@@ -9,34 +9,39 @@ import { PaginatedSupportResource, SupportCategory } from "@/type/page/support";
 export const SupportService = {
     /** 取得支援分類 */
     handleGetSupportCategories: async (lang: string): Promise<SupportCategory[]> => {
-        const res = await apiClient<{ data: SupportCategoryResDto[] }>(CommonUrl.CONSTANTS_SUPPORT_CATEGORIES, {
+        // ✅ apiClient 已自動解包 APIResponse，直接獲得 data 內容
+        const categories = await apiClient<SupportCategoryResDto[]>(CommonUrl.CONSTANTS_SUPPORT_CATEGORIES, {
             method: 'GET',
             headers: {
                 'Accept-Language': lang
             }
         });
-        // 🔥 後端返回格式: { success, code, message, data: [...] }
-        // 需要訪問 res.data 才能拿到真正的數組
-        return SupportMapper.toDomainCategoryList(res.data);
+
+        console.log('✅ 支援分類列表（已解包）', categories);
+
+        return SupportMapper.toDomainCategoryList(categories);
     },
 
 
     /** 取得支援資源列表 (含防呆保護) */
     handleGetSupportList: async (payload: SupportReqDto, lang: string): Promise<PaginatedSupportResource> => {
         try {
+            // ✅ apiClient 已自動解包 APIResponse，返回 { items, meta }
             const res = await apiClient<PaginatedResDto<SupportListResDto>>(CommonUrl.SUPPORT_RESOURCES, {
                 params: payload,
                 headers: {
                     'Accept-Language': lang ?? 'zh'
                 }
             });
-            const { pagination } = res.meta;
 
+            console.log('✅ 支援資源列表（已解包）', res);
+
+            // ✅ 使用新的分頁結構：meta.total, meta.page, meta.limit
             return {
-                data: SupportMapper.toDomainList(res.data),
-                total: pagination.total_items,
-                page: pagination.current_page,
-                limit: pagination.items_per_page,
+                data: SupportMapper.toDomainList(res.items),  // ✅ 使用 items 而非 data
+                total: res.meta.total,      // ✅ 使用 meta.total
+                page: res.meta.page,        // ✅ 使用 meta.page
+                limit: res.meta.limit,      // ✅ 使用 meta.limit
             };
         } catch (error: any) {
             // ★ 特規處理：如果後端回傳 404，視為「空資料」並回傳，不拋出錯誤

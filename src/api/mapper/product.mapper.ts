@@ -58,53 +58,64 @@ export class ProductMapper {
     return 'sensor'; // 默認類型
   }
   /**
-   * 單筆轉換 (Snake Case -> Camel Case)
+   * 單筆轉換：後端 DTO → 前端 ProductCardData
+   *
+   * 字段映射：
+   * - dto.title → title ✅
+   * - dto.category.value → category (使用 value 作為 category id)
+   * - dto.image → image ✅
+   * - dto.specs → specs ✅ (已匹配)
    */
   static toProductCardData(dto: ProductResDto): ProductCardData {
     return {
       id: dto.id,
       slug: dto.slug,
-      title: dto.product_name,
-      category: dto.category_id, // 這裡之後可以接 i18n 轉換
-      image: dto.cover_image_url,
-      href: `/products/${dto.slug}`, // 組裝前端路由
-      specs:
-        dto.specifications?.map(spec => ({
-          label: spec.spec_key,
-          value: spec.spec_value,
-          type: spec.spec_type ?? this.inferSpecType(spec.spec_key), // 優先使用後端類型，否則推斷
-        })) ?? [], // 防呆：如果 spec 是 null，給空陣列
+      title: dto.title,              // ✅ 後端返回 title
+      category: dto.category.value,  // ✅ 使用 category.value 作為分類 id
+      image: dto.image,              // ✅ 後端返回 image
+      href: dto.href || `/products/${dto.slug}`, // 優先使用後端的 href，否則組裝
+      specs: dto.specs?.map(spec => ({
+        label: spec.label,           // ✅ 後端已返回 label
+        value: spec.value,           // ✅ 後端已返回 value
+        type: spec.type ?? this.inferSpecType(spec.label), // 優先使用後端類型
+      })) ?? [],
       tags: dto.tags ?? [],
     };
   }
 
   /**
-   * 🔥 列表轉換 (Array)
-   * 這裡的好處是：可以在這裡做防呆，如果後端回傳 null，這裡直接給 []，前端就不會爆掉
+   * 🔥 列表轉換：後端分頁結構 → 前端 PaginatedList
+   *
+   * 字段映射：
+   * - dto.items → list ✅
+   * - dto.meta.page → pagination.current ✅
+   * - dto.meta.limit → pagination.pageSize ✅
+   * - dto.meta.total → pagination.total ✅
+   * - dto.meta.lastPage → pagination.totalPages ✅
    */
   static toPaginatedList(
     dto: PaginatedResDto<ProductResDto>
   ): PaginatedList<ProductCardData> {
-    console.log('轉換後的列表', dto.data?.map(item => this.toProductCardData(item)));
+    console.log('📦 原始後端數據', dto);
+    console.log('📦 原始產品列表', dto.items);
 
-    const list = dto.data?.map(item => this.toProductCardData(item)) ?? [];
+    // 轉換產品列表
+    const list = dto.items?.map(item => this.toProductCardData(item)) ?? [];
 
+    // 轉換分頁信息
     const pagination = {
-      current: dto.meta.pagination.current_page,
-      pageSize: dto.meta.pagination.items_per_page,
-      total: dto.meta.pagination.total_items,
-      totalPages: dto.meta.pagination.total_pages,
+      current: dto.meta.page,       // ✅ 後端返回 page
+      pageSize: dto.meta.limit,     // ✅ 後端返回 limit
+      total: dto.meta.total,        // ✅ 後端返回 total
+      totalPages: dto.meta.lastPage, // ✅ 後端返回 lastPage
     };
 
-    console.log('轉換後的列表', list);
-    console.log('轉換後的列表', pagination);
+    console.log('✅ 轉換後的產品列表', list);
+    console.log('✅ 轉換後的分頁信息', pagination);
 
     return {
-      // 1. 轉換列表資料
-      list: list,
-      // 2. 轉換分頁資訊 (Snake -> Camel)
-      pagination: pagination,
-
+      list,
+      pagination,
     };
   }
 }

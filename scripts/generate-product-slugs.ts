@@ -16,13 +16,18 @@ interface Product {
   // 其他产品字段...
 }
 
+// 匹配后端实际返回的结构
 interface ApiResponse {
-  data: Product[];
-  meta: {
-    pagination: {
-      total_items: number;
-      current_page: number;
-      items_per_page: number;
+  success: boolean;
+  code: number;
+  message: string;
+  data: {
+    items: Product[];
+    meta: {
+      total: number;      // 总数
+      page: number;       // 当前页
+      limit: number;      // 每页数量
+      lastPage: number;   // 总页数
     };
   };
 }
@@ -51,13 +56,13 @@ async function fetchAllProductSlugs(): Promise<string[]> {
     }
 
     const firstData: ApiResponse = await firstResponse.json();
-    const { total_items, items_per_page } = firstData.meta.pagination;
-    totalPages = Math.ceil(total_items / items_per_page);
+    const { total, limit, lastPage } = firstData.data.meta;
+    totalPages = lastPage;
 
     // 添加第一页的 slug
-    slugs.push(...firstData.data.map((p) => p.slug));
+    slugs.push(...firstData.data.items.map((p) => p.slug));
 
-    console.log(`📦 Found ${total_items} products across ${totalPages} pages`);
+    console.log(`📦 Found ${total} products across ${totalPages} pages`);
 
     // 获取剩余页面
     for (let page = 2; page <= totalPages; page++) {
@@ -76,7 +81,7 @@ async function fetchAllProductSlugs(): Promise<string[]> {
       }
 
       const data: ApiResponse = await response.json();
-      slugs.push(...data.data.map((p) => p.slug));
+      slugs.push(...data.data.items.map((p) => p.slug));
       console.log(`✓ Fetched page ${page}/${totalPages}`);
     }
 

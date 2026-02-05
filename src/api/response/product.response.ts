@@ -1,20 +1,39 @@
-import { PaginatedResDto, PaginationDto } from './common.response';
+import { PaginatedResDto } from './common.response';
 
+// 產品規格 DTO (已匹配後端實際返回)
 export interface ProductSpecResDto {
-  spec_key: string; // 對應前端的 label
-  spec_value: string; // 對應前端的 value
-  spec_type?: 'sensor' | 'chip' | 'lens' | 'power' | 'storage' | 'protection' | 'waterproof'; // 可選：規格類型
+  type?: 'sensor' | 'chip' | 'lens' | 'power' | 'storage' | 'protection' | 'waterproof';
+  label: string;  // 後端返回 label
+  value: string;  // 後端返回 value
 }
 
+// 產品分類 DTO (後端返回的 category 是完整對象)
+export interface ProductCategoryResDto {
+  id: string;
+  name: string;
+  description: string | null;
+  value: string;  // 如 "license"
+  sort: number;
+}
+
+// 產品 DTO (匹配後端實際返回的字段名)
 export interface ProductResDto {
   id: string;
+  tag?: string;              // 標籤如 "熱銷新品"
   slug: string;
-  product_name: string; // 後端可能叫 product_name
-  category_id: string; // 後端可能給 ID 或 code
-  cover_image_url: string; // 後端慣用的命名
-  specifications: ProductSpecResDto[]; // 規格列表
+  title: string;             // ✅ 後端返回 title 不是 product_name
+  category: ProductCategoryResDto; // ✅ 後端返回完整對象不是 category_id
+  image: string;             // ✅ 後端返回 image 不是 cover_image_url
+  href?: string;             // 後端可能會返回 href
+  model: string;             // 型號如 "SRT-LPR-X1"
   tags: string[];
-  // href 不需要後端給，前端自己組
+  specs: ProductSpecResDto[]; // ✅ 後端返回 specs 不是 specifications
+  description?: string;      // 產品描述
+  features?: string[];       // 產品特性列表
+  images?: string[];         // 詳細圖片列表
+  downloads?: any[];         // 下載資源
+  createdAt?: any;
+  updatedAt?: any;
 }
 
 export type ProductListResponse = PaginatedResDto<ProductResDto>;

@@ -7,9 +7,11 @@ export const AboutService = {
   /**
    * 取得關於我時間軸
    * @param lang - 當前語系代碼 (e.g., 'zh', 'en')
+   *
+   * ✅ apiClient 已自動解包 APIResponse，直接獲得 data 內容
    */
   handleGetTimeline: async (lang?: string): Promise<ITimelineSection> => {
-    const response = await apiClient<{ data: ITimelineItem[] }>(
+    const items = await apiClient<ITimelineItem[]>(
       CommonUrl.ABOUT_HISTORY,
       {
         method: 'GET',
@@ -18,6 +20,9 @@ export const AboutService = {
         },
       }
     );
-    return { items: response.data };
+
+    console.log('✅ 時間軸列表（已解包）', items);
+
+    return { items };
   },
 };

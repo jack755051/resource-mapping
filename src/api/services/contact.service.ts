@@ -14,9 +14,11 @@ export const ContactService = {
   /**
    * 取得據點列表 (GET)
    * @param lang 當前語系代碼 (e.g. 'zh', 'en')
+   *
+   * ✅ apiClient 已自動解包 APIResponse，直接獲得 data 內容
    */
   handleGetLocations: async (lang: string): Promise<OfficeLocation[]> => {
-    const res = await apiClient<{ data: OfficeLocationResDto[] }>(
+    const locations = await apiClient<OfficeLocationResDto[]>(
       CommonUrl.CONTACT_LOCATIONS,
       {
         method: 'GET',
@@ -27,9 +29,9 @@ export const ContactService = {
       }
     );
 
-    // 🔥 後端返回 { success, code, message, data: [...] }
-    // 需要訪問 res.data 獲取實際陣列
-    return ContactMapper.toDomainList(res.data);
+    console.log('✅ 據點列表（已解包）', locations);
+
+    return ContactMapper.toDomainList(locations);
   },
 
   /**

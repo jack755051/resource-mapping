@@ -11,10 +11,13 @@ export const ProductService = {
   /**
    * 取得產品分類列表
    * @param lang 當前語系代碼 (e.g. 'zh', 'en')
+   *
+   * ✅ apiClient 已自動解包 APIResponse，直接獲得 data 內容
    */
   handleGetProductCategories: async (lang: string): Promise<ProductCategory[]> => {
     console.log('取得產品分類列表');
-    const res = await apiClient<{ data: ConstantProductsCategoriesResDto[] }>(
+    // apiClient 自動解包後返回的是 ConstantProductsCategoriesResDto[]
+    const categories = await apiClient<ConstantProductsCategoriesResDto[]>(
       CommonUrl.CONSTANTS_PRODUCTS_CATEGORIES,
       {
         method: 'GET',
@@ -23,20 +26,25 @@ export const ProductService = {
         },
       }
     );
-    // 🔥 後端返回 { success, code, message, data: [...] }
-    // 需要訪問 res.data 獲取實際陣列
-    return ProductMapper.toDomainCategoryList(res.data);
+
+    console.log('✅ 分類列表（已解包）', categories);
+
+    return ProductMapper.toDomainCategoryList(categories);
   },
 
   /**
    * 取得產品列表
    * @param lang 當前語系代碼 (e.g. 'zh', 'en')
+   *
+   * ✅ apiClient 已自動解包 APIResponse，返回 { items, meta }
    */
   handleGetProducts: async (
     params: ProductListReqDto,
     lang: string
   ): Promise<PaginatedList<ProductCardData>> => {
-    console.log('取得產品列表');
+    console.log('🔍 請求產品列表', params);
+
+    // apiClient 自動解包後返回 { items: [...], meta: {...} }
     const data = await apiClient<ProductListResponse>(CommonUrl.PRODUCTS, {
       method: 'GET',
       query: {
@@ -51,7 +59,7 @@ export const ProductService = {
       },
     });
 
-    console.log('取得產品列表', data);
+    console.log('✅ 後端返回數據（已解包）', data);
 
     return ProductMapper.toPaginatedList(data);
   },

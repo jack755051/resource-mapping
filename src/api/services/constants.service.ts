@@ -3,10 +3,15 @@ import { CommonUrl } from '../url';
 import { ConstantProductsCategoriesResDto } from '../response/constant.response';
 
 export const ConstantsService = {
+  /**
+   * 取得產品分類列表
+   *
+   * ✅ apiClient 已自動解包 APIResponse，直接獲得 data 內容
+   */
   handleGetProductsCategories: async (
     language?: string
   ): Promise<ConstantProductsCategoriesResDto[]> => {
-    const res = await apiClient<{ data: ConstantProductsCategoriesResDto[] }>(
+    const categories = await apiClient<ConstantProductsCategoriesResDto[]>(
       CommonUrl.CONSTANTS_PRODUCTS_CATEGORIES,
       {
         method: 'GET',
@@ -16,8 +21,8 @@ export const ConstantsService = {
       }
     );
 
-    // 🔥 後端返回格式: { success, code, message, data: [...] }
-    // 需要訪問 res.data 才能拿到真正的數組
-    return res.data;
+    console.log('✅ 產品分類列表（已解包）', categories);
+
+    return categories;
   },
 };
