@@ -7,11 +7,10 @@ import Header from '@/components/layout/header/header';
 import Footer from '@/components/layout/footer';
 import SiteBreadcrumb from '@/components/layout/site-breadcrumb';
 
-// 2. 引入剛做好的 Provider
-import { LanguageProvider } from '@/provider/language-provider';
-import { SystemProvider } from '@/provider/systemProvider';
-import { Toaster } from 'sonner';
+// 2. 引入 Redux Provider 和系统初始化组件
 import { ReduxProvider } from '@/provider/ReduxProvider';
+import { SystemInitializer } from '@/components/system-initializer';
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -39,22 +38,21 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-          <LanguageProvider>
-            <SystemProvider>
-              {/* 2. 在這裡建立全域的 Sticky Footer 結構 */}
-              <div className="relative flex min-h-screen flex-col bg-background">
-                <Header />
-                {/* <SiteBreadcrumb /> */}
+          {/* 系统资源初始化：监听语言变化并自动加载系统资源 */}
+          <SystemInitializer />
 
-                {/* 3. 主要內容區：這裡的 flex-1 會確保 Footer 被推到底部 */}
-                {/* 你可以在這裡加 main，或者留給 page 自己加 */}
-                <main className="flex-1 flex flex-col">{children}</main>
-                <Toaster />
+          {/* 2. 在这里建立全局的 Sticky Footer 结构 */}
+          <div className="relative flex min-h-screen flex-col bg-background">
+            <Header />
+            {/* <SiteBreadcrumb /> */}
 
-                <Footer />
-              </div>
-            </SystemProvider>
-          </LanguageProvider>
+            {/* 3. 主要内容区：这里的 flex-1 会确保 Footer 被推到底部 */}
+            {/* 你可以在这里加 main，或者留给 page 自己加 */}
+            <main className="flex-1 flex flex-col">{children}</main>
+            <Toaster />
+
+            <Footer />
+          </div>
         </ReduxProvider>
       </body>
     </html>

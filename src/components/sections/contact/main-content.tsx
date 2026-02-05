@@ -3,15 +3,15 @@
 import { ContactForm } from './form';
 import { ContactInfo } from './info';
 import { useContact } from '@/hooks/useContact';
-import { useSystem } from '@/provider/systemProvider';
+import { useAppSelector } from '@/store/hooks';
+import { selectLocationsCategories } from '@/store/slices/system.slice';
 
 export function ContactMainContent() {
   const { data } = useContact();
   const { formConfig } = data;
 
-  // 🔥 從 SystemProvider 獲取 locations（系統參數）
-  const { resources } = useSystem();
-  const { locations } = resources;
+  // 🔥 从 Redux 获取 locations（系统参数）
+  const locations = useAppSelector(selectLocationsCategories);
 
   return (
     <div className="container mx-auto px-6 py-12 md:py-20">

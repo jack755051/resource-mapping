@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { SystemState } from '@/type/store';
+import { SupportCategory } from '@/type/page/support';
+import { ProductCategory } from '@/type/page/product';
+import { OfficeLocation } from '@/type/page/contact';
 import { SupportService } from '@/api/services/support.service';
 import { ProductService } from '@/api/services/product.service';
 import { ContactService } from '@/api/services/contact.service';
@@ -42,7 +45,7 @@ export const fetchSystemResources = createAsyncThunk(
             ]);
 
             // 处理 Support Categories
-            let supportCategories = [];
+            let supportCategories: SupportCategory[] = [];
             if (results[0].status === 'fulfilled') {
                 supportCategories = results[0].value;
             } else {
@@ -51,7 +54,7 @@ export const fetchSystemResources = createAsyncThunk(
             }
 
             // 处理 Product Categories
-            let productCategories = [];
+            let productCategories: ProductCategory[] = [];
             if (results[1].status === 'fulfilled') {
                 productCategories = results[1].value;
             } else {
@@ -60,7 +63,7 @@ export const fetchSystemResources = createAsyncThunk(
             }
 
             // 处理 Locations
-            let locationsCategories = [];
+            let locationsCategories: OfficeLocation[] = [];
             if (results[2].status === 'fulfilled') {
                 locationsCategories = results[2].value;
             } else {

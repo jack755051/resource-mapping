@@ -1,13 +1,13 @@
 // src/hooks/useProduct.ts
 import { useMemo, useEffect } from 'react';
 import { useTranslation } from './useTranslation';
-import { useSystem } from '@/provider/systemProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchProducts,
   setCategory,
   setPage,
 } from '@/store/slices/product.slice';
+import { selectProductCategories } from '@/store/slices/system.slice';
 import { AppDispatch, RootState } from '@/store';
 import { ProductCategory } from '@/type/page/product';
 
@@ -15,10 +15,9 @@ export function useProduct() {
   const dispatch = useDispatch<AppDispatch>();
   const { language } = useTranslation();
 
-  // 🔥 從 SystemProvider 獲取分類數據（系統級參數）
-  // ⚠️ SystemProvider 會在語系切換時自動重新請求，後端返回翻譯後的字符串
-  const { resources } = useSystem();
-  const rawCategories = resources.productCategories;
+  // 🔥 从 Redux 获取分类数据（系统级参数）
+  // ⚠️ system.slice 会在语系切换时自动重新请求，后端返回翻译后的字符串
+  const rawCategories = useSelector(selectProductCategories);
 
   // 1. 從 Redux 選取產品列表資料（分類改從 SystemParams 獲取）
   const { list, loading, pagination, queryParams } = useSelector(

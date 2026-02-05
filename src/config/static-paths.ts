@@ -13,10 +13,11 @@
  * - 如果暂时没有产品，可以保持为空数组（但产品页面将无法访问）
  */
 export const PRODUCT_SLUGS: string[] = [
-  // 示例产品（如果没有真实产品，至少需要一个占位符以通过构建）
-  'example-product', // 占位符产品，实际部署前请替换为真实 slug
+  // 真实产品列表
+  'gwgreg',  // 添加您的产品 slug
+  'example-product', // 保留示例
 
-  // 取消注释以下行来添加真实产品
+  // 如果有更多产品，继续添加
   // 'gc-ip50-w288',
   // 'smart-eye-x1',
   // 'speed-dome-pro',

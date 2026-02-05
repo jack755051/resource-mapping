@@ -2,15 +2,16 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
-import { useSystem } from '@/provider/systemProvider';
+import { useAppSelector } from '@/store/hooks';
+import { selectSupportCategories, selectSystemIsLoading } from '@/store/slices/system.slice';
 import type { SupportResource } from '@/type/page/support';
 import { SupportService } from '@/api/services/support.service';
 
-// 定義 FilterCategory (UI 顯示用)
+// 定义 FilterCategory (UI 显示用)
 export interface FilterCategory {
     id: string;
     label: string;
-    sort?: number;  // 用於排序
+    sort?: number;  // 用于排序
 }
 
 interface UseSupportOptions {
@@ -20,10 +21,10 @@ interface UseSupportOptions {
 export function useSupport({ itemsPerPage = 5 }: UseSupportOptions = {}) {
     const { t, language } = useTranslation();
 
-    // 🔥 從 SystemProvider 獲取分類數據（系統級參數）
-    // ⚠️ SystemProvider 會在語系切換時自動重新請求，後端返回翻譯後的字符串
-    const { resources, isLoading: isSystemLoading } = useSystem();
-    const rawCategories = resources.supportCategories;
+    // 🔥 从 Redux 获取分类数据（系统级参数）
+    // ⚠️ system.slice 会在语系切换时自动重新请求，后端返回翻译后的字符串
+    const rawCategories = useAppSelector(selectSupportCategories);
+    const isSystemLoading = useAppSelector(selectSystemIsLoading);
 
     // 狀態
     const [activeCategory, setActiveCategory] = useState<string>('all');

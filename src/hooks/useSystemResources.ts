@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useLanguage } from '@/provider/language-provider';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { selectCurrentLanguage } from '@/store/slices/language.slice';
 import {
     fetchSystemResources,
     selectSupportCategories,
@@ -35,7 +35,7 @@ import {
  * }
  */
 export function useSystemResources() {
-    const { language } = useLanguage();
+    const language = useAppSelector(selectCurrentLanguage);
     const dispatch = useAppDispatch();
 
     // 获取状态

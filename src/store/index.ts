@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import productReducer from './slices/product.slice';
 import systemReducer from './slices/system.slice';
+import languageReducer from './slices/language.slice';
 
 export const store = configureStore({
   reducer: {
     product: productReducer,
     system: systemReducer,
+    language: languageReducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });
