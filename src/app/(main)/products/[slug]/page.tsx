@@ -25,5 +25,7 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  // ✅ 只傳遞 slug，id 會在客戶端組件中透過 useSearchParams 讀取
   return <ProductDetailContent slug={slug} />;
 }

@@ -1,9 +1,10 @@
 import { ProductCardData, ProductCategory } from '@/type/page/product';
-import { ProductResDto } from '../response/product.response';
+import { ProductResDto, ProductDetailResDto, ProductDownloadResDto } from '../response/product.response';
 import { PaginatedList } from '@/type/common';
 import { PaginatedResDto } from '../response/common.response';
-import { ProductSpecItem } from '@/type/page/proudct-detail';
+import { ProductSpecItem, ProductDownload } from '@/type/page/proudct-detail';
 import { ConstantProductsCategoriesResDto } from '../response/constant.response';
+import { ProductDetailData } from '@/hooks/useProductDetail';
 
 export class ProductMapper {
   // ==========================================
@@ -74,7 +75,8 @@ export class ProductMapper {
       title: dto.title,              // ✅ 後端返回 title
       category: dto.category.value,  // ✅ 使用 category.value 作為分類 id
       image: dto.image,              // ✅ 後端返回 image
-      href: dto.href || `/products/${dto.slug}`, // 優先使用後端的 href，否則組裝
+      // ✅ 強制使用包含 id 參數的 href，以便詳情頁使用 UUID 調用 API
+      href: `/products/${dto.slug}?id=${dto.id}`,
       specs: dto.specs?.map(spec => ({
         label: spec.label,           // ✅ 後端已返回 label
         value: spec.value,           // ✅ 後端已返回 value
@@ -117,6 +119,53 @@ export class ProductMapper {
     return {
       list,
       pagination,
+    };
+  }
+
+  // ==========================================
+  // Product Detail 轉換
+  // ==========================================
+
+  /**
+   * 轉換下載資源
+   */
+  static toProductDownload(dto: ProductDownloadResDto): ProductDownload {
+    return {
+      id: dto.id,
+      title: dto.title,
+      type: dto.type,
+      size: dto.size,
+      date: dto.date,
+      url: dto.url,
+    };
+  }
+
+  /**
+   * 轉換產品詳情：後端 DTO → 前端 ProductDetailData
+   */
+  static toProductDetail(dto: ProductDetailResDto): ProductDetailData {
+    return {
+      // 基礎信息（繼承自 ProductCardData）
+      id: dto.id,
+      slug: dto.slug,
+      title: dto.title,
+      category: dto.category.value,  // 使用 category.value 作為分類標識
+      image: dto.image,
+      href: dto.href || `/products/${dto.slug}`,
+      specs: dto.specs?.map(spec => ({
+        label: spec.label,
+        value: spec.value,
+        type: spec.type ?? this.inferSpecType(spec.label),
+      })) ?? [],
+      tags: dto.tags ?? [],
+
+      // 詳情專屬信息
+      tag: dto.tag || '',
+      model: dto.model,
+      description: dto.description || '',
+      features: dto.features ?? [],
+      images: dto.images ?? [dto.image], // 如果沒有額外圖片，使用主圖
+      downloads: dto.downloads?.map(d => this.toProductDownload(d)) ?? [],
     };
   }
 }

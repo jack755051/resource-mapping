@@ -9,11 +9,20 @@ import { ProductSpecs } from '@/components/sections/productDetail/specs';
 import { LoadingSpinner } from '@/components/layout/loading-spinner';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ProductInquiryCard } from '@/components/sections/productDetail/inquiry-card';
+import { useSearchParams } from 'next/navigation';
 
-export function ProductDetailContent({ slug }: { slug: string }) {
+export function ProductDetailContent({
+  slug,
+}: {
+  slug: string;
+}) {
   const { t } = useTranslation();
 
-  // 透過 slug 取得產品資料
+  // ✅ 在客戶端組件中讀取 searchParams 的 id 參數
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id') || undefined;
+
+  // ✅ 透過 slug 和 id 取得產品資料（優先使用 id）
   const {
     product,
     isLoading,
@@ -23,7 +32,7 @@ export function ProductDetailContent({ slug }: { slug: string }) {
     productInfo,
     productSpecs,
     productDownloads,
-  } = useProductDetail(slug);
+  } = useProductDetail(slug, id);
 
   if (
     isLoading ||

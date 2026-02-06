@@ -88,10 +88,10 @@ export interface ProductSpecsProps extends contentProps<
 export interface ProductDownload {
   id: string;
   title: string;
-  type: 'PDF' | 'Word' | 'Driver' | 'Firmware' | 'Software';
-  size: number;
-  date: string;
-  url: string;
+  type: string;  // ✅ 改為 string 以支持任意文件類型（PDF, ZIP, EXE, Word 等）
+  size: number;  // 文件大小（bytes）
+  date: string;  // 日期字符串
+  url: string;   // 下載 URL
 }
 
 export interface ProductDownloads {

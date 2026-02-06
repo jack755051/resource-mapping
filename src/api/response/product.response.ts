@@ -41,4 +41,20 @@ export type ProductListResponse = PaginatedResDto<ProductResDto>;
 // ---------------------------------------------------------------------------
 // 產品詳細頁面
 // ---------------------------------------------------------------------------
-export interface ProductDetailResDto {}
+
+// 產品下載資源 DTO
+export interface ProductDownloadResDto {
+  id: string;
+  url: string;
+  date: string;  // ISO date string
+  size: number;  // bytes
+  type: string;  // 文件類型如 "PDF", "ZIP"
+  title: string; // 下載資源標題
+}
+
+// 產品詳情 DTO（擴展自列表 DTO，包含更多詳細信息）
+export interface ProductDetailResDto extends ProductResDto {
+  features?: string[];  // 產品特性列表
+  images?: string[];   // 詳細圖片列表（畫廊）
+  downloads?: ProductDownloadResDto[]; // 下載資源列表
+}

@@ -65,10 +65,16 @@ export function useProduct() {
 
   // Action 封裝
   const handleSetCategory = (categoryId: string) => {
-    console.log(`🔄 切換分類: categoryId=${categoryId}`);
+    // 找到對應的分類
+    const category = uiCategories.find(c => c.id === categoryId);
+
+    // ✅ 如果是「全系列」(slug === 'all')，傳遞 undefined，讓 API 不帶 categoryId
+    const finalCategoryId = category?.slug === 'all' ? undefined : categoryId;
+
+    console.log(`🔄 切換分類: categoryId=${categoryId}, slug=${category?.slug}, 實際傳遞=${finalCategoryId || '(undefined - 不傳參數)'}`);
 
     // 切換分類時，通常也會重置到第一頁
-    dispatch(setCategory(categoryId));  // ✅ 傳遞 category 的 UUID
+    dispatch(setCategory(finalCategoryId));  // ✅ 全系列傳 undefined，其他傳 UUID
     dispatch(setPage(1));
   };
 

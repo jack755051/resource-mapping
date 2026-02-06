@@ -70,10 +70,11 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     // 設定分類 (這會觸發重新抓取，但在 Hook 裡做)
-    // ✅ action.payload 現在是 category 的 UUID
-    setCategory(state, action: PayloadAction<string>) {
-      state.queryParams.categoryId =
-        action.payload === 'all' ? undefined : action.payload;
+    // ✅ action.payload 可以是 UUID 或 undefined
+    // - undefined: 請求所有產品（全系列）
+    // - UUID: 過濾特定分類
+    setCategory(state, action: PayloadAction<string | undefined>) {
+      state.queryParams.categoryId = action.payload;
       state.queryParams.page = 1; // 切換分類時重置回第一頁
     },
     // 設定頁碼

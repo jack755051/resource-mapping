@@ -1,11 +1,12 @@
 import { apiClient } from '../client';
-import { CommonUrl } from '../url';
-import { ProductListResponse } from '../response/product.response';
+import { CommonUrl, replaceUrlParams } from '../url';
+import { ProductListResponse, ProductDetailResDto } from '../response/product.response';
 import { ProductListReqDto } from '../request/product.request';
 import { ProductMapper } from '../mapper/product.mapper';
 import { PaginatedList } from '@/type/common';
 import { ProductCardData, ProductCategory } from '@/type/page/product';
 import { ConstantProductsCategoriesResDto } from '../response/constant.response';
+import { ProductDetailData } from '@/hooks/useProductDetail';
 
 export const ProductService = {
   /**
@@ -64,15 +65,30 @@ export const ProductService = {
     return ProductMapper.toPaginatedList(data);
   },
 
-  // handleGetProductDetail: async (slug: string, lang: string): Promise<ProductDetailResponse> => {
-  //     const data = await ofetch<ProductDetailResponse>(CommonUrl.PRODUCT_DETAIL, {
-  //         method: 'GET',
-  //         headers: {
-  //             'Content-Type': 'application/json',
-  //             'Accept-Language': lang,
-  //         },
-  //     });
+  /**
+   * 取得產品詳情
+   * @param idOrSlug 產品的 id（UUID）或 slug（URL 友好標識）- 優先使用 id
+   * @param lang 當前語系代碼 (e.g. 'zh', 'en')
+   *
+   * ✅ apiClient 已自動解包 APIResponse，直接獲得產品詳情
+   * ✅ 支持使用 UUID 或 slug 調用 API（優先使用 UUID 避免後端 500 錯誤）
+   */
+  handleGetProductDetail: async (idOrSlug: string, lang: string): Promise<ProductDetailData> => {
+    console.log('🔍 請求產品詳情', idOrSlug);
 
-  //     return data;
-  // }
+    // 替換 URL 參數（無論是 UUID 還是 slug 都可以正常替換）
+    const url = replaceUrlParams(CommonUrl.PRODUCT_DETAIL, { slug: idOrSlug });
+
+    // apiClient 自動解包後返回產品詳情對象
+    const data = await apiClient<ProductDetailResDto>(url, {
+      method: 'GET',
+      headers: {
+        'Accept-Language': lang,
+      },
+    });
+
+    console.log('✅ 後端返回產品詳情（已解包）', data);
+
+    return ProductMapper.toProductDetail(data);
+  },
 };
