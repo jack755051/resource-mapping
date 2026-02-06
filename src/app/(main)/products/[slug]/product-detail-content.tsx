@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { ProductDownloads } from '@/components/sections/productDetail/downloads';
 import { RelatedProducts } from '@/components/sections/productDetail/related';
 import { useProductDetail } from '@/hooks/useProductDetail';
@@ -11,11 +12,8 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { ProductInquiryCard } from '@/components/sections/productDetail/inquiry-card';
 import { useSearchParams } from 'next/navigation';
 
-export function ProductDetailContent({
-  slug,
-}: {
-  slug: string;
-}) {
+// 將使用 useSearchParams 的邏輯提取到單獨的組件
+function ProductDetailWithSearchParams({ slug }: { slug: string }) {
   const { t } = useTranslation();
 
   // ✅ 在客戶端組件中讀取 searchParams 的 id 參數
@@ -90,5 +88,23 @@ export function ProductDetailContent({
         <RelatedProducts props={{ products: relatedProducts }} />
       </div>
     </div>
+  );
+}
+
+// 主要導出組件：使用 Suspense 包裹，避免 hydration error
+export function ProductDetailContent({ slug }: { slug: string }) {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen w-full flex flex-col items-center justify-center bg-background gap-4">
+          <LoadingSpinner size="lg" />
+          <p className="text-sm text-muted-foreground animate-pulse font-medium tracking-wide">
+            Loading...
+          </p>
+        </div>
+      }
+    >
+      <ProductDetailWithSearchParams slug={slug} />
+    </Suspense>
   );
 }

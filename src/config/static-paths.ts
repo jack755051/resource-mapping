@@ -1,41 +1,52 @@
 /**
- * 静态路径配置
- * 用于 Next.js 静态导出时生成预渲染页面
+ * 自动生成的静态路径配置
+ * 由 scripts/generate-product-slugs.ts 生成
  *
- * 使用说明：
- * 1. 在此文件中添加所有需要预渲染的产品 slug
- * 2. 运行 `npm run build` 时，这些页面会被生成为静态 HTML
- * 3. 如果产品数据来自 API，可以在构建前运行脚本获取所有 slug
+ * ⚠️ 此文件会在构建时自动更新，请勿手动编辑！
+ * 如需添加产品，请在后台管理系统中添加，然后重新构建
  *
- * 注意：
- * - 在 output: 'export' 模式下，必须预先定义所有动态路由
- * - 未在此列表中的 slug 将显示 404 页面
- * - 如果暂时没有产品，可以保持为空数组（但产品页面将无法访问）
+ * 生成时间: 2026-02-06T07:17:32.664Z
+ * 产品数量: 33
  */
 export const PRODUCT_SLUGS: string[] = [
-  // 真实产品列表
-  'gwgreg',  // 添加您的产品 slug
-  'example-product', // 保留示例
-
-  // 如果有更多产品，继续添加
-  // 'gc-ip50-w288',
-  // 'smart-eye-x1',
-  // 'speed-dome-pro',
-
-  // 或者从外部文件导入
-  // ...importedProductSlugs,
+  "DVR-5116HD",
+  "NVR-BH08VHD",
+  "NVR-BH16VHD2",
+  "NVR-BH16VHD4-16P",
+  "NVR-BH32VHD8",
+  "NVR-BH32VHD8-16P",
+  "NVR-BH04VHD",
+  "CP-DS20X-HD36",
+  "CP-DS36X-HD",
+  "CP-DS36X-HD-5MP",
+  "CP-DS20X-HDC",
+  "CP-DS20X-HDC-5MP",
+  "CP-DS36X-HDC",
+  "CP-DS36X-HDN",
+  "CP-DS36X-HD20",
+  "CP-DS20X-HD",
+  "CP-DS05X-HD20",
+  "GP-BH04IP-Z",
+  "GP-BH045IP",
+  "GP-BH045IP-Z",
+  "GP-BH048IP-AFZ",
+  "GC-ST0454",
+  "GC-ST0254",
+  "GC-ST075HDZ",
+  "GC-AHD100-550",
+  "GC-AHD70-288",
+  "GC-AHD50-288",
+  "GC-AHD30-6",
+  "GC-30450-W288",
+  "GC-IP30-W288",
+  "GC-IP50-R27135",
+  "GC-IP50-W288",
+  "smart-eye-x1"
 ];
 
 /**
  * 获取所有产品 slug（用于构建时）
- * 如果需要从 API 获取，可以在这里实现
  */
 export async function getAllProductSlugs(): Promise<string[]> {
-  // TODO: 实现从 API 或 CMS 获取产品列表的逻辑
-  // 例如：
-  // const response = await fetch('https://api.example.com/products');
-  // const products = await response.json();
-  // return products.map(p => p.slug);
-
   return PRODUCT_SLUGS;
 }
