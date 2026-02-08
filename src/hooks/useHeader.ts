@@ -73,12 +73,18 @@ export function useHeader() {
   const isShowLoginButton = false;
   // 是否顯示公司名稱文字
   const isShowCompanyName = false;
+  // 是否顯示語言切換器
+  const isShowLanguageSwitcher = true;
+  // 是否顯示搜尋框
+  const isShowSearch = false;
 
 
   return {
     // 處理顯示
     isShowLoginButton,
     isShowCompanyName,
+    isShowLanguageSwitcher,
+    isShowSearch,
     headerBrand,
     headerUserNav,
     headerSearch,

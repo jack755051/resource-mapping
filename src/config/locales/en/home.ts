@@ -66,6 +66,6 @@ export const enHome = {
   // =================================================================
   'home.cta.title': 'Don\'t let "Unknown" be a cost.',
   'home.cta.subtitle':
-    'Get a professional site assessment for your facility or specialized project today.',
+    'Schedule a precision site diagnosis today, and turn potential risks into a solid foundation for your facility.',
   'home.cta.button': 'Book a Site Visit',
 };

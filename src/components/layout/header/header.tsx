@@ -15,7 +15,7 @@ import { LanguageSwitcher, Search, UserNav } from './toolbar';
 
 export default function Header() {
   const { items: navigationItems } = useNavigation();
-  const { headerBrand, headerUserNav, headerSearch, headerNavigation, isShowLoginButton, isShowCompanyName } =
+  const { headerBrand, headerUserNav, headerSearch, headerNavigation, isShowLanguageSwitcher, isShowSearch, isShowLoginButton, isShowCompanyName } =
     useHeader();
 
   // 定義搜尋邏輯 (Header 層級控制業務邏輯)
@@ -56,14 +56,18 @@ export default function Header() {
       {/* 關鍵：加上 ml-auto (margin-left: auto) */}
       {/* 這會吃掉中間所有剩餘空間，把 Toolbar 推到最右邊 */}
       <Toolbar className="ml-auto">
-        <Search
-          data={headerSearch}
-          onSearch={handleSearch}
-          className="hidden md:flex"
-          classNames={{}}
-        />
+        {isShowSearch && (
+          <Search
+            data={headerSearch}
+            onSearch={handleSearch}
+            className="hidden md:flex"
+            classNames={{}}
+          />
+        )}
 
-        <LanguageSwitcher />
+        {isShowLanguageSwitcher && (
+          <LanguageSwitcher />
+        )}
 
         <div className="h-4 w-[1px] bg-border mx-2 hidden md:block" />
 
