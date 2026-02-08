@@ -17,7 +17,7 @@ export function useHeader() {
     logo: {
       href: '/',
       alt: 'Guangxun Tech Logo',
-      src: '/images/logo.jpg',
+      src: '/images/logo.png',
     },
     title: 'Guangxun Tech.',
   };

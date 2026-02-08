@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Resource Mapping Tool',
+  title: 'Guangxun Tech.',
   description: 'Guangxun Tech.',
 };
 
