@@ -25,6 +25,7 @@ export const enContact = {
   'contact.form.placeholder.email': 'example@company.com',
 
   'contact.form.label.type': 'Inquiry Type',
+  'contact.form.tags.appointment': 'Request Assessment',
   'contact.form.tags.community': 'Community Security',
   'contact.form.tags.lpr': 'LPR System',
   'contact.form.tags.dvr': 'DVR/NVR',

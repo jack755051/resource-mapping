@@ -22,6 +22,7 @@ export const zhContact = {
   'contact.form.placeholder.email': 'example@company.com',
 
   'contact.form.label.type': '諮詢項目 (可複選)',
+  'contact.form.tags.appointment': '預約評估',
   'contact.form.tags.community': '社區安防',
   'contact.form.tags.lpr': '車牌辨識',
   'contact.form.tags.dvr': '監控主機',

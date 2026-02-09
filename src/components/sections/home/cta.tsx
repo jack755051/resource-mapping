@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslation } from '@/hooks/useTranslation';
+import Link from 'next/link';
 
 export function CtaSection() {
   const { t } = useTranslation();
@@ -15,9 +16,12 @@ export function CtaSection() {
           {t('home.cta.subtitle')}
         </p>
         <div className="flex justify-center gap-4">
-          <button className="px-8 py-3 rounded-full bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl">
+          <Link
+            href="/contact?type=appointment&message=%E6%88%91%E9%9C%80%E8%A6%81%E9%A0%90%E7%B4%84%E8%A9%95%E4%BC%B0%EF%BC%81"
+            className="px-8 py-3 rounded-full bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl"
+          >
             {t('home.cta.button')}
-          </button>
+          </Link>
         </div>
       </div>
     </section>

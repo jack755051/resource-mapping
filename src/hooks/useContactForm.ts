@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { useTranslation } from '@/hooks/useTranslation'; // 引入 hook
+import { useSearchParams } from 'next/navigation';
 
 import { ContactFormData, contactFormSchema } from '@/schema/contact';
 import { ContactService } from '@/api/services/contact.service';
@@ -12,6 +13,7 @@ export function useContactForm() {
   // 1. 取得當前語系
   const { language } = useTranslation();
   const [isSuccess, setIsSuccess] = useState(false);
+  const searchParams = useSearchParams();
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -23,6 +25,21 @@ export function useContactForm() {
       message: '',
     },
   });
+
+  // 2. 從 URL 參數初始化表單
+  useEffect(() => {
+    const message = searchParams.get('message');
+    const type = searchParams.get('type');
+
+    if (message) {
+      form.setValue('message', decodeURIComponent(message));
+    }
+
+    if (type) {
+      const tags = type.split(',');
+      form.setValue('type', tags);
+    }
+  }, [searchParams, form]);
 
   const { setValue, watch, reset } = form;
   const selectedTags = watch('type') || [];
