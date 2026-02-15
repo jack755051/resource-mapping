@@ -1,5 +1,6 @@
 import { PRODUCT_SLUGS } from '@/config/static-paths';
 import { ProductDetailContent } from './product-detail-content';
+import { Metadata } from 'next';
 
 /**
  * 生成静态路径 - 用于 Next.js 静态导出
@@ -18,6 +19,29 @@ export async function generateStaticParams() {
  * 如果访问未在 generateStaticParams 中定义的路径，将显示 404
  */
 export const dynamicParams = false;
+
+/**
+ * 生成動態 Metadata
+ * TODO: 未來可優化為從 API 獲取實際產品資料
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  // 目前使用通用 metadata，未來可以根據 slug 獲取實際產品資料
+  return {
+    title: '產品詳情',
+    description: '查看光訊科技的專業安防監控產品詳細資訊，包括產品規格、功能特色、下載資源等。',
+    openGraph: {
+      title: '產品詳情 | Guangxun Tech',
+      description: '查看光訊科技的專業安防監控產品詳細資訊。',
+      url: `https://guangxun.net/products/${slug}`,
+    },
+  };
+}
 
 export default async function ProductDetailPage({
   params,

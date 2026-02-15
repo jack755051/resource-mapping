@@ -11,7 +11,7 @@ import { useHeader } from '@/hooks/useHeader';
 import Navigation from './navigation';
 import Brand from './brand';
 import Toolbar from './toolbar/toolbar';
-import { LanguageSwitcher, Search, UserNav } from './toolbar';
+import { LanguageSwitcher, Search, UserNav, ThemeToggle } from './toolbar';
 
 export default function Header() {
   const { items: navigationItems } = useNavigation();
@@ -64,6 +64,8 @@ export default function Header() {
             classNames={{}}
           />
         )}
+
+        <ThemeToggle />
 
         {isShowLanguageSwitcher && (
           <LanguageSwitcher />

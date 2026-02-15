@@ -56,6 +56,7 @@ export function useProductDetail(slug: string, id?: string) {
       images: product.images,
       activeIndex: galleryActiveIndex,
       onIndexChange: setGalleryActiveIndex,
+      productName: product.title,
     };
   }, [product, galleryActiveIndex]);
 

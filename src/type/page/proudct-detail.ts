@@ -7,6 +7,7 @@ export interface ProductGallery {
   images: string[];
   activeIndex: number;
   onIndexChange: (index: number) => void;
+  productName?: string;
 }
 
 export interface ProductGalleryClasses {

@@ -10,7 +10,7 @@ export function ProductGallery({
   className,
   classNames,
 }: ProductGalleryProps) {
-  const { images, activeIndex, onIndexChange } = props;
+  const { images, activeIndex, onIndexChange, productName } = props;
 
   return (
     <div className={cn('space-y-4', className, classNames?.container)}>
@@ -36,7 +36,7 @@ export function ProductGallery({
             {images && images[activeIndex] && (
               <Image
                 src={images[activeIndex]}
-                alt="Product Image"
+                alt={productName ? `${productName} - 產品圖片 ${activeIndex + 1}` : `產品圖片 ${activeIndex + 1}`}
                 fill
                 // 這裡合併 classNames.image
                 className={cn(
@@ -74,8 +74,14 @@ export function ProductGallery({
                 ? 'border-primary ring-2 ring-primary/20'
                 : 'border-transparent hover:border-border'
             )}
+            aria-label={`檢視圖片 ${idx + 1}`}
           >
-            <Image src={img} alt="" fill className="object-contain p-2" />
+            <Image
+              src={img}
+              alt={productName ? `${productName} - 縮圖 ${idx + 1}` : `產品縮圖 ${idx + 1}`}
+              fill
+              className="object-contain p-2"
+            />
           </button>
         ))}
       </div>
