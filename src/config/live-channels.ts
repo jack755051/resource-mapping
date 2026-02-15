@@ -1,5 +1,13 @@
 // src/config/live-channels.ts
 
+/**
+ * LiveChannel 介面
+ *
+ * 說明：
+ * - id 和 name 由後端 API 提供
+ * - youtubeChannelId 和 youtubeVideoId 需要在前端配置
+ * - 可以透過環境變數或靜態配置管理 YouTube 來源
+ */
 export interface LiveChannel {
   id: string;
   name: string;
@@ -8,27 +16,41 @@ export interface LiveChannel {
   isOffline?: boolean; // 強制設定為離線 (測試用)
 }
 
-export const LIVE_CHANNELS: LiveChannel[] = [
-  {
-    id: 'cam-01',
-    name: 'MAIN_ENTRANCE', // 正門
-    youtubeChannelId: process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID, // 預設使用 env
+/**
+ * YouTube 頻道映射配置
+ *
+ * 說明：根據後端返回的頻道 ID，映射到對應的 YouTube 來源
+ * 可以根據實際需求調整配置
+ */
+export const YOUTUBE_CHANNEL_MAPPING: Record<
+  string,
+  { youtubeChannelId?: string; youtubeVideoId?: string }
+> = {
+  'cam-01': {
+    youtubeChannelId: process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID,
   },
-  {
-    id: 'cam-02',
-    name: 'SERVER_ROOM_A', // 機房 A
-    youtubeVideoId: 'dQw4w9WgXcQ', // (範例ID，實際請換成真的直播ID)
-    isOffline: true, // 模擬訊號中斷
+  'cam-02': {
+    youtubeVideoId: 'dQw4w9WgXcQ', // 範例ID
   },
-  {
-    id: 'cam-03',
-    name: 'PRODUCTION_LINE', // 產線
+  'cam-03': {
     youtubeChannelId: 'UCxxxxxxxx',
   },
-  {
-    id: 'cam-04',
-    name: 'WAREHOUSE_ZOOM', // 倉庫
+  'cam-04': {
     youtubeChannelId: 'UCyyyyyyyy',
   },
-  // ... 您可以繼續新增測試 9 分割
-];
+};
+
+/**
+ * 合併 API 數據與 YouTube 配置
+ *
+ * @param channels - 從 API 獲取的頻道列表
+ * @returns 包含 YouTube 來源的完整頻道列表
+ */
+export function mergeChannelsWithYouTube(
+  channels: Pick<LiveChannel, 'id' | 'name'>[]
+): LiveChannel[] {
+  return channels.map(channel => ({
+    ...channel,
+    ...(YOUTUBE_CHANNEL_MAPPING[channel.id] || {}),
+  }));
+}

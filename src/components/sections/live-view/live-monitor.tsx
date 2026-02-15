@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useLiveView } from '@/hooks/useLiveView';
 import { EmptyLiveMonitor } from './empty-live-monitor';
 import { SingleMonitorFrame } from './single-monitor-frame';
 import {
@@ -12,32 +13,50 @@ import {
   SignalHigh,
   SignalZero,
 } from 'lucide-react';
-import { LIVE_CHANNELS } from '@/config/live-channels';
 import { cn } from '@/lib/utils';
 
 type LayoutMode = 'single' | 'grid-4' | 'grid-9';
 
 export function LiveMonitor() {
   const { t } = useTranslation();
+  const { channels, channelsLoading } = useLiveView();
 
   // 狀態管理
   const [layoutMode, setLayoutMode] = useState<LayoutMode>('single');
   const [activeChannelId, setActiveChannelId] = useState<string>(
-    LIVE_CHANNELS[0]?.id
+    channels[0]?.id || ''
   );
 
-  // 🛡️ 如果完全沒頻道配置，直接顯示大空狀態
-  if (LIVE_CHANNELS.length === 0) {
+  // 當頻道數據載入後，設置第一個頻道為活躍頻道
+  useEffect(() => {
+    if (channels.length > 0 && !activeChannelId) {
+      setActiveChannelId(channels[0].id);
+    }
+  }, [channels, activeChannelId]);
+
+  // 🛡️ 如果正在載入，顯示載入狀態
+  if (channelsLoading) {
+    return (
+      <section className="py-12 bg-black/95 text-white">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-gray-400">{t('system.loading')}</p>
+        </div>
+      </section>
+    );
+  }
+
+  // 🛡️ 如果完全沒頻道配置，直接顯示空狀態
+  if (channels.length === 0) {
     return <EmptyLiveMonitor />;
   }
 
   // 計算可見頻道
   const getVisibleChannels = () => {
     if (layoutMode === 'single') {
-      return LIVE_CHANNELS.filter(c => c.id === activeChannelId);
+      return channels.filter(c => c.id === activeChannelId);
     }
     const limit = layoutMode === 'grid-4' ? 4 : 9;
-    return LIVE_CHANNELS.slice(0, limit);
+    return channels.slice(0, limit);
   };
 
   const visibleChannels = getVisibleChannels();
@@ -90,7 +109,7 @@ export function LiveMonitor() {
         {/* --- 單一視圖的頻道選擇器 --- */}
         {layoutMode === 'single' && (
           <div className="flex gap-2 overflow-x-auto pb-4 mb-2 scrollbar-thin scrollbar-thumb-primary/20">
-            {LIVE_CHANNELS.map(channel => (
+            {channels.map(channel => (
               <button
                 key={channel.id}
                 onClick={() => setActiveChannelId(channel.id)}

@@ -5,60 +5,34 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Layers, ZoomIn } from 'lucide-react'; // 使用 Layers Icon 代表多圖層
 import { useTranslation } from '@/hooks/useTranslation';
+import { useLiveView } from '@/hooks/useLiveView';
 import { ImageModal } from './image-modal'; // 引入剛剛做的 Modal
 
 export function FootageGallery() {
   const { t } = useTranslation();
+  const { galleryData, galleryLoading } = useLiveView();
 
   // Modal 狀態控制
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState<number>(0);
 
-  // 模擬資料 (升級為多圖結構)
-  const FOOTAGE_DATA = [
-    {
-      id: 1,
-      // 封面圖
-      cover: '/images/demo-night-vision.jpg',
-      // 點開後的所有圖片 (包含封面與其他細節圖)
-      images: [
-        '/images/demo-night-vision.jpg',
-        '/images/demo-night-vision-zoom.jpg', // 假設有細節圖
-        '/images/demo-night-vision-off.jpg', // 對照組
-      ],
-      titleKey: 'liveView.footage.1.title',
-      metaKey: 'liveView.footage.1.meta',
-      tagKey: 'liveView.footage.1.tag',
-    },
-    {
-      id: 2,
-      cover: '/images/demo-lpr.jpg',
-      images: [
-        '/images/demo-lpr.jpg',
-        '/images/demo-lpr-night.jpg',
-        '/images/demo-lpr-rain.jpg',
-      ],
-      titleKey: 'liveView.footage.2.title',
-      metaKey: 'liveView.footage.2.meta',
-      tagKey: 'liveView.footage.2.tag',
-    },
-    {
-      id: 3,
-      cover: '/images/demo-wide.jpg',
-      images: [
-        '/images/demo-wide.jpg',
-        '/images/demo-wide-dewarped.jpg', // 魚眼校正後
-      ],
-      titleKey: 'liveView.footage.3.title',
-      metaKey: 'liveView.footage.3.meta',
-      tagKey: 'liveView.footage.3.tag',
-    },
-  ];
-
   const handleOpenModal = (index: number) => {
     setSelectedGallery(index);
     setModalOpen(true);
   };
+
+  // 如果正在載入，顯示載入狀態
+  if (galleryLoading) {
+    return (
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="text-center">
+            <p className="text-muted-foreground">{t('system.loading')}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 bg-background">
@@ -73,7 +47,7 @@ export function FootageGallery() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {FOOTAGE_DATA.map((item, index) => (
+          {galleryData.map((item, index) => (
             <div
               key={item.id}
               onClick={() => handleOpenModal(index)} // 點擊觸發
@@ -133,8 +107,8 @@ export function FootageGallery() {
       <ImageModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        images={FOOTAGE_DATA[selectedGallery]?.images || []}
-        title={t(FOOTAGE_DATA[selectedGallery]?.titleKey)}
+        images={galleryData[selectedGallery]?.images || []}
+        title={t(galleryData[selectedGallery]?.titleKey)}
       />
     </section>
   );
