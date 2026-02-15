@@ -7,7 +7,7 @@ export const enSolutions = {
   'solutions.hero.title.prefix': 'Turning Your Security Needs',
   'solutions.hero.title.highlight': 'Into an Impenetrable Shield.',
   'solutions.hero.desc':
-    'Equipment is just the beginning; integration is the soul. We are not just vendors but your engineering consultants. From site assessment to precision deployment, San Ring Tech delivers industrial-grade solutions built to last.',
+    'Equipment is just the beginning; integration is the soul. We are not just vendors but your engineering consultants. From site assessment to precision deployment, Guangxun Tech delivers industrial-grade solutions built to last.',
 
   // Process Steps
   'solutions.steps.1.title': 'Site Assessment',
@@ -30,8 +30,8 @@ export const enSolutions = {
   'solutions.quality.badge': 'CONSTRUCTION QUALITY',
   'solutions.quality.title': 'Details Determine\nSystem Longevity.',
   'solutions.quality.desc':
-    'Most surveillance failures stem from poor installation and inferior cabling. San Ring Tech treats cabling as an art form. We implement data-center-grade cable management, turning your server room into an orderly, maintainable hub.',
-  'solutions.quality.image.caption': 'Standardized Cabling by San Ring Tech',
+    'Most surveillance failures stem from poor installation and inferior cabling. Guangxun Tech treats cabling as an art form. We implement data-center-grade cable management, turning your server room into an orderly, maintainable hub.',
+  'solutions.quality.image.caption': 'Standardized Cabling by Guangxun Tech',
 
   // Quality List Items
   'solutions.quality.list.1':

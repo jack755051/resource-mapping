@@ -12,6 +12,7 @@ import Navigation from './navigation';
 import Brand from './brand';
 import Toolbar from './toolbar/toolbar';
 import { LanguageSwitcher, Search, UserNav, ThemeToggle } from './toolbar';
+import MobileMenu from './mobile-menu';
 
 export default function Header() {
   const { items: navigationItems } = useNavigation();
@@ -35,6 +36,9 @@ export default function Header() {
         'sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'
       )}
     >
+      {/* Mobile Menu Button (只在手機版顯示) */}
+      <MobileMenu />
+
       {/* 左側第一部分：Logo */}
       {/* shrink-0 確保 Logo 不會被擠壓 */}
       <Brand className="header__content__brand shrink-0" data={headerBrand} isShowCompanyName={isShowCompanyName} />

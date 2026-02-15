@@ -22,6 +22,14 @@ export const enCommon = {
   'footer.rights': 'All rights reserved.',
   'footer.company': 'Guangxun Tech.',
 
+  // Header - Mobile Menu
+  'header.mobile_menu.title': 'Navigation Menu',
+  'header.mobile_menu.open': 'Open Menu',
+  'header.mobile_menu.close': 'Close Menu',
+  'header.mobile_menu.settings': 'Settings',
+  'header.mobile_menu.theme': 'Dark Mode',
+  'header.mobile_menu.language': 'Language',
+
   // System Status
   'system.initializing': 'System initializing...',
   'system.loading': 'Loading...',

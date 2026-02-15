@@ -20,6 +20,14 @@ export const zhCommon = {
   'footer.rights': '版權所有。',
   'footer.company': 'Guangxun Tech.',
 
+  // Header - Mobile Menu
+  'header.mobile_menu.title': '導航選單',
+  'header.mobile_menu.open': '開啟選單',
+  'header.mobile_menu.close': '關閉選單',
+  'header.mobile_menu.settings': '設定',
+  'header.mobile_menu.theme': '深色模式',
+  'header.mobile_menu.language': '語言',
+
   // 系統/狀態相關
   'system.initializing': '系統初始化中...',
   'system.loading': '資料載入中...',

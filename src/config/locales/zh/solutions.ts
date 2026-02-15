@@ -7,7 +7,7 @@ export const zhSolutions = {
   'solutions.hero.title.prefix': '將您的安全需求，',
   'solutions.hero.title.highlight': '轉化為堅不可摧的防護網。', // "防護網" 比 "系統" 更具象，更有安全感
   'solutions.hero.desc':
-    '設備只是半成品，整合才是靈魂。我們不只是設備供應商，更是您的工程顧問。從現場評估到精密施工，San Ring Tech 以工業級標準，為您打造經得起時間考驗的一站式解決方案。',
+    '設備只是半成品，整合才是靈魂。我們不只是設備供應商，更是您的工程顧問。從現場評估到精密施工，Guangxun Tech 以工業級標準，為您打造經得起時間考驗的一站式解決方案。',
 
   // Process Steps: 強調每個步驟的專業深度
   'solutions.steps.1.title': '現場勘查評估',
@@ -30,8 +30,8 @@ export const zhSolutions = {
   'solutions.quality.badge': '施工品質承諾',
   'solutions.quality.title': '施工的細節，\n決定了系統的壽命。', // \n 強制換行，增加視覺張力
   'solutions.quality.desc':
-    '許多監視系統的故障，源自於粗糙的施工與劣質的線材。San Ring Tech 視佈線為藝術。我們導入數據中心等級的理線標準，讓您的機房不再是盤絲洞，而是井然有序、易於維護的樞紐。',
-  'solutions.quality.image.caption': 'San Ring Tech 標準化佈線實績',
+    '許多監視系統的故障，源自於粗糙的施工與劣質的線材。Guangxun Tech 視佈線為藝術。我們導入數據中心等級的理線標準，讓您的機房不再是盤絲洞，而是井然有序、易於維護的樞紐。',
+  'solutions.quality.image.caption': 'Guangxun Tech 標準化佈線實績',
 
   // Quality List Items: 具體的技術規格，建立信任
   'solutions.quality.list.1': '嚴選工業級抗干擾純銅線材 (拒絕銅包鋁)',
