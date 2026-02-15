@@ -29,4 +29,25 @@ export const enLiveView = {
   'liveView.footage.3.title': '180° Panoramic Surveillance',
   'liveView.footage.3.meta': '4K Resolution | Fisheye',
   'liveView.footage.3.tag': 'Panorama',
+
+  // Image Modal
+  'liveView.modal.close': 'Close',
+  'liveView.modal.prev': 'Previous',
+  'liveView.modal.next': 'Next',
+  'liveView.modal.thumbnail': 'Thumbnail',
+  'liveView.modal.galleryImage': 'Gallery image',
+
+  // Monitor Error State
+  'liveView.error.title': 'ERROR',
+  'liveView.error.signalLost': 'SIGNAL_LOST',
+
+  // Single Monitor Frame
+  'liveView.monitor.cam': 'CAM',
+  'liveView.monitor.liveFeed': 'Live Feed',
+
+  // Live Monitor
+  'liveView.live.title': 'Live Surveillance',
+  'liveView.live.subtitle': 'DATA_CENTER_GRADE // MULTI_CHANNEL_FEED',
+  'liveView.live.badge': 'LIVE SYSTEM',
+  'liveView.live.noSource': 'NO_SOURCE',
 };

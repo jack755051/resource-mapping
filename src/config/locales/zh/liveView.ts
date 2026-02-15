@@ -28,4 +28,25 @@ export const zhLiveView = {
   'liveView.footage.3.title': '180° 全景監控',
   'liveView.footage.3.meta': '4K 解析度 | 魚眼鏡頭',
   'liveView.footage.3.tag': '全景視野',
+
+  // Image Modal
+  'liveView.modal.close': '關閉',
+  'liveView.modal.prev': '上一張',
+  'liveView.modal.next': '下一張',
+  'liveView.modal.thumbnail': '縮圖',
+  'liveView.modal.galleryImage': '圖庫圖片',
+
+  // Monitor Error State
+  'liveView.error.title': '錯誤',
+  'liveView.error.signalLost': '訊號丟失',
+
+  // Single Monitor Frame
+  'liveView.monitor.cam': '攝影機',
+  'liveView.monitor.liveFeed': '即時畫面',
+
+  // Live Monitor
+  'liveView.live.title': '即時監控',
+  'liveView.live.subtitle': '數據中心級 // 多頻道串流',
+  'liveView.live.badge': '即時系統',
+  'liveView.live.noSource': '無訊號源',
 };

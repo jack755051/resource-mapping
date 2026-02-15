@@ -3,12 +3,14 @@
 import { cn } from '@/lib/utils';
 import { LiveChannel } from '@/config/live-channels';
 import { MonitorErrorState } from './monitor-error-state';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface SingleMonitorFrameProps {
   channel: LiveChannel;
 }
 
 export function SingleMonitorFrame({ channel }: SingleMonitorFrameProps) {
+  const { t } = useTranslation();
   // 判斷來源 URL
   const src = channel.youtubeChannelId
     ? `https://www.youtube.com/embed/live_stream?channel=${channel.youtubeChannelId}&autoplay=1&mute=1&controls=0&modestbranding=1`
@@ -28,7 +30,7 @@ export function SingleMonitorFrame({ channel }: SingleMonitorFrameProps) {
 
       {/* 頻道標籤 HUD */}
       <div className="absolute top-3 left-4 z-20 bg-black/60 backdrop-blur px-2 py-0.5 rounded text-[10px] font-mono text-primary/80 border border-primary/20 shadow-sm">
-        CAM: {channel.name}
+        {t('liveView.monitor.cam')}: {channel.name}
       </div>
 
       {/* 內容區域：離線 vs 直播 */}
@@ -37,7 +39,7 @@ export function SingleMonitorFrame({ channel }: SingleMonitorFrameProps) {
       ) : (
         <iframe
           src={src!}
-          title={`Live Feed ${channel.name}`}
+          title={`${t('liveView.monitor.liveFeed')} ${channel.name}`}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none" // pointer-events-none 防止 iframe 搶滑鼠事件
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

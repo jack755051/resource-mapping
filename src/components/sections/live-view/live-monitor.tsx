@@ -49,10 +49,10 @@ export function LiveMonitor() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-6 border-b border-white/20 pb-4 gap-4">
           <div>
             <h2 className="text-2xl font-bold tracking-widest uppercase text-primary">
-              Live Surveillance
+              {t('liveView.live.title')}
             </h2>
             <p className="text-xs text-gray-400 font-mono mt-1">
-              DATA_CENTER_GRADE // MULTI_CHANNEL_FEED
+              {t('liveView.live.subtitle')}
             </p>
           </div>
 
@@ -82,7 +82,7 @@ export function LiveMonitor() {
             {/* LIVE Badge */}
             <div className="flex items-center gap-2 px-3 py-1 rounded bg-red-900/30 border border-red-500/50 text-red-500 text-xs font-bold animate-pulse">
               <Radio className="w-3 h-3" />
-              <span>LIVE SYSTEM</span>
+              <span>{t('liveView.live.badge')}</span>
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@ export function LiveMonitor() {
                 className="bg-gray-950/50 border border-white/5 rounded-lg flex items-center justify-center min-h-[200px]"
               >
                 <span className="text-gray-800 font-mono text-xs">
-                  NO_SOURCE
+                  {t('liveView.live.noSource')}
                 </span>
               </div>
             ))}
