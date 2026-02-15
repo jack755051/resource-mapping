@@ -9,6 +9,10 @@ export const enSolutions = {
   'solutions.hero.desc':
     'Equipment is just the beginning; integration is the soul. We are not just vendors but your engineering consultants. From site assessment to precision deployment, Guangxun Tech delivers industrial-grade solutions built to last.',
 
+  // Process Section Title
+  'solutions.process.title': 'Standardized Operating Procedure',
+  'solutions.process.subtitle': 'SOP Process',
+
   // Process Steps
   'solutions.steps.1.title': 'Site Assessment',
   'solutions.steps.1.desc':

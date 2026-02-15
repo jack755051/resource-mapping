@@ -9,6 +9,10 @@ export const zhSolutions = {
   'solutions.hero.desc':
     '設備只是半成品，整合才是靈魂。我們不只是設備供應商，更是您的工程顧問。從現場評估到精密施工，Guangxun Tech 以工業級標準，為您打造經得起時間考驗的一站式解決方案。',
 
+  // Process Section Title
+  'solutions.process.title': '標準化作業流程',
+  'solutions.process.subtitle': 'SOP Process',
+
   // Process Steps: 強調每個步驟的專業深度
   'solutions.steps.1.title': '現場勘查評估',
   'solutions.steps.1.desc':

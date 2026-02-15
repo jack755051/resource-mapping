@@ -1,8 +1,11 @@
 'use client';
 
 import { WifiOff, VideoOff, AlertTriangle } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export function EmptyLiveMonitor() {
+  const { t } = useTranslation();
+
   return (
     <section className="py-12 bg-black/95 text-white overflow-hidden border-y border-white/10">
       <div className="container mx-auto px-6">
@@ -10,17 +13,17 @@ export function EmptyLiveMonitor() {
         <div className="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
           <div>
             <h2 className="text-2xl font-bold tracking-widest uppercase text-muted-foreground">
-              Surveillance System
+              {t('liveView.monitor.title')}
             </h2>
             <p className="text-xs text-gray-600 font-mono mt-1">
-              SYSTEM_ID: NULL // FEED_TERMINATED
+              {t('liveView.monitor.systemId')}
             </p>
           </div>
           <div className="flex items-center gap-3">
             {/* Offline Badge */}
             <div className="flex items-center gap-2 px-3 py-1 rounded bg-gray-800 border border-gray-600 text-gray-400 text-xs font-bold">
               <WifiOff className="w-3 h-3" />
-              <span>OFFLINE</span>
+              <span>{t('liveView.monitor.offline')}</span>
             </div>
             <div className="font-mono text-xs text-gray-600">-- / --</div>
           </div>
@@ -49,19 +52,19 @@ export function EmptyLiveMonitor() {
             </div>
 
             <h3 className="text-xl md:text-3xl font-bold tracking-widest text-gray-400 mb-2 uppercase">
-              No Signal Input
+              {t('liveView.monitor.noSignal')}
             </h3>
             <p className="text-gray-600 font-mono text-xs md:text-sm tracking-wide">
-              ERR_CONNECTION_REFUSED // CHECK_SOURCE_CONFIG
+              {t('liveView.monitor.errorCode')}
             </p>
 
             {/* 底部技術細節裝飾 */}
             <div className="mt-8 flex gap-4 text-[10px] font-mono text-gray-700 uppercase tracking-widest">
               <span className="flex items-center gap-1">
-                <AlertTriangle className="w-3 h-3" /> Source_Not_Found
+                <AlertTriangle className="w-3 h-3" /> {t('liveView.monitor.sourceNotFound')}
               </span>
               <span>|</span>
-              <span>Retrying...</span>
+              <span>{t('liveView.monitor.retrying')}</span>
             </div>
           </div>
 

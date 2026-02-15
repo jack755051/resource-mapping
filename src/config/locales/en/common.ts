@@ -30,6 +30,9 @@ export const enCommon = {
   'header.mobile_menu.theme': 'Dark Mode',
   'header.mobile_menu.language': 'Language',
 
+  // Live View
+  'nav.live_view': 'Live View',
+
   // System Status
   'system.initializing': 'System initializing...',
   'system.loading': 'Loading...',

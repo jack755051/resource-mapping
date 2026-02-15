@@ -28,6 +28,9 @@ export const zhCommon = {
   'header.mobile_menu.theme': '深色模式',
   'header.mobile_menu.language': '語言',
 
+  // Live View
+  'nav.live_view': '即時監控',
+
   // 系統/狀態相關
   'system.initializing': '系統初始化中...',
   'system.loading': '資料載入中...',

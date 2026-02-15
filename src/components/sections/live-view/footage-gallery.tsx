@@ -4,41 +4,41 @@ import Image from 'next/image';
 import { ZoomIn } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 
-// 模擬資料 (未來可從 DB 讀取)
-const FOOTAGE_DATA = [
-  {
-    id: 1,
-    src: '/images/demo-night-vision.jpg', // 需準備夜視圖
-    title: '極低照度測試',
-    meta: 'ISO 12800 | 0.001 Lux',
-    tag: 'Night Vision',
-  },
-  {
-    id: 2,
-    src: '/images/demo-lpr.jpg', // 需準備車牌辨識圖
-    title: '高速車牌辨識',
-    meta: '120 km/h | 99.9% Accuracy',
-    tag: 'AI LPR',
-  },
-  {
-    id: 3,
-    src: '/images/demo-wide.jpg', // 需準備廣角圖
-    title: '180° 全景監控',
-    meta: '4K Resolution | Fisheye',
-    tag: 'Panorama',
-  },
-];
-
 export function FootageGallery() {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
+
+  // 模擬資料 (未來可從 DB 讀取)
+  const FOOTAGE_DATA = [
+    {
+      id: 1,
+      src: '/images/demo-night-vision.jpg',
+      titleKey: 'liveView.footage.1.title',
+      metaKey: 'liveView.footage.1.meta',
+      tagKey: 'liveView.footage.1.tag',
+    },
+    {
+      id: 2,
+      src: '/images/demo-lpr.jpg',
+      titleKey: 'liveView.footage.2.title',
+      metaKey: 'liveView.footage.2.meta',
+      tagKey: 'liveView.footage.2.tag',
+    },
+    {
+      id: 3,
+      src: '/images/demo-wide.jpg',
+      titleKey: 'liveView.footage.3.title',
+      metaKey: 'liveView.footage.3.meta',
+      tagKey: 'liveView.footage.3.tag',
+    },
+  ];
 
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="mb-12 text-center md:text-left">
-          <h2 className="text-3xl font-bold mb-4">實拍畫質展示</h2>
+          <h2 className="text-3xl font-bold mb-4">{t('liveView.gallery.title')}</h2>
           <p className="text-muted-foreground">
-            眼見為憑。我們提供未經修飾的原始輸出畫面。
+            {t('liveView.gallery.subtitle')}
           </p>
         </div>
 
@@ -50,7 +50,7 @@ export function FootageGallery() {
             >
               <Image
                 src={item.src}
-                alt={item.title}
+                alt={t(item.titleKey)}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -63,13 +63,13 @@ export function FootageGallery() {
                 <div className="flex justify-between items-end">
                   <div>
                     <div className="text-primary text-xs font-bold tracking-wider uppercase mb-1">
-                      {item.tag}
+                      {t(item.tagKey)}
                     </div>
                     <h3 className="text-white text-lg font-bold">
-                      {item.title}
+                      {t(item.titleKey)}
                     </h3>
                     <p className="text-gray-400 text-xs font-mono mt-1">
-                      {item.meta}
+                      {t(item.metaKey)}
                     </p>
                   </div>
                   <ZoomIn className="text-white w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity" />

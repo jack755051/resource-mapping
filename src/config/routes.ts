@@ -54,6 +54,11 @@ export const appRoutes: AppRoute[] = [
     href: '/support',
     icon: 'download',
   },
+  {
+    title: 'nav.live_view', // 即時監控
+    href: '/live-view',
+    icon: 'video',
+  },
   // {
   //   title: 'nav.cases', // 實績案例 (非常重要！客戶要看走線漂不漂亮)
   //   href: '/cases',

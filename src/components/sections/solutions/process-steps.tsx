@@ -18,8 +18,8 @@ export function SolutionsProcessSteps() {
     <section className="py-20 bg-muted/30 border-y border-border/40 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold">標準化作業流程</h2>
-          <p className="text-muted-foreground mt-2">SOP Process</p>
+          <h2 className="text-3xl font-bold">{t('solutions.process.title')}</h2>
+          <p className="text-muted-foreground mt-2">{t('solutions.process.subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
