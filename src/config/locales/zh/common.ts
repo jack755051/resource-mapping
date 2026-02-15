@@ -24,4 +24,19 @@ export const zhCommon = {
   'system.initializing': '系統初始化中...',
   'system.loading': '資料載入中...',
   'system.error': '連線錯誤，請稍後再試',
+
+  // 錯誤頁面
+  'common.error.title': '系統發生預期外的錯誤',
+  'common.error.desc':
+    '我們的監控系統偵測到異常。請嘗試重新整理，若問題持續發生，請聯繫技術支援。',
+
+  // 404 頁面
+  'common.not_found.title': '頁面訊號丟失',
+  'common.not_found.desc': '您所尋找的路徑不存在，或權限不足無法存取該監控節點。',
+
+  // 通用操作按鈕
+  'common.action.retry': '重新載入',
+  'common.action.contact_support': '聯繫支援',
+  'common.action.back_home': '返回首頁',
+  'common.action.go_back': '回上一頁',
 };

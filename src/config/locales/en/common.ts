@@ -26,4 +26,20 @@ export const enCommon = {
   'system.initializing': 'System initializing...',
   'system.loading': 'Loading...',
   'system.error': 'Connection error, please try again later',
+
+  // Error Page
+  'common.error.title': 'An Unexpected Error Occurred',
+  'common.error.desc':
+    'Our monitoring system has detected an anomaly. Please try refreshing the page. If the problem persists, please contact technical support.',
+
+  // 404 Page
+  'common.not_found.title': 'Page Signal Lost',
+  'common.not_found.desc':
+    'The path you are looking for does not exist, or you do not have permission to access this monitoring node.',
+
+  // Common Actions
+  'common.action.retry': 'Retry',
+  'common.action.contact_support': 'Contact Support',
+  'common.action.back_home': 'Back to Home',
+  'common.action.go_back': 'Go Back',
 };
