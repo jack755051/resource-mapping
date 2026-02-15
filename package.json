@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3006",
+    "dev:local": "USE_LOCAL_BACKEND=true next dev -p 3006",
     "prebuild": "tsx scripts/generate-product-slugs.ts",
     "build": "next build",
     "generate-slugs": "tsx scripts/generate-product-slugs.ts",
