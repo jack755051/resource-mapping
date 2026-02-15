@@ -24,6 +24,9 @@ export const zhCommon = {
   'system.initializing': '系統初始化中...',
   'system.loading': '資料載入中...',
   'system.error': '連線錯誤，請稍後再試',
+  'system.loading.title': '系統初始化',
+  'system.loading.subtitle': '正在建立安全連線...',
+  'system.loading.version': '光訊科技',
 
   // 錯誤頁面
   'common.error.title': '系統發生預期外的錯誤',

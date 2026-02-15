@@ -1,20 +1,21 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '安裝實績',
+  title: 'Case Studies | 安裝實績',
   description:
-    '查看光訊科技的安裝實績案例，包括居家、商業、工業等各類型監控系統的成功案例，見證我們的專業實力。',
+    'View our successful security surveillance installation projects for residential, commercial, and industrial applications. 查看光訊科技的安裝實績案例，包括居家、商業、工業等各類型監控系統的成功案例。',
   keywords: [
+    'case studies',
+    'installation projects',
+    'success stories',
+    'project portfolio',
     '安裝實績',
     '成功案例',
-    '專案實績',
-    '客戶見證',
-    '監控案例',
   ],
   openGraph: {
-    title: '安裝實績 | Guangxun Tech',
+    title: 'Case Studies | Guangxun Tech',
     description:
-      '查看光訊科技的安裝實績案例，見證我們在各類型監控系統的專業實力。',
+      'View our successful security surveillance installation projects for residential, commercial, and industrial applications.',
     url: 'https://guangxun.net/cases',
   },
 };

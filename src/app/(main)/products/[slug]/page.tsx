@@ -33,11 +33,13 @@ export async function generateMetadata({
 
   // 目前使用通用 metadata，未來可以根據 slug 獲取實際產品資料
   return {
-    title: '產品詳情',
-    description: '查看光訊科技的專業安防監控產品詳細資訊，包括產品規格、功能特色、下載資源等。',
+    title: 'Product Details | 產品詳情',
+    description:
+      'View detailed information about our professional security surveillance products including specifications, features, and resources. 查看光訊科技的專業安防監控產品詳細資訊，包括產品規格、功能特色、下載資源等。',
     openGraph: {
-      title: '產品詳情 | Guangxun Tech',
-      description: '查看光訊科技的專業安防監控產品詳細資訊。',
+      title: 'Product Details | Guangxun Tech',
+      description:
+        'View detailed information about our professional security surveillance products.',
       url: `https://guangxun.net/products/${slug}`,
     },
   };

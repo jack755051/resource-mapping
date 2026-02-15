@@ -26,6 +26,9 @@ export const enCommon = {
   'system.initializing': 'System initializing...',
   'system.loading': 'Loading...',
   'system.error': 'Connection error, please try again later',
+  'system.loading.title': 'SYSTEM INITIALIZING',
+  'system.loading.subtitle': 'ESTABLISHING SECURE CONNECTION...',
+  'system.loading.version': 'Guangxun Tech',
 
   // Error Page
   'common.error.title': 'An Unexpected Error Occurred',

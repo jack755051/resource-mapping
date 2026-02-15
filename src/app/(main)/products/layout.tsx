@@ -1,22 +1,24 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '產品與服務',
+  title: 'Products & Services | 產品與服務',
   description:
-    '探索光訊科技的專業安防監控產品，包括高清攝影機、智能錄影主機、周邊配件等完整解決方案，滿足您的居家與商業安全需求。',
+    'Explore our professional security surveillance products including HD IP cameras, smart NVR/DVR recorders, and complete security solutions. 探索光訊科技的專業安防監控產品，包括高清攝影機、智能錄影主機、周邊配件等完整解決方案。',
   keywords: [
-    '監控攝影機',
-    '錄影主機',
+    'IP camera',
+    'security camera',
     'NVR',
     'DVR',
+    'surveillance equipment',
+    'CCTV products',
+    '監控攝影機',
+    '錄影主機',
     '安防產品',
-    '周邊配件',
-    '監控設備',
   ],
   openGraph: {
-    title: '產品與服務 | Guangxun Tech',
+    title: 'Products & Services | Guangxun Tech',
     description:
-      '探索光訊科技的專業安防監控產品，包括高清攝影機、智能錄影主機、周邊配件等完整解決方案。',
+      'Explore our professional security surveillance products including HD IP cameras, smart NVR/DVR recorders, and complete security solutions.',
     url: 'https://guangxun.net/products',
   },
 };

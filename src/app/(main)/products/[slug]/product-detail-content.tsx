@@ -7,15 +7,12 @@ import { useProductDetail } from '@/hooks/useProductDetail';
 import { ProductGallery } from '@/components/sections/productDetail/gallery';
 import { ProductInfo } from '@/components/sections/productDetail/info';
 import { ProductSpecs } from '@/components/sections/productDetail/specs';
-import { LoadingSpinner } from '@/components/layout/loading-spinner';
-import { useTranslation } from '@/hooks/useTranslation';
+import { LoadingScreen } from '@/components/layout/loading-screen';
 import { ProductInquiryCard } from '@/components/sections/productDetail/inquiry-card';
 import { useSearchParams } from 'next/navigation';
 
 // 將使用 useSearchParams 的邏輯提取到單獨的組件
 function ProductDetailWithSearchParams({ slug }: { slug: string }) {
-  const { t } = useTranslation();
-
   // ✅ 在客戶端組件中讀取 searchParams 的 id 參數
   const searchParams = useSearchParams();
   const id = searchParams.get('id') || undefined;
@@ -39,14 +36,7 @@ function ProductDetailWithSearchParams({ slug }: { slug: string }) {
     !productSpecs ||
     !productDownloads
   ) {
-    return (
-      <div className="min-h-screen w-full flex flex-col items-center justify-center bg-background gap-4">
-        <LoadingSpinner size="lg" />
-        <p className="text-sm text-muted-foreground animate-pulse font-medium tracking-wide">
-          {t('system.initializing')}
-        </p>
-      </div>
-    );
+    return <LoadingScreen fullScreen />;
   }
 
   return (
@@ -94,16 +84,7 @@ function ProductDetailWithSearchParams({ slug }: { slug: string }) {
 // 主要導出組件：使用 Suspense 包裹，避免 hydration error
 export function ProductDetailContent({ slug }: { slug: string }) {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen w-full flex flex-col items-center justify-center bg-background gap-4">
-          <LoadingSpinner size="lg" />
-          <p className="text-sm text-muted-foreground animate-pulse font-medium tracking-wide">
-            Loading...
-          </p>
-        </div>
-      }
-    >
+    <Suspense fallback={<LoadingScreen fullScreen />}>
       <ProductDetailWithSearchParams slug={slug} />
     </Suspense>
   );

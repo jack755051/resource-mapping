@@ -25,12 +25,22 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Guangxun Tech - 專業安防監控系統解決方案',
+    default: 'Guangxun Tech - Professional Security Surveillance Solutions | 專業安防監控系統',
     template: '%s | Guangxun Tech',
   },
   description:
-    '光訊科技提供專業的安防監控系統、攝影機、錄影主機及完整的弱電工程規劃服務，為您的居家與商業環境提供全方位安全防護。',
+    'Guangxun Tech provides professional security surveillance systems, IP cameras, NVR/DVR recorders, and complete security solutions for residential and commercial environments. 光訊科技提供專業安防監控系統、攝影機、錄影主機及完整的弱電工程規劃服務。',
   keywords: [
+    // English Keywords (Better for SEO)
+    'security camera',
+    'surveillance system',
+    'IP camera',
+    'CCTV',
+    'NVR',
+    'DVR',
+    'security solutions',
+    'video surveillance',
+    // Chinese Keywords
     '監控系統',
     '安防監控',
     '攝影機',
@@ -38,37 +48,43 @@ export const metadata: Metadata = {
     '弱電工程',
     '居家防護',
     '商務監控',
-    'CCTV',
-    'surveillance',
-    'security camera',
   ],
   authors: [{ name: 'Guangxun Tech' }],
   creator: 'Guangxun Tech',
   publisher: 'Guangxun Tech',
   metadataBase: new URL('https://guangxun.net'),
+  alternates: {
+    canonical: 'https://guangxun.net',
+    languages: {
+      'zh-TW': 'https://guangxun.net',
+      'en-US': 'https://guangxun.net',
+    },
+  },
   openGraph: {
     type: 'website',
     locale: 'zh_TW',
+    alternateLocale: ['en_US'],
     url: 'https://guangxun.net',
     siteName: 'Guangxun Tech',
-    title: 'Guangxun Tech - 專業安防監控系統解決方案',
+    title: 'Guangxun Tech - Professional Security Surveillance Solutions',
     description:
-      '光訊科技提供專業的安防監控系統、攝影機、錄影主機及完整的弱電工程規劃服務，為您的居家與商業環境提供全方位安全防護。',
+      'Professional security surveillance systems, IP cameras, NVR/DVR recorders, and complete security solutions for residential and commercial environments.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Guangxun Tech',
+        alt: 'Guangxun Tech - Security Surveillance Solutions',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Guangxun Tech - 專業安防監控系統解決方案',
+    title: 'Guangxun Tech - Professional Security Surveillance Solutions',
     description:
-      '光訊科技提供專業的安防監控系統、攝影機、錄影主機及完整的弱電工程規劃服務。',
+      'Professional security surveillance systems, IP cameras, and complete security solutions.',
     images: ['/og-image.jpg'],
+    creator: '@guangxuntech',
   },
   robots: {
     index: true,
