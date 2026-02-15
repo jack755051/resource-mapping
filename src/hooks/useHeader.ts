@@ -1,8 +1,4 @@
-import {
-  HeaderBrandData,
-  HeaderSearchData,
-  HeaderUserNavData,
-} from '@/type';
+import { HeaderBrandData, HeaderSearchData, HeaderUserNavData } from '@/type';
 import { useNavigation } from '@/hooks/useNavigation';
 import { useTranslation } from '@/hooks/useTranslation';
 
@@ -77,7 +73,6 @@ export function useHeader() {
   const isShowLanguageSwitcher = true;
   // 是否顯示搜尋框
   const isShowSearch = false;
-
 
   return {
     // 處理顯示

@@ -1,5 +1,9 @@
 import { ProductCardData, ProductCategory } from '@/type/page/product';
-import { ProductResDto, ProductDetailResDto, ProductDownloadResDto } from '../response/product.response';
+import {
+  ProductResDto,
+  ProductDetailResDto,
+  ProductDownloadResDto,
+} from '../response/product.response';
 import { PaginatedList } from '@/type/common';
 import { PaginatedResDto } from '../response/common.response';
 import { ProductSpecItem, ProductDownload } from '@/type/page/proudct-detail';
@@ -25,19 +29,23 @@ export class ProductMapper {
    * 2. ✅ slug 使用 value（dto.value），用於 URL 和顯示
    * 3. 後端的 I18nInterceptor 已根據 accept-language header 自動翻譯 name
    */
-  static toDomainCategory(dto: ConstantProductsCategoriesResDto): ProductCategory {
+  static toDomainCategory(
+    dto: ConstantProductsCategoriesResDto
+  ): ProductCategory {
     return {
-      id: dto.id,         // ✅ 使用真實的 UUID
-      label: dto.name,    // ✅ 後端已翻譯，直接使用
-      sort: dto.sort,     // ✅ 保留排序順序
-      slug: dto.value     // ✅ URL 友好的識別碼
+      id: dto.id, // ✅ 使用真實的 UUID
+      label: dto.name, // ✅ 後端已翻譯，直接使用
+      sort: dto.sort, // ✅ 保留排序順序
+      slug: dto.value, // ✅ URL 友好的識別碼
     };
   }
 
   /**
    * 批次轉換分類
    */
-  static toDomainCategoryList(dtos: ConstantProductsCategoriesResDto[]): ProductCategory[] {
+  static toDomainCategoryList(
+    dtos: ConstantProductsCategoriesResDto[]
+  ): ProductCategory[] {
     if (!Array.isArray(dtos)) return [];
     return dtos.map(dto => this.toDomainCategory(dto));
   }
@@ -51,12 +59,26 @@ export class ProductMapper {
   private static inferSpecType(specKey: string): ProductSpecItem['type'] {
     const key = specKey.toLowerCase();
     if (key.includes('sensor') || key.includes('感測器')) return 'sensor';
-    if (key.includes('chip') || key.includes('晶片') || key.includes('處理器')) return 'chip';
-    if (key.includes('lens') || key.includes('鏡頭') || key.includes('焦距')) return 'lens';
-    if (key.includes('power') || key.includes('電源') || key.includes('供電')) return 'power';
-    if (key.includes('storage') || key.includes('儲存') || key.includes('記憶')) return 'storage';
-    if (key.includes('protection') || key.includes('防護') || key.includes('保護')) return 'protection';
-    if (key.includes('waterproof') || key.includes('防水') || key.includes('ip')) return 'waterproof';
+    if (key.includes('chip') || key.includes('晶片') || key.includes('處理器'))
+      return 'chip';
+    if (key.includes('lens') || key.includes('鏡頭') || key.includes('焦距'))
+      return 'lens';
+    if (key.includes('power') || key.includes('電源') || key.includes('供電'))
+      return 'power';
+    if (key.includes('storage') || key.includes('儲存') || key.includes('記憶'))
+      return 'storage';
+    if (
+      key.includes('protection') ||
+      key.includes('防護') ||
+      key.includes('保護')
+    )
+      return 'protection';
+    if (
+      key.includes('waterproof') ||
+      key.includes('防水') ||
+      key.includes('ip')
+    )
+      return 'waterproof';
     return 'sensor'; // 默認類型
   }
   /**
@@ -72,16 +94,17 @@ export class ProductMapper {
     return {
       id: dto.id,
       slug: dto.slug,
-      title: dto.title,              // ✅ 後端返回 title
-      category: dto.category.value,  // ✅ 使用 category.value 作為分類 id
-      image: dto.image,              // ✅ 後端返回 image
+      title: dto.title, // ✅ 後端返回 title
+      category: dto.category.value, // ✅ 使用 category.value 作為分類 id
+      image: dto.image, // ✅ 後端返回 image
       // ✅ 強制使用包含 id 參數的 href，以便詳情頁使用 UUID 調用 API
       href: `/products/${dto.slug}?id=${dto.id}`,
-      specs: dto.specs?.map(spec => ({
-        label: spec.label,           // ✅ 後端已返回 label
-        value: spec.value,           // ✅ 後端已返回 value
-        type: spec.type ?? this.inferSpecType(spec.label), // 優先使用後端類型
-      })) ?? [],
+      specs:
+        dto.specs?.map(spec => ({
+          label: spec.label, // ✅ 後端已返回 label
+          value: spec.value, // ✅ 後端已返回 value
+          type: spec.type ?? this.inferSpecType(spec.label), // 優先使用後端類型
+        })) ?? [],
       tags: dto.tags ?? [],
     };
   }
@@ -107,9 +130,9 @@ export class ProductMapper {
 
     // 轉換分頁信息
     const pagination = {
-      current: dto.meta.page,       // ✅ 後端返回 page
-      pageSize: dto.meta.limit,     // ✅ 後端返回 limit
-      total: dto.meta.total,        // ✅ 後端返回 total
+      current: dto.meta.page, // ✅ 後端返回 page
+      pageSize: dto.meta.limit, // ✅ 後端返回 limit
+      total: dto.meta.total, // ✅ 後端返回 total
       totalPages: dto.meta.lastPage, // ✅ 後端返回 lastPage
     };
 
@@ -149,14 +172,15 @@ export class ProductMapper {
       id: dto.id,
       slug: dto.slug,
       title: dto.title,
-      category: dto.category.value,  // 使用 category.value 作為分類標識
+      category: dto.category.value, // 使用 category.value 作為分類標識
       image: dto.image,
       href: dto.href || `/products/${dto.slug}`,
-      specs: dto.specs?.map(spec => ({
-        label: spec.label,
-        value: spec.value,
-        type: spec.type ?? this.inferSpecType(spec.label),
-      })) ?? [],
+      specs:
+        dto.specs?.map(spec => ({
+          label: spec.label,
+          value: spec.value,
+          type: spec.type ?? this.inferSpecType(spec.label),
+        })) ?? [],
       tags: dto.tags ?? [],
 
       // 詳情專屬信息

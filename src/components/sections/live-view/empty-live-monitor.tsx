@@ -61,7 +61,8 @@ export function EmptyLiveMonitor() {
             {/* 底部技術細節裝飾 */}
             <div className="mt-8 flex gap-4 text-[10px] font-mono text-gray-700 uppercase tracking-widest">
               <span className="flex items-center gap-1">
-                <AlertTriangle className="w-3 h-3" /> {t('liveView.monitor.sourceNotFound')}
+                <AlertTriangle className="w-3 h-3" />{' '}
+                {t('liveView.monitor.sourceNotFound')}
               </span>
               <span>|</span>
               <span>{t('liveView.monitor.retrying')}</span>

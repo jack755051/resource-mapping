@@ -66,7 +66,8 @@ export function useAbout() {
       // 合併資料：保留原本的 Header (因為 API 只回傳 Item List)，並用 API 的 Items 覆寫
       setTimelineData({
         header: defaultData.header,
-        items: mappedData.items.length > 0 ? mappedData.items : defaultData.items,
+        items:
+          mappedData.items.length > 0 ? mappedData.items : defaultData.items,
       });
     } catch (error) {
       console.warn('取得時間軸 API 失敗，使用預設資料渲染:', error);

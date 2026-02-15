@@ -46,7 +46,8 @@ export const zhCommon = {
 
   // 404 頁面
   'common.not_found.title': '頁面訊號丟失',
-  'common.not_found.desc': '您所尋找的路徑不存在，或權限不足無法存取該監控節點。',
+  'common.not_found.desc':
+    '您所尋找的路徑不存在，或權限不足無法存取該監控節點。',
 
   // 通用操作按鈕
   'common.action.retry': '重新載入',

@@ -33,8 +33,8 @@ export function PaginationControl({
           disabled={current === 1}
           onClick={() => onPageChange(current - 1)}
           className={cn(
-            "h-10 w-10 transition-colors",
-            current === 1 && "opacity-50 cursor-not-allowed"
+            'h-10 w-10 transition-colors',
+            current === 1 && 'opacity-50 cursor-not-allowed'
           )}
         >
           <ChevronLeft className="h-4 w-4" />
@@ -68,7 +68,10 @@ export function PaginationControl({
             // 顯示省略號的邏輯 (簡化處理)
             if (page === current - 2 || page === current + 2) {
               return (
-                <span key={page} className="px-1 py-2 text-muted-foreground text-sm">
+                <span
+                  key={page}
+                  className="px-1 py-2 text-muted-foreground text-sm"
+                >
                   ...
                 </span>
               );
@@ -79,12 +82,8 @@ export function PaginationControl({
 
         {/* 手機版只顯示當前頁碼文字 */}
         <div className="sm:hidden flex items-center gap-2 px-4">
-          <span className="text-sm font-medium">
-            {current}
-          </span>
-          <span className="text-sm text-muted-foreground">
-            / {totalPages}
-          </span>
+          <span className="text-sm font-medium">{current}</span>
+          <span className="text-sm text-muted-foreground">/ {totalPages}</span>
         </div>
 
         {/* 下一頁 */}
@@ -94,8 +93,8 @@ export function PaginationControl({
           disabled={current === totalPages}
           onClick={() => onPageChange(current + 1)}
           className={cn(
-            "h-10 w-10 transition-colors",
-            current === totalPages && "opacity-50 cursor-not-allowed"
+            'h-10 w-10 transition-colors',
+            current === totalPages && 'opacity-50 cursor-not-allowed'
           )}
         >
           <ChevronRight className="h-4 w-4" />

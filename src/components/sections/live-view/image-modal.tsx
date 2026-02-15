@@ -142,7 +142,12 @@ export function ImageModal({
                       : 'border-transparent opacity-50 hover:opacity-100'
                   )}
                 >
-                  <Image src={img} alt={`${t('liveView.modal.thumbnail')} ${idx + 1}`} fill className="object-cover" />
+                  <Image
+                    src={img}
+                    alt={`${t('liveView.modal.thumbnail')} ${idx + 1}`}
+                    fill
+                    className="object-cover"
+                  />
                 </button>
               ))}
             </div>

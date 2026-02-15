@@ -15,7 +15,11 @@ export const apiClient = ofetch.create({
   // ✅ 響應攔截器：自動提取 APIResponse 的 data 字段
   async onResponse({ response }) {
     // 如果響應符合 APIResponse 結構，自動提取 data
-    if (response._data && typeof response._data === 'object' && 'data' in response._data) {
+    if (
+      response._data &&
+      typeof response._data === 'object' &&
+      'data' in response._data
+    ) {
       const apiResponse = response._data as APIResponse<any>;
 
       // 檢查是否成功

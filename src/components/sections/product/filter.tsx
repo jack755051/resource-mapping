@@ -21,7 +21,6 @@ export function ProductFilterSection() {
     <div className="sticky top-0 z-40 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16 md:h-20 gap-4">
-
           {/* 左側：分類列表 */}
           <CategoryList
             categories={categories}
@@ -31,7 +30,6 @@ export function ProductFilterSection() {
 
           {/* 右側：工具列 */}
           <div className="hidden md:flex items-center gap-2 border-l border-border pl-4 ml-2">
-
             {/* 搜尋功能 */}
             <ProductSearch
               categories={categories}

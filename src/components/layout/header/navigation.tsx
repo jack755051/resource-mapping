@@ -67,7 +67,7 @@ export default function Navigation({
 
               <Link
                 href={item.href}
-                prefetch={false}  // 禁用预加载
+                prefetch={false} // 禁用预加载
                 className={cn(
                   'header__navigation__list__item__link transition-colors relative z-10', // z-10 確保文字在背景之上
                   'hover:text-primary',

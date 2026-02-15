@@ -25,7 +25,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Guangxun Tech - Professional Security Surveillance Solutions | 專業安防監控系統',
+    default:
+      'Guangxun Tech - Professional Security Surveillance Solutions | 專業安防監控系統',
     template: '%s | Guangxun Tech',
   },
   description:

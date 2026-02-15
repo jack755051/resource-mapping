@@ -33,4 +33,7 @@ export enum CommonUrl {
   PRODUCT_DETAIL = '/products/:slug',
   // 支援
   SUPPORT_RESOURCES = '/support/resources',
+  // 及時影像
+  LIVE_MONITOR_LIST = '/live-view/live-monitor-list',
+  GALLERY_LIST = '/live-view/gallery',
 }

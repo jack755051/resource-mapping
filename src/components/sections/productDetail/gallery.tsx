@@ -36,7 +36,11 @@ export function ProductGallery({
             {images && images[activeIndex] && (
               <Image
                 src={images[activeIndex]}
-                alt={productName ? `${productName} - 產品圖片 ${activeIndex + 1}` : `產品圖片 ${activeIndex + 1}`}
+                alt={
+                  productName
+                    ? `${productName} - 產品圖片 ${activeIndex + 1}`
+                    : `產品圖片 ${activeIndex + 1}`
+                }
                 fill
                 // 這裡合併 classNames.image
                 className={cn(
@@ -78,7 +82,11 @@ export function ProductGallery({
           >
             <Image
               src={img}
-              alt={productName ? `${productName} - 縮圖 ${idx + 1}` : `產品縮圖 ${idx + 1}`}
+              alt={
+                productName
+                  ? `${productName} - 縮圖 ${idx + 1}`
+                  : `產品縮圖 ${idx + 1}`
+              }
               fill
               className="object-contain p-2"
             />

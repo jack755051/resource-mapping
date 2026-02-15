@@ -9,7 +9,7 @@ import { Metadata } from 'next';
  * 请在 src/config/static-paths.ts 中配置所有产品的 slug
  */
 export async function generateStaticParams() {
-  return PRODUCT_SLUGS.map((slug) => ({
+  return PRODUCT_SLUGS.map(slug => ({
     slug,
   }));
 }

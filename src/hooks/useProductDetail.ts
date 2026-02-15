@@ -109,7 +109,10 @@ export function useProductDetail(slug: string, id?: string) {
       try {
         // 1. 調用 API 獲取產品詳情（優先使用 id，如果沒有則使用 slug）
         const identifier = id || slug;
-        const productData = await ProductService.handleGetProductDetail(identifier, language);
+        const productData = await ProductService.handleGetProductDetail(
+          identifier,
+          language
+        );
 
         if (!isMounted) return;
 
@@ -118,7 +121,6 @@ export function useProductDetail(slug: string, id?: string) {
         // 2. TODO: 獲取相關產品（目前使用空數組，可以後續實現）
         // 可以根據產品的 category 調用列表 API 獲取同分類的其他產品
         setRelatedProducts([]);
-
       } catch (error) {
         console.error('❌ 獲取產品詳情失敗', error);
         if (!isMounted) return;

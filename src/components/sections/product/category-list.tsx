@@ -22,7 +22,7 @@ export function CategoryList({
   return (
     <div className="flex-1 overflow-x-auto scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
       <div className="flex items-center gap-1">
-        {categories.map((cat) => {
+        {categories.map(cat => {
           const isActive = activeCategory === cat.id;
           // 解析多語系名稱
           const localizedName = getLocalizedContent(cat.label, language);

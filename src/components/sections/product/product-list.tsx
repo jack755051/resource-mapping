@@ -21,7 +21,7 @@ interface ProductListSectionProps {
 
 export function ProductListSection({
   className,
-  classNames
+  classNames,
 }: ProductListSectionProps = {}) {
   // =========================================================================
   // 🔥 統一數據源：從 useProduct hook 獲取所有數據
@@ -33,7 +33,7 @@ export function ProductListSection({
     activeCategory,
     pagination,
     setPage,
-    loading
+    loading,
   } = useProduct();
 
   const categoryName = currentCategoryName;
@@ -44,7 +44,13 @@ export function ProductListSection({
 
   return (
     // min-h-[80vh] 是防止抖動的關鍵
-    <section className={cn("container mx-auto px-6 py-12 min-h-[80vh]", className, classNames?.container)}>
+    <section
+      className={cn(
+        'container mx-auto px-6 py-12 min-h-[80vh]',
+        className,
+        classNames?.container
+      )}
+    >
       <AnimatePresence mode="wait">
         {loading ? (
           // -------------------------------------------
@@ -77,7 +83,10 @@ export function ProductListSection({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className={cn("py-32 flex flex-col items-center justify-center text-center border-2 border-dashed border-border/50 rounded-3xl", classNames?.emptyState)}
+            className={cn(
+              'py-32 flex flex-col items-center justify-center text-center border-2 border-dashed border-border/50 rounded-3xl',
+              classNames?.emptyState
+            )}
           >
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4 text-muted-foreground">
               <SlidersHorizontal className="w-8 h-8" />
@@ -100,7 +109,12 @@ export function ProductListSection({
             transition={{ duration: 0.3 }}
           >
             {/* 標題與計數 */}
-            <div className={cn("mb-8 flex items-baseline gap-4", classNames?.header)}>
+            <div
+              className={cn(
+                'mb-8 flex items-baseline gap-4',
+                classNames?.header
+              )}
+            >
               <h2 className="text-2xl font-bold">{categoryName}</h2>
               <span className="text-muted-foreground text-sm">
                 共 {totalCount} 項產品
@@ -108,7 +122,12 @@ export function ProductListSection({
             </div>
 
             {/* 產品網格 */}
-            <div className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8", classNames?.grid)}>
+            <div
+              className={cn(
+                'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8',
+                classNames?.grid
+              )}
+            >
               {products.map(product => (
                 <ProductCard key={product.id} props={product} />
               ))}
@@ -116,7 +135,12 @@ export function ProductListSection({
 
             {/* 分頁控制器 - 添加分隔線和更好的間距 */}
             {pagination && pagination.totalPages > 1 && (
-              <div className={cn("mt-16 pt-8 border-t border-border/50", classNames?.pagination)}>
+              <div
+                className={cn(
+                  'mt-16 pt-8 border-t border-border/50',
+                  classNames?.pagination
+                )}
+              >
                 <PaginationControl
                   pagination={pagination}
                   onPageChange={setPage}

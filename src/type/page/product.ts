@@ -32,11 +32,11 @@ export interface ProductCardClasses {
 export interface ProductCardProps extends contentProps<
   ProductCardData,
   ProductCardClasses
-> { }
+> {}
 
 // -------- 產品分類 -----------
 
-export interface ProductCategory extends CommonFilter { }
+export interface ProductCategory extends CommonFilter {}
 
 export interface ProductCategoryClasses {
   container?: string;
@@ -47,5 +47,4 @@ export interface ProductCategoryClasses {
 export interface ProductCategoryProps extends contentProps<
   ProductCategory,
   ProductCategoryClasses
-> { }
-
+> {}

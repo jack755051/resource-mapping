@@ -1,6 +1,6 @@
-import { LocalizedString } from "./i18n";
-import { ProductCategory } from "./page/product";
-import { SupportCategory } from "./page/support";
+import { LocalizedString } from './i18n';
+import { ProductCategory } from './page/product';
+import { SupportCategory } from './page/support';
 
 export interface Pagination {
   current: number;
@@ -23,10 +23,10 @@ export interface contentProps<T, S> {
 // ====== 篩選的型別 =======
 export interface CommonFilter {
   id: string;
-  label: string | LocalizedString;  // 🔥 支持两种格式：翻译后的字符串 或 多语系对象
+  label: string | LocalizedString; // 🔥 支持两种格式：翻译后的字符串 或 多语系对象
   active?: boolean;
   slug?: string;
-  sort?: number;  // 排序順序
+  sort?: number; // 排序順序
   onFilterClick?: (id: string) => void; // 改为可选，因为组件可以直接使用 hook 的方法
 }
 

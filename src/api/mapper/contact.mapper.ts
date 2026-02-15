@@ -8,7 +8,11 @@ export class ContactMapper {
    */
   private static mapOfficeType(typeName: string): OfficeType {
     const name = typeName.toLowerCase();
-    if (name.includes('總部') || name.includes('headquarters') || name.includes('hq')) {
+    if (
+      name.includes('總部') ||
+      name.includes('headquarters') ||
+      name.includes('hq')
+    ) {
       return 'hq';
     }
     if (name.includes('倉庫') || name.includes('warehouse')) {

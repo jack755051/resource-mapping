@@ -1,7 +1,10 @@
 'use client';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setLanguage as setLanguageAction, selectCurrentLanguage } from '@/store/slices/language.slice';
+import {
+  setLanguage as setLanguageAction,
+  selectCurrentLanguage,
+} from '@/store/slices/language.slice';
 import { LanguageCode } from '@/config/i18n';
 
 /**

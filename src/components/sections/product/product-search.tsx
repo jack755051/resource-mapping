@@ -33,7 +33,7 @@ export function ProductSearch({
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((open) => !open);
+        setOpen(open => !open);
       }
     };
     document.addEventListener('keydown', down);
@@ -76,7 +76,7 @@ export function ProductSearch({
           <CommandSeparator />
 
           <CommandGroup heading="Categories">
-            {categories.map((cat) => {
+            {categories.map(cat => {
               const localizedName = getLocalizedContent(cat.label, language);
               return (
                 <CommandItem

@@ -1,16 +1,16 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
-const isDev = process.env.NODE_ENV === "development";
-const useLocalBackend = process.env.USE_LOCAL_BACKEND === "true";
+const isDev = process.env.NODE_ENV === 'development';
+const useLocalBackend = process.env.USE_LOCAL_BACKEND === 'true';
 
 // 開發環境後端 URL
 const devBackendUrl = useLocalBackend
-  ? "http://localhost:3000"
-  : "https://guangxun.net";
+  ? 'http://localhost:3000'
+  : 'https://guangxun.net';
 
 const nextConfig: NextConfig = {
   // 1. 僅在生產環境使用靜態輸出
-  ...(isDev ? {} : { output: "export" }),
+  ...(isDev ? {} : { output: 'export' }),
 
   // 2. 關閉圖片優化 (或者你需要配置第三方 Loader 如 Cloudinary)
   images: {
@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
         async rewrites() {
           return [
             {
-              source: "/api/v1/:path*",
+              source: '/api/v1/:path*',
               destination: `${devBackendUrl}/api/v1/:path*`,
             },
           ];

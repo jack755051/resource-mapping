@@ -8,7 +8,14 @@ export function useContact() {
   return {
     data: {
       formConfig: {
-        inquiryTags: ['appointment', 'community', 'lpr', 'dvr', 'maintenance', 'other'],
+        inquiryTags: [
+          'appointment',
+          'community',
+          'lpr',
+          'dvr',
+          'maintenance',
+          'other',
+        ],
       },
     },
   };

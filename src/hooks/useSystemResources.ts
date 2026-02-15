@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectCurrentLanguage } from '@/store/slices/language.slice';
 import {
-    fetchSystemResources,
-    selectSupportCategories,
-    selectProductCategories,
-    selectLocationsCategories,
-    selectSystemIsLoading,
-    selectSystemError,
-    selectSystemResources,
+  fetchSystemResources,
+  selectSupportCategories,
+  selectProductCategories,
+  selectLocationsCategories,
+  selectSystemIsLoading,
+  selectSystemError,
+  selectSystemResources,
 } from '@/store/slices/system.slice';
 
 /**
@@ -35,49 +35,49 @@ import {
  * }
  */
 export function useSystemResources() {
-    const language = useAppSelector(selectCurrentLanguage);
-    const dispatch = useAppDispatch();
+  const language = useAppSelector(selectCurrentLanguage);
+  const dispatch = useAppDispatch();
 
-    // 获取状态
-    const isLoading = useAppSelector(selectSystemIsLoading);
-    const error = useAppSelector(selectSystemError);
-    const resources = useAppSelector(selectSystemResources);
+  // 获取状态
+  const isLoading = useAppSelector(selectSystemIsLoading);
+  const error = useAppSelector(selectSystemError);
+  const resources = useAppSelector(selectSystemResources);
 
-    // 监听语系变化，自动获取资源
-    useEffect(() => {
-        dispatch(fetchSystemResources(language));
-    }, [language, dispatch]);
+  // 监听语系变化，自动获取资源
+  useEffect(() => {
+    dispatch(fetchSystemResources(language));
+  }, [language, dispatch]);
 
-    return {
-        // 资源数据
-        supportCategories: resources.supportCategories,
-        productCategories: resources.productCategories,
-        locations: resources.locations,
-        // 状态
-        isLoading,
-        error,
-        // 手动刷新方法
-        refresh: () => dispatch(fetchSystemResources(language)),
-    };
+  return {
+    // 资源数据
+    supportCategories: resources.supportCategories,
+    productCategories: resources.productCategories,
+    locations: resources.locations,
+    // 状态
+    isLoading,
+    error,
+    // 手动刷新方法
+    refresh: () => dispatch(fetchSystemResources(language)),
+  };
 }
 
 /**
  * 仅获取 Support Categories 的 Hook（不会触发数据加载）
  */
 export function useSupportCategories() {
-    return useAppSelector(selectSupportCategories);
+  return useAppSelector(selectSupportCategories);
 }
 
 /**
  * 仅获取 Product Categories 的 Hook（不会触发数据加载）
  */
 export function useProductCategories() {
-    return useAppSelector(selectProductCategories);
+  return useAppSelector(selectProductCategories);
 }
 
 /**
  * 仅获取 Locations 的 Hook（不会触发数据加载）
  */
 export function useLocations() {
-    return useAppSelector(selectLocationsCategories);
+  return useAppSelector(selectLocationsCategories);
 }

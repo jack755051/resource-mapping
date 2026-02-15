@@ -28,7 +28,14 @@ export function useProduct() {
   // ✅ 使用具體的查詢參數作為依賴，而非整個對象
   useEffect(() => {
     dispatch(fetchProducts(language));
-  }, [dispatch, queryParams.categoryId, queryParams.page, queryParams.limit, queryParams.sort, language]);
+  }, [
+    dispatch,
+    queryParams.categoryId,
+    queryParams.page,
+    queryParams.limit,
+    queryParams.sort,
+    language,
+  ]);
 
   // 3. UI 分類轉換
   const uiCategories: ProductCategory[] = useMemo(() => {
@@ -37,11 +44,11 @@ export function useProduct() {
     return rawCategories
       .map(cat => ({
         id: cat.id,
-        label: typeof cat.label === 'string' ? cat.label : cat.label,  // 後端已翻譯
+        label: typeof cat.label === 'string' ? cat.label : cat.label, // 後端已翻譯
         slug: cat.slug,
-        sort: cat.sort
+        sort: cat.sort,
       }))
-      .sort((a, b) => (a.sort ?? 999) - (b.sort ?? 999));  // 按 sort 升序排序
+      .sort((a, b) => (a.sort ?? 999) - (b.sort ?? 999)); // 按 sort 升序排序
   }, [rawCategories]);
 
   // 4. 計算當前分類名稱
@@ -51,16 +58,17 @@ export function useProduct() {
       return queryParams.categoryId;
     }
     // 找到「全系列」分類：優先使用 slug === 'all'，其次使用 sort === 0 的第一個
-    const allCategory = uiCategories.find(c => c.slug === 'all')
-                      || uiCategories.find(c => c.sort === 0)
-                      || uiCategories[0];  // 兜底：使用第一個分類
+    const allCategory =
+      uiCategories.find(c => c.slug === 'all') ||
+      uiCategories.find(c => c.sort === 0) ||
+      uiCategories[0]; // 兜底：使用第一個分類
     return allCategory?.id || 'all';
   }, [queryParams.categoryId, uiCategories]);
 
   const currentCategoryName = useMemo(() => {
     const current = uiCategories.find(c => c.id === activeCategory);
     // ✅ label 已經是翻譯後的字符串，直接使用
-    return current?.label as string || '';
+    return (current?.label as string) || '';
   }, [activeCategory, uiCategories]);
 
   // Action 封裝
@@ -71,10 +79,12 @@ export function useProduct() {
     // ✅ 如果是「全系列」(slug === 'all')，傳遞 undefined，讓 API 不帶 categoryId
     const finalCategoryId = category?.slug === 'all' ? undefined : categoryId;
 
-    console.log(`🔄 切換分類: categoryId=${categoryId}, slug=${category?.slug}, 實際傳遞=${finalCategoryId || '(undefined - 不傳參數)'}`);
+    console.log(
+      `🔄 切換分類: categoryId=${categoryId}, slug=${category?.slug}, 實際傳遞=${finalCategoryId || '(undefined - 不傳參數)'}`
+    );
 
     // 切換分類時，通常也會重置到第一頁
-    dispatch(setCategory(finalCategoryId));  // ✅ 全系列傳 undefined，其他傳 UUID
+    dispatch(setCategory(finalCategoryId)); // ✅ 全系列傳 undefined，其他傳 UUID
     dispatch(setPage(1));
   };
 

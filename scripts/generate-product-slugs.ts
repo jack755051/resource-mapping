@@ -8,7 +8,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://guangxun.net/api/v1';
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://guangxun.net/api/v1';
 
 interface Product {
   id: string;
@@ -24,10 +25,10 @@ interface ApiResponse {
   data: {
     items: Product[];
     meta: {
-      total: number;      // 总数
-      page: number;       // 当前页
-      limit: number;      // 每页数量
-      lastPage: number;   // 总页数
+      total: number; // 总数
+      page: number; // 当前页
+      limit: number; // 每页数量
+      lastPage: number; // 总页数
     };
   };
 }
@@ -60,7 +61,7 @@ async function fetchAllProductSlugs(): Promise<string[]> {
     totalPages = lastPage;
 
     // 添加第一页的 slug
-    slugs.push(...firstData.data.items.map((p) => p.slug));
+    slugs.push(...firstData.data.items.map(p => p.slug));
 
     console.log(`📦 Found ${total} products across ${totalPages} pages`);
 
@@ -81,7 +82,7 @@ async function fetchAllProductSlugs(): Promise<string[]> {
       }
 
       const data: ApiResponse = await response.json();
-      slugs.push(...data.data.items.map((p) => p.slug));
+      slugs.push(...data.data.items.map(p => p.slug));
       console.log(`✓ Fetched page ${page}/${totalPages}`);
     }
 
@@ -138,7 +139,7 @@ export async function getAllProductSlugs(): Promise<string[]> {
 }
 
 // 执行脚本
-generateStaticPathsFile().catch((error) => {
+generateStaticPathsFile().catch(error => {
   console.error('Fatal error:', error);
   process.exit(1);
 });

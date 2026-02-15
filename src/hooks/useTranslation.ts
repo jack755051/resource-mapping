@@ -2,7 +2,10 @@
 
 import { dictionaries } from '@/config/dictionaries';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { selectCurrentLanguage, setLanguage as setLanguageAction } from '@/store/slices/language.slice';
+import {
+  selectCurrentLanguage,
+  setLanguage as setLanguageAction,
+} from '@/store/slices/language.slice';
 import { LanguageCode } from '@/config/i18n';
 
 export function useTranslation() {
