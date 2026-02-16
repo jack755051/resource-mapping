@@ -16,6 +16,8 @@ export const enLiveView = {
   'liveView.gallery.title': 'Real Footage Quality Showcase',
   'liveView.gallery.subtitle':
     'Seeing is believing. We provide unmodified raw output frames.',
+  'liveView.gallery.empty.title': 'No Gallery Content Available',
+  'liveView.gallery.empty.description': 'There are no footage quality showcase items at the moment.',
 
   // Footage Data
   'liveView.footage.1.title': 'Ultra Low Light Test',

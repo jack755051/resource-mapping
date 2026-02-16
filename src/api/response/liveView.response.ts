@@ -2,11 +2,21 @@
 export interface LiveViewListResDto {
   id: string;
   name: string;
+  description?: string;
+  youtubeChannelId?: string;
+  youtubeVideoId?: string;
+  sort: number;
+  isActive: boolean;
 }
 
 export interface LiveViewResDto {
   id: string;
   name: string;
+  description?: string;
+  youtubeChannelId?: string;
+  youtubeVideoId?: string;
+  sort: number;
+  isActive: boolean;
 }
 
 export interface LiveViewGalleryResDto {

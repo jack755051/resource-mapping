@@ -1,7 +1,4 @@
-import {
-  LiveChannel,
-  mergeChannelsWithYouTube,
-} from '@/config/live-channels';
+import { LiveChannel } from '@/config/live-channels';
 import {
   LiveViewListResDto,
   LiveViewGalleryResDto,
@@ -26,39 +23,41 @@ export class LiveViewMapper {
   // ==========================================
 
   /**
-   * 單一轉換：將 API 頻道 DTO 轉為基本頻道數據
+   * 單一轉換：將 API 頻道 DTO 轉為 LiveChannel
    *
    * 後端字段映射：
    * - dto.id → id (頻道唯一識別碼)
    * - dto.name → name (頻道名稱)
+   * - dto.youtubeChannelId → youtubeChannelId (YouTube 頻道 ID)
+   * - dto.youtubeVideoId → youtubeVideoId (YouTube 影片 ID)
    *
    * ⚠️ 注意：
-   * - 此方法只轉換基本數據，不包含 YouTube 來源
-   * - YouTube 來源由 toDomainChannelList 統一處理
+   * - YouTube 來源現在由後端管理，不再需要前端配置
    */
-  static toDomainChannel(
-    dto: LiveViewListResDto
-  ): Pick<LiveChannel, 'id' | 'name'> {
+  static toDomainChannel(dto: LiveViewListResDto): LiveChannel {
     return {
       id: dto.id,
       name: dto.name,
+      youtubeChannelId: dto.youtubeChannelId,
+      youtubeVideoId: dto.youtubeVideoId,
     };
   }
 
   /**
-   * 批次轉換：頻道列表 + YouTube 來源合併
+   * 批次轉換：頻道列表
    *
    * 後端字段映射：
    * - dto.id → id (頻道唯一識別碼)
    * - dto.name → name (頻道名稱)
+   * - dto.youtubeChannelId → youtubeChannelId
+   * - dto.youtubeVideoId → youtubeVideoId
    *
    * ⚠️ 重要：
-   * 1. 先將所有 DTO 轉換為基本格式
-   * 2. 使用 mergeChannelsWithYouTube 合併 YouTube 配置
-   * 3. YouTube 來源由前端配置檔 (live-channels.ts) 管理
+   * - YouTube 來源由後端直接提供，前端直接使用
+   * - 不再需要合併前端配置
    *
    * @param dtos - 後端返回的頻道列表 DTO
-   * @returns 包含 YouTube 來源的完整頻道列表
+   * @returns 完整頻道列表
    */
   static toDomainChannelList(dtos: LiveViewListResDto[]): LiveChannel[] {
     // 🛡️ 防禦性檢查：確保輸入是陣列
@@ -74,17 +73,14 @@ export class LiveViewMapper {
     }
 
     try {
-      // 步驟 1: 轉換基本數據
-      const basicChannels = dtos.map(dto => this.toDomainChannel(dto));
-
-      // 步驟 2: 合併 YouTube 配置
-      const channelsWithYouTube = mergeChannelsWithYouTube(basicChannels);
+      // 直接轉換，不再合併前端配置
+      const channels = dtos.map(dto => this.toDomainChannel(dto));
 
       console.log(
-        `✅ LiveViewMapper: 成功轉換 ${channelsWithYouTube.length} 個頻道`
+        `✅ LiveViewMapper: 成功轉換 ${channels.length} 個頻道`
       );
 
-      return channelsWithYouTube;
+      return channels;
     } catch (error) {
       console.error('LiveViewMapper.toDomainChannelList: 轉換失敗', error);
       return [];

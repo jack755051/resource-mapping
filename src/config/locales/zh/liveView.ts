@@ -15,6 +15,8 @@ export const zhLiveView = {
   // Footage Gallery Section
   'liveView.gallery.title': '實拍畫質展示',
   'liveView.gallery.subtitle': '眼見為憑。我們提供未經修飾的原始輸出畫面。',
+  'liveView.gallery.empty.title': '目前尚無畫廊內容',
+  'liveView.gallery.empty.description': '暫時沒有實拍畫質展示資料。',
 
   // Footage Data
   'liveView.footage.1.title': '極低照度測試',

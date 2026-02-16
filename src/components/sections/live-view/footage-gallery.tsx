@@ -3,10 +3,10 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Layers, ZoomIn } from 'lucide-react'; // 使用 Layers Icon 代表多圖層
+import { Layers, ZoomIn, ImageOff } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useLiveView } from '@/hooks/useLiveView';
-import { ImageModal } from './image-modal'; // 引入剛剛做的 Modal
+import { ImageModal } from './image-modal';
 
 export function FootageGallery() {
   const { t } = useTranslation();
@@ -46,8 +46,20 @@ export function FootageGallery() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryData.map((item, index) => (
+        {galleryData.length === 0 ? (
+          // 空狀態
+          <div className="py-32 flex flex-col items-center justify-center text-center border-2 border-dashed border-border/50 rounded-3xl">
+            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4 text-muted-foreground">
+              <ImageOff className="w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-bold">{t('liveView.gallery.empty.title')}</h3>
+            <p className="text-muted-foreground mt-2">
+              {t('liveView.gallery.empty.description')}
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {galleryData.map((item, index) => (
             <div
               key={item.id}
               onClick={() => handleOpenModal(index)} // 點擊觸發
@@ -99,17 +111,20 @@ export function FootageGallery() {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* 燈箱 Modal */}
-      <ImageModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        images={galleryData[selectedGallery]?.images || []}
-        title={t(galleryData[selectedGallery]?.titleKey)}
-      />
+      {galleryData.length > 0 && (
+        <ImageModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          images={galleryData[selectedGallery]?.images || []}
+          title={t(galleryData[selectedGallery]?.titleKey)}
+        />
+      )}
     </section>
   );
 }
