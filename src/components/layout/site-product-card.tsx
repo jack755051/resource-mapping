@@ -16,12 +16,14 @@ import { ArrowRight, Aperture, Maximize2, Zap, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ProductCardProps } from '@/type/page/product';
 import { ProductImagePlaceholder } from './product-image-placeholder';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export function ProductCard({
   props,
   className,
   classNames,
 }: ProductCardProps) {
+  const { t } = useTranslation();
   const { title, category, image, specs, tags, href } = props;
   const [imageError, setImageError] = useState(false);
 
@@ -75,7 +77,7 @@ export function ProductCard({
             <Badge className="bg-white/90 text-primary hover:bg-white shadow-sm gap-1.5 border border-primary/10">
               <Aperture className="w-3.5 h-3.5" />
               <span className="text-[10px] font-bold tracking-wider">
-                AI CORE
+                {t('products.card.aiCore')}
               </span>
             </Badge>
           </div>
@@ -137,7 +139,7 @@ export function ProductCard({
       >
         <div className="w-full flex items-center justify-between group/btn cursor-pointer">
           <span className="text-sm font-medium text-muted-foreground group-hover/btn:text-foreground transition-colors">
-            View Details
+            {t('products.card.viewDetails')}
           </span>
           <Button
             size="icon"
@@ -152,7 +154,7 @@ export function ProductCard({
       <Link
         href={href}
         className="absolute inset-0 z-0 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-3xl"
-        aria-label={`View ${title}`}
+        aria-label={t('products.card.viewDetailsAria', { title })}
       />
     </Card>
   );

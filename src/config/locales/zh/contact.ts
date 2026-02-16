@@ -42,6 +42,8 @@ export const zhContact = {
   'contact.success.reset': '發送新的諮詢',
 
   // Info Section (Right)
+  'contact.info.location.label': '選擇據點',
+  'contact.info.location.placeholder': '選擇據點',
   'contact.info.address.title': '公司地址',
   'contact.info.address.content': '241 新北市新莊區福壽街 164 巷 17 號 1 樓',
   'contact.info.address.map': '開啟 Google Maps',

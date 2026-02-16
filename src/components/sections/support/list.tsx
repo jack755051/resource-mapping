@@ -148,7 +148,7 @@ export function SupportList({ className, classNames }: SupportListProps = {}) {
                 <a
                   href="#"
                   className="absolute inset-0"
-                  aria-label={`View ${item.title}`}
+                  aria-label={t('support.list.view', { title: item.title })}
                   onClick={e => e.preventDefault()}
                 ></a>
               </motion.div>

@@ -47,6 +47,8 @@ export const enContact = {
   'contact.success.reset': 'Send Another Inquiry',
 
   // Info Section (Right)
+  'contact.info.location.label': 'Select Location',
+  'contact.info.location.placeholder': 'Choose a location',
   'contact.info.address.title': 'Office Address',
   'contact.info.address.content':
     '1F., No. 17, Ln. 164, Fushou St., Xinzhuang Dist., New Taipei City 242, Taiwan',

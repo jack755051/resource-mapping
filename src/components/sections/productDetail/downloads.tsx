@@ -79,7 +79,9 @@ export function ProductDownloads({
               target="_blank"
               rel="noreferrer"
               className="absolute inset-0"
-              aria-label={`Download ${item.title}`}
+              aria-label={t('productDetail.downloads.aria', {
+                title: item.title,
+              })}
             ></a>
           </div>
         ))}

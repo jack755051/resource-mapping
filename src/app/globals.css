@@ -57,6 +57,17 @@
     --accent-cyan: 189 94% 43%;
     --accent-green: 142 71% 45%;
     --accent-red: 0 84% 60%;
+
+    /* HUD (Live View) tokens */
+    --hud-bg: 222 47% 6%;
+    --hud-surface: 222 47% 8%;
+    --hud-panel: 222 47% 12%;
+    --hud-text: 210 40% 98%;
+    --hud-line: 210 40% 98%;
+    --hud-muted: 215 16% 65%;
+    --hud-muted-strong: 215 16% 40%;
+    --hud-danger: 0 84% 60%;
+    --hud-success: 142 71% 45%;
   }
 
   .dark {
@@ -101,6 +112,17 @@
     --accent-cyan: 189 94% 50%;
     --accent-green: 142 71% 45%;
     --accent-red: 0 100% 60%;
+
+    /* HUD (Live View) tokens */
+    --hud-bg: 222 47% 6%;
+    --hud-surface: 222 47% 8%;
+    --hud-panel: 222 47% 12%;
+    --hud-text: 210 40% 98%;
+    --hud-line: 210 40% 98%;
+    --hud-muted: 215 16% 65%;
+    --hud-muted-strong: 215 16% 40%;
+    --hud-danger: 0 84% 60%;
+    --hud-success: 142 71% 45%;
   }
 }
 

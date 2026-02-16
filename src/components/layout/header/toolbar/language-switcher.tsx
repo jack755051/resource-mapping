@@ -14,8 +14,10 @@ import { LucideIcon } from 'lucide-react';
 // 引入我們剛做好的 config 和 hook
 import { languages, LanguageCode } from '@/config/i18n';
 import { useLanguage } from '@/provider/language-provider';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function LanguageSwitcher() {
+  const { t } = useTranslation();
   const { getIcon } = useIcon();
   const LanguageIconComponent = getIcon('language') as LucideIcon;
 
@@ -29,7 +31,7 @@ export default function LanguageSwitcher() {
           {LanguageIconComponent && (
             <LanguageIconComponent className="h-[1.2rem] w-[1.2rem]" />
           )}
-          <span className="sr-only">切換語言</span>
+          <span className="sr-only">{t('header.language.toggle')}</span>
         </Button>
       </DropdownMenuTrigger>
 

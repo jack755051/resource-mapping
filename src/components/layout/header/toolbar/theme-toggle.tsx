@@ -4,8 +4,10 @@ import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function ThemeToggle() {
+  const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -29,7 +31,9 @@ export default function ThemeToggle() {
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="w-9 h-9 transition-all hover:bg-muted"
       aria-label={
-        theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+        theme === 'dark'
+          ? t('common.theme.toLight')
+          : t('common.theme.toDark')
       }
     >
       {theme === 'dark' ? (

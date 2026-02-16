@@ -21,7 +21,7 @@ export function SingleMonitorFrame({ channel }: SingleMonitorFrameProps) {
   const isOffline = channel.isOffline || !src;
 
   return (
-    <div className="relative aspect-video w-full bg-gray-900 rounded-lg overflow-hidden border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.3)] group hover:border-primary/50 transition-colors">
+    <div className="relative aspect-video w-full bg-hud-panel rounded-lg overflow-hidden border border-hud-line/10 shadow-[0_0_20px_rgba(0,0,0,0.3)] group hover:border-primary/50 transition-colors">
       {/* 裝飾：四角鎖定框 (純視覺) */}
       <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-primary/30 z-20 pointer-events-none"></div>
       <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-primary/30 z-20 pointer-events-none"></div>
@@ -29,7 +29,7 @@ export function SingleMonitorFrame({ channel }: SingleMonitorFrameProps) {
       <div className="absolute bottom-2 right-2 w-3 h-3 border-r border-b border-primary/30 z-20 pointer-events-none"></div>
 
       {/* 頻道標籤 HUD */}
-      <div className="absolute top-3 left-4 z-20 bg-black/60 backdrop-blur px-2 py-0.5 rounded text-[10px] font-mono text-primary/80 border border-primary/20 shadow-sm">
+      <div className="absolute top-3 left-4 z-20 bg-hud-bg/60 backdrop-blur px-2 py-0.5 rounded text-[10px] font-mono text-primary/80 border border-primary/20 shadow-sm">
         {t('liveView.monitor.cam')}: {channel.name}
       </div>
 
@@ -50,7 +50,7 @@ export function SingleMonitorFrame({ channel }: SingleMonitorFrameProps) {
       <div
         className={cn(
           'absolute bottom-3 right-4 z-20 w-2 h-2 rounded-full shadow-lg border border-black/50',
-          isOffline ? 'bg-red-500' : 'bg-green-500 animate-pulse'
+          isOffline ? 'bg-hud-danger' : 'bg-hud-success animate-pulse'
         )}
       />
     </div>

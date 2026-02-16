@@ -15,4 +15,5 @@ export const zhSupport = {
   // List / Empty State
   'support.list.empty.title': '找不到相關資源',
   'support.list.empty.desc': '請嘗試其他關鍵字或切換分類。',
+  'support.list.view': '查看 {title}',
 };

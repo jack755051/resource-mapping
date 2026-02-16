@@ -41,7 +41,12 @@ export function SendSuccess({
       </div>
 
       {/* 標題：優先使用傳入的 title，沒有則用翻譯檔 */}
-      <h3 className={cn('text-xl font-bold text-accent-green', classNames?.title)}>
+      <h3
+        className={cn(
+          'text-xl font-bold text-accent-green',
+          classNames?.title
+        )}
+      >
         {title || t('contact.success.title')}
       </h3>
 

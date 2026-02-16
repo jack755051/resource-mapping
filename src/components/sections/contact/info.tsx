@@ -78,13 +78,15 @@ export function ContactInfo({ locations }: ContactInfoProps) {
         </div>
         <div className="flex-1">
           <Label className="text-xs text-muted-foreground mb-1 block">
-            Select Location
+            {t('contact.info.location.label')}
           </Label>
 
           {/* 🔥 重點：這裡的 value 必須是有值的 activeId，不能是空字串 */}
           <Select value={activeId} onValueChange={setSelectedLocationId}>
             <SelectTrigger className="w-full h-12 bg-card border-border/50 rounded-xl text-base font-medium">
-              <SelectValue placeholder="選擇據點" />
+              <SelectValue
+                placeholder={t('contact.info.location.placeholder')}
+              />
             </SelectTrigger>
             <SelectContent>
               {locations.map(loc => (

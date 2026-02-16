@@ -39,7 +39,7 @@ export default function Error({
         <div className="absolute top-12 right-12 flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-destructive animate-ping"></div>
           <span className="text-xs font-mono text-destructive/80 tracking-widest uppercase">
-            SYSTEM ERROR
+            {t('common.error.status')}
           </span>
         </div>
       </div>
@@ -51,19 +51,18 @@ export default function Error({
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-          {t('common.error.title') || '系統發生預期外的錯誤'}
+          {t('common.error.title')}
         </h1>
 
         <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-          {t('common.error.desc') ||
-            '我們的監控系統偵測到異常。請嘗試重新整理，若問題持續發生，請聯繫技術支援。'}
+          {t('common.error.desc')}
         </p>
 
         {/* 錯誤代碼 (僅在開發環境或有 digest 時顯示，增加科技感) */}
         {error.digest && (
           <div className="mb-8 p-3 bg-muted/50 rounded-lg border border-border/50 inline-block">
             <code className="text-xs font-mono text-muted-foreground">
-              Digest: {error.digest}
+              {t('common.error.digest', { digest: error.digest })}
             </code>
           </div>
         )}
@@ -74,7 +73,7 @@ export default function Error({
             className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-destructive text-destructive-foreground font-medium transition-all hover:bg-destructive/90 shadow-lg shadow-destructive/20 hover:shadow-destructive/40 hover:-translate-y-0.5"
           >
             <RotateCcw className="mr-2 w-4 h-4" />
-            {t('common.action.retry') || '重新載入'}
+            {t('common.action.retry')}
           </button>
 
           <Link
@@ -82,7 +81,7 @@ export default function Error({
             className="inline-flex items-center justify-center h-12 px-8 rounded-full border border-border bg-background/60 backdrop-blur hover:bg-muted font-medium transition-colors"
           >
             <LifeBuoy className="mr-2 w-4 h-4" />
-            {t('common.action.contact_support') || '聯繫支援'}
+            {t('common.action.contact_support')}
           </Link>
         </div>
       </div>
@@ -90,7 +89,7 @@ export default function Error({
       {/* 底部裝飾 */}
       <div className="absolute bottom-12 left-0 w-full text-center">
         <p className="font-mono text-[10px] text-destructive/40 tracking-[0.2em]">
-          STATUS: CRITICAL_FAILURE // ACTION_REQUIRED
+          {t('common.error.footer')}
         </p>
       </div>
     </div>

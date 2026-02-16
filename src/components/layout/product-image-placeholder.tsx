@@ -2,6 +2,7 @@
 
 import { Cctv } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface ProductImagePlaceholderProps {
   className?: string;
@@ -10,6 +11,8 @@ interface ProductImagePlaceholderProps {
 export function ProductImagePlaceholder({
   className,
 }: ProductImagePlaceholderProps) {
+  const { t } = useTranslation();
+
   return (
     <div
       className={cn(
@@ -25,9 +28,11 @@ export function ProductImagePlaceholder({
       {/* 文字說明 */}
       <div className="flex flex-col items-center gap-1">
         <span className="text-xs font-bold tracking-widest uppercase font-mono">
-          Image Coming Soon
+          {t('products.image.placeholder.title')}
         </span>
-        <span className="text-[10px] opacity-70">Product Visual Pending</span>
+        <span className="text-[10px] opacity-70">
+          {t('products.image.placeholder.subtitle')}
+        </span>
       </div>
     </div>
   );

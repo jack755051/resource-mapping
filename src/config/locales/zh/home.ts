@@ -6,6 +6,11 @@ export const zhHome = {
   'home.hero.subtitle': '安全不該只是被動紀錄，而是主動防禦...',
   'home.hero.cta.business': '企業諮詢',
   'home.hero.cta.special': '查看特殊方案',
+  'home.hero.hud.recording': '錄影 00:04:23:12',
+  'home.hero.hud.sys': '系統：在線',
+  'home.hero.hud.cam': '攝影機ID：08-AX',
+  'home.hero.hud.net': '網路：1GB/S',
+  'home.hero.hud.ai': 'AI偵測：啟用',
 
   // =================================================================
   // Home Page: Section B - Client Types

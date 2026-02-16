@@ -81,6 +81,17 @@ const config = {
           2: 'hsl(var(--surface-2))',
           3: 'hsl(var(--surface-3))',
         },
+        hud: {
+          bg: 'hsl(var(--hud-bg))',
+          surface: 'hsl(var(--hud-surface))',
+          panel: 'hsl(var(--hud-panel))',
+          text: 'hsl(var(--hud-text))',
+          line: 'hsl(var(--hud-line))',
+          muted: 'hsl(var(--hud-muted))',
+          mutedStrong: 'hsl(var(--hud-muted-strong))',
+          danger: 'hsl(var(--hud-danger))',
+          success: 'hsl(var(--hud-success))',
+        },
       },
       // 2. 導角設定 (建議用科技感的直角或微導角)
       borderRadius: {

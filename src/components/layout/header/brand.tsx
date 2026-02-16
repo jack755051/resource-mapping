@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { HeaderBrandProps } from '@/type'; // 直接引用定義好的 Props
 import { cn } from '@/lib/utils';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function Brand({
   data,
@@ -10,6 +11,7 @@ export default function Brand({
   classNames,
   isShowCompanyName,
 }: HeaderBrandProps) {
+  const { t } = useTranslation();
   // 解構資料，讓程式碼更乾淨
   const { logo, title } = data;
 
@@ -35,7 +37,7 @@ export default function Brand({
       ) : (
         // 如果沒有圖片，顯示一個佔位方塊 (開發階段好用)
         <div className="h-8 w-8 bg-muted rounded-md flex items-center justify-center text-xs font-bold text-muted-foreground">
-          Logo
+          {t('common.brand.logoPlaceholder')}
         </div>
       )}
 

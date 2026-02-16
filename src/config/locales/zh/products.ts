@@ -15,6 +15,28 @@ export const zhProducts = {
   'products.hero.ai.tag': 'AI',
   'products.hero.ai.title': '智慧偵測',
   'products.hero.ai.accuracy': '99.9% 準確率',
+  'products.hero.imageAlt': '旗艦攝影機',
+
+  // =================================================================
+  // Products Page: List & Search
+  // =================================================================
+  'products.list.empty.title': '目前尚無產品',
+  'products.list.empty.desc': '分類「{category}」目前沒有相關資料。',
+  'products.list.count': '共 {count} 項產品',
+  'products.card.viewDetails': '查看詳情',
+  'products.card.viewDetailsAria': '查看 {title} 詳情',
+  'products.card.aiCore': 'AI 核心',
+
+  'products.search.placeholder': '搜尋產品...',
+  'products.search.empty': '找不到相關結果。',
+  'products.search.popular': '熱門',
+  'products.search.categories': '分類',
+  'products.search.sample': 'GC-IP50 旗艦款',
+  'products.search.title': '產品搜尋',
+  'products.search.desc': '可依型號、分類或關鍵字搜尋。',
+
+  'products.image.placeholder.title': '圖片準備中',
+  'products.image.placeholder.subtitle': '產品視覺待補',
 
   // =================================================================
   // Product Detail Page: Info (產品資訊)
@@ -39,6 +61,7 @@ export const zhProducts = {
   // Product Detail Page: Downloads (產品下載)
   // =================================================================
   'productDetail.downloads.title': '下載專區',
+  'productDetail.downloads.aria': '下載 {title}',
 
   'productDetail.downloads.pdf': 'PDF',
   'productDetail.downloads.word': 'Word',
@@ -56,4 +79,12 @@ export const zhProducts = {
   // =================================================================
   'productDetail.related.title': '相關產品推薦',
   'productDetail.related.viewAll': '查看全系列',
+
+  // Product Detail: Gallery
+  'productDetail.gallery.view360': '360° 瀏覽',
+  'productDetail.gallery.image': '產品圖片 {index}',
+  'productDetail.gallery.imageWithName': '{name} - 產品圖片 {index}',
+  'productDetail.gallery.thumbnail': '產品縮圖 {index}',
+  'productDetail.gallery.thumbnailWithName': '{name} - 產品縮圖 {index}',
+  'productDetail.gallery.viewImage': '檢視圖片 {index}',
 };

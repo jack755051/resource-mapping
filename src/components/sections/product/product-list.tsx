@@ -7,6 +7,7 @@ import { ProductSkeletonCard } from '@/components/layout/skeleton/product-skelet
 import { SlidersHorizontal } from 'lucide-react';
 import { useProduct } from '@/hooks/useProduct';
 import { cn } from '@/lib/utils';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface ProductListSectionProps {
   className?: string;
@@ -23,6 +24,7 @@ export function ProductListSection({
   className,
   classNames,
 }: ProductListSectionProps = {}) {
+  const { t } = useTranslation();
   // =========================================================================
   // 🔥 統一數據源：從 useProduct hook 獲取所有數據
   // =========================================================================
@@ -91,9 +93,11 @@ export function ProductListSection({
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4 text-muted-foreground">
               <SlidersHorizontal className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold">目前尚無產品</h3>
+            <h3 className="text-xl font-bold">
+              {t('products.list.empty.title')}
+            </h3>
             <p className="text-muted-foreground mt-2">
-              分類「{categoryName}」目前沒有相關資料。
+              {t('products.list.empty.desc', { category: categoryName })}
             </p>
           </motion.div>
         ) : (
@@ -117,7 +121,7 @@ export function ProductListSection({
             >
               <h2 className="text-2xl font-bold">{categoryName}</h2>
               <span className="text-muted-foreground text-sm">
-                共 {totalCount} 項產品
+                {t('products.list.count', { count: totalCount })}
               </span>
             </div>
 

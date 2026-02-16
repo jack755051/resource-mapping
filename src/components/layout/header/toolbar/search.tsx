@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/input-group';
 import { cn } from '@/lib/utils';
 import { useIcon } from '@/hooks/useIcon';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function Search({
   data, // 1. 改名為 data
@@ -25,6 +26,7 @@ export default function Search({
 
   const { getIcon } = useIcon();
   const IconComponent = getIcon('search') as LucideIcon;
+  const { t } = useTranslation();
 
   const [inputValue, setInputValue] = useState(defaultValue || '');
 
@@ -50,7 +52,7 @@ export default function Search({
     >
       <InputGroupInput
         className={cn('max-w-xs', classNames?.input)}
-        placeholder={placeholder ?? 'Search...'}
+        placeholder={placeholder ?? t('nav.search.placeholder')}
         value={inputValue}
         disabled={disabled} // 4. 綁定 disabled
         onChange={e => setInputValue(e.target.value)}

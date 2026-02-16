@@ -109,8 +109,8 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
               type="email"
               {...register('email')}
               placeholder={t('contact.form.placeholder.email')}
-                className={cn(
-                  'bg-muted/20 border-border/50 h-11 sm:h-12',
+              className={cn(
+                'bg-muted/20 border-border/50 h-11 sm:h-12',
                 errors.email &&
                   'border-destructive focus-visible:ring-destructive'
               )}
@@ -196,7 +196,7 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  處理中...
+                  {t('contact.form.submitting')}
                 </>
               ) : (
                 <>

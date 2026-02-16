@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
   // 2. 關閉圖片優化 (或者你需要配置第三方 Loader 如 Cloudinary)
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
 
   // 3. 確保 React Strict Mode 開啟 (生產環境建議)

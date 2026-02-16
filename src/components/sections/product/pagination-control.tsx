@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button'; // 假設你有這個
 import { cn } from '@/lib/utils';
 import { Pagination } from '@/type/common';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface PaginationControlProps {
   pagination: Pagination | null;
@@ -14,6 +15,7 @@ export function PaginationControl({
   pagination,
   onPageChange,
 }: PaginationControlProps) {
+  const { t } = useTranslation();
   if (!pagination || pagination.totalPages <= 1) return null;
 
   const { current, totalPages } = pagination;
@@ -38,7 +40,7 @@ export function PaginationControl({
           )}
         >
           <ChevronLeft className="h-4 w-4" />
-          <span className="sr-only">Previous Page</span>
+          <span className="sr-only">{t('common.pagination.previous')}</span>
         </Button>
 
         {/* 頁碼按鈕 (手機版可以隱藏中間，只留當前頁) */}
@@ -98,13 +100,16 @@ export function PaginationControl({
           )}
         >
           <ChevronRight className="h-4 w-4" />
-          <span className="sr-only">Next Page</span>
+          <span className="sr-only">{t('common.pagination.next')}</span>
         </Button>
       </div>
 
       {/* 頁面資訊提示 - 桌面版 */}
       <div className="hidden sm:block text-sm text-muted-foreground">
-        第 {current} 頁，共 {totalPages} 頁
+        {t('common.pagination.pageInfo', {
+          current,
+          total: totalPages,
+        })}
       </div>
     </div>
   );

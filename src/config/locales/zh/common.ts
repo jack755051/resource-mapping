@@ -27,6 +27,7 @@ export const zhCommon = {
   'header.mobile_menu.settings': '設定',
   'header.mobile_menu.theme': '深色模式',
   'header.mobile_menu.language': '語言',
+  'header.language.toggle': '切換語言',
 
   // Live View
   'nav.live_view': '即時監控',
@@ -43,15 +44,51 @@ export const zhCommon = {
   'common.error.title': '系統發生預期外的錯誤',
   'common.error.desc':
     '我們的監控系統偵測到異常。請嘗試重新整理，若問題持續發生，請聯繫技術支援。',
+  'common.error.status': '系統錯誤',
+  'common.error.footer': '狀態：嚴重故障 // 需要處置',
+  'common.error.digest': '摘要：{digest}',
 
   // 404 頁面
   'common.not_found.title': '頁面訊號丟失',
   'common.not_found.desc':
     '您所尋找的路徑不存在，或權限不足無法存取該監控節點。',
+  'common.not_found.status': '無訊號',
+  'common.not_found.footer': '錯誤碼：0x404_NOT_FOUND // 系統已停止',
 
   // 通用操作按鈕
   'common.action.retry': '重新載入',
   'common.action.contact_support': '聯繫支援',
   'common.action.back_home': '返回首頁',
   'common.action.go_back': '回上一頁',
+
+  // Brand
+  'common.brand.logoPlaceholder': '標誌',
+
+  // 分頁
+  'common.pagination.previous': '上一頁',
+  'common.pagination.next': '下一頁',
+  'common.pagination.pageInfo': '第 {current} 頁，共 {total} 頁',
+  'common.pagination.label': '分頁',
+  'common.pagination.previousShort': '上一頁',
+  'common.pagination.nextShort': '下一頁',
+  'common.pagination.more': '更多頁面',
+
+  // Theme
+  'common.theme.toLight': '切換至淺色模式',
+  'common.theme.toDark': '切換至深色模式',
+
+  // Breadcrumb
+  'common.breadcrumb.label': '麵包屑',
+  'common.breadcrumb.more': '更多',
+
+  // Carousel
+  'common.carousel.previous': '上一張',
+  'common.carousel.next': '下一張',
+
+  // Dialog
+  'common.dialog.close': '關閉',
+
+  // Command
+  'common.command.title': '指令面板',
+  'common.command.desc': '搜尋要執行的指令...',
 };

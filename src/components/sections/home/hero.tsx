@@ -2,6 +2,7 @@
 
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTranslation } from '@/hooks/useTranslation';
 
 export function HeroSection() {
@@ -12,7 +13,15 @@ export function HeroSection() {
       {/* 1. 背景層 */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/80 to-background z-10" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 contrast-125 grayscale mix-blend-multiply" />
+        <Image
+          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-30 contrast-125 grayscale mix-blend-multiply"
+          aria-hidden="true"
+        />
 
         {/* HUD 監控介面裝飾 */}
         <div className="absolute inset-0 z-20 pointer-events-none opacity-20">
@@ -27,18 +36,18 @@ export function HeroSection() {
           <div className="absolute top-12 right-12 flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-destructive animate-pulse"></div>
             <span className="text-xs font-mono text-primary/80 tracking-widest">
-              REC 00:04:23:12
+              {t('home.hero.hud.recording')}
             </span>
           </div>
 
           <div className="absolute bottom-12 left-12 font-mono text-[10px] text-primary/40 leading-tight hidden md:block">
-            SYS: ONLINE
+            {t('home.hero.hud.sys')}
             <br />
-            CAM_ID: 08-AX
+            {t('home.hero.hud.cam')}
             <br />
-            NET: 1GB/S
+            {t('home.hero.hud.net')}
             <br />
-            AI_DETECT: ACTIVE
+            {t('home.hero.hud.ai')}
           </div>
         </div>
 

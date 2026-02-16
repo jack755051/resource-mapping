@@ -15,4 +15,5 @@ export const enSupport = {
   // List / Empty State
   'support.list.empty.title': 'No resources found',
   'support.list.empty.desc': 'Try different keywords or categories.',
+  'support.list.view': 'View {title}',
 };

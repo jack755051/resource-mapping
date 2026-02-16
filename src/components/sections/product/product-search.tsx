@@ -59,23 +59,28 @@ export function ProductSearch({
         </kbd>
       </Button>
 
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandDialog
+        open={open}
+        onOpenChange={setOpen}
+        title={t('products.search.title')}
+        description={t('products.search.desc')}
+      >
         {/* 可以用 t() 翻譯 placeholder */}
-        <CommandInput placeholder="Search products..." />
+        <CommandInput placeholder={t('products.search.placeholder')} />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>{t('products.search.empty')}</CommandEmpty>
 
-          <CommandGroup heading="Popular">
+          <CommandGroup heading={t('products.search.popular')}>
             <CommandItem onSelect={() => console.log('Selected IP50')}>
               <Laptop className="mr-2 h-4 w-4" />
-              <span>GC-IP50 Flagship</span>
+              <span>{t('products.search.sample')}</span>
             </CommandItem>
             {/* ...其他靜態項目... */}
           </CommandGroup>
 
           <CommandSeparator />
 
-          <CommandGroup heading="Categories">
+          <CommandGroup heading={t('products.search.categories')}>
             {categories.map(cat => {
               const localizedName = getLocalizedContent(cat.label, language);
               return (

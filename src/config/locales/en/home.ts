@@ -9,6 +9,11 @@ export const enHome = {
     'Security requires active defense, not just passive recording. From production details to perimeter blind spots, we use industrial-grade vision to preempt risks before they occur.',
   'home.hero.cta.business': 'Consult for Business',
   'home.hero.cta.special': 'See Special Solutions',
+  'home.hero.hud.recording': 'REC 00:04:23:12',
+  'home.hero.hud.sys': 'SYS: ONLINE',
+  'home.hero.hud.cam': 'CAM_ID: 08-AX',
+  'home.hero.hud.net': 'NET: 1GB/S',
+  'home.hero.hud.ai': 'AI_DETECT: ACTIVE',
 
   // =================================================================
   // Home Page: Section B - Client Types

@@ -60,14 +60,14 @@ export function ImageModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 md:p-8"
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-hud-bg/95 backdrop-blur-sm p-4 md:p-8"
           onClick={onClose} // 點擊背景關閉
         >
           {/* 關閉按鈕 */}
           <button
             onClick={onClose}
             aria-label={t('liveView.modal.close')}
-            className="absolute top-4 right-4 md:top-8 md:right-8 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors z-50"
+            className="absolute top-4 right-4 md:top-8 md:right-8 p-2 rounded-full bg-hud-line/10 text-hud-text hover:bg-hud-line/20 transition-colors z-50"
           >
             <X className="w-6 h-6" />
           </button>
@@ -79,9 +79,9 @@ export function ImageModal({
           >
             {/* 標題 (可選) */}
             {title && (
-              <div className="absolute -top-12 left-0 text-white font-bold text-xl tracking-wider">
+              <div className="absolute -top-12 left-0 text-hud-text font-bold text-xl tracking-wider">
                 {title}
-                <span className="ml-4 text-sm font-normal text-gray-400">
+                <span className="ml-4 text-sm font-normal text-hud-muted">
                   {currentIndex + 1} / {images.length}
                 </span>
               </div>
@@ -109,14 +109,14 @@ export function ImageModal({
                 <button
                   onClick={showPrev}
                   aria-label={t('liveView.modal.prev')}
-                  className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-white/20 transition-all border border-white/10"
+                  className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 p-3 rounded-full bg-hud-bg/60 text-hud-text hover:bg-hud-line/20 transition-all border border-hud-line/10"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button
                   onClick={showNext}
                   aria-label={t('liveView.modal.next')}
-                  className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-white/20 transition-all border border-white/10"
+                  className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 p-3 rounded-full bg-hud-bg/60 text-hud-text hover:bg-hud-line/20 transition-all border border-hud-line/10"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>

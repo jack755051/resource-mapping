@@ -52,7 +52,9 @@ export function FootageGallery() {
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4 text-muted-foreground">
               <ImageOff className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold">{t('liveView.gallery.empty.title')}</h3>
+            <h3 className="text-xl font-bold">
+              {t('liveView.gallery.empty.title')}
+            </h3>
             <p className="text-muted-foreground mt-2">
               {t('liveView.gallery.empty.description')}
             </p>
@@ -60,57 +62,57 @@ export function FootageGallery() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {galleryData.map((item, index) => (
-            <div
-              key={item.id}
-              onClick={() => handleOpenModal(index)} // 點擊觸發
-              className="group relative aspect-[4/3] rounded-2xl bg-muted border border-border/50 cursor-pointer"
-            >
-              {/* 視覺優化：堆疊效果 (Stack Effect)
+              <div
+                key={item.id}
+                onClick={() => handleOpenModal(index)} // 點擊觸發
+                className="group relative aspect-[4/3] rounded-2xl bg-muted border border-border/50 cursor-pointer"
+              >
+                {/* 視覺優化：堆疊效果 (Stack Effect)
                  在主圖下面墊一張稍微歪一點的圖，暗示這是一個「相簿」
               */}
-              <div className="absolute inset-0 bg-gray-800 rounded-2xl rotate-3 scale-[0.98] translate-y-2 opacity-50 group-hover:rotate-6 group-hover:translate-y-3 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-hud-panel/70 rounded-2xl rotate-3 scale-[0.98] translate-y-2 opacity-50 group-hover:rotate-6 group-hover:translate-y-3 transition-transform duration-500" />
 
-              <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-lg">
-                <Image
-                  src={item.cover}
-                  alt={t(item.titleKey)}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+                <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-lg">
+                  <Image
+                    src={item.cover}
+                    alt={t(item.titleKey)}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
 
                 {/* 覆蓋層 */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
 
                 {/* 右上角：圖片數量標籤 */}
-                {item.images.length > 1 && (
-                  <div className="absolute top-4 right-4 bg-black/60 backdrop-blur px-2 py-1 rounded text-xs font-mono text-white flex items-center gap-1 border border-white/20">
-                    <Layers className="w-3 h-3" />
-                    <span>+{item.images.length - 1}</span>
-                  </div>
-                )}
+                  {item.images.length > 1 && (
+                    <div className="absolute top-4 right-4 bg-hud-bg/60 backdrop-blur px-2 py-1 rounded text-xs font-mono text-hud-text flex items-center gap-1 border border-hud-line/20">
+                      <Layers className="w-3 h-3" />
+                      <span>+{item.images.length - 1}</span>
+                    </div>
+                  )}
 
                 {/* 資訊 */}
-                <div className="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                  <div className="flex justify-between items-end">
-                    <div>
-                      <div className="text-primary text-xs font-bold tracking-wider uppercase mb-1">
-                        {t(item.tagKey)}
+                  <div className="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <div className="text-primary text-xs font-bold tracking-wider uppercase mb-1">
+                          {t(item.tagKey)}
+                        </div>
+                        <h3 className="text-hud-text text-lg font-bold">
+                          {t(item.titleKey)}
+                        </h3>
+                        <p className="text-hud-muted text-xs font-mono mt-1">
+                          {t(item.metaKey)}
+                        </p>
                       </div>
-                      <h3 className="text-white text-lg font-bold">
-                        {t(item.titleKey)}
-                      </h3>
-                      <p className="text-gray-400 text-xs font-mono mt-1">
-                        {t(item.metaKey)}
-                      </p>
-                    </div>
-                    {/* Icon 改成 Layers，更有「查看更多」的感覺 */}
-                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all hover:bg-primary hover:text-white">
-                      <ZoomIn className="w-5 h-5" />
+                      {/* Icon 改成 Layers，更有「查看更多」的感覺 */}
+                      <div className="w-10 h-10 rounded-full bg-hud-line/10 flex items-center justify-center backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all hover:bg-primary hover:text-hud-text">
+                        <ZoomIn className="w-5 h-5" />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
             ))}
           </div>
         )}

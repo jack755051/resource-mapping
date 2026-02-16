@@ -24,7 +24,7 @@ export default function NotFound() {
         <div className="absolute top-12 right-12 flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-accent-orange animate-pulse"></div>
           <span className="text-xs font-mono text-accent-orange/80 tracking-widest uppercase">
-            NO SIGNAL
+            {t('common.not_found.status')}
           </span>
         </div>
       </div>
@@ -40,12 +40,11 @@ export default function NotFound() {
         </h1>
 
         <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-          {t('common.not_found.title') || '頁面訊號丟失'}
+          {t('common.not_found.title')}
         </h2>
 
         <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-md mx-auto">
-          {t('common.not_found.desc') ||
-            '您所尋找的路徑不存在，或權限不足無法存取該監控節點。'}
+          {t('common.not_found.desc')}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -54,7 +53,7 @@ export default function NotFound() {
             className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-primary text-primary-foreground font-medium transition-all hover:bg-primary/90 shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5"
           >
             <Home className="mr-2 w-4 h-4" />
-            {t('common.action.back_home') || '返回首頁'}
+            {t('common.action.back_home')}
           </Link>
 
           <button
@@ -62,7 +61,7 @@ export default function NotFound() {
             className="inline-flex items-center justify-center h-12 px-8 rounded-full border border-border bg-background/60 backdrop-blur hover:bg-muted font-medium transition-colors"
           >
             <ArrowLeft className="mr-2 w-4 h-4" />
-            {t('common.action.go_back') || '回上一頁'}
+            {t('common.action.go_back')}
           </button>
         </div>
       </div>
@@ -70,7 +69,7 @@ export default function NotFound() {
       {/* 底部裝飾 */}
       <div className="absolute bottom-12 left-0 w-full text-center">
         <p className="font-mono text-[10px] text-muted-foreground/40 tracking-[0.2em]">
-          ERR_CODE: 0x404_NOT_FOUND // SYSTEM_HALTED
+          {t('common.not_found.footer')}
         </p>
       </div>
     </div>

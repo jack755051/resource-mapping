@@ -4,12 +4,14 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { ProductGalleryProps } from '@/type/page/proudct-detail';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export function ProductGallery({
   props,
   className,
   classNames,
 }: ProductGalleryProps) {
+  const { t } = useTranslation();
   const { images, activeIndex, onIndexChange, productName } = props;
 
   return (
@@ -38,8 +40,13 @@ export function ProductGallery({
                 src={images[activeIndex]}
                 alt={
                   productName
-                    ? `${productName} - 產品圖片 ${activeIndex + 1}`
-                    : `產品圖片 ${activeIndex + 1}`
+                    ? t('productDetail.gallery.imageWithName', {
+                        name: productName,
+                        index: activeIndex + 1,
+                      })
+                    : t('productDetail.gallery.image', {
+                        index: activeIndex + 1,
+                      })
                 }
                 fill
                 // 這裡合併 classNames.image
@@ -56,7 +63,7 @@ export function ProductGallery({
         {/* 標籤 */}
         <div className={cn('absolute top-6 left-6', classNames?.badge)}>
           <span className="bg-background/80 backdrop-blur border border-border/50 px-3 py-1 rounded-full text-xs font-mono font-medium">
-            VIEW 360°
+            {t('productDetail.gallery.view360')}
           </span>
         </div>
       </div>
@@ -78,14 +85,21 @@ export function ProductGallery({
                 ? 'border-primary ring-2 ring-primary/20'
                 : 'border-transparent hover:border-border'
             )}
-            aria-label={`檢視圖片 ${idx + 1}`}
+            aria-label={t('productDetail.gallery.viewImage', {
+              index: idx + 1,
+            })}
           >
             <Image
               src={img}
               alt={
                 productName
-                  ? `${productName} - 縮圖 ${idx + 1}`
-                  : `產品縮圖 ${idx + 1}`
+                  ? t('productDetail.gallery.thumbnailWithName', {
+                      name: productName,
+                      index: idx + 1,
+                    })
+                  : t('productDetail.gallery.thumbnail', {
+                      index: idx + 1,
+                    })
               }
               fill
               className="object-contain p-2"

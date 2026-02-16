@@ -37,9 +37,9 @@ export function LiveMonitor() {
   // 🛡️ 如果正在載入，顯示載入狀態
   if (channelsLoading) {
     return (
-      <section className="py-12 bg-black/95 text-white">
+      <section className="py-12 bg-hud-bg text-hud-text">
         <div className="section-container text-center">
-          <p className="text-gray-400">{t('system.loading')}</p>
+          <p className="text-hud-muted">{t('system.loading')}</p>
         </div>
       </section>
     );
@@ -62,22 +62,22 @@ export function LiveMonitor() {
   const visibleChannels = getVisibleChannels();
 
   return (
-    <section className="py-12 bg-black/95 text-white overflow-hidden border-y border-white/10">
+    <section className="py-12 bg-hud-bg text-hud-text overflow-hidden border-y border-hud-line/10">
       <div className="section-container">
         {/* --- Header & Controls --- */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-white/20 pb-4 gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-hud-line/20 pb-4 gap-4">
           <div>
             <h2 className="text-2xl font-bold tracking-widest uppercase text-primary">
               {t('liveView.live.title')}
             </h2>
-            <p className="text-xs text-gray-400 font-mono mt-1">
+            <p className="text-xs text-hud-muted font-mono mt-1">
               {t('liveView.live.subtitle')}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 md:gap-6">
             {/* 視圖切換器 */}
-            <div className="flex bg-gray-900 rounded-lg p-1 border border-white/10">
+            <div className="flex bg-hud-panel rounded-lg p-1 border border-hud-line/10">
               <ViewModeButton
                 mode="single"
                 current={layoutMode}
@@ -99,7 +99,7 @@ export function LiveMonitor() {
             </div>
 
             {/* LIVE Badge */}
-            <div className="flex items-center gap-2 px-3 py-1 rounded bg-red-900/30 border border-red-500/50 text-red-500 text-xs font-bold animate-pulse">
+            <div className="flex items-center gap-2 px-3 py-1 rounded bg-hud-danger/15 border border-hud-danger/50 text-hud-danger text-xs font-bold animate-pulse">
               <Radio className="w-3 h-3" />
               <span>{t('liveView.live.badge')}</span>
             </div>
@@ -117,13 +117,13 @@ export function LiveMonitor() {
                   'flex items-center gap-2 px-4 py-2 rounded border text-xs font-mono whitespace-nowrap transition-all',
                   activeChannelId === channel.id
                     ? 'bg-primary/20 border-primary text-primary shadow-[0_0_15px_rgba(var(--primary),0.3)]'
-                    : 'bg-gray-900 border-white/10 text-gray-400 hover:border-white/30 hover:text-white'
+                    : 'bg-hud-panel border-hud-line/10 text-hud-muted hover:border-hud-line/30 hover:text-hud-text'
                 )}
               >
                 {channel.isOffline ? (
-                  <SignalZero className="w-3 h-3 text-red-500" />
+                  <SignalZero className="w-3 h-3 text-hud-danger" />
                 ) : (
-                  <SignalHigh className="w-3 h-3 text-green-500" />
+                  <SignalHigh className="w-3 h-3 text-hud-success" />
                 )}
                 {channel.name}
               </button>
@@ -152,9 +152,9 @@ export function LiveMonitor() {
             }).map((_, i) => (
               <div
                 key={`empty-${i}`}
-                className="aspect-video bg-gray-950/50 border border-white/5 rounded-lg flex items-center justify-center"
+                className="aspect-video bg-hud-surface/50 border border-hud-line/5 rounded-lg flex items-center justify-center"
               >
-                <span className="text-gray-800 font-mono text-xs">
+                <span className="text-hud-mutedStrong font-mono text-xs">
                   {t('liveView.live.noSource')}
                 </span>
               </div>
@@ -184,7 +184,7 @@ function ViewModeButton({
         'p-2 rounded transition-all',
         current === mode
           ? 'bg-primary text-primary-foreground shadow-lg'
-          : 'text-gray-400 hover:text-white hover:bg-white/5'
+          : 'text-hud-muted hover:text-hud-text hover:bg-hud-line/5'
       )}
     >
       <Icon className="w-4 h-4" />

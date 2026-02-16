@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 // 1. 引入翻譯 Hook
 import { useTranslation } from '@/hooks/useTranslation';
 
@@ -50,10 +51,13 @@ export function ProductHeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative w-full h-full">
-              <img
+              <Image
                 src="/images/hero-camera.png"
-                alt="Flagship Camera"
-                className="object-contain w-full h-full drop-shadow-2xl"
+                alt={t('products.hero.imageAlt')}
+                fill
+                priority
+                sizes="(min-width: 768px) 50vw, 80vw"
+                className="object-contain drop-shadow-2xl"
               />
 
               <motion.div
