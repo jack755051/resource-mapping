@@ -28,7 +28,7 @@ export function ProductCard({
   return (
     <Card
       className={cn(
-        'group relative flex flex-col h-full overflow-hidden rounded-[1.5rem] border border-border/40 bg-card transition-all duration-500 hover:shadow-2xl hover:border-primary/50 hover:-translate-y-1',
+        'group relative flex flex-col h-full overflow-hidden rounded-3xl border border-border/40 bg-card transition-all duration-500 hover:shadow-2xl hover:border-primary/50 hover:-translate-y-1',
         classNames?.container,
         className
       )}
@@ -151,7 +151,7 @@ export function ProductCard({
 
       <Link
         href={href}
-        className="absolute inset-0 z-0 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-[1.5rem]"
+        className="absolute inset-0 z-0 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-3xl"
         aria-label={`View ${title}`}
       />
     </Card>

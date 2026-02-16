@@ -8,8 +8,8 @@ export function SupportFilters() {
   const { categories, activeCategory, setActiveCategory } = useSupport();
 
   return (
-    <div className="sticky top-0 z-40 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-6">
+    <div className="sticky top-16 z-40 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+      <div className="section-container">
         <div className="flex items-center h-16 overflow-x-auto scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
           <div className="flex items-center gap-1">
             {/* 直接使用傳入的 categories 進行 map */}

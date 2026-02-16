@@ -18,9 +18,27 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: [
+          'var(--font-geist-sans)',
+          'system-ui',
+          '-apple-system',
+          'Segoe UI',
+          'sans-serif',
+        ],
+        mono: [
+          'var(--font-geist-mono)',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'monospace',
+        ],
+      },
       // 1. 色彩設定 (必須在 extend 內)
       colors: {
         border: 'hsl(var(--border))',
+        borderSubtle: 'hsl(var(--border-subtle))',
+        borderStrong: 'hsl(var(--border-strong))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
@@ -44,6 +62,11 @@ const config = {
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
+          blue: 'hsl(var(--accent-blue))',
+          orange: 'hsl(var(--accent-orange))',
+          cyan: 'hsl(var(--accent-cyan))',
+          green: 'hsl(var(--accent-green))',
+          red: 'hsl(var(--accent-red))',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -53,12 +76,18 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        surface: {
+          1: 'hsl(var(--surface-1))',
+          2: 'hsl(var(--surface-2))',
+          3: 'hsl(var(--surface-3))',
+        },
       },
       // 2. 導角設定 (建議用科技感的直角或微導角)
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        '4xl': '2rem',
       },
       // 3. 關鍵影格定義
       keyframes: {

@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export function ProductSkeletonCard() {
   return (
-    <Card className="flex flex-col h-full overflow-hidden rounded-[1.5rem] border border-border/40 bg-card">
+    <Card className="flex flex-col h-full overflow-hidden rounded-3xl border border-border/40 bg-card">
       {/* 1. 圖片區塊模擬 */}
       {/* 保持 aspect-[4/3] 確保高度跟真的一樣 */}
       <div className="relative aspect-[4/3] w-full p-6">

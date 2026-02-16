@@ -27,9 +27,9 @@ import { useSupport } from '@/hooks/useSupport';
 // Icon Helper
 const getIcon = (type: string, category: string) => {
   if (category === 'firmware' || category === 'software')
-    return <FileCode className="w-5 h-5 text-blue-600" />;
+    return <FileCode className="w-5 h-5 text-accent-blue" />;
   if (category === 'faq')
-    return <HelpCircle className="w-5 h-5 text-orange-500" />;
+    return <HelpCircle className="w-5 h-5 text-accent-orange" />;
   if (category === 'manual')
     return <FileText className="w-5 h-5 text-primary" />;
   return <Wrench className="w-5 h-5 text-muted-foreground" />;
@@ -58,7 +58,7 @@ export function SupportList({ className, classNames }: SupportListProps = {}) {
   return (
     <div
       className={cn(
-        'container mx-auto px-6 py-12 max-w-4xl',
+        'section-container section-y-sm max-w-4xl',
         className,
         classNames?.container
       )}

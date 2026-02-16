@@ -15,8 +15,8 @@ export function SolutionsProcessSteps() {
   ];
 
   return (
-    <section className="py-20 bg-muted/30 border-y border-border/40 overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section className="section-y bg-muted/30 border-y border-border/40 overflow-hidden">
+      <div className="section-container">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold">{t('solutions.process.title')}</h2>
           <p className="text-muted-foreground mt-2">
@@ -33,7 +33,7 @@ export function SolutionsProcessSteps() {
             return (
               <div
                 key={step.keyIndex}
-                className="group relative bg-background border border-border/50 p-6 rounded-3xl hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group relative bg-background border border-border/50 p-5 sm:p-6 rounded-3xl hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 {/* 1. Icon 懸浮球 */}
                 <div className="w-14 h-14 bg-primary/5 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-sm">

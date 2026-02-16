@@ -8,9 +8,9 @@ export function EmptyLiveMonitor() {
 
   return (
     <section className="py-12 bg-black/95 text-white overflow-hidden border-y border-white/10">
-      <div className="container mx-auto px-6">
+      <div className="section-container">
         {/* Header HUD - Modified for Offline State */}
-        <div className="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 border-b border-white/10 pb-4 gap-4">
           <div>
             <h2 className="text-2xl font-bold tracking-widest uppercase text-muted-foreground">
               {t('liveView.monitor.title')}

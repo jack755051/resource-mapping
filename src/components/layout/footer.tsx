@@ -21,7 +21,7 @@ export default function Footer({
     <footer
       className={cn(
         // 1. 基礎樣式
-        'footer__wrapper w-full flex items-center justify-center py-4 text-sm text-gray-600',
+        'footer__wrapper w-full flex items-center justify-center py-4 text-sm text-muted-foreground',
         // 2. 外部傳入的 Slot 樣式
         classNames?.wrapper,
         // 3. 最外層的樣式

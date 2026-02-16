@@ -7,14 +7,14 @@ export function ManifestoSection() {
   const { t } = useTranslation();
 
   return (
-    <section className="container mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24">
+    <section className="section-container section-y-lg">
       <div className="max-w-4xl">
         <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-muted text-muted-foreground text-sm font-medium">
           <History className="w-4 h-4" />
           <span>{t('about.manifesto.est')}</span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.15] mb-8">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.15] mb-8">
           {t('about.manifesto.title.prefix')}
           <br />
           {t('about.manifesto.title.middle')}
@@ -25,7 +25,7 @@ export function ManifestoSection() {
         </h1>
 
         <div className="flex flex-col md:flex-row gap-12 items-start border-l-2 border-primary/20 pl-8 md:pl-12">
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
             {t('about.manifesto.desc.p1')}
             <br />
             <br />

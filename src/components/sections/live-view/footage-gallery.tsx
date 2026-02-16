@@ -25,7 +25,7 @@ export function FootageGallery() {
   if (galleryLoading) {
     return (
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
+        <div className="section-container">
           <div className="text-center">
             <p className="text-muted-foreground">{t('system.loading')}</p>
           </div>
@@ -36,7 +36,7 @@ export function FootageGallery() {
 
   return (
     <section className="py-24 bg-background">
-      <div className="container mx-auto px-6">
+      <div className="section-container">
         <div className="mb-12 text-center md:text-left">
           <h2 className="text-3xl font-bold mb-4">
             {t('liveView.gallery.title')}

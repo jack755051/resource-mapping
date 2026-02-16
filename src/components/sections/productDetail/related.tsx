@@ -16,7 +16,7 @@ export function RelatedProducts({
   return (
     <div
       className={cn(
-        'container mx-auto px-6 py-16',
+        'section-container section-y-sm',
         className,
         classNames?.container
       )}

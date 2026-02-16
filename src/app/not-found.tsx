@@ -22,8 +22,8 @@ export default function NotFound() {
 
         {/* 狀態代碼 */}
         <div className="absolute top-12 right-12 flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-orange-500 animate-pulse"></div>
-          <span className="text-xs font-mono text-orange-500/80 tracking-widest uppercase">
+          <div className="w-3 h-3 rounded-full bg-accent-orange animate-pulse"></div>
+          <span className="text-xs font-mono text-accent-orange/80 tracking-widest uppercase">
             NO SIGNAL
           </span>
         </div>

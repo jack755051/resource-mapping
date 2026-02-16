@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 // hooks
 import { useNavigation } from '@/hooks/useNavigation';
 import { useHeader } from '@/hooks/useHeader';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 // components
 import Navigation from './navigation';
@@ -16,6 +18,7 @@ import MobileMenu from './mobile-menu';
 
 export default function Header() {
   const { items: navigationItems } = useNavigation();
+  const router = useRouter();
   const {
     headerBrand,
     headerUserNav,
@@ -26,6 +29,18 @@ export default function Header() {
     isShowLoginButton,
     isShowCompanyName,
   } = useHeader();
+
+  // 預載入主要路由 (提升切頁速度)
+  useEffect(() => {
+    const routes = new Set<string>();
+    navigationItems.forEach(item => {
+      routes.add(item.href);
+      item.children?.forEach(child => routes.add(child.href));
+    });
+    routes.forEach(route => {
+      router.prefetch(route);
+    });
+  }, [navigationItems, router]);
 
   // 定義搜尋邏輯 (Header 層級控制業務邏輯)
   const handleSearch = (value: string) => {
@@ -81,9 +96,10 @@ export default function Header() {
           />
         )}
 
-        <ThemeToggle />
-
-        {isShowLanguageSwitcher && <LanguageSwitcher />}
+        <div className="hidden md:flex items-center gap-2">
+          <ThemeToggle />
+          {isShowLanguageSwitcher && <LanguageSwitcher />}
+        </div>
 
         <div className="h-4 w-[1px] bg-border mx-2 hidden md:block" />
 

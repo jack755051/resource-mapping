@@ -35,9 +35,9 @@ export function ProductDownloads({
               className={cn(
                 'w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-colors',
                 item.type === 'PDF'
-                  ? 'bg-red-500/10 text-red-600'
+                  ? 'bg-accent-red/10 text-accent-red'
                   : item.type === 'Driver' || item.type === 'Firmware'
-                    ? 'bg-blue-500/10 text-blue-600'
+                    ? 'bg-accent-blue/10 text-accent-blue'
                     : 'bg-muted text-muted-foreground'
               )}
             >

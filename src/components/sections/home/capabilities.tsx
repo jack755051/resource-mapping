@@ -19,7 +19,7 @@ export function CapabilitySection() {
     'px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase w-fit';
 
   return (
-    <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto w-full">
+    <section className="section-container section-y-lg md:px-12 w-full">
       <div className="mb-16 md:text-center space-y-4">
         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
           {t('home.capabilities.title')}
@@ -31,7 +31,7 @@ export function CapabilitySection() {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[minmax(180px,auto)]">
         {/* 1. Visual Management (大格) - Primary 色系 */}
-        <div className="md:col-span-2 md:row-span-2 rounded-[2rem] border border-border bg-card p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-primary/50 group">
+        <div className="md:col-span-2 md:row-span-2 rounded-4xl border border-border bg-card p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-primary/50 group">
           <div className="relative z-10 space-y-6">
             <div className="flex justify-between items-start">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary transition-transform duration-300 group-hover:scale-110 group-hover:bg-primary/20">
@@ -56,15 +56,18 @@ export function CapabilitySection() {
         </div>
 
         {/* 2. Extreme Tech (小格) - Cyan 色系 */}
-        <div className="md:col-span-1 rounded-[2rem] border border-border bg-card p-6 flex flex-col justify-between transition-all duration-300 hover:bg-cyan-500/5 hover:border-cyan-500/50 hover:shadow-lg hover:-translate-y-1 group">
+        <div className="md:col-span-1 rounded-4xl border border-border bg-card p-6 flex flex-col justify-between transition-all duration-300 hover:bg-accent-cyan/5 hover:border-accent-cyan/50 hover:shadow-lg hover:-translate-y-1 group">
           <div className="flex justify-between items-start mb-4">
-            <Eye className="w-8 h-8 text-cyan-500" />
+            <Eye className="w-8 h-8 text-accent-cyan" />
             <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="flex flex-col">
             {/* Tag 2: Cyan (已修正：加上背景色與圓角) */}
             <span
-              className={cn(baseTagClass, 'bg-cyan-500/10 text-cyan-600 mb-3')}
+              className={cn(
+                baseTagClass,
+                'bg-accent-cyan/10 text-accent-cyan mb-3'
+              )}
             >
               {t('home.capabilities.extreme.tag')}
             </span>
@@ -78,9 +81,9 @@ export function CapabilitySection() {
         </div>
 
         {/* 3. Installation (小格) - Orange 色系 */}
-        <div className="md:col-span-1 rounded-[2rem] border border-border bg-card p-6 flex flex-col justify-between transition-all duration-300 hover:bg-orange-500/5 hover:border-orange-500/50 hover:shadow-lg hover:-translate-y-1 group">
+        <div className="md:col-span-1 rounded-4xl border border-border bg-card p-6 flex flex-col justify-between transition-all duration-300 hover:bg-accent-orange/5 hover:border-accent-orange/50 hover:shadow-lg hover:-translate-y-1 group">
           <div className="flex justify-between items-start mb-4">
-            <Wrench className="w-8 h-8 text-orange-500" />
+            <Wrench className="w-8 h-8 text-accent-orange" />
             <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="flex flex-col">
@@ -88,7 +91,7 @@ export function CapabilitySection() {
             <span
               className={cn(
                 baseTagClass,
-                'bg-orange-500/10 text-orange-600 mb-3'
+                'bg-accent-orange/10 text-accent-orange mb-3'
               )}
             >
               {t('home.capabilities.install.tag')}
@@ -103,13 +106,16 @@ export function CapabilitySection() {
         </div>
 
         {/* 4. Home (寬格) - Green 色系 */}
-        <div className="md:col-span-2 rounded-[2rem] border border-border bg-card p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden transition-all duration-300 hover:border-green-500/50 hover:shadow-lg hover:bg-green-50/50 dark:hover:bg-green-900/10">
+        <div className="md:col-span-2 rounded-4xl border border-border bg-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden transition-all duration-300 hover:border-accent-green/50 hover:shadow-lg hover:bg-accent-green/5">
           <div className="space-y-3 relative z-10 flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <HomeIcon className="w-6 h-6 text-green-500" />
+              <HomeIcon className="w-6 h-6 text-accent-green" />
               {/* Tag 4: Green (已修正：樣式統一) */}
               <span
-                className={cn(baseTagClass, 'bg-green-500/10 text-green-600')}
+                className={cn(
+                  baseTagClass,
+                  'bg-accent-green/10 text-accent-green'
+                )}
               >
                 {t('home.capabilities.home.tag')}
               </span>

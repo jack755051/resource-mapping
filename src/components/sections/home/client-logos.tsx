@@ -7,7 +7,7 @@ export function ClientSection() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 border-b border-border/40 bg-muted/30">
+    <section className="section-y border-b border-border/40 bg-muted/30">
       <div className="max-w-7xl mx-auto px-6">
         {/* Label 稍微加大間距，讓它更像一個 Section Header */}
         <div className="text-center mb-12">
@@ -18,9 +18,9 @@ export function ClientSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* 1. Manufacturing */}
-          <div className="group flex flex-col items-start gap-4 p-8 rounded-3xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
+          <div className="group flex flex-col items-start gap-4 p-6 sm:p-8 rounded-3xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
             <div className="flex justify-between w-full">
-              <div className="p-3.5 rounded-2xl bg-blue-100/50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
+              <div className="p-3.5 rounded-2xl bg-accent-blue/10 text-accent-blue group-hover:scale-110 transition-transform duration-300">
                 <Factory className="w-6 h-6" />
               </div>
               {/* 裝飾性箭頭，hover 時顯現 */}
@@ -36,13 +36,13 @@ export function ClientSection() {
               </p>
             </div>
             {/* 背景裝飾光暈 */}
-            <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors" />
+            <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-accent-blue/5 rounded-full blur-3xl group-hover:bg-accent-blue/10 transition-colors" />
           </div>
 
           {/* 2. Retail */}
-          <div className="group flex flex-col items-start gap-4 p-8 rounded-3xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
+          <div className="group flex flex-col items-start gap-4 p-6 sm:p-8 rounded-3xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
             <div className="flex justify-between w-full">
-              <div className="p-3.5 rounded-2xl bg-orange-100/50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform duration-300">
+              <div className="p-3.5 rounded-2xl bg-accent-orange/10 text-accent-orange group-hover:scale-110 transition-transform duration-300">
                 <Store className="w-6 h-6" />
               </div>
               <ArrowUpRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-primary transition-colors" />
@@ -56,13 +56,13 @@ export function ClientSection() {
                 {t('home.clients.retail.desc')}
               </p>
             </div>
-            <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-orange-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition-colors" />
+            <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-accent-orange/5 rounded-full blur-3xl group-hover:bg-accent-orange/10 transition-colors" />
           </div>
 
           {/* 3. Special */}
-          <div className="group flex flex-col items-start gap-4 p-8 rounded-3xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
+          <div className="group flex flex-col items-start gap-4 p-6 sm:p-8 rounded-3xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
             <div className="flex justify-between w-full">
-              <div className="p-3.5 rounded-2xl bg-cyan-100/50 dark:bg-cyan-900/20 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform duration-300">
+              <div className="p-3.5 rounded-2xl bg-accent-cyan/10 text-accent-cyan group-hover:scale-110 transition-transform duration-300">
                 <Anchor className="w-6 h-6" />
               </div>
               <ArrowUpRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-primary transition-colors" />
@@ -76,7 +76,7 @@ export function ClientSection() {
                 {t('home.clients.special.desc')}
               </p>
             </div>
-            <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-cyan-500/5 rounded-full blur-3xl group-hover:bg-cyan-500/10 transition-colors" />
+            <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-accent-cyan/5 rounded-full blur-3xl group-hover:bg-accent-cyan/10 transition-colors" />
           </div>
         </div>
       </div>

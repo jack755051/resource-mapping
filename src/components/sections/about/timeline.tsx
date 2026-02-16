@@ -10,8 +10,8 @@ export function TimelineSection() {
   const { header, items } = timelineData;
 
   return (
-    <section className="border-t border-border/40 py-24 bg-background">
-      <div className="container mx-auto px-6">
+    <section className="border-t border-border/40 section-y bg-background">
+      <div className="section-container">
         <div className="flex flex-col lg:flex-row gap-16">
           {/* 左側：標題區 (資料來自 Header) */}
           <div className="lg:w-1/3 lg:sticky lg:top-32 h-fit">
@@ -36,7 +36,7 @@ export function TimelineSection() {
               {items.map((item, index) => (
                 <div key={index} className="relative group">
                   {/* 圓點裝飾：根據 isActive 判斷樣式 */}
-                  <div className="absolute -left-[41px] md:-left-[57px] top-1 flex h-6 w-6 items-center justify-center">
+                  <div className="absolute -left-8 sm:-left-[41px] md:-left-[57px] top-1 flex h-6 w-6 items-center justify-center">
                     {item.isActive ? (
                       /* Active / Future 狀態 (閃爍動畫) */
                       <>

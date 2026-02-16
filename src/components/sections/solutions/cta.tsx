@@ -7,8 +7,8 @@ export function SolutionsCTA() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 bg-primary text-primary-foreground text-center">
-      <div className="container mx-auto px-6">
+    <section className="section-y bg-primary text-primary-foreground text-center">
+      <div className="section-container">
         <h2 className="text-3xl font-bold mb-6">{t('solutions.cta.title')}</h2>
         <Link
           href="/contact?type=appointment&message=%E6%88%91%E9%9C%80%E8%A6%81%E9%A0%90%E7%B4%84%E8%A9%95%E4%BC%B0%EF%BC%81"

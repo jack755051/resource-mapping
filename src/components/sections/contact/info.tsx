@@ -57,8 +57,8 @@ export function ContactInfo({ locations }: ContactInfoProps) {
     return (
       <div className="lg:col-span-5 space-y-8 animate-pulse">
         <div className="h-12 bg-muted rounded-xl w-full" />
-        <div className="h-40 bg-muted rounded-[1.5rem] w-full" />
-        <div className="h-40 bg-muted rounded-[1.5rem] w-full" />
+        <div className="h-40 bg-muted rounded-3xl w-full" />
+        <div className="h-40 bg-muted rounded-3xl w-full" />
       </div>
     );
   }
@@ -109,7 +109,7 @@ export function ContactInfo({ locations }: ContactInfoProps) {
           {/* ... 下面的內容完全不用動，因為 currentLocation 已經正確了 ... */}
 
           {/* Card: 地址 */}
-          <div className="p-6 rounded-[1.5rem] border border-border/50 bg-card hover:border-primary/30 transition-colors group">
+          <div className="p-6 rounded-3xl border border-border/50 bg-card hover:border-primary/30 transition-colors group">
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                 <MapPin className="w-5 h-5" />
@@ -135,9 +135,9 @@ export function ContactInfo({ locations }: ContactInfoProps) {
           </div>
 
           {/* Card: 電話 */}
-          <div className="p-6 rounded-[1.5rem] border border-border/50 bg-card hover:border-primary/30 transition-colors group">
+          <div className="p-6 rounded-3xl border border-border/50 bg-card hover:border-primary/30 transition-colors group">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-full bg-accent-blue/10 flex items-center justify-center text-accent-blue group-hover:scale-110 transition-transform">
                 <Phone className="w-5 h-5" />
               </div>
               <div className="space-y-4 w-full">
@@ -178,9 +178,9 @@ export function ContactInfo({ locations }: ContactInfoProps) {
           </div>
 
           {/* Card: 信箱 */}
-          <div className="p-6 rounded-[1.5rem] border border-border/50 bg-card hover:border-primary/30 transition-colors group">
+          <div className="p-6 rounded-3xl border border-border/50 bg-card hover:border-primary/30 transition-colors group">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-full bg-accent-orange/10 flex items-center justify-center text-accent-orange group-hover:scale-110 transition-transform">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
@@ -198,7 +198,7 @@ export function ContactInfo({ locations }: ContactInfoProps) {
           </div>
 
           {/* 地圖 */}
-          <div className="w-full h-64 rounded-[2rem] overflow-hidden border border-border/50 relative group mt-4">
+          <div className="w-full h-48 sm:h-64 rounded-4xl overflow-hidden border border-border/50 relative group mt-4">
             <iframe
               src={currentLocation.address.embedSrc}
               width="100%"

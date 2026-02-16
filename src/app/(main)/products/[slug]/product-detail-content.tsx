@@ -43,11 +43,11 @@ function ProductDetailWithSearchParams({ slug }: { slug: string }) {
     <div className="min-h-screen bg-background pb-20">
       {/* 1. 麵包屑與簡單標題 (可選，視你的 SiteBreadcrumb 是否自動處理) */}
 
-      <div className="container mx-auto px-6 py-12 md:py-20">
+      <div className="section-container section-y">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           {/* 左側：Sticky 圖片展示區 (佔 7 欄) */}
           <div className="lg:col-span-7">
-            <div className="sticky top-24 space-y-8">
+            <div className="lg:sticky lg:top-24 space-y-8">
               <ProductGallery props={gallery} />
             </div>
           </div>

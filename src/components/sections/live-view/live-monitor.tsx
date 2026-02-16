@@ -38,7 +38,7 @@ export function LiveMonitor() {
   if (channelsLoading) {
     return (
       <section className="py-12 bg-black/95 text-white">
-        <div className="container mx-auto px-6 text-center">
+        <div className="section-container text-center">
           <p className="text-gray-400">{t('system.loading')}</p>
         </div>
       </section>
@@ -63,9 +63,9 @@ export function LiveMonitor() {
 
   return (
     <section className="py-12 bg-black/95 text-white overflow-hidden border-y border-white/10">
-      <div className="container mx-auto px-6">
+      <div className="section-container">
         {/* --- Header & Controls --- */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-6 border-b border-white/20 pb-4 gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-white/20 pb-4 gap-4">
           <div>
             <h2 className="text-2xl font-bold tracking-widest uppercase text-primary">
               {t('liveView.live.title')}
@@ -75,7 +75,7 @@ export function LiveMonitor() {
             </p>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6">
             {/* 視圖切換器 */}
             <div className="flex bg-gray-900 rounded-lg p-1 border border-white/10">
               <ViewModeButton
@@ -136,10 +136,8 @@ export function LiveMonitor() {
           className={cn(
             'grid gap-4 transition-all duration-500 ease-in-out',
             layoutMode === 'single' && 'grid-cols-1',
-            layoutMode === 'grid-4' &&
-              'grid-cols-1 md:grid-cols-2 aspect-[16/9] md:aspect-auto',
-            layoutMode === 'grid-9' &&
-              'grid-cols-1 md:grid-cols-3 aspect-[16/9] md:aspect-auto'
+            layoutMode === 'grid-4' && 'grid-cols-1 md:grid-cols-2',
+            layoutMode === 'grid-9' && 'grid-cols-1 md:grid-cols-3'
           )}
         >
           {visibleChannels.map(channel => (
@@ -154,7 +152,7 @@ export function LiveMonitor() {
             }).map((_, i) => (
               <div
                 key={`empty-${i}`}
-                className="bg-gray-950/50 border border-white/5 rounded-lg flex items-center justify-center min-h-[200px]"
+                className="aspect-video bg-gray-950/50 border border-white/5 rounded-lg flex items-center justify-center"
               >
                 <span className="text-gray-800 font-mono text-xs">
                   {t('liveView.live.noSource')}

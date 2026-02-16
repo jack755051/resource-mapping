@@ -71,12 +71,13 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
                 {...register('name')}
                 placeholder={t('contact.form.placeholder.name')}
                 className={cn(
-                  'bg-muted/20 border-border/50 h-12',
-                  errors.name && 'border-red-500 focus-visible:ring-red-500'
+                  'bg-muted/20 border-border/50 h-11 sm:h-12',
+                  errors.name &&
+                    'border-destructive focus-visible:ring-destructive'
                 )}
               />
               {errors.name && (
-                <span className="text-xs text-red-500">
+                <span className="text-xs text-destructive">
                   {errors.name.message}
                 </span>
               )}
@@ -88,12 +89,13 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
                 {...register('phone')}
                 placeholder={t('contact.form.placeholder.phone')}
                 className={cn(
-                  'bg-muted/20 border-border/50 h-12',
-                  errors.phone && 'border-red-500 focus-visible:ring-red-500'
+                  'bg-muted/20 border-border/50 h-11 sm:h-12',
+                  errors.phone &&
+                    'border-destructive focus-visible:ring-destructive'
                 )}
               />
               {errors.phone && (
-                <span className="text-xs text-red-500">
+                <span className="text-xs text-destructive">
                   {errors.phone.message}
                 </span>
               )}
@@ -107,13 +109,14 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
               type="email"
               {...register('email')}
               placeholder={t('contact.form.placeholder.email')}
-              className={cn(
-                'bg-muted/20 border-border/50 h-12',
-                errors.email && 'border-red-500 focus-visible:ring-red-500'
+                className={cn(
+                  'bg-muted/20 border-border/50 h-11 sm:h-12',
+                errors.email &&
+                  'border-destructive focus-visible:ring-destructive'
               )}
             />
             {errors.email && (
-              <span className="text-xs text-red-500">
+              <span className="text-xs text-destructive">
                 {errors.email.message}
               </span>
             )}
@@ -142,7 +145,7 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
               })}
             </div>
             {errors.type && (
-              <span className="text-xs text-red-500">
+              <span className="text-xs text-destructive">
                 {errors.type.message}
               </span>
             )}
@@ -156,11 +159,12 @@ export function ContactForm({ inquiryTags }: ContactFormProps) {
               placeholder={t('contact.form.placeholder.message')}
               className={cn(
                 'min-h-[150px] bg-muted/20 border-border/50 resize-none',
-                errors.message && 'border-red-500 focus-visible:ring-red-500'
+                errors.message &&
+                  'border-destructive focus-visible:ring-destructive'
               )}
             />
             {errors.message && (
-              <span className="text-xs text-red-500">
+              <span className="text-xs text-destructive">
                 {errors.message.message}
               </span>
             )}

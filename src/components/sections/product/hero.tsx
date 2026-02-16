@@ -14,7 +14,7 @@ export function ProductHeroSection() {
       <div className="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-5" />
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/20 blur-3xl rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-32 relative z-10">
+      <div className="section-container pt-16 pb-20 md:pt-24 md:pb-32 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-12">
           {/* 左側：文字區 */}
           <motion.div
@@ -27,9 +27,9 @@ export function ProductHeroSection() {
               {t('products.hero.badge')}
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground">
               {t('products.hero.title.prefix')} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-blue">
                 {t('products.hero.title.suffix')}
               </span>
             </h1>
@@ -44,7 +44,7 @@ export function ProductHeroSection() {
 
           {/* 右側：Hero Image */}
           <motion.div
-            className="flex-1 relative w-full max-w-lg aspect-square md:aspect-[4/3]"
+            className="flex-1 relative w-full max-w-sm sm:max-w-lg aspect-square md:aspect-[4/3]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}

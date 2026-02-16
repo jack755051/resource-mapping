@@ -14,7 +14,7 @@ export function ContactMainContent() {
   const locations = useAppSelector(selectLocationsCategories);
 
   return (
-    <div className="container mx-auto px-6 py-12 md:py-20">
+    <div className="section-container section-y">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
         {/* 左側：表單組件 */}
         <ContactForm inquiryTags={formConfig.inquiryTags} />

@@ -41,6 +41,22 @@
     --input: 214 32% 91%;
     --ring: 221 83% 53%;
     --radius: 0.5rem;
+
+    /* Surface tokens */
+    --surface-1: 0 0% 100%;
+    --surface-2: 210 40% 98%;
+    --surface-3: 210 40% 96.1%;
+
+    /* Border tones */
+    --border-subtle: 214 32% 91%;
+    --border-strong: 214 32% 85%;
+
+    /* Accent tokens */
+    --accent-blue: 217 91% 60%;
+    --accent-orange: 24 94% 53%;
+    --accent-cyan: 189 94% 43%;
+    --accent-green: 142 71% 45%;
+    --accent-red: 0 84% 60%;
   }
 
   .dark {
@@ -69,6 +85,22 @@
     --border: 217 33% 20%;
     --input: 217 33% 20%;
     --ring: 217 91% 65%;
+
+    /* Surface tokens */
+    --surface-1: 222 47% 8%;
+    --surface-2: 222 47% 10%;
+    --surface-3: 217 33% 15%;
+
+    /* Border tones */
+    --border-subtle: 217 33% 20%;
+    --border-strong: 217 33% 28%;
+
+    /* Accent tokens */
+    --accent-blue: 217 91% 65%;
+    --accent-orange: 24 94% 58%;
+    --accent-cyan: 189 94% 50%;
+    --accent-green: 142 71% 45%;
+    --accent-red: 0 100% 60%;
   }
 }
 
@@ -78,6 +110,24 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer utilities {
+  .section-container {
+    @apply container mx-auto px-6;
+  }
+
+  .section-y-sm {
+    @apply py-12 md:py-16;
+  }
+
+  .section-y {
+    @apply py-16 md:py-24;
+  }
+
+  .section-y-lg {
+    @apply py-24 md:py-32;
   }
 }

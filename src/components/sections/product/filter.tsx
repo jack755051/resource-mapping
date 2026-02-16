@@ -18,8 +18,8 @@ export function ProductFilterSection() {
   if (!hasData) return null;
 
   return (
-    <div className="sticky top-0 z-40 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-6">
+    <div className="sticky top-16 z-40 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+      <div className="section-container">
         <div className="flex items-center justify-between h-16 md:h-20 gap-4">
           {/* 左側：分類列表 */}
           <CategoryList

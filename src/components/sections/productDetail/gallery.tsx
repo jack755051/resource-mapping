@@ -17,7 +17,7 @@ export function ProductGallery({
       {/* 主圖顯示區 */}
       <div
         className={cn(
-          'relative aspect-[4/3] w-full bg-muted/10 rounded-[2rem] border border-border/50 overflow-hidden',
+          'relative aspect-[4/3] w-full bg-muted/10 rounded-4xl border border-border/50 overflow-hidden',
           classNames?.imageWrapper
         )}
       >
@@ -44,7 +44,7 @@ export function ProductGallery({
                 fill
                 // 這裡合併 classNames.image
                 className={cn(
-                  'object-contain p-8 md:p-12 drop-shadow-2xl',
+                  'object-contain p-6 sm:p-8 md:p-12 drop-shadow-2xl',
                   classNames?.image
                 )}
                 priority
@@ -73,7 +73,7 @@ export function ProductGallery({
             key={idx}
             onClick={() => onIndexChange(idx)}
             className={cn(
-              'relative w-20 h-20 rounded-xl border-2 overflow-hidden flex-shrink-0 transition-all bg-muted/10',
+              'relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl border-2 overflow-hidden flex-shrink-0 transition-all bg-muted/10',
               activeIndex === idx
                 ? 'border-primary ring-2 ring-primary/20'
                 : 'border-transparent hover:border-border'

@@ -11,7 +11,7 @@ export function ContactHero() {
       <div className="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-5" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
 
-      <div className="container mx-auto px-6 py-16 md:py-24 relative z-10 text-center">
+      <div className="section-container section-y relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

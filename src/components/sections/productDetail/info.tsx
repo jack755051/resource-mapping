@@ -70,7 +70,7 @@ export function ProductInfo({
           >
             <div
               className={cn(
-                'mt-1 w-5 h-5 rounded-full bg-green-500/10 flex items-center justify-center text-green-600 shrink-0',
+                'mt-1 w-5 h-5 rounded-full bg-accent-green/10 flex items-center justify-center text-accent-green shrink-0',
                 classNames?.featureIcon
               )}
             >

@@ -46,7 +46,7 @@ export function ProductListSection({
     // min-h-[80vh] 是防止抖動的關鍵
     <section
       className={cn(
-        'container mx-auto px-6 py-12 min-h-[80vh]',
+        'section-container section-y-sm min-h-[60vh] sm:min-h-[80vh]',
         className,
         classNames?.container
       )}

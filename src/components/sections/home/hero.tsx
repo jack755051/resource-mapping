@@ -8,7 +8,7 @@ export function HeroSection() {
   const { t } = useTranslation();
 
   return (
-    <section className="relative w-full py-24 md:py-32 lg:min-h-[90vh] flex flex-col items-center justify-center overflow-hidden border-b border-border/40">
+    <section className="relative w-full section-y-lg lg:min-h-[90vh] flex flex-col items-center justify-center overflow-hidden border-b border-border/40">
       {/* 1. 背景層 */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/80 to-background z-10" />
@@ -25,7 +25,7 @@ export function HeroSection() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[120%] w-[1px] bg-primary/20"></div>
 
           <div className="absolute top-12 right-12 flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+            <div className="w-3 h-3 rounded-full bg-destructive animate-pulse"></div>
             <span className="text-xs font-mono text-primary/80 tracking-widest">
               REC 00:04:23:12
             </span>
@@ -56,9 +56,9 @@ export function HeroSection() {
           {t('home.hero.badge')}
         </div>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-tight">
           {t('home.hero.title.prefix')} <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-blue">
             {t('home.hero.title.highlight')}
           </span>
         </h1>
