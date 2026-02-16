@@ -1,5 +1,69 @@
 import { ofetch } from 'ofetch';
+import type { FetchOptions } from 'ofetch';
 import { APIResponse } from './response/common.response';
+
+export type ApiErrorType =
+  | 'UNAUTHORIZED'
+  | 'FORBIDDEN'
+  | 'API_FAILED'
+  | 'NETWORK'
+  | 'TIMEOUT'
+  | 'UNKNOWN';
+
+export class ApiClientError extends Error {
+  type: ApiErrorType;
+  status?: number;
+  code?: number | string;
+  data?: unknown;
+
+  constructor(
+    message: string,
+    {
+      type,
+      status,
+      code,
+      data,
+    }: {
+      type: ApiErrorType;
+      status?: number;
+      code?: number | string;
+      data?: unknown;
+    }
+  ) {
+    super(message);
+    this.name = 'ApiClientError';
+    this.type = type;
+    this.status = status;
+    this.code = code;
+    this.data = data;
+  }
+}
+
+const DEFAULT_TIMEOUT = Number(process.env.NEXT_PUBLIC_API_TIMEOUT) || 30000;
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1';
+const DEV_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
+
+let authToken: string | null = null;
+
+export function setAuthToken(token: string | null) {
+  authToken = token;
+}
+
+function getAuthToken() {
+  if (authToken) return authToken;
+  if (typeof window === 'undefined') return DEV_TOKEN || null;
+  return (
+    sessionStorage.getItem('accessToken') ||
+    localStorage.getItem('accessToken') ||
+    DEV_TOKEN ||
+    null
+  );
+}
+
+function isBinaryResponse(options?: FetchOptions) {
+  const responseType = options?.responseType;
+  return responseType === 'blob' || responseType === 'arrayBuffer';
+}
 
 /**
  * 统一的 API 客户端
@@ -10,10 +74,13 @@ import { APIResponse } from './response/common.response';
  * 自動提取：{...} (data 內容)
  */
 export const apiClient = ofetch.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1',
+  baseURL: BASE_URL,
+  timeout: DEFAULT_TIMEOUT,
 
   // ✅ 響應攔截器：自動提取 APIResponse 的 data 字段
-  async onResponse({ response }) {
+  async onResponse({ response, options }) {
+    if (isBinaryResponse(options)) return;
+
     // 如果響應符合 APIResponse 結構，自動提取 data
     if (
       response._data &&
@@ -24,11 +91,12 @@ export const apiClient = ofetch.create({
 
       // 檢查是否成功
       if (!apiResponse.success) {
-        console.error('[API Error]', {
+        throw new ApiClientError(apiResponse.message || 'API request failed', {
+          type: 'API_FAILED',
+          status: response.status,
           code: apiResponse.code,
-          message: apiResponse.message,
+          data: apiResponse,
         });
-        // 可以在這裡拋出錯誤或處理業務異常
       }
 
       // 自動提取並替換響應為 data 內容
@@ -37,11 +105,41 @@ export const apiClient = ofetch.create({
   },
 
   // 錯誤處理
-  onResponseError({ response }) {
-    console.error('[API Error]', {
-      url: response.url,
-      status: response.status,
-      statusText: response.statusText,
+  onResponseError({ response, error }) {
+    if (error instanceof ApiClientError) {
+      throw error;
+    }
+    if (!response) {
+      const isTimeout =
+        error?.name === 'AbortError' ||
+        String(error?.message || '').toLowerCase().includes('timeout');
+      throw new ApiClientError(error?.message || 'Network error', {
+        type: isTimeout ? 'TIMEOUT' : 'NETWORK',
+      });
+    }
+
+    const status = response.status;
+    const type =
+      status === 401
+        ? 'UNAUTHORIZED'
+        : status === 403
+          ? 'FORBIDDEN'
+          : 'UNKNOWN';
+
+    throw new ApiClientError(response.statusText || 'Request failed', {
+      type,
+      status,
+      data: response._data,
     });
+  },
+
+  onRequest({ options }) {
+    const token = getAuthToken();
+    if (!token) return;
+    const existingHeaders = new Headers(options.headers || {});
+    if (!existingHeaders.has('Authorization')) {
+      existingHeaders.set('Authorization', `Bearer ${token}`);
+    }
+    options.headers = existingHeaders;
   },
 });
