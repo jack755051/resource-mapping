@@ -1,10 +1,14 @@
-/**取得頻道ID列表**/
+/** 取得頻道 ID 列表 **/
 export interface LiveViewListResDto {
   id: string;
   name: string;
   description?: string;
   youtubeChannelId?: string;
   youtubeVideoId?: string;
+  // --- 新增欄位 ---
+  streamUrl?: string; // WebRTC 串流網址
+  provider?: string; // 'webrtc' | 'youtube'
+  // ----------------
   sort: number;
   isActive: boolean;
 }

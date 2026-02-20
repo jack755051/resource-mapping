@@ -40,6 +40,10 @@ export class LiveViewMapper {
       name: dto.name,
       youtubeChannelId: dto.youtubeChannelId,
       youtubeVideoId: dto.youtubeVideoId,
+      // 映射新欄位，並給予預設值
+      streamUrl: dto.streamUrl,
+      provider: (dto.provider as 'webrtc' | 'youtube') || 'webrtc',
+      isOffline: false, // 預設為在線，之後可由後端狀態決定
     };
   }
 
@@ -76,9 +80,7 @@ export class LiveViewMapper {
       // 直接轉換，不再合併前端配置
       const channels = dtos.map(dto => this.toDomainChannel(dto));
 
-      console.log(
-        `✅ LiveViewMapper: 成功轉換 ${channels.length} 個頻道`
-      );
+      console.log(`✅ LiveViewMapper: 成功轉換 ${channels.length} 個頻道`);
 
       return channels;
     } catch (error) {
