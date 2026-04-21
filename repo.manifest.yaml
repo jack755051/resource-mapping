@@ -1,0 +1,154 @@
+schema_version: 1
+repo_id: resource-mapping
+name: Guangxun Tech Corporate Site
+display_name: 光訊科技 企業官網
+summary: 光訊科技 (Guangxun Tech) 安防監控產品官方網站 — Next.js 16 + React 19 靜態輸出，支援多語系、SEO、RWD 與 Docker/Nginx 部署。
+description: >
+  Guangxun Tech 光訊科技企業官網前端專案，作為品牌門面展示 IP Camera、NVR/DVR、安防監控
+  系統與弱電工程方案。採用 Next.js App Router (React 19) 搭配 Tailwind CSS 4 與 shadcn/ui
+  風格的 Radix UI 組件；整合 Redux Toolkit 管理系統資源、react-hook-form + zod 做表單驗證、
+  sonner 處理全域 Toast。內建繁中 / 英文 i18n、完整 SEO metadata (OpenGraph / Twitter Card)、
+  靜態匯出 (next export) 搭配 Nginx 容器化部署。
+owner: jack755051
+maintainers:
+  - jack755051
+status: active
+visibility: public
+repository_url: https://github.com/jack755051/resource-mapping
+demo_url: https://guangxun.net
+homepage: https://guangxun.net
+default_branch: main
+current_branch: develop
+
+category: web-frontend
+project_type: corporate-site
+role: Full-stack Frontend Engineer
+period:
+  start: 2025-10
+  end: ongoing
+
+stack:
+  - nodejs
+  - nextjs
+  - react
+  - typescript
+  - tailwindcss
+  - radix-ui
+  - shadcn-ui
+  - redux-toolkit
+  - react-hook-form
+  - zod
+  - ofetch
+  - framer-motion
+  - docker
+  - nginx
+
+languages:
+  - typescript
+  - javascript
+  - css
+  - dockerfile
+
+frameworks:
+  frontend: nextjs@16.1.3
+  ui: react@19.2.3
+  styling: tailwindcss@4
+  state: redux-toolkit@2
+  forms: react-hook-form + zod
+
+entrypoints:
+  app: src/app/layout.tsx
+  home: src/app/page.tsx
+  routes: src/app/(main)
+  api_layer: src/api
+  config: next.config.ts
+  container: Dockerfile
+  reverse_proxy: nginx.conf
+
+commands:
+  install: npm install
+  dev: npm run dev
+  dev_local_backend: npm run dev:local
+  build: npm run build
+  start: npm start
+  lint: npm run lint
+  lint_fix: npm run lint:fix
+  format: npm run format
+  format_check: npm run format:check
+  generate_slugs: npm run generate-slugs
+  test: TODO
+
+ports:
+  dev: 3006
+  container: 80
+  host_exposed: 3000
+
+interfaces:
+  web: true
+  api: false
+  worker: false
+  ssr: false
+  static_export: true
+  i18n: true
+  seo: true
+  rwd: true
+
+features:
+  - 以 App Router 實作多頁企業官網 (About / Products / Cases / Solutions / Live View / Contact / Support)
+  - 產品頁動態路由 + 預先生成 slug (scripts/generate-product-slugs.ts)
+  - 繁體中文 / 英文雙語系系統資源 (Redux store 管理)
+  - 完整 SEO metadata、OpenGraph、Twitter Card 與多語 canonical
+  - 表單串接後端 API (Contact / Support) 並以 zod 驗證
+  - Next.js static export + Nginx 容器化部署 (Docker multi-stage build)
+  - 開發環境透過 next.config.ts rewrites 代理 /api/v1 至後端，避免 CORS
+
+architecture:
+  pattern: Next.js App Router + Layered API
+  layers:
+    - presentation: src/app (pages, layout, error, not-found)
+    - ui_components: src/components/{ui,layout,sections}
+    - state: src/store (Redux Toolkit)
+    - services: src/api/services
+    - mappers: src/api/mapper
+    - http_client: src/api/client.ts (ofetch)
+    - schemas: src/schema
+
+thumbnail: public/images/og-image.jpg
+screenshots:
+  - public/images/og-image.jpg
+
+tags:
+  - portfolio
+  - nextjs
+  - react-19
+  - typescript
+  - tailwindcss
+  - shadcn-ui
+  - redux-toolkit
+  - i18n
+  - seo
+  - docker
+  - nginx
+  - static-export
+  - corporate-site
+  - security-surveillance
+
+portfolio:
+  featured: true
+  priority: 1
+  card_title: 光訊科技 官網
+  card_subtitle: Next.js 16 + React 19 企業官網
+  highlights:
+    - Next.js 16 App Router 靜態輸出，Nginx 容器化部署
+    - Redux Toolkit 驅動的多語系系統資源
+    - 完整 SEO metadata、OpenGraph、多語 canonical
+    - 產品頁 slug 預生成 + 動態路由
+    - shadcn/ui + Tailwind CSS 4 主題化設計
+
+unresolved_fields:
+  - commands.test
+  - license
+
+notes:
+  - README 已依 101-readme-agent.md rewrite 模式重寫
+  - manifest 作為單一機器可解析事實來源，供 portfolio 站抓取
