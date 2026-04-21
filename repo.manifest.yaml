@@ -1,5 +1,5 @@
 schema_version: 1
-repo_id: resource-mapping
+repo_id: guangxun-tech-site-frontend
 name: Guangxun Tech Corporate Site
 display_name: 光訊科技 企業官網
 summary: 光訊科技 (Guangxun Tech) 安防監控產品官方網站 — Next.js 16 + React 19 靜態輸出，支援多語系、SEO、RWD 與 Docker/Nginx 部署。
@@ -14,7 +14,7 @@ maintainers:
   - jack755051
 status: active
 visibility: public
-repository_url: https://github.com/jack755051/resource-mapping
+repository_url: https://github.com/jack755051/guangxun-tech-site-frontend
 demo_url: https://guangxun.net
 homepage: https://guangxun.net
 default_branch: main

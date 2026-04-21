@@ -1,13 +1,13 @@
 ---
 schema_version: 1
-repo_id: resource-mapping
+repo_id: guangxun-tech-site-frontend
 name: Guangxun Tech Corporate Site
 display_name: 光訊科技 企業官網
 summary: 光訊科技 (Guangxun Tech) 安防監控產品官方網站 — Next.js 16 + React 19 靜態輸出，支援多語系、SEO、RWD 與 Docker/Nginx 部署。
 owner: jack755051
 status: active
 visibility: public
-repository_url: https://github.com/jack755051/resource-mapping
+repository_url: https://github.com/jack755051/guangxun-tech-site-frontend
 demo_url: https://guangxun.net
 category: web-frontend
 project_type: corporate-site
@@ -44,7 +44,7 @@ portfolio:
 
 > 光訊科技 (Guangxun Tech) 安防監控產品官方網站。採用 Next.js 16 App Router (React 19) 打造，支援繁中 / 英文雙語系、完整 SEO metadata，並以 Nginx 容器靜態託管。
 >
-> 🌐 Live：<https://guangxun.net>　|　📦 Repo：<https://github.com/jack755051/resource-mapping>
+> 🌐 Live：<https://guangxun.net>　|　📦 Repo：<https://github.com/jack755051/guangxun-tech-site-frontend>
 
 ---
 
@@ -102,7 +102,7 @@ portfolio:
 ## Project Structure
 
 ```
-resource-mapping/
+guangxun-tech-site-frontend/
 ├─ src/
 │  ├─ app/                       # Next.js App Router
 │  │  ├─ (main)/                 # 主要公開頁面群
@@ -194,7 +194,7 @@ npm run format:check     # Prettier 檢查
 
 ```bash
 # 單獨建置
-docker build -t resource-mapping-frontend .
+docker build -t guangxun-tech-site-frontend .
 
 # docker-compose (對外 http://localhost:3000 → container :80)
 docker compose up -d --build

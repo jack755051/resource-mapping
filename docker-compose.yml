@@ -2,7 +2,7 @@ services:
   frontend:
     # 這裡的 build . 代表使用當前目錄的 Dockerfile
     build: .
-    container_name: resource-mapping-frontend
+    container_name: guangxun-tech-site-frontend
     ports:
       # 將本機的 3000 port 對應到容器的 80 port
       # 啟動後你就可以用 http://localhost:3000 訪問
