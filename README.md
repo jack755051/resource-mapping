@@ -1,10 +1,28 @@
-# Guangxun Tech Corporate Site · 光訊科技 企業官網
+# Guangxun Tech Site Frontend · 光訊科技 企業官網 Frontend
 
-> 光訊科技 (Guangxun Tech) 安防監控產品官方網站。採用 Next.js 16 App Router (React 19) 打造，支援繁中 / 英文雙語系、完整 SEO metadata，並以 Nginx 容器靜態託管。
->
-> 🌐 Live：<https://guangxun.net>　|　📦 Repo：<https://github.com/jack755051/guangxun-tech-site-frontend>
+> 光訊科技 (Guangxun Tech) 安防監控產品官方網站前端。採用 Next.js 16 App Router (React 19) 打造，支援繁中 / 英文雙語系、完整 SEO metadata，並以 Nginx 容器靜態託管。
+
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Nginx-2496ED?logo=docker&logoColor=white)
+![Status](https://img.shields.io/badge/status-active-22c55e)
 
 ---
+
+## Highlights
+
+| | |
+|---|---|
+| ⚛️ 框架 | Next.js 16 App Router + React 19 + TypeScript 5 |
+| 🎨 樣式 | Tailwind CSS 4 + shadcn/ui (Radix Primitives) |
+| 🗂️ 狀態管理 | Redux Toolkit 2 + react-redux 9 |
+| 📝 表單 | react-hook-form 7 + zod 4 |
+| 🌐 多語系 | 繁中 / 英文 (Redux store 驅動) |
+| 🔍 SEO | Metadata / OpenGraph / Twitter Card / Robots / 多語 canonical |
+| 📡 HTTP | ofetch + DTO / Mapper 分層 |
+| 🐳 部署 | Static Export → Docker multi-stage → Nginx |
 
 ## Purpose
 
@@ -210,6 +228,22 @@ docker compose up -d --build
   - 不支援 Server Actions、`dynamic = 'force-dynamic'`、Route Handlers 等需要伺服器的能力。
   - 所有 API 請求皆由 Client 端直接打向 `https://guangxun.net`。
 - **Nginx SPA 路由**：`nginx.conf` 已加入 `try_files $uri $uri.html $uri/ /index.html;`，支援 Next export 的 `.html` 副檔名路由與 SPA fallback。
-- **Portfolio 展示**：本 repo 之 `repo.manifest.yaml` 供 <https://jack755051.github.io/charlie_portfolio_frontend/portfolio> 解析並呈現於作品集卡片；README 頂部 YAML front matter 為精簡對照，完整結構化欄位以 manifest 為準。
-- **無測試腳本**：目前 `package.json` 未定義 `test` 指令，屬已知待補項 (`unresolved_fields.commands.test`)。
+- **Portfolio 展示**：本 repo 之 `repo.manifest.yaml` 供 Portfolio 站解析並呈現於作品集卡片，完整結構化欄位以 manifest 為準。
+- **無測試腳本**：目前 `package.json` 未定義 `test` 指令，屬已知待補項。
 - **歷史遺留命名**：`src/api/` 下如有 `resquest`（刻意保留拼寫）等既有命名，請沿用不得擅自修正。
+
+## Roadmap
+
+- [ ] 單元測試與 E2E 測試覆蓋核心流程
+- [ ] Lighthouse 效能與 Accessibility 優化
+- [ ] PWA / Service Worker 離線快取
+- [ ] 圖片最佳化（next/image 或 CDN 策略）
+
+## License
+
+UNLICENSED — Portfolio 專用，保留一切權利。
+
+## Links
+
+- Live: <https://guangxun.net>
+- Portfolio: <https://jack755051.github.io/charlie_portfolio_frontend/portfolio>
